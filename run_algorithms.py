@@ -6,13 +6,17 @@ import settings
 class final_prob_statement(parse_input.statement):
     def init(self):
         self.final_prob = {}
-def run(filename='', alg_list=[]):
+
+def run(filename, alg_list):
+    
     '''Takes a list of algorithms and assigns final probabilities to each 
 statement in statements
 
-Each module in alg_list must contain a function called final_alg_probability. 
-This function takes the list of statements, the statement number as 
-arguments, and should return a probability dictionary for users.''' 
+Each module in alg_list must contain a function called run(). 
+This function takes the list of statements as an argument and should 
+populate a probability dictionary for users.
+
+For more information, refer to the Readme.''' 
     
     statements = parse_input.init(filename)
     for stat in statements:
