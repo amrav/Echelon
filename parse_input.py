@@ -1,20 +1,26 @@
+'''The famous parse_input file.
+
+The function parse_input.init() takes a filename as an argument and returns 
+a list of objects of the class 'statement'. For example, if an object
+'statement4' belongs to the class 'statement', all the attributes
+accessible from 'statement4' are:
+
+statement4.issued_by  #The name of the user issuing the statement.
+statement4.time       #The time at which the statement was issued.
+statement4.text       #The text of the statement itself, which is
+                      #returned as a LIST of words.
+statement4.users_online  #A list of users online at that time.
+statement4.alg_prob  #This is a dictionary of user names and their 
+                     #corresponding lambdas. Populate this in your
+                     #algorithm.
+
+For more information on how to use the parse_input.statement class to
+write your own algorithms, please read the Readme.'''
+
 from __future__ import division
 import sys
 import nltk
 import re
-
-
-#define various structures
-
-#global chatlog_nltk #Should these be global?
-#global chatlog_words 
-global users
-#global statements
-#user_scope = {}
-
-
-
-#define various constants
 
 
 def clean(text):
@@ -37,7 +43,7 @@ def init(filename):
     
         
         
-    users = []; users_online = []; statements = []
+    users_online = []; statements = []
     
     
     for match in matches:
@@ -47,13 +53,15 @@ def init(filename):
         statement_text = match[3]
 
         if match[0] != '':
-            users.append(issued_by) #how useful is this?
+            statement.users.append(issued_by) #append user to universal list
+            #in class statement
             
-        #add stat to list of statements
-            
+            #add stat to list of statements
             stat = statement(time,issued_by,clean(statement_text), \
 users_online) 
             statements.append(stat)    
+        
+        #if it is a system statement
         else:
             if match[6] == 'joined':
                 users_online.append(match[5])
@@ -62,8 +70,8 @@ users_online)
                     users_online.remove(match[5])
     
     #remove duplicates
-    users = set(users)
-    statement.users = users
+    statement.users = set(statement.users)
+    
     return statements
     
    
@@ -72,7 +80,6 @@ class statement:
     users = []
     def __init__(self, time, issuing_user_name, statement_text, \
 users_online):
-        ##print "init called!"
         self.text = statement_text
         self.issued_by = issuing_user_name
         self.time = time
@@ -82,7 +89,8 @@ users_online):
         #Probability dicitonary to be used by the algorithm
         #as convinient to it. Please ensure that the probabilities are centered
         #around one, unless you are unsure, in which case this object should 
-        #be empty.
+        #be empty. The value of '1' is considered neutral. For more detailed
+        #information, refer to the readme.
 
         
         
@@ -109,16 +117,6 @@ if __name__ == '__main__':
     if len(sys.argv) != 1:
         print "Usage: python parse_input.py"
         sys.exit(1)
-    #filename = sys.argv[1]
-    #statements = init(filename)
-    #test_module1(statements)
-    #for stat in statements:
-     #   stat.print_details()
-#    for stat in statements:
- #       if stat.issued_by == '$$$':
-  #          print stat.issued_by, stat.time
-   #         print stat.text
-    #print "!!!", current_scope
-    #tokenize(filename)
+    
 
 
