@@ -17,7 +17,7 @@ user_scope = {}
 
 current_scope = 4
 scope_weight = 3
-scope_weight_minus = 5
+scope_weight_minus = 3
 addressed_weight = 5
 inverse_recent_weight = 1
 
@@ -40,8 +40,10 @@ def init(filename):
     
         
     global statements
+    
     users = []; users_online = []; statements = []
     current_users = {}
+    
     for match in matches:
         
         time = match[1]
