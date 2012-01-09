@@ -6,10 +6,10 @@ import re
 
 #define various structures
 
-global chatlog_nltk #Should these be global?
-global chatlog_words 
+#global chatlog_nltk #Should these be global?
+#global chatlog_words 
 global users
-global statements
+#global statements
 user_scope = {}
 
 
@@ -39,8 +39,7 @@ def init(filename):
 |(\*\*\*) (.*?) (joined|left)", text)
     
         
-    global statements
-    
+        
     users = []; users_online = []; statements = []
     current_users = {}
     
@@ -93,17 +92,29 @@ users_online, stat_current_users)
     
     #remove duplicates
     users = set(users)
+    return statements
     
    
 class statement:
     
     def __init__(self, time, issuing_user_name, statement_text, \
 users_online, current_users):
+        print "init called!"
         self.text = statement_text
         self.issued_by = issuing_user_name
         self.time = time
         self.users_online = users_online
         self.current_users = current_users
+        
+        self.alg_prob = {}
+        #Probability dicitonary to be used by the algorithm
+        #as convinient to it. Please ensure that the sum of probabilities
+        #is one, unless you are unsure, in which case this object should 
+        #be empty.
+
+        self.final_prob = {}
+        #Strictly to be used only by the run module. 
+        #DO NOT modify this variable.
         
     def print_details(self, full_text=False, online=True, current=True): 
         print self.issued_by + ' at ' + self.time
@@ -121,16 +132,16 @@ users_online, current_users):
         print
 
 
-def test_module1():  #ToDo: WARNING! Alters global statements list. 
-#Do not use in conjunction with other functions relying on unknown statements.
-
+def test_module1(statements, full=False):      
     for i in range(len(statements)):
+    
         if statements[i].issued_by == '$$$':
             cumulative_scope = {}
-            print "--------------------------------------------------"
-            print "Context:"
-            for stat in statements[(i-current_scope):i+1]:
-                stat.print_details(full_text=True,current=True, online=False)
+            if full==True:
+                print "--------------------------------------------------"
+                print "Context:"
+                for stat in statements[(i-current_scope):i+1]:
+                    stat.print_details(full_text=True,current=True, online=False)
                 for user,scope in stat.current_users:
                     if user not in cumulative_scope:
                         cumulative_scope[user]=scope
@@ -162,8 +173,8 @@ if __name__ == '__main__':
         print "Usage: python parse_input.py filename"
         sys.exit(1)
     filename = sys.argv[1]
-    init(filename)
-    test_module1()
+    statements = init(filename)
+    test_module1(statements)
     #for stat in statements:
      #   stat.print_details()
 #    for stat in statements:
