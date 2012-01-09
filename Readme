@@ -1,0 +1,75 @@
+This file explains how to write an algorithm module, test it using 
+test_algorithm.py, and run it using run_algorithms.py. It is 
+intended as a standards, and style guide.
+
+1) The 'statement' class in parse_init.py:
+
+The statement class (an object of this class will be referred to from now 
+on as statement) is used to create objects that hold information about a 
+statement. A statement is defined as something a user sends as a message to 
+other users, by hitting the enter key.
+
+Each statement contains useful information, that can be accessed directly
+by using statement.attribute. For more information about what attributes can be
+accessed, please refer to the parse_input.py module.
+
+2) How to write your algorithm:
+
+   i) Your first step will be to import parse_input.py and store a list of 
+statements returned by parse_input.py in some variable, say, stat_list. 
+Each statement has an attribute alg_prob. You are only concerned with those 
+statements, who's issued_by is unknown('$$$').
+
+   ii) For each unknown statement in stat_list, your algorithm must 
+assign certain values, called lambdas, to each user. A lambda is an indicator 
+of the probability that that user has of being the issuing user. However it is 
+NOT the probability. The value of a lambda will be 1 if the algorithm is 
+completely ambivalent about that user, i.e, it has nothing to say about the 
+possibility of that user being the issuing user. However if the algorithm is 
+reasonably sure that it is at least twice as probable that user1 issued the
+statement, then user1's lambda will be 2. Similarly if the algorithm thinks 
+that it is twice as probable that user2 did not issue the statement, then 
+user2's lambda will be 1/2.
+
+   iii) The lambdas are used when calculating the final probability that 
+user1 issued that statement. It is done by multiplying the lambdas obtained
+by different algorithms for user1. For example, if
+
+(This is not programming. Read it like a maths text)
+
+lambda_alg1 = 1		(alg1 is ambivalent)
+lambda_alg2 = 1.5	(alg2 is a little more certain that user1 issued it)
+lambda_alg3 = 0.9	(alg3 is a little certain that user1 did not issue it)
+lambda_alg4 = 0.01	(alg4 is almost certain that user1 did not issue it)
+
+Finally,
+
+lamda = lamda_alg1 * lamda_alg2 * lamda_alg3 * lamda_alg4
+      = 0.135
+
+The final lamda obtained indicates a low, but not zero, possibility that 
+user1 issued the statement.
+
+   iv) More coming soon. 
+
+3) How to test algorithms:
+
+Coming soon.
+
+4) How to run algorithms:
+
+Locate the file 'settings.py'. Supposing that your algorithm module is named
+'alg_my_algorithm.py'. Add the lines:
+
+import alg_my_algorithm 
+alg_list += alg_my_algorithm
+
+Notice there's no '.py' extension when importing. 
+
+Now run your algorithm from bash using:
+
+python run_algorithms.py filename
+
+Warning: This will generate no output, except what your algorithm module
+produces. For testing your algorithm, use test_algorithm.py(3) instead.
+
