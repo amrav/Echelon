@@ -1,7 +1,9 @@
 import sys
 import parse_input
+import settings
 
-def run(filename, alg_list):
+
+def run(filename='', alg_list=[]):
     '''Takes a list of algorithms and assigns final probabilities to each 
 statement in statements
 
@@ -17,8 +19,8 @@ arguments, and should return a probability dictionary for users.'''
                 alg_prob = alg.final_alg_probability(statements, stat_no)
                 for user in alg_prob:
                     if user not in stat.final_prob:
-                        stat.final_prob[user]=0
-                    stat.final_prob[user] += alg_prob[user] 
+                        stat.final_prob[user]=1
+                    stat.final_prob[user] *= (alg_prob[user]) 
                     #NEED TO ADD WEIGHTS. This function has to be looked
                     #carefully.
                     ##print user,final_prob
@@ -43,10 +45,11 @@ def print_decisions(statements):
             
 
 if __name__ == '__main__':
-    if len(sys.argv)<2:
-        print "Usage: python run_algorithms.py algorithm1.py [algorithm2.py, ...]"
+    if len(sys.argv)!=2:
+        print "Usage: python run_algorithms.py logfile"
         sys.exit(1)
-    run(parse_input.statements, sys.argv[1:])
+    #print type(sys.argv[1])
+    run('log.txt', settings.alg_list)
         
                 
                     

@@ -10,16 +10,12 @@ import re
 #global chatlog_words 
 global users
 #global statements
-user_scope = {}
+#user_scope = {}
+
 
 
 #define various constants
 
-current_scope = 4
-scope_weight = 3
-scope_weight_minus = 3
-addressed_weight = 5
-inverse_recent_weight = 1
 
 def clean(text):
     '''clean raw text file and return a list of tokens'''
@@ -34,14 +30,15 @@ def clean(text):
     return cleantext_str.split(' ')
 
 def init(filename):
-    text = open(filename).read()
+    t = open(filename)
+    text = t.read()
     matches = re.findall(r"(\[([0-9][0-9]\:[0-9][0-9])\] <(.*?)> (.*))\
 |(\*\*\*) (.*?) (joined|left)", text)
     
         
         
     users = []; users_online = []; statements = []
-    current_users = {}
+    
     
     for match in matches:
         
@@ -52,37 +49,11 @@ def init(filename):
         if match[0] != '':
             users.append(issued_by) #how useful is this?
             
-            #direct address should reflect in current users
-            address = re.match(r"(.*?):", statement_text)
-            if address != None:
-                addressed_user = address.group(1)
-                ##print "ADRESSED USER ", addressed_user, ' ', time
-                if addressed_user in users:
-                    current_users[addressed_user] = \
-current_scope*addressed_weight
-                    ##print "WEIGHT" , current_users[addressed_user]
-
-            
-            
-            #update current_users list
-            current_users[issued_by]=current_scope*scope_weight
-            for user in current_users:
-                current_users[user]-=1*scope_weight_minus
-                if current_users[user]<0:
-                    current_users[user]=0
-            
-            #create a list of tuples of current users and 
-            #scope for this statement
-            stat_current_users = [(user,current_users[user]) \
-for user in current_users.keys() if current_users[user]!=0]
-            
-
-            #finally add stat to list of statements
+        #add stat to list of statements
             
             stat = statement(time,issued_by,clean(statement_text), \
-users_online, stat_current_users) 
+users_online) 
             statements.append(stat)    
-        
         else:
             if match[6] == 'joined':
                 users_online.append(match[5])
@@ -92,31 +63,33 @@ users_online, stat_current_users)
     
     #remove duplicates
     users = set(users)
+    statement.users = users
     return statements
     
    
 class statement:
     
+    users = []
     def __init__(self, time, issuing_user_name, statement_text, \
-users_online, current_users):
-        print "init called!"
+users_online):
+        ##print "init called!"
         self.text = statement_text
         self.issued_by = issuing_user_name
         self.time = time
         self.users_online = users_online
-        self.current_users = current_users
-        
+                
         self.alg_prob = {}
         #Probability dicitonary to be used by the algorithm
-        #as convinient to it. Please ensure that the sum of probabilities
-        #is one, unless you are unsure, in which case this object should 
+        #as convinient to it. Please ensure that the probabilities are centered
+        #around one, unless you are unsure, in which case this object should 
         #be empty.
 
         self.final_prob = {}
         #Strictly to be used only by the run module. 
         #DO NOT modify this variable.
         
-    def print_details(self, full_text=False, online=True, current=True): 
+    def print_details(self, full_text=False, online=True, current=True\
+,probabilities = True): 
         print self.issued_by + ' at ' + self.time
         if full_text == False:
             for word in self.text[:5]:
@@ -127,21 +100,23 @@ users_online, current_users):
         print
         if online==True:
             print "Users online:", self.users_online
-        if current==True:
-            print "Current users:", [user for user,_ in self.current_users]
+        if probabilities == True:
+            if self.final_prob!={}:
+                print "Final Probabilities:", self.final_prob
+            else:
+                print "Algorithm Probabilities:", self.alg_prob
         print
 
-
 def test_module1(statements, full=False):      
-    for i in range(len(statements)):
     
+    for i in range(len(statements)):
         if statements[i].issued_by == '$$$':
             cumulative_scope = {}
             if full==True:
                 print "--------------------------------------------------"
                 print "Context:"
                 for stat in statements[(i-current_scope):i+1]:
-                    stat.print_details(full_text=True,current=True, online=False)
+                    stat.print_details(full_text=True,current=True,online=False)
                 for user,scope in stat.current_users:
                     if user not in cumulative_scope:
                         cumulative_scope[user]=scope
@@ -169,12 +144,12 @@ in cumulative_scope]
         
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        print "Usage: python parse_input.py filename"
+    if len(sys.argv) != 1:
+        print "Usage: python parse_input.py"
         sys.exit(1)
-    filename = sys.argv[1]
-    statements = init(filename)
-    test_module1(statements)
+    #filename = sys.argv[1]
+    #statements = init(filename)
+    #test_module1(statements)
     #for stat in statements:
      #   stat.print_details()
 #    for stat in statements:
