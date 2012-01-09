@@ -1,6 +1,8 @@
+from __future__ import division
 import sys
 import nltk
 import re
+
 
 #define various structures
 
@@ -17,6 +19,7 @@ current_scope = 4
 scope_weight = 3
 scope_weight_minus = 5
 addressed_weight = 5
+inverse_recent_weight = 1
 
 def clean(text):
     '''clean raw text file and return a list of tokens'''
@@ -32,7 +35,8 @@ def clean(text):
 
 def init(filename):
     text = open(filename).read()
-    matches = re.findall(r"(\[([0-9][0-9]\:[0-9][0-9])\] <(.*?)> (.*))|(\*\*\*) (.*?) (joined|left)", text)
+    matches = re.findall(r"(\[([0-9][0-9]\:[0-9][0-9])\] <(.*?)> (.*))\
+|(\*\*\*) (.*?) (joined|left)", text)
     
         
     global statements
@@ -51,11 +55,11 @@ def init(filename):
             address = re.match(r"(.*?):", statement_text)
             if address != None:
                 addressed_user = address.group(1)
-                print "ADRESSED USER ", addressed_user, ' ', time
+                ##print "ADRESSED USER ", addressed_user, ' ', time
                 if addressed_user in users:
                     current_users[addressed_user] = \
 current_scope*addressed_weight
-                    print "WEIGHT" , current_users[addressed_user]
+                    ##print "WEIGHT" , current_users[addressed_user]
 
             
             
@@ -130,6 +134,13 @@ def test_module1():  #ToDo: WARNING! Alters global statements list.
                         cumulative_scope[user]=scope
                     else:
                         cumulative_scope[user]+=scope
+                for user in cumulative_scope:
+                    #This function needs to be refined. Perhaps exponential?
+                    if len([s for u,s in statements[i].current_users \
+if u==user]) == 1:
+                        cumulative_scope[user]+=int([s for u,s \
+in statements[i].current_users if u==user][0]/(scope_weight*\
+inverse_recent_weight))#/scope_weight
             max_scope = 0
             for user in cumulative_scope:
                 if cumulative_scope[user]>max_scope and user!='$$$'\
