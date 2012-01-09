@@ -23,13 +23,13 @@ For more information, refer to the Readme.'''
         stat.__class__ = final_prob_statement
         stat.init()
     for alg in alg_list:
-        statements = alg.final_alg_probability(statements)
+        alg.run(statements)
         for stat in statements:
             if stat.issued_by == '$$$':
-                for user in stat.alg_prob:
+                for user in stat.alg_lambda:
                     if user not in stat.final_prob:
                         stat.final_prob[user]=1
-                    stat.final_prob[user] *= (stat.alg_prob[user]) 
+                    stat.final_prob[user] *= (stat.alg_lambda[user]) 
                     ##print stat.alg_prob
                     #NEED TO ADD WEIGHTS. This function has to be looked
                     #carefully.

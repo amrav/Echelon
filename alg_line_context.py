@@ -76,21 +76,21 @@ and (user+':') not in stat.text:
 in cumulative_scope]
             for user in cumulative_scope:
                 ##print user, cumulative_scope[user]
-                statements[i].alg_prob = cumulative_scope 
+                statements[i].alg_lambda = cumulative_scope 
     for stat in statements:
         if stat.issued_by == '$$$':
-            avg = sum(stat.alg_prob.values())/len(stat.alg_prob.keys())
+            avg = sum(stat.alg_lambda.values())/len(stat.alg_lambda.keys())
             #Divide by average to normalise values around 1 ?
-            for user in stat.alg_prob:
-                stat.alg_prob[user]/=avg
+            for user in stat.alg_lambda:
+                stat.alg_lambda[user]/=avg
             if full == True:
-                print stat.alg_prob
+                print stat.alg_lambda
                 print
     return statements    
 
-def final_alg_probability(statements):
+def run(statements):
     #TODO: Fix this so that algorithm is only needed to be run once!!--FIXED!
-    #Populates alg_prob in each statement
+    #Populates alg_lamda in each statement
     for stat in statements:
         stat.__class__ = context_statement
     run_alg(statements, True)

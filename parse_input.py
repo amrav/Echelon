@@ -85,12 +85,12 @@ users_online):
         self.time = time
         self.users_online = users_online
                 
-        self.alg_prob = {}
+        self.alg_lambda = {}
         #Probability dicitonary to be used by the algorithm
         #as convinient to it. Please ensure that the probabilities are centered
         #around one, unless you are unsure, in which case this object should 
         #be empty. The value of '1' is considered neutral. For more detailed
-        #information, refer to the readme.
+        #information, refer to the Readme.
 
         
         
@@ -107,10 +107,7 @@ users_online):
         if online==True:
             print "Users online:", self.users_online
         if probabilities == True:
-            if self.final_prob!={}:
-                print "Final Probabilities:", self.final_prob
-            else:
-                print "Algorithm Probabilities:", self.alg_prob
+            print "Algorithm Probabilities:", self.alg_lambda
         print
 
 if __name__ == '__main__':
