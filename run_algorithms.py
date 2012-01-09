@@ -3,6 +3,9 @@ import parse_input
 import settings
 
 
+class final_prob_statement(parse_input.statement):
+    def init(self):
+        self.final_prob = {}
 def run(filename='', alg_list=[]):
     '''Takes a list of algorithms and assigns final probabilities to each 
 statement in statements
@@ -12,15 +15,18 @@ This function takes the list of statements, the statement number as
 arguments, and should return a probability dictionary for users.''' 
     
     statements = parse_input.init(filename)
-    for stat_no in range(len(statements)):
-        stat = statements[stat_no]
-        if stat.issued_by == '$$$':
-            for alg in alg_list:
-                alg_prob = alg.final_alg_probability(statements, stat_no)
-                for user in alg_prob:
+    for stat in statements:
+        stat.__class__ = final_prob_statement
+        stat.init()
+    for alg in alg_list:
+        statements = alg.final_alg_probability(statements)
+        for stat in statements:
+            if stat.issued_by == '$$$':
+                for user in stat.alg_prob:
                     if user not in stat.final_prob:
                         stat.final_prob[user]=1
-                    stat.final_prob[user] *= (alg_prob[user]) 
+                    stat.final_prob[user] *= (stat.alg_prob[user]) 
+                    ##print stat.alg_prob
                     #NEED TO ADD WEIGHTS. This function has to be looked
                     #carefully.
                     ##print user,final_prob

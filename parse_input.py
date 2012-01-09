@@ -84,9 +84,7 @@ users_online):
         #around one, unless you are unsure, in which case this object should 
         #be empty.
 
-        self.final_prob = {}
-        #Strictly to be used only by the run module. 
-        #DO NOT modify this variable.
+        
         
     def print_details(self, full_text=False, online=True, current=True\
 ,probabilities = True): 
@@ -106,42 +104,6 @@ users_online):
             else:
                 print "Algorithm Probabilities:", self.alg_prob
         print
-
-def test_module1(statements, full=False):      
-    
-    for i in range(len(statements)):
-        if statements[i].issued_by == '$$$':
-            cumulative_scope = {}
-            if full==True:
-                print "--------------------------------------------------"
-                print "Context:"
-                for stat in statements[(i-current_scope):i+1]:
-                    stat.print_details(full_text=True,current=True,online=False)
-                for user,scope in stat.current_users:
-                    if user not in cumulative_scope:
-                        cumulative_scope[user]=scope
-                    else:
-                        cumulative_scope[user]+=scope
-                for user in cumulative_scope:
-                    #This function needs to be refined. Perhaps exponential?
-                    if len([s for u,s in statements[i].current_users \
-if u==user]) == 1:
-                        cumulative_scope[user]+=int([s for u,s \
-in statements[i].current_users if u==user][0]/(scope_weight*\
-inverse_recent_weight))#/scope_weight
-            max_scope = 0
-            for user in cumulative_scope:
-                if cumulative_scope[user]>max_scope and user!='$$$'\
-and (user+':') not in stat.text:
-                    answer = user
-                    max_scope = cumulative_scope[user]
-                    print 
-                
-            print "Replacing $$$ with", answer
-            print "Cumulative scopes: ", [(u,cumulative_scope[u]) for u \
-in cumulative_scope]
-            print
-        
 
 if __name__ == '__main__':
     if len(sys.argv) != 1:

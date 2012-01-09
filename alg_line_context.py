@@ -74,7 +74,6 @@ and (user+':') not in stat.text:
                 print "Replacing $$$ with", answer
                 print "Cumulative scopes: ", [(u,cumulative_scope[u]) for u \
 in cumulative_scope]
-                print
             for user in cumulative_scope:
                 ##print user, cumulative_scope[user]
                 statements[i].alg_prob = cumulative_scope 
@@ -84,14 +83,18 @@ in cumulative_scope]
             #Divide by average to normalise values around 1 ?
             for user in stat.alg_prob:
                 stat.alg_prob[user]/=avg
+            if full == True:
+                print stat.alg_prob
+                print
     return statements    
 
-def final_alg_probability(statements, stat_no):
-    #TODO: Fix this so that algorithm is only needed to be run once!!
+def final_alg_probability(statements):
+    #TODO: Fix this so that algorithm is only needed to be run once!!--FIXED!
+    #Populates alg_prob in each statement
     for stat in statements:
         stat.__class__ = context_statement
-    run_alg(statements[:stat_no+1], True)
-    return statements[stat_no].alg_prob
+    run_alg(statements, True)
+    return statements
 
 
 if __name__ == '__main__':
