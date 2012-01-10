@@ -106,8 +106,6 @@ users_online):
         print
         if online==True:
             print "Users online:", self.users_online
-        if probabilities == True:
-            print "Algorithm Probabilities:", self.alg_lambda
         print
 
 if __name__ == '__main__':

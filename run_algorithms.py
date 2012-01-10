@@ -34,6 +34,7 @@ For more information, refer to the Readme.'''
                     #NEED TO ADD WEIGHTS. This function has to be looked
                     #carefully.
                     ##print user,final_prob
+    return statements
             
 
 def print_decisions(statements):
@@ -44,10 +45,11 @@ def print_decisions(statements):
             print "--------------------------------------------------"
             print "Context:"
             for stat in statements[i-print_range:i+1]: 
-                stat.print_details(full=True)
+                stat.print_details(full_text=True)
             stat = statements[i]
             for user in stat.final_prob:
-             if stat.final_prob[user] == max(stat.final_prob.keys()):
+             if stat.final_prob[user] == max(stat.final_prob.values())\
+and user!='$$$':
                  print "Replacing $$$ by", user
             print stat.final_prob
             print
@@ -59,7 +61,8 @@ if __name__ == '__main__':
         print "Usage: python run_algorithms.py logfile"
         sys.exit(1)
     #print type(sys.argv[1])
-    run('log.txt', settings.alg_list)
+    statements = run(sys.argv[1], settings.alg_list)
+    print_decisions(statements)
         
                 
                     

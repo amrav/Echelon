@@ -18,7 +18,7 @@ class context_statement(parse_input.statement):
     def delete_current_user(self, user):
         self.current_users.pop(user)
 
-def run_alg(statements, full=False):
+def run_alg(statements):
 #function that runs the line context algorithm      
     
     for stat in statements:
@@ -29,7 +29,6 @@ def run_alg(statements, full=False):
         address = re.match(r"(.*?):", text)
         if address != None:
             addressed_user = address.group(1)
-            ##print "ADRESSED USER ", addressed_user, ' ', time
             if addressed_user in parse_input.statement.users:
                 stat.current_users[addressed_user] = \
 current_scope*addressed_weight
@@ -45,12 +44,7 @@ current_scope*addressed_weight
     for i in range(len(statements)):
         if statements[i].issued_by == '$$$':
             cumulative_scope = {}
-            if full==True:
-                print "--------------------------------------------------"
-                print "Context:"
             for stat in statements[(i-current_scope):i+1]:
-                if full==True:
-                    stat.print_details(full_text=True,current=True,online=False)
                 for user in stat.current_users:
                     scope = stat.current_users[user]
                     if user not in cumulative_scope:
@@ -69,13 +63,7 @@ int(statements[i].current_users[user]\
 and (user+':') not in stat.text:
                     answer = user
                     max_scope = cumulative_scope[user]
-            if full==True:
-                print 
-                print "Replacing $$$ with", answer
-                print "Cumulative scopes: ", [(u,cumulative_scope[u]) for u \
-in cumulative_scope]
             for user in cumulative_scope:
-                ##print user, cumulative_scope[user]
                 statements[i].alg_lambda = cumulative_scope 
     for stat in statements:
         if stat.issued_by == '$$$':
@@ -83,19 +71,17 @@ in cumulative_scope]
             #Divide by average to normalise values around 1 ?
             for user in stat.alg_lambda:
                 stat.alg_lambda[user]/=avg
-            if full == True:
-                print stat.alg_lambda
-                print
+                #If user is referred to, his lamda becomes zero.
+                if user+':' in stat.text:
+                    stat.alg_lambda[user] = 0
     return statements    
 
 def run(statements):
-    #TODO: Fix this so that algorithm is only needed to be run once!!--FIXED!
     #Populates alg_lamda in each statement
     for stat in statements:
         stat.__class__ = context_statement
-    run_alg(statements, True)
-    return statements
-
+    run_alg(statements)
+    
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
