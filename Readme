@@ -1,6 +1,6 @@
 This file explains how to write an algorithm module, test it using 
 test_algorithm.py, and run it using run_algorithms.py. It is 
-intended as a standards, and style guide.
+intended as a specifications guide.
 
 1) The 'statement' class in parse_init.py:
 
@@ -18,7 +18,7 @@ accessed, please refer to the parse_input.py module.
    i) Your first step will be to import parse_input.py and store a list of 
 statements returned by parse_input.py in some variable, say, stat_list. 
 Each statement has an attribute alg_prob. You are only concerned with those 
-statements, who's issued_by is unknown('$$$').
+statements, whose issued_by is unknown('$$$').
 
    ii) For each unknown statement in stat_list, your algorithm must 
 assign certain values, called lambdas, to each user. A lambda is an indicator 
@@ -50,30 +50,44 @@ lamda = lamda_alg1 * lamda_alg2 * lamda_alg3 * lamda_alg4
 The final lamda obtained indicates a low, but not zero, possibility that 
 user1 issued the statement.
 
-   iv) More coming soon. 
+   iv) If you need more attributes than the statement class provides,
+you can derive a new class from the statement class to suit your needs.
+See the alg_line_context.py module for an example of this.
+
+    v) You must have a function in your algorithm module called run(). This
+function is used to interface with the other modules, so it must conform to
+the following specifications:
+
+	a) It must take a single argument, a list of statements.
+	b) It need not return anything. However if it does, it will be 
+	ignored.
+	c) For each unknown statement, it must either populate a user-lambda
+	dictionary as specified above, or assign the value None. 
+
+Failure to conform to these specifications may result in any number of errors.
 
 3) How to test algorithms:
 
-In settings.py, import your algorithm module (alg_my_algorithm) and 
+In the module settings.py, import your algorithm module (alg_my_algorithm) and 
 set the value of test_alg to alg_my_algorithm. 
 
 In bash, run:
 
-python test_algorithm.py filename | less
+	python test_algorithm.py filename | less
 
 4) How to run algorithms:
 
-Locate the file 'settings.py'. Supposing that your algorithm module is named
-'alg_my_algorithm.py'. Add the lines:
+Supposing that your algorithm module is named 'alg_my_algorithm.py'. 
+In the module 'settings.py', add the lines:
 
-import alg_my_algorithm 
-alg_list += alg_my_algorithm
+	import alg_my_algorithm 
+	alg_list += alg_my_algorithm
 
 Notice there's no '.py' extension when importing. 
 
 Now run your algorithm from bash using:
 
-python run_algorithms.py filename
+	python run_algorithms.py filename | less
 
 Warning: This will use all algorithms specified in settings.py. For testing 
 your algorithm only, use test_algorithm.py(3) instead.
