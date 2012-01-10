@@ -54,7 +54,12 @@ user1 issued the statement.
 
 3) How to test algorithms:
 
-Coming soon.
+In settings.py, import your algorithm module (alg_my_algorithm) and 
+set the value of test_alg to alg_my_algorithm. 
+
+In bash, run:
+
+python test_algorithm.py filename | less
 
 4) How to run algorithms:
 
@@ -70,6 +75,6 @@ Now run your algorithm from bash using:
 
 python run_algorithms.py filename
 
-Warning: This will generate no output, except what your algorithm module
-produces. For testing your algorithm, use test_algorithm.py(3) instead.
+Warning: This will use all algorithms specified in settings.py. For testing 
+your algorithm only, use test_algorithm.py(3) instead.
 
