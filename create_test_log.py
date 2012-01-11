@@ -13,31 +13,30 @@ def createlog(filename, answerflag = False):
   log = open(filename,"r")
   test_filename = re.search(r"(.*)\.", filename).group(1)
   test_file = open(test_filename+'_test.txt',"w")
+  if answerflag == True:
+    answers = open(test_filename+'_answers.txt','w')
   
   line = log.readline()
   
-  while line!= None:
-    match=re.search(r"\[\d\d:\d\d\] <([:alphanum:]+)>",line)
+  while line:
+    match=re.search(r"\[\d\d:\d\d\] <(.+?)>",line)
     if match!=None and random.randint(1,20)==1:
       line=line.replace(match.group(1),'$$$')
       if answerflag == True:
-        answers = open(test_filename+'_answers.txt','r')
         answers.write(match.group(1)+'\n')
+    test_file.write(line)
     line=log.readline()
-  
-  test_file.write(line)
-    
 
 if __name__=='__main__':
   
   if len(sys.argv)<2:
-    print "Usage: python create_test_log.py filename [--answers]"
+    print "Usage: python create_test_log.py [--answers] <filename>"
     sys.exit(1)
   
-  if len(sys.argv)==3 and sys.argv[2]=='--answers':
-    createlog(sys.argv[1],answerflag=True)
+  if len(sys.argv)==3 and sys.argv[1]=='--answers':
+    createlog(sys.argv[2],answerflag=True)
   else:
-    createlog(sys.argv[1])
+    createlog(sys.argv[2])
 
 
 

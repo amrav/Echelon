@@ -1,0 +1,791 @@
+[00:05] *** ashim left
+[00:05] *** ashim joined
+[00:53] *** lupo33 left
+[01:34] *** sa1 left
+[01:34] *** sa1 joined
+[01:48] *** sa1 left
+[01:49] *** sa1 joined
+[03:05] *** navgeet joined
+[04:06] *** sa1 left
+[04:18] *** ksinkar joined
+[04:20] *** ksinkar left
+[04:26] *** navgeet left
+[05:12] *** ps_jinx left
+[05:17] *** ps_jinx joined
+[05:53] *** sa1 joined
+[05:54] *** aftab joined
+[06:13] *** aftab left
+[06:17] <yeban> Gmail isn't working for me.
+
+[06:20] <sanjoyd> Works for me.  Using 212.
+
+[06:21] <sa1> Wasn't working for me either. Working on 247 now.
+
+[06:28] <yeban> Works with 247. Thanks sa1 :).
+
+[06:29] <artagnon> HTTPS is down on 245 :)
+
+[06:58] <sanjoyd> 212 not working now. :(
+
+[07:44] *** sa1 left
+[07:47] *** aftab joined
+[08:20] *** lupo33 joined
+[08:24] *** sa1 joined
+[09:41] <artagnon> They have some idea, but nobody is really certain about these things.
+
+[09:52] *** aftab left
+[10:05] * artagnon shudders
+
+[10:05] <lupo33> artagnon: At the thought of what?
+
+[10:05] <artagnon> I just commented on a super-high-influence thread about Git Generation Numbers -- mainly a conversation between Linus, and the original authors.
+
+[10:05] <lupo33> :)
+
+[10:06] <artagnon> It took me some time to convince myself that what I was saying wasn't all garbage.
+
+[10:07] <artagnon> http://thread.gmane.org/gmane.comp.version-control.git/177146/focus=180783
+
+[10:11] * lupo33 googles Git Generation Numbers
+
+[10:12] <$$$> You'll find nothing :)
+
+[10:12] <$$$> Except this thread, and a previous thread like this.
+
+[10:13] <lupo33> http://news.ycombinator.com/item?id=2765844
+
+[10:13] <sa1> :). In the first and last paragraphs, you sound like me when I am talking to you or Sanjoy. The middle paragraphs, of course, I have no clue about.
+
+[10:13] * artagnon laughs
+
+[10:14] <artagnon> Yes, that was the point of showing you this :)
+
+[10:14] <sa1> :)
+
+[10:15] <artagnon> It's perfectly normal behavior.  This is how the community grows.
+
+[10:16] <artagnon> Note how I'm blatantly disagreeing with almost everyone except Linus :P
+
+[10:16] <artagnon> It's very important to disagree.
+
+[10:17] <sa1> artagnon: I disagree. :P
+
+[10:17] * artagnon smiles
+
+[10:17] <artagnon> Also, note how most less-useful responses on the thread are completely ignored.
+
+[10:18] <artagnon> See the people Linus responds to.
+
+[10:25] *** ps_jinx left
+[10:27] * lupo33 was wondering if a we could write code to make a simple s/foo/bar-like command to replace foo by bar in the channel log (and if possible in the live channel feed too).
+
+[10:27] <lupo33> s/a//
+
+[10:28] <sanjoyd> lupo33: not possible in the live channel feed.
+
+[10:28] <$$$> sanjoyd: Thought so.
+
+[10:31] *** ps_jinx joined
+[10:34] <artagnon> sa1: Read Linus' first email to the Usenet group announcing Linux.
+
+[10:34] <artagnon> Sounds very similar :)
+
+[10:36] <artagnon> http://en.wikipedia.org/wiki/History_of_Linux#The_creation_of_Linux
+
+[10:36] <sa1> Yeah, I have read it. But still, he announced a _kernel_, which makes the the rest of the email rather secondary.:P
+
+[10:40] <sa1> The same of course could be the case with your email, though I don't understand it.
+
+[10:42] <artagnon> lol, I don't either -- and that isn't the point anyway.
+
+[10:42] <sa1> yEAH
+
+[10:42] <sa1> s/yEAH/Yeah
+
+[10:43] <artagnon> Sometimes, I wonder how people managet to hit CAPS LOCK -- I don't even have that key.
+
+[10:44] *** ps_jinx left
+[10:45] <sa1> artagnon: I find it faster than Shift.:| My fingers have got used to it.
+
+[10:49] *** ps_jinx joined
+[10:55] * lupo33 is surprised to find that "/ME" works even on gchat.
+
+[10:55] * sa1 leaves lab.
+
+[10:55] *** sa1 left
+[11:13] <artagnon> Anyone for chai?  I'm going to BCR to get a quick chai
+
+[11:14] * artagnon goes off
+
+[11:23] *** sa1 joined
+[11:53] <sa1>  /join #xmonad
+
+[11:54] <$$$> sorry for that :/
+
+[12:17] *** sa1 left
+[12:20] *** sa1 joined
+[12:23] *** vickyc joined
+[12:23] *** sa1_ joined
+[12:32] *** ps_jinx left
+[12:37] *** ps_jinx joined
+[12:42] *** vickyc left
+[12:42] *** vickyc joined
+[12:44] *** sanket left
+[12:44] *** ps_jinx left
+[12:47] *** ps_jinx joined
+[12:58] *** ps_jinx left
+[13:04] *** ps_jinx joined
+[13:09] <diffoperator> I just a very lol thing today.
+
+[13:09] *** ps_jinx left
+[13:09] <diffoperator> Turns out that the work I did last year at BC helped my boss get a promotion :P
+
+[13:09] <$$$> *heard
+
+[13:14] *** ps_jinx joined
+[13:23] <lupo33> diffoperator: BC = Barcap?
+
+[13:23] <artagnon> Yes! I figured out what was wrong with my computer! :D
+
+[13:23] <artagnon> After going through many many GPF logs, I figured out that it was my RAM.
+
+[13:23] <artagnon> Ran memtest and figured out which stick :)
+
+[13:24] <$$$> Oh, okay.  You have the warranty now.
+
+[13:24] <artagnon> Ofcourse :)
+
+[13:25] <$$$> At first, I thought it was my i7 core or hard drives.  Even suspected the motherboard for some time.
+
+[13:26] <artagnon> I was desperate today -- can't have Chrome crashing all the time during my interview :)
+
+[13:27] *** vickyc left
+[13:28] <lupo33> artagnon: You are still interviewing? After that amazing Amazon offer? :D
+
+[13:28] <artagnon> The drive I have is almost scary.
+
+[13:29] *** vickyc joined
+[13:43] * yeban cheers for artagnon 
+
+[13:43] * yeban dances :D/-<
+
+[13:43] * yeban dances :D|-<
+
+[13:43] * yeban dances :D-<
+
+[13:43] * yeban dances :D|-<
+
+[13:46] * diffoperator needs to get himself an SSD
+
+[13:49] <artagnon> :)
+
+[14:00] *** sanket joined
+[14:06] *** vinaykola joined
+[14:14] *** vickyc left
+[14:15] *** vickyc joined
+[14:27] <$$$> artagnon: What time is your interview?
+
+[14:34] <$$$> yeban: 10:30 PM.
+
+[14:44] *** ps_jinx left
+[14:44] *** sa1_ left
+[14:45] *** sa1 left
+[14:46] *** ps_jinx joined
+[14:46] <yeban> Dinner?
+
+[14:51] *** lupo33 left
+[14:51] *** vinaykola left
+[14:51] *** vickyc1 joined
+[14:52] *** vickyc left
+[14:52] *** sanket left
+[14:53] <ashim> artagnon: Best of luck for the interview. :)
+
+[15:08] *** sanket joined
+[15:10] *** sanjoyd left
+[15:10] *** sanjoyd joined
+[15:19] <diffoperator> sanjoyd: Are you writing GPython in C++?
+
+[15:19] <sanjoyd> diffoperator: yes.
+
+[15:19] <diffoperator> eschewed C?
+
+[15:19] <sanjoyd> diffoperator: a lot has changed from what is there in the github account.  I'll probably re-write history.
+
+[15:20] <sanjoyd> diffoperator: yes.  I'm a C++ fan now. :D
+
+[15:20] <diffoperator> are your latest commits in?
+
+[15:20] <sanjoyd> diffoperator: no.  I'll push once the lexer is written.
+
+[15:20] <sanjoyd> diffoperator: or, actually I can push what I have now.
+
+[15:20] <diffoperator> (you'll come back to java soon, the way you are going...)
+
+[15:20] <diffoperator> yeah do that
+
+[15:20] <$$$> diffoperator: you'll probably reconsider when you look at the code. :P
+
+[15:21] <sanjoyd> diffoperator: it does not work, barely compiles.
+
+[15:21] <sanjoyd> I'll push nevertheless.
+
+[15:23] <sanjoyd> diffoperator: pushed.
+
+[15:23] <$$$> ok
+
+[15:24] <diffoperator> are you writing the lexer by hand?
+
+[15:24] <sanjoyd> diffoperator: yes.  Actually I've cleaned up the one in CPython itself.
+
+[15:24] <$$$> Now to tweak it until it runs.
+
+[15:25] <sanjoyd> The CPython one is a huge function, with quite a few gotos.
+
+[15:25] <$$$> I've removed all that.
+
+[15:25] <sanjoyd> And I'm experimenting with the idea of turning the lexing + parsing the other way than usual.
+
+[15:25] <sanjoyd> i.e. the lexer calls the parser when it has a token, and not the other way around.
+
+[15:25] <sanjoyd> Right now, I don't know if this will work well.
+
+[15:26] <diffoperator> huh? that is not the standard workflow
+
+[15:26] <diffoperator> It shouldn't
+
+[15:26] <sanjoyd> You mean the lexing + parsing?
+
+[15:26] <artagnon> ashim: Thanks :)
+
+[15:26] <diffoperator> 1
+
+[15:26] <sanjoyd> No, not really.  Things do work unexpectedly.  For instance, v8 does not even have a lexer.
+
+[15:26] <sanjoyd> It parses JS directly.
+
+[15:27] <$$$> Are there any proofs on the efficiency and correctness of this method?
+
+[15:27] <sanjoyd> diffoperator: which method?
+
+[15:27] <sanjoyd> I'm not following any method.
+
+[15:27] <diffoperator> of parsing directly
+
+[15:27] <diffoperator> no the standard way of doing things is to use compiler compilers
+
+[15:27] <sanjoyd> You'd have a hard time proving a C++ program. :D
+
+[15:28] <sanjoyd> diffoperator: they're too slow for a JIT.
+
+[15:28] <diffoperator> wow, with templates and all
+
+[15:28] <diffoperator> oh right my bad
+
+[15:28] <diffoperator> thats standard compiler theory
+
+[15:28] <sanjoyd> Plus, compiler-compilers tend to work well with whitespace agnostic langauges.
+
+[15:28] <sanjoyd> IMO.
+
+[15:28] <diffoperator> how do things work for JIT compilers?
+
+[15:28] <sanjoyd> I could not find a nice and elegant way to encode Python's indentation in lex.
+
+[15:29] <diffoperator> is it possible to simply import V8?
+
+[15:29] <diffoperator> i mean its architecture
+
+[15:30] <diffoperator> or does the target language requires different way of doing things?
+
+[15:30] *** maxking joined
+[15:39] <sanjoyd> diffoperator: sorry, was on the phone.
+
+[15:39] <sanjoyd> diffoperator: give me a few minutes.
+
+[15:40] <$$$> np
+
+[15:44] <sanjoyd> diffoperator: I do intend to base the code on V8's architecture.  I've been hearing a bit on trace based JITs too; perhaps that will also be interesting to explore.
+
+[15:46] <diffoperator> https://github.com/resistor/BrainFTracing
+
+[15:46] <$$$> have you seen this?
+
+[15:47] <sanjoyd> I've not gone through the source.
+
+[15:47] <diffoperator> I'm feeling too darn sleepy...
+
+[15:48] <diffoperator> Since I left kgp I have become a wimp
+
+[15:48] <sanjoyd> In what sense?
+
+[15:56] <diffoperator> in my capacity to give up on sleep
+
+[15:56] <diffoperator> I have gotten too used to the "good life"
+
+[15:56] *** lupo33 joined
+[16:05] *** sa1 joined
+[16:12] *** theonlyone joined
+[16:12] <theonlyone> Why so many channels?
+
+[16:13] <yeban> theonlyone: There is only one.
+
+[16:13] <theonlyone> Anyone here?
+
+[16:13] <yeban> theonlyone: A lot. Try /names
+
+[16:13] <theonlyone> So how many have joined KLUG this year?
+
+[16:20] <yeban> theonlyone: There are around 45 people on the Google Group.
+
+[16:20] <yeban> theonlyone: http://groups.google.com/group/kgplug
+
+[16:20] <yeban> My bad. There are 79 members now.
+
+[16:21] <sanjoyd> The whole idea of "joining KLUG" is not very well defined. :)
+
+[16:21] <yeban> Right.
+
+[16:22] <artagnon> It's not "joining" so much as "participating" -- hence the change in the side link.
+
+[16:24] *** artagnon left
+[16:24] *** artagnon joined
+[16:24] *** ChanServ sets mode: +o artagnon
+
+[16:24] *** ChanServ sets mode: -o artagnon
+
+[16:25] <theonlyone> Why do i see npower here?
+
+[16:26] <$$$> He passed out.
+
+[16:26] <sanjoyd> Yes he continues to exist ...
+
+[16:26] <sanjoyd> s/Yes/Yet/
+
+[16:27] * crodjer does :)-=<
+
+[16:27] * crodjer does :)-|=<
+
+[16:27] * crodjer does :)-/=<
+
+[16:27] * crodjer does :)-|=<
+
+[16:27] * crodjer does :)-=<
+
+[16:28] <yeban> artagnon: ping
+
+[16:28] <theonlyone> He's got a girlfriend now. That disqualifies him.
+
+[16:28] <yeban> theonlyone: Huh?
+
+[16:28] <theonlyone> :|
+
+[16:29] <sanjoyd> np0w3r:  has a girlfriend??!!
+
+[16:29] <theonlyone> 1
+
+[16:29] <sanjoyd> artagnon: no wonder he was looking different.
+
+[16:29] <yeban> artagnon: In klug.github.com's there is a commit which says [rr: rebased].
+
+[16:29] <$$$> SHA: af50af4b
+
+[16:30] <yeban> Now rebase can mean a lot of things, right?
+
+[16:30] <theonlyone> His teeth look the same to me.
+
+[16:30] <sanjoyd> He was looking all shiny and stuff.
+
+[16:31] <$$$> (When he came to Kgp for the convo.)
+
+[16:31] <yeban> lol :D
+
+[16:31] <theonlyone> Wait,
+
+[16:31] <theonlyone> John Doe to me show details Aug 24 8:26 AM  me: http://alpha.dateiitians.com    lol 8:28 AM  John: wait, opening. but the name seems very promising   me: lol   Naveen: dude    fuckin' awesome    idea    damn, i'm a li'l late :P   me: No    You are an ex-IITian.    Still works out. 8:29 AM  Naveen: no, i'm in a relnship :P   me: :O   Naveen: hmm, 1 day old? :D   me: DateIITians offers you variou
+
+[16:39] <sanjoyd> yeban: artagnon is giving his interview, probably.
+
+[16:44] <yeban> sanjoyd: Right.
+
+[17:01] *** lupo33_ joined
+[17:03] *** lupo33_ left
+[17:04] *** lupo33_ joined
+[17:04] <lupo33_> Oops. Sorry. :/
+
+[17:07] <yeban> lupo33_: For what?
+
+[17:10] <$$$> I mis-typed the msg NickServ command, and thought it appeared on the feed(with my account password :P). Just checked the logs, it didn't. :)
+
+[17:12] *** maxking left
+[17:14] <yeban> I see.
+
+[17:24] *** crodjer left
+
+[17:29] <np0w3r> sanjoyd: Btw, what about your intern next summer? Thinking about it yet? :P
+
+[17:30] *** maxking joined
+[17:30] <sanjoyd> Will start applying soon.
+
+[17:30] <$$$> In a week or two, i.e.
+
+[17:30] <np0w3r> Hmm, nice.
+
+
+[17:35] *** theonlyone left
+[17:35] *** yeban left
+[17:35] *** lupo33 left
+[17:36] *** sa1 left
+[17:36] *** sanket left
+[17:36] *** maxking left
+[17:36] *** vickyc1 left
+[17:37] *** lupo33_ left
+[17:48] *** sanjoyd left
+[17:52] *** ps_jinx left
+[20:11] *** sa1 joined
+[20:15] * sa1 hopes artagnon's interview wasn't affected because of the power cut.
+
+[20:22] *** yeban joined
+[20:50] *** aftab joined
+[20:51] <artagnon> Just the last question of the first interview got screwed up.
+
+[20:51] <artagnon> Second interview re-scheduled.  Aced everything else.
+
+[20:55] *** sa1 left
+[20:56] *** sa1 joined
+[20:59] * artagnon dozes off
+
+[21:02] <$$$> artagnon: read the logs now. nice. :)
+
+[21:11] <aftab> Just read the logs too. Was quite interesting.
+
+[21:11] * aftab calls it a day. 
+
+[21:11] *** aftab left
+[02:14] <yeban> Anyone up?
+
+[02:19] *** lupo33 joined
+[02:21] <sa1> yeban: yes
+
+[02:21] <yeban> sa1: No class?
+
+[02:23] <$$$> Well yeah, there's one at 8:30, so I was about to go get ready.
+
+[02:24] * yeban has one at 9:30
+
+[02:24] * yeban hates classes
+
+[02:26] <sa1> yeban: The feeling is universal. :)
+
+[02:26] <yeban> :)
+
+[02:28] * lupo33 missed the 7:30 double lecture. 
+
+[02:42] * yeban cheers for lupo33 
+
+[02:53] * sa1 leaves.
+
+[03:27] *** vickyc joined
+[04:45] *** ksinkar joined
+[04:49] *** lupo33 left
+[05:01] *** crodjer joined
+[05:01] *** aftab joined
+[05:05] *** aftab left
+[05:23] *** sanjoyd joined
+[05:23] *** sanjoyd left
+[05:23] *** sanjoyd joined
+[05:58] *** ksinkar left
+[05:59] *** ksinkar joined
+[07:11] *** vickyc left
+[07:55] *** maxking joined
+[08:13] *** aftab joined
+[08:27] *** yeban left
+[08:48] * aftab is trying out wmii.
+
+[09:20] *** maxking left
+[10:38] *** aftab left
+[10:44] <crodjer> chai?
+
+[10:51] <artagnon> crodjer: Yeah, sure.  I'll leave in 2 mins.
+
+[10:51] * crodjer leaves
+
+[10:52] <artagnon> Call for a meeting this Friday if you like -- I might not be in a position to attend it.
+
+[10:52] <artagnon> I'm not in a position to organize/ call it either -- I'm being weighted down by interviews.
+
+[10:53] <artagnon> Ask sanjoyd and yeban for the final say though; they're our community maintainers.
+
+[11:37] *** lupo33 joined
+[11:42] <diffoperator> sanjoyd: Are you thinking of incorporating nanojit into gpython?
+
+[11:42] <diffoperator> I was taking a look at the tracemonkey arch
+
+[11:42] <diffoperator> they use nanojit for generating fast machine code and something called jstracer for hot code opt
+
+[11:52] <diffoperator> *for monitoring, sorry
+
+[11:53] *** ksinkar_ joined
+[11:53] *** ksinkar left
+[12:06] *** vickyc joined
+[12:08] <$$$> diffoperator: I'll have a look at it.  Does it look good, btw?
+
+[12:53] *** ksinkar_ left
+[12:55] *** ps_jinx joined
+[12:55] <diffoperator> it looks usable
+
+[12:55] <diffoperator> + it is maintained by adobe and mozilla
+
+[12:56] <diffoperator> So essentially what the Firefox guys are planning to do is
+
+[12:56] <diffoperator> javascript -> quickly generated but not that optimized code using nitro
+
+[12:57] <diffoperator> nitro code -> slowly generated but fast machine code using nanojit
+
+[12:57] <diffoperator> the last step applies for code that is marked as hot
+
+[12:58] <diffoperator> MSR came up with something called SPUR. I will read that paper.
+
+[13:00] <sanjoyd> diffoperator: okay.  I too will have a look.
+
+[13:03] *** ps_jinx left
+[13:15] *** ps_jinx joined
+[13:22] <sanjoyd> artagnon: ping!
+
+[13:33] <artagnon> sanjoyd: pong.
+
+[13:34] <sanjoyd> artagnon: got time to look at my resume?
+
+[13:35] <$$$> artagnon: or later/
+
+[13:35] <sanjoyd> ?
+
+[13:35] <sanjoyd> As in, should I ask you later?
+
+[13:35] <artagnon> Later, please.  Tomorrow for sure.
+
+[13:35] * artagnon nods
+
+[13:35] <sanjoyd> Okay.
+
+[13:36] <diffoperator> sanjoyd: I am currently reading nanojit code. When do you want to discuss this?
+
+[13:37] <sanjoyd> diffoperator: I still have not seen the code, maybe in two hours?
+
+[13:37] <diffoperator> ok
+
+[13:38] <sanjoyd> I was actually thinking we should work on the lexer and parser; and focus on getting a CFG first.  Once that is out of the way and we actually have something to play with, these things will make more sense.
+
+[13:38] <sanjoyd> It does make a lot of sense to get a library do the platform specific code gen, of course.
+
+[13:39] <sanjoyd> Ahh ... too many 'actually's.
+
+[13:39] <diffoperator> yeah, definitely
+
+[13:39] <$$$> can you prepare some sort of a rough roadmap? I have only used lex and yacc in the past
+
+[13:40] <sanjoyd> Okay.
+
+[13:40] <sanjoyd> I'll do that.
+
+[13:40] <diffoperator> so if you intend to do things differently, i will need to read up on some theory
+
+[13:40] <diffoperator> or code
+
+[13:40] <sanjoyd> Even I'm not very sure about many things right now. :)
+
+[13:54] <diffoperator> np, we first try to get hello world to run
+
+[13:54] <sanjoyd> Exactly! :)
+
+[13:54] <sanjoyd> diffoperator: do you know if A Sarkar de-regges students?
+
+[14:21] *** ps_jinx left
+[14:26] *** ps_jinx joined
+[14:50] *** navgeet joined
+[15:03] <lupo33> Is Minix a high entry barrier project?
+
+[15:11] <$$$> lupo33: try to look at the source, and see how much sense it makes.
+
+[15:12] <sanjoyd> lupo33: you might want to contribute to some C project first, hacking on an OS can be pretty hardcore.
+
+[15:17] <diffoperator> lupo33: It depends on how much time/energy you have to spare.
+
+[15:18] <diffoperator> hacking on minix is like a high intensity, high reward activity
+
+[15:18] <diffoperator> it will be painful but your maturity will develop rapidly
+
+[15:18] <diffoperator> sanjoyd: turns out nanojit does not implement tracing, its just a really fast JIT with its own  IR
+
+[15:19] <sanjoyd> diffoperator: oh, okay.
+
+[15:19] <sanjoyd> diffoperator: I was just talking about something that would, sort of, allow us to compose assembly in a platform non-specific way.
+
+[15:19] <diffoperator> tracemonkey uses something called jstracer to analyse code that is "hot" and selectively JITs that
+
+[15:19] <sanjoyd> diffoperator: so I won't have to worry about what the hex code for mov is.
+
+[15:19] <diffoperator> so we "could" use nanojit for that
+
+[15:19] <sanjoyd> diffoperator: oh, okay.
+
+[15:20] <diffoperator> lexer/parser->cfg->nanojit?
+
+[15:20] <sanjoyd> diffoperator: but I still think we're thinking too far ahead. :P
+
+[15:20] <sanjoyd> diffoperator: yes, probably.
+
+[15:20] <diffoperator> aye, lexer/parser first
+
+[15:20] <$$$> diffoperator: *lexer* first. :D
+
+[15:20] <sanjoyd> diffoperator: I also want to implement some inline caching.
+
+[15:20] <diffoperator> can we just take CPython and rip out its parsing/lexing infrastructure?
+
+[15:20] <sanjoyd> diffoperator: we can do that.
+
+[15:21] *** aftab joined
+[15:21] <diffoperator> are we doing that?
+
+[15:21] <sanjoyd> diffoperator: if I don't get much done by this weekend, perhaps it would be intelligent to do so.
+
+[15:21] <lupo33> diffoperator, sanjoyd: OK.
+
+[15:21] <sanjoyd> diffoperator: it would be nice to have a faster and more streamlined parser in C++, I think.
+
+[15:21] <diffoperator> ok, this weekend I will be travelling anyway
+
+[15:22] <sanjoyd> diffoperator: in fact, that is exactly what unladen swallow did -- start from the place where CPython has already generated the bytecode.
+
+[15:22] <diffoperator> right, i remember
+
+[15:22] <diffoperator> unladen swallow is written in C++
+
+[15:22] <$$$> ?
+
+[15:22] <sanjoyd> In fact, do you think it'll be better the other war around?
+
+[15:22] <sanjoyd> diffoperator: the LLVM parts are, I think.
+
+[15:22] <diffoperator> what?
+
+[15:22] <sanjoyd> LLVM has a C api too, so I can't be sure.
+
+[15:22] <sanjoyd> s/war/way/
+
+[15:23] <sanjoyd> i.e. first use the CPython frontend.
+
+[15:23] <sanjoyd> (By wrapping it around some classes etc.)
+
+[15:23] <sanjoyd> And start with the more fun parts.
+
+[15:23] <sanjoyd> If we see the need later, we can re-write the frontend in C++.
+
+[15:23] <diffoperator> hmm we could
+
+[15:24] <sanjoyd> I think this makes more sense ... more importantly we won't be bored to death before we start seeing some results. :)
+
+[15:24] <diffoperator> oh ok then
+
+[15:24] <diffoperator> prepare a roadmap and let me know, i'll start experimenting with nanojit tomorrow
+
+[16:04] *** aftab left
+[16:17] *** maxking joined
+[16:18] *** maxking_ joined
+[16:19] *** maxking left
+[16:20] *** yeban joined
+[16:24] *** maxking joined
+[16:24] *** maxking_ left
+[16:25] <maxking> I tried upgrading from debian stable to testing but size mi-match error is coming everytime
+
+[16:26] <maxking> I tried changing the proxy and mirror as well but no use.
+
+[16:26] <maxking> Any help?
+
+[16:33] <sanjoyd> maxking: use aria2c to download the files and then use apt-get to install them.
+
+[16:33] <sanjoyd> maxking: wait ...
+
+[16:34] *** navgeet left
+[16:34] <sanjoyd> http://pastebin.com/3UZbYmrB
+
+[16:34] <sanjoyd> maxking: ^
+
+[16:35] <sanjoyd> Save this as fast-apt-get, chmod +x it, and then instead of sudo apt-get install foo, do fast-apt-get install foo.
+
+[16:35] <maxking> sanjoyd: Thanx i'll try it then.
+
+[16:38] <sa1> sanjoyd: I used to have the same problem when I was on Ubuntu. Changing the internet connection(as in using my USB modem) used to fix it. Is it a problem with our proxies? Do they cache corrupted files or something?
+
+[16:38] <sanjoyd> sa1: yes, yes.
+
+[16:39] <sanjoyd> sa1: rather, I think so, I think so.
+
+[16:40] <sa1> pacman has been positively peaceful in this regard.  :) Also allows me to use any downloader as the backend.
+
+[16:48] <maxking> sanjoyd:after saving it as fast-apt-get then?
+
+[16:48] <maxking> chmod +x fast-apt-get?
+
+[16:48] <sanjoyd> 22:09 <sanjoyd> Save this as fast-apt-get, chmod +x it, and then
+
+[16:48] <sanjoyd>                 instead of sudo apt-get install foo, do
+
+[16:48] <$$$>                 fast-apt-get install foo.
+
+[16:48] <sanjoyd> :D
+
+[16:51] <maxking> command not found
+
+[16:51] <maxking> :O
+
+[16:51] <sanjoyd> If you have it in the current dir, you need to do ./fast-apt-get
+
+[16:51] <sanjoyd> Or you can put it somewhere on your path.
+
+[16:51] <lupo33> sanjoyd: http://viewer.opencalais.com/
+
+[16:52] <sanjoyd> lupo33: check PM!
+
+[16:53] <maxking> Illegal option- for ./fast-apt-get
+
+[16:53] <sanjoyd> maxking: works on my comp, try fixing it?
+
+[17:56] *** maxking left
+[19:08] <artagnon> Totally aced it.
+
+[19:08] <artagnon> Designed the backend for GMail in 10 mins :P
+
+[19:09] * artagnon goes out to get chai
+
+[19:40] *** vickyc left
+[19:43] *** vickyc joined
+[20:01] <sa1> artagnon: congrats again.
+
+[20:12] <artagnon> sa1: Results aren't out yet, so I wouldn't be celebrating yet :P
+
+[20:12] <artagnon> Plus, there'll be 4 more interviews :)
+
+[20:13] <artagnon> ... but yeah, thanks :)
+
+[20:16] <sa1> 4 more interviews? as in, 4 more Google rounds or other places?
+
+[20:18] <sanjoyd> artagnon: awesome!
+
+[20:19] <artagnon> sa1: Google rounds.
+
+[20:20] <artagnon> sanjoyd: 'twas a *cakewalk*.  I can't wait to take on more interviews.
+
+[20:21] * artagnon dozes off
+
+[20:35] *** sa1 left
+[20:59] *** ps_jinx left
+[21:04] *** ps_jinx joined
+[21:09] *** sa1 joined
+[21:23] *** sa1 left
+[21:30] *** ps_jinx left
+[21:35] *** ps_jinx joined
+[22:23] *** maxking joined
+[22:40] <maxking> Any one there?
+
+[22:51] *** maxking left
