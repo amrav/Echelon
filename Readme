@@ -16,7 +16,7 @@ accessed, please refer to the parse_input.py module.
 2) How to write your algorithm:
 
    i) Your first step will be to import parse_input.py and store a list of 
-statements returned by parse_input.py in some variable, say, stat_list. 
+statements returned by parse_input.init(filename) in some variable, say, stat_list. 
 Each statement has an attribute alg_prob. You are only concerned with those 
 statements, whose issued_by is unknown('$$$').
 
