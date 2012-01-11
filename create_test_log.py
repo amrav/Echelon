@@ -36,7 +36,7 @@ if __name__=='__main__':
   if len(sys.argv)==3 and sys.argv[1]=='--answers':
     createlog(sys.argv[2],answerflag=True)
   else:
-    createlog(sys.argv[2])
+    createlog(sys.argv[1])
 
 
 
