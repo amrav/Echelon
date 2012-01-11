@@ -1,0 +1,5266 @@
+[00:02] *** jdav left
+[00:03] *** kenperkins joined
+[00:05] *** nardev left
+[00:06] *** wbednarski joined
+[00:06] *** Destos left
+[00:06] <aspiers> what are -r and --root supposed to do?
+
+[00:07] <Mikachu> -r is recursive
+
+[00:07] <aspiers> no, for git log
+
+[00:07] <Mikachu> oh
+
+[00:07] <Mikachu> "show recursive diffs"
+
+[00:08] *** Morphous_ joined
+[00:08] <aspiers> ah
+
+[00:09] <aspiers> err
+
+[00:09] <aspiers> what does that mean in this context?
+
+[00:09] <Mikachu> no idea
+
+[00:09] <aspiers> can't find any docs for --root at all
+
+[00:09] <cmn> what on earth is a recursive dir?
+
+[00:09] *** NelsonM joined
+[00:10] *** pantsman left
+[00:10] <cmn> I believe --root causes log -p to show the contents of the root dir as a diff
+
+[00:10] <cmn> which often doesn't make any sense
+
+[00:10] <Mikachu> it's a diff-tree option
+
+[00:10] <cmn> as it'll just be all those files as added
+
+[00:10] <Mikachu> but it's a bit silly
+
+[00:10] <cmn> so it's the default, then? -r I mean
+
+[00:10] <Mikachu> if it gets to that point and files are left, they're obviously from the root commit
+
+[00:11] <Mikachu> so there's no point parsing it from the diff
+
+[00:11] <cmn> sure, but apparently someone wanted or needed the root commit as a diff
+
+[00:11] *** gitinfo sets mode: +v NelsonM
+
+[00:11] <NelsonM> When "git status" says "Your branch is ahead of 'origin/master' by 1 commit", how does it pick the name "origin/master" to compare to?
+
+[00:11] <Mikachu> i meant for this script, but thinking again maybe multiple roots makes that untrue
+
+[00:12] <FauxFaux> NelsonM: git branch -avv; it's the "upstream" branch from the config.  git branc --set-upstsream.
+
+[00:12] <NelsonM> thanks!
+
+[00:12] <cmn> oh, for the script... sure, but then the root commit would need to be handled differently
+
+[00:13] <cmn> presumably this way it's the same loop for every commit, even the root one?
+
+[00:13] <Mikachu> sure, but it might be worth optimizing still :)
+
+[00:13] *** gusnan left
+[00:13] *** FernandoBasso left
+[00:14] <cmn> absolutely, gotta shave off those milliseconds
+
+[00:14] *** soulcake joined
+[00:15] *** vpopov left
+[00:16] *** unreal left
+[00:19] *** NelsonM left
+[00:19] *** drev1_ joined
+[00:20] *** unreal joined
+[00:20] *** phaedrix joined
+[00:21] *** mjessome joined
+[00:21] *** legnaleurc left
+[00:21] *** Cromulent joined
+[00:22] *** abhatnag joined
+[00:22] *** Dave^|| left
+[00:22] *** legnaleurc joined
+[00:23] *** drev1 left
+[00:24] *** drev1_ left
+[00:24] *** unreal left
+[00:26] *** abhatnag left
+[00:28] *** zulax joined
+[00:29] *** monokrome left
+[00:29] *** ceej left
+[00:30] *** madewokherd left
+[00:30] *** monokrome joined
+[00:31] *** mjessome left
+[00:31] *** Praise- joined
+[00:32] *** Praise left
+[00:32] *** bigkm joined
+[00:32] *** Bass10 joined
+[00:34] *** k299 left
+[00:34] *** xpot-mobile joined
+[00:34] *** Bass10 left
+[00:35] *** Bass10 joined
+[00:35] *** amgarching left
+[00:37] *** binarychef joined
+[00:37] *** binarychef left
+[00:37] *** binarychef joined
+[00:38] *** binarychef left
+[00:42] *** diegoviola joined
+[00:42] *** __iron left
+[00:45] *** madewokherd joined
+[00:46] *** ziggles joined
+[00:46] *** Shusshu left
+[00:48] *** ipalaus_ left
+[00:48] *** unreal joined
+[00:49] *** Cromulent left
+[00:49] *** subbyyy joined
+[00:49] *** lacrymology joined
+[00:51] *** bigkm left
+[00:52] *** crassus joined
+[00:52] <crassus> Does anyone know how to git fetch or clone a cache of a repository on Google Code Search, when the original isn't available anymore?
+
+[00:52] *** wilmoore joined
+[00:52] <FauxFaux> Where's the cache?
+
+[00:53] *** bigkm joined
+[00:53] *** metcalfc left
+[00:53] <crassus> It's in the results from a search I made on Google Code Search: http://www.google.com/codesearch#4xS2tUyEWmY/
+
+[00:54] *** riyonuk left
+[00:55] <crassus> heh, cloning it just worked
+
+[00:55] <crassus> thanks anyways
+
+[00:55] *** crassus left
+[00:56] *** zulax left
+[00:58] *** zulax joined
+[00:59] *** mbj left
+[01:00] *** eijk__ left
+[01:01] *** airborn left
+[01:03] *** j416 left
+[01:03] *** baburdick left
+[01:10] *** kogent joined
+[01:11] *** uu joined
+[01:11] *** uu left
+[01:11] *** dorkmafia1 joined
+[01:12] *** kogent left
+[01:13] *** dorkmafia left
+[01:13] *** iocor left
+[01:15] *** sudoquai left
+[01:15] *** ericmuyser left
+[01:15] *** ericm is now known as ericmuyser
+
+[01:15] *** kogent joined
+[01:15] *** fr0stbyte joined
+[01:17] *** bgerber left
+[01:17] *** bgerber joined
+[01:17] *** kogent left
+[01:18] *** fayimora left
+[01:18] *** baburdick joined
+[01:20] *** QaDeS_ joined
+[01:20] *** DaveIngram joined
+[01:21] *** Daniel0108 left
+[01:21] *** DaveIngram left
+[01:22] *** DaveIngram joined
+[01:23] *** steffo left
+[01:24] *** QaDeS left
+[01:24] *** dvide_ joined
+[01:24] *** dvide left
+[01:25] *** innoying left
+[01:25] *** innoying joined
+[01:25] *** macabre left
+[01:28] *** tgunr left
+[01:28] *** lacrymology left
+[01:28] *** brian_g left
+[01:30] *** lacrymology joined
+[01:31] *** dfr|mac left
+[01:32] *** crisp left
+[01:32] *** tgunr joined
+[01:35] *** brian_g joined
+[01:36] *** brian_g left
+[01:37] *** elseif joined
+[01:38] *** caseymcg joined
+[01:40] *** amigojapan joined
+[01:43] *** fayimora joined
+[01:43] *** legnaleurc left
+[01:44] *** skylord5816 joined
+[01:44] *** skylord5816 left
+[01:44] *** skylord5816 joined
+[01:44] *** skylord5816 left
+[01:44] *** skylord5816 joined
+[01:45] *** legnaleurc joined
+[01:46] *** ISF_ joined
+[01:49] *** LeMike left
+[01:49] *** fayimora left
+[01:49] *** legnaleurc left
+[01:51] *** legnaleurc joined
+[01:52] *** guampa joined
+[01:55] *** xerora left
+[01:57] *** thiago joined
+[01:58] *** txomon|home joined
+[01:58] *** zulax left
+[02:03] *** ipalaus_ joined
+[02:07] *** skylord5816 left
+[02:08] *** Goplat joined
+[02:08] <aspiers> Mikachu: http://stackoverflow.com/questions/5183199/how-print-last-commit-info-for-every-file-in-a-git-repository/8774781#8774781
+
+[02:08] *** BonQuisha left
+[02:09] <aspiers> it works with the git release notes now - needed -m option to git log
+
+[02:09] *** ziggles left
+[02:09] <cbreak> as I suspected
+
+[02:10] <cbreak> an evil merge
+
+[02:10] <aspiers> cbreak: yeah :)
+
+[02:11] <aspiers> ok, bed time
+
+[02:11] <aspiers> later!
+
+[02:11] *** robotmay left
+[02:11] *** flavius left
+[02:11] *** aspiers left
+[02:12] *** soulcake left
+[02:12] *** brainbox1100_ joined
+[02:13] *** fayimora joined
+[02:14] *** brainbox1100 left
+[02:14] *** brainbox1100_ is now known as brainbox1100
+
+[02:16] <Mikachu> ASIRINeiluj: nice
+
+[02:16] <Mikachu> oops, meant aspiers
+
+[02:17] *** resmo left
+[02:19] *** churp left
+[02:19] *** churp joined
+[02:21] *** frivol joined
+[02:21] *** CEnnis91 left
+[02:22] *** CEnnis91 joined
+[02:22] *** dreiss left
+[02:22] *** rmillerx left
+[02:23] *** Fandekasp joined
+[02:25] *** eletuchy_ left
+[02:26] *** DaveIngram left
+[02:27] *** soulcake joined
+[02:28] *** Phlogistique left
+[02:30] *** resmo joined
+[02:33] *** macRover joined
+[02:33] *** tro left
+[02:36] *** tro joined
+[02:37] *** wbednarski left
+[02:39] *** Yuuhi` joined
+[02:41] *** Yuuhi left
+[02:42] *** bigkm left
+[02:43] *** Vampire0_ joined
+[02:43] *** p3rror left
+[02:44] *** Anxi80 joined
+[02:46] *** mh_le left
+[02:46] *** Vampire0 left
+[02:47] *** berserkr left
+[02:48] *** legnaleurc left
+[02:49] *** legnaleurc joined
+[02:50] *** tewecske left
+[02:56] *** legnaleurc left
+[02:57] *** angelsl joined
+[02:58] *** legnaleurc joined
+[02:58] *** resmo left
+[02:59] *** skalnik_ left
+[03:00] *** resmo joined
+[03:00] *** pantsman joined
+[03:00] *** pantsman left
+[03:00] *** pantsman joined
+[03:01] *** Fandekasp left
+[03:01] *** BonQuisha joined
+[03:06] *** drev1 joined
+[03:07] *** tro left
+[03:07] *** QaDeS_ left
+[03:07] *** deitarion joined
+[03:08] *** tro joined
+[03:09] <deitarion> I have a repo that wasn't originally expected to be shared which contains an SQLite database. What would be the simplest way to script removing the DB from each revision and adding a file generated by `sqlite3 database.sqlite3 .schema > schema.sql`?
+
+[03:09] *** rmillerx joined
+[03:11] *** fayimora left
+[03:12] *** Anxi80 left
+[03:12] <deitarion> Ideally without deleting it from the working copy in HEAD to keep the snippet as safe as possible when I inevitably end up reusing it.
+
+[03:13] <frogonwheels> deitarion: look at  man git-filter-branch
+
+[03:13] <gitinfo> deitarion: the git-filter-branch manpage is available at http://jk.gs/git-filter-branch.html
+
+[03:14] *** tellone left
+[03:14] <deitarion> Heh. I was just typing somethin on that note.
+
+[03:14] <deitarion> I know it'll have something to do with filter-branch, but I remember that, the last time I tried to play around with that, my skills weren't up to par.
+
+[03:14] <frogonwheels> deitarion: remember, you can always make a clone to try it out on.
+
+[03:15] <deitarion> Or just `cp -r . ../gbindex.backup`, obviously. The problem is that I'm not completely grasping what I'm reading in the manpage.
+
+[03:15] <DrNick> skip to the examples
+
+[03:15] <frogonwheels> deitarion: actually a clone is more efficient as it will start off with links to the original
+
+[03:16] <deitarion> frogonwheels: Really. Less reason to trust it prior to pushing to GitHub, I suppose.
+
+[03:16] <deitarion> Well, unless I clone to another partition or physical device.
+
+[03:17] *** Akufen left
+[03:17] <frogonwheels> deitarion: git filter-branch --tree-filter 'sqlite3 database.sqlite3 .schema > schema.sql && git rm database.sqlite3 && git add schema.sql.schema'         or something close
+
+[03:17] *** legnaleurc left
+[03:17] <frogonwheels> er.. filenames wrong, but you get the iedea
+
+[03:17] <frogonwheels> idea
+
+[03:18] <deitarion> Thanks. If I wanted to make sure the DB remained in the working copy but was removed from all revisions, would `rm --cached` do the trick?
+
+[03:19] *** kst` joined
+[03:19] *** legnaleurc joined
+[03:20] <cbreak> deitarion: no
+
+[03:20] <cbreak> you would copy it out of the working dir
+
+[03:20] <cbreak> tree-filter needs the working directory clean
+
+[03:20] <deitarion> cbreak: Obviously, but I'm looking for defense in depth against data loss due to human error.
+
+[03:20] <cbreak> git won't lose data once it's committed unless something seriously bad happens.
+
+[03:21] <frogonwheels> deitarion: I think in this case, you want to use rm -  you can always restore the original from the old head commit
+
+[03:21] <cbreak> if you want to defend against seriously-bad, make a clone
+
+[03:21] <cbreak> if you want to defend against seriously-worse, make a clone to some remote location, on different continent
+
+[03:21] <frogonwheels> deitarion: ^^ see. clone is good.
+
+[03:21] *** t0rc joined
+[03:21] *** kst left
+[03:21] <cbreak> worse such as your house burning down
+
+[03:22] <cbreak> if you just want to be cautious, make a branch or a tag
+
+[03:22] <deitarion> frogonwheels: I never said it wasn't. I just know that, when I don't have offsite private repo space, hardlinks increase the chances of trouble.
+
+[03:22] <cbreak> no
+
+[03:23] <cbreak> if hardlinks are trouble, then you should consider switching to a different filesystem
+
+[03:24] <frogonwheels> deitarion: remember you're only linking between sha1 (i  think) named pack files - that don't change once created afaik.  modifications are then local to the repo, and packed into a new packfile.
+
+[03:24] <deitarion> cbreak: Doesn't matter what the filesystem is. Badly used or badly-written apps can mean accidentally modifying all links rather than getting copy-on-write behaviour.
+
+[03:24] <frogonwheels> cbreak:  ^^ is this your understanding?
+
+[03:24] <cbreak> pack files change. hard links are used to link to object files
+
+[03:24] *** dys`` joined
+[03:24] <cbreak> which are read only.
+
+[03:24] <cbreak> deitarion: irrelevant for git
+
+[03:24] *** schnatta left
+[03:25] <cbreak> object files are identified by their hash. Their content never changes.
+
+[03:25] <deitarion> cbreak: Depends. I've got the repo inside ~/Dropbox right now since I don't know of any free private offsite Git hosting. Who knows what bugs could lurk in Dropbox's client.
+
+[03:25] <cbreak> the only thing git will make with objects is create, delete, and read.
+
+[03:26] <cbreak> it does not depend.
+
+[03:26] <deitarion> Hence why I always clone to a separate physical drive for reasons beyond crash resistance..
+
+[03:26] *** dys` left
+[03:26] <cbreak> dropbox doesn't cause problems because of hard links
+
+[03:26] <cbreak> it causes problems because it's an insecure pile of garbage
+
+[03:26] *** simplechat joined
+[03:26] *** simplechat left
+[03:26] *** simplechat joined
+[03:27] <deitarion> Point. I only use it as a sync option for stuff I don't want to announce to the world but wouldn't get choked up about if it leaked.
+
+[03:28] <cbreak> if you want to experiment with filter-branch, making a backup tag is sufficient to get back up if the filtering fails
+
+[03:29] *** tro left
+[03:29] <cbreak> or if it succeeds in a way that does not please you
+
+[03:29] *** Targen left
+[03:29] <deitarion> In retrospect, duh. I really need to properly cross-connect my low-level and high-level understandings of how git works.
+
+[03:29] <cbreak> just git reset --hard backuptag and you're back.
+
+[03:29] <cbreak> (to make it: git tag backuptag)
+
+[03:30] *** ldlework left
+[03:30] *** dreiss joined
+[03:30] *** tro joined
+[03:31] <deitarion> *nod* I know how to work with tags... I just have trouble remembering to think about how actions are expressed in low-level git.
+
+[03:32] <cbreak> creating a tag:
+
+[03:32] <cbreak> "Write hash of current commit into file with name blah"
+
+[03:32] <cbreak> resetting to a tag:
+
+[03:32] <cbreak> "Write hash contained in tag file blah into branch file pointed to by HEAD"
+
+[03:33] <deitarion> *nod* I understand that. It's just that I have to remember to consciously check. It doesn't yet occur to me automatically when I'm thinking about the high-level stuff.
+
+[03:35] *** kenperkins left
+[03:37] <deitarion> Oh, yeah. One other thing. What's the cleanest way to `grep` or `find` through all revisions. (eg. To verify that no SQLite databases are left un-converted or, for example, to verify that no instances of a password were missed)
+
+[03:37] *** xerxas left
+[03:37] *** boblet left
+[03:37] *** necromancer left
+[03:37] *** jmcantrell left
+[03:37] *** shennyg left
+[03:37] *** Dr4g left
+[03:37] *** lyddonb_ left
+[03:37] *** remyo left
+[03:37] *** desaila left
+[03:37] *** CEnnis91 left
+[03:37] *** MetaCosm left
+[03:37] *** tiglionabbit left
+[03:37] *** tfnico left
+[03:37] *** matjas left
+[03:37] *** fujin left
+[03:37] *** SeanTAllen left
+[03:37] *** arnihermann left
+[03:38] *** claudiu__ left
+[03:38] *** etcetera left
+[03:38] *** dkannan left
+[03:38] *** dnyy left
+[03:38] *** NimeshNeema left
+[03:38] *** pl0sh left
+[03:38] *** xerxas joined
+[03:38] *** tfnico joined
+[03:38] *** xerxas left
+[03:38] *** jab416171|Cloud left
+[03:39] *** LongBeach joined
+[03:40] <deitarion> Wait. Never mind. I must've typo'd my search last time. There's a StackOverflow result right at the top
+
+[03:41] *** tfnico left
+[03:42] *** spaceonline left
+[03:42] <deitarion> Oh, there's why I'm being such an inconsiderate question-asker. I was asking questions in the 30 minutes after my brain started to shut down but before I started to actually notice myself feeling drowsy. I guess I'll go to bed and work on this more tomorrow.
+
+[03:43] *** deitarion left
+[03:43] *** dreiss left
+[03:43] *** CEnnis91 joined
+[03:43] *** CEnnis91 left
+[03:43] *** CEnnis91 joined
+[03:43] *** CEnnis91 left
+[03:43] *** CEnnis91 joined
+[03:43] *** nixmaniack left
+[03:44] *** CEnnis91 left
+[03:46] *** TheFuzzball left
+[03:49] *** remyo joined
+[03:51] *** mloskot left
+[03:51] *** necromancer joined
+[03:51] *** monokrome left
+[03:51] *** orafu left
+[03:52] *** orafu joined
+[03:52] *** mdel left
+[03:53] *** remyo left
+[03:53] *** necromancer left
+[03:56] *** jmcantrell joined
+[03:57] *** lacrymology left
+[03:58] *** Fandekasp joined
+[03:58] *** jmcantrell left
+[04:00] *** TomyLobo left
+[04:00] *** BonQuisha left
+[04:02] *** macRover left
+[04:03] *** stringoO joined
+[04:04] *** GutenTag left
+[04:04] *** Targen joined
+[04:06] *** remyo joined
+[04:06] *** tiglionabbit joined
+[04:06] *** krz joined
+[04:06] *** dreiss joined
+[04:10] *** legnaleurc left
+[04:10] *** t0rc left
+[04:11] *** legnaleurc joined
+[04:16] *** thiago left
+[04:16] *** gavin_huang joined
+[04:17] *** tiglionabbit left
+[04:17] *** remyo left
+[04:18] *** Targen left
+[04:19] *** Targen joined
+[04:20] *** brokenshakles joined
+[04:20] *** dr0id joined
+[04:21] *** BonQuisha joined
+[04:21] *** Chillance joined
+[04:23] *** Targen left
+[04:25] *** etcetera joined
+[04:25] *** BonQuisha left
+[04:26] *** legnaleurc left
+[04:30] *** legnaleurc joined
+[04:32] *** dnyy joined
+[04:33] *** zendeavor left
+[04:33] *** SeanTAllen joined
+[04:34] *** legnaleurc left
+[04:36] *** sreich joined
+[04:37] *** legnaleurc joined
+[04:40] *** zendeavor joined
+[04:41] *** Samoi left
+[04:44] *** kukks left
+[04:44] *** Samoi joined
+[04:45] *** MetaCosm joined
+[04:47] *** remyo joined
+[04:51] *** mdel joined
+[04:52] *** najam joined
+[04:52] *** najam left
+[04:53] *** kukks joined
+[04:53] *** mdel left
+[04:54] *** ISF__ joined
+[04:54] *** churp left
+[04:55] *** dnyy left
+[04:56] *** ISF_ left
+[04:58] *** watsonian joined
+[04:59] *** MetaCosm left
+[04:59] *** remyo left
+[04:59] *** SeanTAllen left
+[05:01] *** infid joined
+[05:02] *** [M]ax left
+[05:03] *** [M]ax joined
+[05:03] *** pidus joined
+[05:04] *** CollinPDX left
+[05:06] *** necromancer joined
+[05:07] *** CollinPDX joined
+[05:12] *** MetaCosm joined
+[05:16] *** binjured joined
+[05:16] *** shiba_yu_ left
+[05:18] *** rmillerx left
+[05:19] *** dorisabayon joined
+[05:21] *** edude03 left
+[05:21] *** Blaster left
+[05:22] *** Fandekasp left
+[05:23] *** Blaster joined
+[05:25] *** MetaCosm left
+[05:26] *** SeanTAllen joined
+[05:26] *** edude03 joined
+[05:27] *** Blaster left
+[05:27] *** macabre joined
+[05:28] *** krz left
+[05:28] *** bindaasomatic joined
+[05:28] *** binjured left
+[05:28] *** CollinPDX left
+[05:28] *** binjured joined
+[05:29] *** storrgie left
+[05:29] *** dr0id left
+[05:30] *** binjured left
+[05:30] *** binjured joined
+[05:32] *** Blaster joined
+[05:33] *** dnjaramba joined
+[05:34] *** fermianyon left
+[05:36] *** fermianyon joined
+[05:37] *** CollinPDX joined
+[05:40] *** aro joined
+[05:41] *** stringoO left
+[05:41] *** stringoO joined
+[05:41] *** CollinPDX left
+[05:42] *** pantsman left
+[05:43] *** CollinPDX joined
+[05:44] *** dreiss left
+[05:46] *** matsebc left
+[05:46] *** matsebc joined
+[05:46] *** caseymcg left
+[05:47] *** dorkmafia joined
+[05:47] *** dorkmafia1 left
+[05:47] *** yshh joined
+[05:48] *** matsebc left
+[05:49] *** subbyyy left
+[05:50] *** kukks left
+[05:50] *** macRover joined
+[05:52] *** pidus left
+[05:52] *** subbyyy joined
+[05:53] *** CollinPDX left
+[05:54] *** watsonian left
+[05:54] *** CollinPDX joined
+[05:54] *** watsonian joined
+[05:55] *** Guest98484 joined
+[05:58] *** CollinPD_ joined
+[05:59] *** CollinPDX left
+[05:59] *** joshsmith left
+[06:00] *** c1de0x left
+[06:01] *** c1de0x joined
+[06:02] *** AmirBehzad joined
+[06:04] *** macRover left
+[06:06] *** matsebc joined
+[06:06] *** caseymcg joined
+[06:06] *** Textmode joined
+[06:08] *** Textmode left
+[06:09] *** frivol left
+[06:10] *** Textmode joined
+[06:12] *** elseif left
+[06:13] *** soulcake_ joined
+[06:13] *** Textmode left
+[06:14] *** michaelgamble joined
+[06:14] <michaelgamble> anyone here?
+
+[06:15] <lericson> nope
+
+[06:15] <bob2> hundreds
+
+[06:15] *** Textmode joined
+[06:15] *** dnyy joined
+[06:15] *** subbyyy left
+[06:15] <lericson> am I in this channel?
+
+[06:17] *** Textmode left
+[06:20] *** jameslord joined
+[06:20] *** jameslord left
+[06:20] *** neurodrone left
+[06:20] *** Samoi left
+[06:21] *** rphlx joined
+[06:22] <michaelgamble> lol big room
+
+[06:22] <michaelgamble> any of you guys use sparkleshare?
+
+[06:22] *** Samoi joined
+[06:22] *** Samoi left
+[06:22] *** Samoi joined
+[06:24] *** Marquel left
+[06:24] *** mdel joined
+[06:25] *** blur joined
+[06:25] *** jameslordhz joined
+[06:27] *** Marquel joined
+[06:27] *** MetaCosm joined
+[06:27] *** gitinfo sets mode: +v jameslordhz
+
+[06:27] <jameslordhz> hi
+
+[06:27] <jameslordhz> hi
+
+[06:27] <jameslordhz> !cs
+
+[06:27] <gitinfo> 'Git for Computer Scientists' explains the basic structures used by git, which is very helpful for understanding its concepts. http://sitaramc.github.com/gcs/
+
+[06:27] <jameslordhz> !hi
+
+[06:27] <gitinfo> [!welcome] Welcome to this channel. Go ahead and ask your question. Very few people are responding to greetings, but will respond if a question is asked.
+
+[06:27] *** herdingcat joined
+[06:29] *** Dulak joined
+[06:30] <jameslordhz> clear
+
+[06:30] *** jameslordhz left
+[06:32] *** jameslordhz joined
+[06:32] *** gitinfo sets mode: +v jameslordhz
+
+[06:32] <jameslordhz> hi
+
+[06:32] <jameslordhz> what is the command to know if local repo is different from remote repo?
+
+[06:33] *** yshh left
+[06:34] *** lacrymology joined
+[06:34] *** legnaleurc left
+[06:35] *** josefig joined
+[06:35] *** gitinfo sets mode: +v josefig
+
+[06:36] *** legnaleurc joined
+[06:41] <bob2> git fetch ; git log somebranch..origin/somebranch
+
+[06:42] *** blur left
+[06:43] *** siko_way joined
+[06:44] *** siko_way left
+[06:45] *** sudoquai joined
+[06:46] *** legnaleurc left
+[06:46] *** macRover joined
+[06:47] *** legnaleurc joined
+[06:48] <jameslordhz> bob2 git fetch does not show if local repo is different from remote repo, it just fetch history:(
+
+[06:48] <bob2> yes
+
+[06:48] <bob2> hence why i didn't say to just use git fetch
+
+[06:48] *** sreich left
+[06:49] <jameslordhz> bob2 pardon?
+
+[06:50] <bob2> 17:41:11 < bob2> git fetch ; git log somebranch..origin/somebranch
+
+[06:51] <jameslordhz> git log x_branch .. origin/x_branch
+
+[06:51] <jameslordhz> fatal: ambiguous argument '..': both revision and filename
+
+[06:51] <jameslordhz> Use '--' to separate filenames from revisions
+
+[06:51] <bob2> like
+
+[06:51] <jameslordhz> not works
+
+[06:51] <bob2> seriously
+
+[06:51] <bob2> 17:50:01 < bob2> 17:41:11 < bob2> git fetch ; git log somebranch..origin/somebranch
+
+[06:51] <bob2> note that there aren't spaces around the ..
+
+[06:52] *** macabre left
+[06:53] *** Tac_Home joined
+[06:54] *** atdiehm_ left
+[06:56] *** edude03 left
+[06:59] *** infid left
+[06:59] *** msponge joined
+[07:01] *** infid joined
+[07:01] *** aspotashev joined
+[07:01] *** Goplat left
+[07:02] *** gitinfo sets mode: +v jameslordhz
+
+[07:02] *** umren joined
+[07:03] <michaelgamble> is anyone here on mac osx lion/
+
+[07:03] <michaelgamble> am i retarded in thinking the snow leopard binary install will work for me in lion?
+
+[07:04] *** legnaleurc left
+[07:04] <jameslordhz> why i cannot send msg in #vim?
+
+[07:05] <watsonian> michaelgamble: i just `brew install git`
+
+[07:05] <michaelgamble> mistake to use the dog?
+
+[07:05] <michaelgamble> dmg
+
+[07:05] *** legnaleurc joined
+[07:06] <watsonian> i don't know -- i've never tried :)
+
+[07:06] <watsonian> homebrew is always one of the first things i install
+
+[07:06] <watsonian> http://mxcl.github.com/homebrew/
+
+[07:07] <watsonian> along with the gcc standalone installer https://github.com/kennethreitz/osx-gcc-installer
+
+[07:07] *** folsto joined
+[07:07] <michaelgamble> is it better then macports?
+
+[07:07] <michaelgamble> i tried that a while back
+
+[07:07] <watsonian> people have mixed opinions
+
+[07:07] <watsonian> i like it a lot
+
+[07:08] *** folsto left
+[07:08] <variable> is there a way to get a brief log log rebase -i but with got log ?
+
+[07:08] <michaelgamble> hmm ill check it out
+
+[07:09] *** tomislater joined
+[07:09] <michaelgamble> whats this gcc stuff all about
+
+[07:09] <watsonian> if you want to compile any packages you need the dev tools installed
+
+[07:09] <watsonian> but to get those you have to install Xcode
+
+[07:10] <watsonian> the standalone installer installs all the standard non-Xcode compiler tools and libraries you need
+
+[07:10] <watsonian> so, if you don't plan on doing any iOS or Cocoa developement, you can get all your standard linux dev tools installed without a problem
+
+[07:11] *** Biopandemic joined
+[07:11] <watsonian> homebrew uses gcc to compile things like wget or git or what have you
+
+[07:11] <michaelgamble> cool good to know
+
+[07:12] *** Biopandemic left
+[07:14] *** drev1 left
+[07:14] *** diegovio1a joined
+[07:14] *** diegoviola is now known as Guest29047
+
+[07:15] *** diegovio1a is now known as diegoviola
+
+[07:16] *** Guest29047 left
+[07:16] *** dorkmafia left
+[07:18] *** atdiehm_ joined
+[07:19] *** Tac_Home left
+[07:19] *** Textmode joined
+[07:22] *** legnaleurc left
+[07:23] *** legnaleurc joined
+[07:23] *** Sir_Rai joined
+[07:25] *** georgeps joined
+[07:32] *** IronLotus joined
+[07:32] *** dreiss joined
+[07:32] *** Vortex35 joined
+[07:32] *** IronLotus left
+[07:35] *** setmeaway left
+[07:35] *** ziggles joined
+[07:35] *** legnaleurc_ joined
+[07:35] *** setmeaway joined
+[07:36] *** Vortex34 left
+[07:36] *** legnaleurc left
+[07:36] *** michaelgamble left
+[07:36] *** dr0id joined
+[07:38] *** CollinPD_ left
+[07:40] *** CollinPDX joined
+[07:40] *** legnaleurc_ left
+[07:41] *** rendar joined
+[07:42] <jameslordhz> git log master..master does not show if local repo is different from remote repo:(
+
+[07:42] *** legnaleurc joined
+[07:42] <bob2> unclear what you mean then
+
+[07:42] <bob2> it shows if the branches have diverged
+
+[07:42] <bob2> maybe you want 'git status'
+
+[07:42] <bob2> assuming tracking is configured
+
+[07:43] <jameslordhz> no git status
+
+[07:43] <jameslordhz> i want to know if i have push my change to remote, dude
+
+[07:43] <josefig> if I add everything for a commit, but I want to change that add with only certain files/directories, what is the command ? git rm ?
+
+[07:44] *** ben_alman left
+[07:44] *** krz joined
+[07:45] *** willo_ left
+[07:45] *** wagle left
+[07:45] *** georgeps left
+[07:45] *** madewokherd left
+[07:46] *** willo_ joined
+[07:50] *** igotnolegs left
+[07:51] *** watsonian left
+[07:51] *** guampa left
+[07:51] <sitaram> rm --cached
+
+[07:52] *** ben_alman joined
+[07:52] <sitaram> josefig: git rm will remove it from the working tree also; not sure if that is what you meant/wanted
+
+[07:52] <sitaram> josefig: in general,
+
+[07:52] <sitaram> josefig: in general, 'git status' will tell you what to do for such cases
+
+[07:52] <josefig> oh, only rm —cached
+
+[07:53] <josefig> git rm —cached
+
+[07:53] *** dorkmafia joined
+[07:53] *** drev1 joined
+[07:53] *** jameslordhz left
+[07:54] *** jameslordhz joined
+[07:55] <josefig> thx
+
+[07:56] <jameslordhz> hi
+
+[07:56] *** CollinPDX left
+[07:56] *** legnaleurc left
+[07:56] <bob2> jameslordhz, git log in fact shows that
+
+[07:57] <bob2> git log origin/whocares..whocares
+
+[07:57] <bob2> as does git status if tracking is configured
+
+[07:57] *** legnaleurc joined
+[07:58] *** wilmoore left
+[07:58] <jameslordhz> git log origin/master--master
+
+[07:58] <jameslordhz> fatal: ambiguous argument 'origin/master--master': unknown revision or path not in the working tree.
+
+[07:58] <jameslordhz> no works
+
+[07:59] *** CollinPDX joined
+[08:00] *** tewecske joined
+[08:02] *** imaginativeone joined
+[08:02] *** ThomasLocke joined
+[08:02] *** Dave^| joined
+[08:03] <imaginativeone> how do I authenticate my git repository from Xcode?
+
+[08:04] *** umren1 joined
+[08:05] *** umren left
+[08:09] <bob2> jameslordhz, why do you keep making up command lines
+
+[08:09] <bob2> 18:57:07 < bob2> git log origin/whocares..whocares
+
+[08:10] <bob2> (correct, ..)
+
+[08:10] *** ISF__ left
+[08:10] <jameslordhz> git log origin/x_branch..xbranch, not works
+
+[08:10] *** toabctl joined
+[08:11] <bob2> except it does work
+
+[08:11] *** umren1 left
+[08:11] <bob2> maybe the branch names are wrong? maybe you forgot to git fetch?
+
+[08:11] <bob2> what problem are you having?
+
+[08:11] *** fermianyon left
+[08:13] <jameslordhz> bob2 git log x_branch means local log, git log origin/x_branch means remote log:)
+
+[08:13] <jameslordhz>  .. not works
+
+[08:14] *** krzkrzkrz joined
+[08:14] *** krzkrzkrz left
+[08:14] *** krzkrzkrz joined
+[08:15] *** krz left
+[08:15] *** krzkrzkrz is now known as krz
+
+[08:18] *** jameslordhz left
+[08:19] *** jameslordhz joined
+[08:20] *** Fandekasp joined
+[08:20] *** Spockz joined
+[08:20] <variable> is there a way to get a brief log log rebase -i but with got log ?
+
+[08:21] *** macRover left
+[08:21] <sitaram> variable: git log --oneline?
+
+[08:21] *** Spockz` joined
+[08:22] <variable> sitaram: oh, perfect
+
+[08:22] <variable> thanks!
+
+[08:22] *** AlecTaylor joined
+[08:22] <AlecTaylor> hi
+
+[08:22] <sitaram> variable: although I have an alias that I much prefer (and you can use this to make your own): lg  = log   --graph '--format=%Cblue%h%Creset %Cgreen%ar%Creset %Cblue%d%Creset %s'
+
+[08:23] <AlecTaylor> How do I clone a specific changeset?
+
+[08:23] <sitaram> AlecTaylor: you don't
+
+[08:23] *** dorisabayon left
+[08:23] <AlecTaylor> How do I revert my last commit?
+
+[08:23] <AlecTaylor> (commit+push)
+
+[08:23] <sitaram> AlecTaylor: clone can only be for the entire repo.  However you can certainly *fetch* one *branch* from a remote repo
+
+[08:24] <sitaram> AlecTaylor: !fixup
+
+[08:24] <gitinfo> AlecTaylor: So you made a bad commit and want to remove/fix it? (1) NOT PUSHED/PUBLISHED: `git rebase -i $COMMIT^` or perhaps `git commit --amend` (or `git reset HEAD^`). (2) OTHERWISE, `git revert $COMMIT` to make a reverse commit. (3) If you have pushed and MUST remove it, use rebase or filter-branch and type !rewriting_public_history in IRC.
+
+[08:24] <variable> sitaram: very cool. I like that
+
+[08:24] <AlecTaylor> I only have the one branch. Something stuffed up in the commit+push. (I might've used the wrong command args)
+
+[08:24] *** diegoviola left
+[08:25] <sitaram> details or command output?
+
+[08:25] <AlecTaylor> git commit -a -m "Restructure"
+
+[08:25] <AlecTaylor> git push
+
+[08:26] *** simplechat left
+[08:26] <AlecTaylor> I had a folder named "Prototype" and a folder named "Wizard". I removed my working dir and recloned (for testing).
+
+[08:26] *** CollinPD_ joined
+[08:26] <AlecTaylor> Now all I have is a "Wizard" directory
+
+[08:27] *** CollinPDX left
+[08:27] <AlecTaylor> git version 1.7.5.4 on Ubuntu 11.10 i386
+
+[08:29] <AlecTaylor> sitaram: ?
+
+[08:30] <sitaram> git commit -a doesn't add stuff that is not already added
+
+[08:30] *** jonshea left
+[08:30] <sitaram> so if any files in Prototype were not already known to git, the commit would not see them
+
+[08:31] <sitaram> I assume you're playing with git so far; no one actually *working* would remove a directory while still learning the toolchain
+
+[08:31] <sitaram> s/would/should/
+
+[08:31] *** toabctl left
+[08:31] <sitaram> (at best rename or move out of the way)
+
+[08:32] <sitaram> AlecTaylor: ?
+
+[08:33] *** fayimora joined
+[08:35] <AlecTaylor> Yeah, I'll do that in future.
+
+[08:35] <AlecTaylor> So what's the command to revert my last push?
+
+[08:35] * AlecTaylor is learning
+
+[08:37] <sitaram> AlecTaylor: !fixup
+
+[08:37] <gitinfo> AlecTaylor: So you made a bad commit and want to remove/fix it? (1) NOT PUSHED/PUBLISHED: `git rebase -i $COMMIT^` or perhaps `git commit --amend` (or `git reset HEAD^`). (2) OTHERWISE, `git revert $COMMIT` to make a reverse commit. (3) If you have pushed and MUST remove it, use rebase or filter-branch and type !rewriting_public_history in IRC.
+
+[08:37] *** TLMonitor joined
+[08:37] *** TLMonitor left
+[08:37] *** TLMonitor joined
+[08:38] *** whyking_ joined
+[08:40] <bob2> jameslordhz, no idea what you'
+
+[08:40] <AlecTaylor> `git revert $COMMIT`
+
+[08:40] <bob2> re talking about anymore
+
+[08:40] <bob2> git log whocares..origin/whocares shows the log diff /between those branches/
+
+[08:40] <bob2> I think you're just trying random guesses
+
+[08:40] <AlecTaylor> That $COMMIT, what's do I replace it with? - sitaram
+
+[08:41] *** whyking left
+[08:42] *** fairuz_ joined
+[08:42] *** amigojapan left
+[08:42] <sitaram> AlecTaylor: I realise that's a little terse.  So tell me what you mean by "revert my last push".  First -- you already pushed right?
+
+[08:43] *** TLMonitor left
+[08:43] <sitaram> if you did, is it likely anyone else has pulled that commit?  if so, the best command to use is 'git revert HEAD' (where HEAD is a specific git word that means the current top commit)
+
+[08:43] *** Silowyi left
+[08:44] <sitaram> what 'git revert' does is add a *new* commit that does the opposite of the commit being 'revert'ed
+
+[08:45] *** [M]ax left
+[08:45] <sitaram> when you push this out, you're effectively cancelling out that commit
+
+[08:49] *** [M]ax joined
+[08:49] *** rendar left
+[08:53] *** dorkmafia1 joined
+[08:53] *** dorkmafia left
+[08:55] *** TLMonitor joined
+[08:55] *** TLMonitor left
+[08:55] *** TLMonitor joined
+[08:55] <AlecTaylor> Thanks, git rever HEAD worked
+
+[08:57] *** jameslordhz left
+[08:58] *** fairuz_ left
+[08:58] *** fairuz_ joined
+[08:59] *** rendar joined
+[09:02] *** legnaleurc left
+[09:03] *** khmarbaise joined
+[09:03] *** legnaleurc joined
+[09:04] *** Spockz` left
+[09:04] *** FernandoBasso joined
+[09:08] *** churp joined
+[09:13] *** [M]ax left
+[09:13] *** sepek left
+[09:17] *** [M]ax joined
+[09:17] *** dr0id left
+[09:19] *** kloeri left
+[09:22] *** Akufen joined
+[09:24] *** Blaster left
+[09:26] *** yuni joined
+[09:26] *** Blaster joined
+[09:26] *** yuni left
+[09:30] *** CollinPD_ left
+[09:30] *** ciaranm joined
+[09:31] *** kloeri joined
+[09:31] *** sepek joined
+[09:31] *** sepek left
+[09:31] *** sepek joined
+[09:31] *** Ingmar joined
+[09:33] *** CollinPDX joined
+[09:34] *** jameslordhz joined
+[09:35] <jameslordhz> any body here use git to manage binary files
+
+[09:35] <jameslordhz> is there any better choice?
+
+[09:36] *** CollinPD_ joined
+[09:38] *** dorkmafia1 left
+[09:38] *** legnaleurc left
+[09:39] *** rurufufuss joined
+[09:39] *** CollinP__ joined
+[09:39] *** CollinPDX left
+[09:40] *** alip joined
+[09:40] *** legnaleurc joined
+[09:42] *** CollinPD_ left
+[09:43] *** bwright left
+[09:43] *** airborn joined
+[09:44] *** legnaleurc left
+[09:44] *** ziggles left
+[09:44] *** Sigma joined
+[09:46] *** legnaleurc joined
+[09:47] *** Raging_Hog joined
+[09:48] *** eijk joined
+[09:51] *** legnaleurc left
+[09:52] *** legnaleurc joined
+[09:52] *** Raging_Hog left
+[09:53] *** valtih joined
+[09:56] *** Jackneill joined
+[09:56] *** fl0w joined
+[10:00] *** soulcake_ left
+[10:05] *** nikuyoshi joined
+[10:05] *** josefig left
+[10:06] *** Guest98484 left
+[10:08] <cmn> jameslordhz: there's git-annex and git-media which ease the pain of large binary files
+
+[10:10] *** aspotashev left
+[10:13] *** sattu94 joined
+[10:14] *** mdel left
+[10:14] *** schnatta joined
+[10:14] *** faber joined
+[10:18] *** soulcake left
+[10:18] *** nikuyoshi left
+[10:21] *** SeanTAllen left
+[10:21] *** dnyy left
+[10:21] *** etcetera left
+[10:21] *** necromancer left
+[10:21] *** MetaCosm left
+[10:22] *** joeytwiddle joined
+[10:23] *** schnatta left
+[10:24] *** MetaCosm joined
+[10:24] *** fl0w left
+[10:26] *** BiggFREE joined
+[10:28] *** pinky left
+[10:28] *** pinky joined
+[10:29] *** webben left
+[10:30] *** [M]ax left
+[10:31] *** dnyy joined
+[10:31] *** whitman joined
+[10:32] *** etcetera joined
+[10:33] *** [M]ax joined
+[10:36] *** stamina joined
+[10:37] *** caseymcg left
+[10:37] *** yshh joined
+[10:37] *** cenuij joined
+[10:37] *** cenuij left
+[10:37] *** cenuij joined
+[10:38] *** jceb joined
+[10:39] *** btanaka left
+[10:40] *** eighty4 joined
+[10:41] *** necromancer joined
+[10:41] *** gusnan joined
+[10:41] *** Spockz` joined
+[10:42] *** akraut joined
+[10:43] *** txomon|home left
+[10:45] *** chisler joined
+[10:47] *** SeanTAllen joined
+[10:51] *** legnaleurc left
+[10:51] *** maleknet joined
+[10:52] *** legnaleurc joined
+[10:53] *** dreiss left
+[10:53] *** fl0w joined
+[10:54] *** zxiest joined
+[10:56] *** txomon|home joined
+[10:58] *** fl0w left
+[11:01] *** zxiest[a] joined
+[11:02] *** zxiest left
+[11:03] *** wagle joined
+[11:04] *** hwit joined
+[11:05] *** hwit left
+[11:06] *** zxiest[a] left
+[11:07] *** kerrick left
+[11:08] *** Praise- is now known as Praise
+
+[11:10] *** solofight joined
+[11:11] *** pantsman joined
+[11:11] <solofight> people i am thinking about a use case for git other than source code. What other activity does a computer literate use Git for  ?
+
+[11:12] *** mile123 joined
+[11:12] *** dvide_ left
+[11:12] *** legnaleurc left
+[11:13] *** steffo joined
+[11:13] *** chisler left
+[11:13] <solofight> A network admin who needs logging of the computers in his network every day morning (Assuming the computers in the network has dhcp enabled)
+
+[11:13] *** legnaleurc joined
+[11:13] *** sudoquai left
+[11:14] <solofight> that might be a good use case - but i want to use a less technical example. not everybody can understand the concept of DHCP and stuff
+
+[11:15] <cmn> for logs you're probably better off using logratate and backups
+
+[11:16] <cmn> the typical use-case for annex or media is music
+
+[11:17] <solofight> cmn: you mean logrotate and backups ?
+
+[11:17] <cmn> yes
+
+[11:18] <cmn> DHCP logs are append-only, aren't they?
+
+[11:18] <solofight> cmn: it becomes tideous to manage those many files - and distributed content - dont you think ? IN git i can have one single file which replaces the content every day morning. And my file always shows the current content with options for me to go back to any given date with git if needed
+
+[11:18] <cbreak> dhcp is a stupid way to log which computers are in the network
+
+[11:18] <cbreak> and making daily snapshots is even worse
+
+[11:19] <solofight> cbreak: dhcp with mac id gives me which computer did what and when - whyd you say its stupid
+
+[11:19] <cbreak> because it's insecure and incomplete
+
+[11:20] *** psoo joined
+[11:20] <cmn> you can fake MAC and hostname
+
+[11:20] <cbreak> I can without problem get into a network that does that without you noticing
+
+[11:20] <cbreak> just by not using dhcp
+
+[11:20] *** dorisabayon joined
+[11:20] <solofight> cmn: not without admin rights to the computer
+
+[11:20] <cmn> so? I have root on three computers in my hand's reach
+
+[11:20] <cbreak> ho. ho. I am admin
+
+[11:20] *** drev1 left
+[11:20] <cbreak> on my laptop and my ipad
+
+[11:20] <Mikachu> all you need is admin rights to a pair of scissors
+
+[11:20] *** iocor joined
+[11:21] <cbreak> a better way to manage that is to control the ports that are mapped on the switches directly
+
+[11:21] *** mile123 left
+[11:21] <solofight> cbreak: cmn Well anyways - I want some inputs on use cases for Git apart from using it for source code
+
+[11:21] *** j416 joined
+[11:21] <solofight> Mikachu: ^
+
+[11:21] <cbreak> find something else.
+
+[11:22] <cbreak> git is abused for web pages a lot
+
+[11:22] *** imaginativeone left
+[11:22] <cbreak> have you seen gitolite?
+
+[11:22] <cbreak> it uses git to manage gitolite itself
+
+[11:22] <solofight> cbreak: no
+
+[11:22] *** hwit joined
+[11:22] <cmn> there's etckeeper
+
+[11:23] <cbreak> there's bup, which attempts to do backup with git
+
+[11:23] <cbreak> (general filesystem backup)
+
+[11:23] <solofight> cbreak: some general use cases - daily life
+
+[11:23] *** Fandekasp left
+[11:23] <cbreak> there's git-anex, which can be used to manage binary files that are stored in various locations
+
+[11:24] <Mikachu> people use it for dotfiles too, that's not exactly source code
+
+[11:24] <cbreak> solofight: gitolite is daily life :)
+
+[11:24] *** brian_g joined
+[11:24] *** stringoO left
+[11:25] <cbreak> what git excels at: distributed creation of history with parallel development
+
+[11:25] <cbreak> as long as it's text, it's ok
+
+[11:25] <cbreak> you could use it for a book you write
+
+[11:25] *** Shusshu joined
+[11:25] *** stringoO joined
+[11:25] <cbreak> for a web page. I've seen people try to use it as backend for a wiki engine
+
+[11:27] <cmn> there's a few of those, the jekyll docs assume you're going to use git
+
+[11:27] <cmn> (jekyll is a static website generation tool)
+
+[11:27] * solofight thinking deeply
+
+[11:28] <cbreak> cmn: like a text editor?
+
+[11:28] <cmn> jekyll? no, you put some templates and some content (in markdown or html), and jekyll with create the full HTML pages
+
+[11:29] <cbreak> like php
+
+[11:29] <cmn> I guess, but there's no code running in the webserver, the pages are meant to be served statically
+
+[11:30] *** iocor left
+[11:30] *** fisted_ joined
+[11:30] <cmn> unless you want to add some dynamism, which you can, put jekyll is about creating a webpage/blog with templates to be served anywhere
+
+[11:30] <cmn> but*
+
+[11:30] *** fisted left
+[11:31] <cbreak> the way I have used php so far was to write the code, generate the pages
+
+[11:31] <cbreak> and upload them to the net
+
+[11:31] <cmn> then yes
+
+[11:32] *** replore_ joined
+[11:32] <cbreak> (well, I also use a blog software which I have no idea what runs inside :)
+
+[11:32] <cmn> it'd be like having wordpress and very extreme caching
+
+[11:33] *** sudoquai joined
+[11:33] *** fayimora left
+[11:35] *** legnaleurc left
+[11:36] *** umren joined
+[11:36] *** disappe__ left
+[11:36] *** legnaleurc joined
+[11:37] *** sh4rm4 joined
+[11:38] <sh4rm4> i checked out an earlier commit, and am now in "detached" state... how can i go back to the original commit ?
+
+[11:38] <sh4rm4> (git log doesnt show it anymore)
+
+[11:38] <cmn> checkout
+
+[11:39] *** stamina left
+[11:39] <cmn> git log won't show it because the newer commit doesn't exist in the current commit's history
+
+[11:39] *** stamina joined
+[11:39] <frogonwheels> sh4rm4:  you usually just checkout the branch you were on
+
+[11:39] <cmn> to go back to a branch, checkout that branch, 'git checkout -' should work as well
+
+[11:39] <sh4rm4> simply "git checkout" ?
+
+[11:39] <cmn> you need to tell git what you want it to checkout
+
+[11:39] <frogonwheels> sh4rm4:  checking out the head commit of the branch still leaves you in a detached state.
+
+[11:39] *** iocor joined
+[11:40] <frogonwheels> sh4rm4: git checkout master  (for example)
+
+[11:40] *** disappe__ joined
+[11:41] *** psoo left
+[11:41] <frogonwheels> sh4rm4: git reflog   will tell you which branch you were on.   (moving from 'branch' to <commit>  in the comments)
+
+[11:41] *** iocor left
+[11:41] <sh4rm4> i was on master
+
+[11:42] <sh4rm4> i need to find out which project it was...
+
+[11:42] *** _iron joined
+[11:43] *** webben joined
+[11:43] <wereHamster> sh4rm4: git checkout master
+
+[11:43] <sh4rm4> mhm, git checkout - did the job
+
+[11:44] <sh4rm4> git checkout master
+
+[11:44] <sh4rm4> Already on 'master'
+
+[11:44] <cmn> checkout - tells git to checkout wheverever you were before you last run checkuot
+
+[11:45] <sh4rm4> git reflog shows two switches now, and i'm back on head
+
+[11:45] <sh4rm4> do i need to disable the "detached" state now ?
+
+[11:45] <frogonwheels> you are always on HEAD. by definition.  you are probably back on master.
+
+[11:45] <sh4rm4> i never left master ;)
+
+[11:45] *** berserkr joined
+[11:45] <frogonwheels> sh4rm4: it shouldn't show as detached if you have a branch checked out.
+
+[11:46] <sh4rm4> git status
+
+[11:46] <sh4rm4> # On branch master
+
+[11:46] <sh4rm4> looks good
+
+[11:46] <sh4rm4> thanks :)
+
+[11:47] <cmn> yes, you did leave master
+
+[11:47] <cmn> because you checked out an older revision
+
+[11:47] <sh4rm4> i c
+
+[11:48] *** AlecTaylor left
+[11:49] *** acl_ joined
+[11:49] *** CollinPDX joined
+[11:51] *** khmarbaise left
+[11:52] *** CollinP__ left
+[11:53] *** shruggar left
+[11:55] <sitaram> solofight: http://dpaste.org/HmOfX/ for what is almost definitely abuse but I use it a lot
+
+[11:55] *** legnaleurc left
+[11:55] *** legnaleurc joined
+[11:57] *** unreal left
+[11:58] <jameslordhz> any interesting channel on IRC? not about technology, haha
+
+[11:58] *** Dave^|| joined
+[11:59] *** lacrymology left
+[11:59] *** lacrymology joined
+[12:00] *** matjas joined
+[12:00] <Mikachu> not on this network
+
+[12:01] *** yshh left
+[12:01] *** Dave^| left
+[12:01] *** yshh joined
+[12:02] *** robotmay joined
+[12:03] *** legnaleurc left
+[12:04] *** legnaleurc joined
+[12:04] <sitaram> :)
+
+[12:06] <j416> (:
+
+[12:06] *** yshh left
+[12:09] *** legnaleurc left
+[12:09] <jameslordhz> Mikachu on which network?
+
+[12:10] *** legnaleurc joined
+[12:11] <sh4rm4> jameslordhz, maybe quakenet for games and #quiz like stuff
+
+[12:12] *** CollinPDX left
+[12:12] <jameslordhz> sh4rm4 i don't like games, i just want to talk about life, jokes , philosophy:)
+
+[12:12] *** CollinPDX joined
+[12:12] <sh4rm4> i'd suggest to search for philosophy IRC via your search engine, then
+
+[12:15] *** hasuTMK joined
+[12:16] <solofight> sitaram: Thank you very much - will look at it
+
+[12:16] <solofight> sitaram: good to hear from you after long time
+
+[12:19] *** jameslordhz left
+[12:20] *** solofight left
+[12:22] *** Cromulent joined
+[12:24] *** Spockz` left
+[12:27] *** EricInBNE left
+[12:27] *** EricInBNE_ joined
+[12:28] *** d0k joined
+[12:28] *** dorisabayon left
+[12:28] *** Cromulent left
+[12:29] *** Fandekasp joined
+[12:30] *** khmarbaise joined
+[12:30] *** EricInBNE_ left
+[12:31] *** EricInBNE_ joined
+[12:33] *** nax joined
+[12:34] *** nax is now known as Guest45503
+
+[12:34] *** ph^ left
+[12:35] *** legnaleurc_ joined
+[12:36] *** legnaleurc left
+[12:38] *** TheFuzzball joined
+[12:39] *** nicoulaj joined
+[12:40] *** empity joined
+[12:42] *** QaDeS joined
+[12:45] *** [M]ax left
+[12:47] *** AnthonyCat joined
+[12:47] <AnthonyCat> It's not possible to undo a 'git reset --hard HEAD' is it?
+
+[12:47] *** LeMike joined
+[12:47] *** gitinfo sets mode: +v LeMike
+
+[12:48] *** [M]ax joined
+[12:49] <LeMike> hi there. did I get this right? If I have one git and clone with --depth, I can't push  / pull it?
+
+[12:49] *** _Vi joined
+[12:49] <j416> AnthonyCat: if you blew away changes you had not yet committed and that were never committed before, a hard reset will kill them. No going back.
+
+[12:50] <AnthonyCat> :( Thanks anyway j416
+
+[12:50] <j416> AnthonyCat: if you happen to have committed them sometime earlier and you have reset away from that commit, you can get that back, but I suppose you did never commit?
+
+[12:51] <AnthonyCat> I committed, made some changes, did checkout abce47… then git reset --hard HEAD
+
+[12:51] <AnthonyCat> SO no
+
+[12:51] <j416> ok
+
+[12:51] <AnthonyCat> damn!
+
+[12:52] <j416> at least the changes were recent, you should be able to recreate them from your head if you do it directly? :)
+
+[12:52] <AnthonyCat> Yeah, it isn't so bad. Probably only a couple of minutes work
+
+[12:53] <j416> AnthonyCat: and a tip for you: I always commit things even if it's not finished, I name the commit "WIP" or so so that I know I have to fix it up before I push somewhere. That way I know my changes are safe.
+
+[12:53] *** dSebastien joined
+[12:53] <AnthonyCat> Will do so from now on
+
+[12:54] <j416> AnthonyCat: remember you can always remove and juggle around with your commits any way you like, the sha1 will change, but unless you've pushed, there is no side effect from that
+
+[12:54] *** dSebastien left
+[12:54] <AnthonyCat> Will people be able to see the commits? Or only the last one?
+
+[12:54] *** catsup left
+[12:54] <j416> they will see everything you push, of course.
+
+[12:54] *** catsup joined
+[12:55] <FauxFaux> AnthonyCat: "git stash" does what you want; makes the current outstanding changes VANISH in an undoable way, but without them being pushed anywhere.
+
+[12:55] <AnthonyCat> but I mean in git log, will there be a whole bunch of commit messages?
+
+[12:55] *** flyz joined
+[12:55] <j416> AnthonyCat: if you commit a bunch of things, of course
+
+[12:55] <j416> AnthonyCat: you can also do as FauxFaux suggests, if you feel that is easier
+
+[12:55] <AnthonyCat> Thanks FauxFaux
+
+[12:56] <j416> I prefer committing and writing "WIP" or so, because then you don't have to keep track of which branch the changes belong to
+
+[12:56] * FauxFaux hands out flyers for the "Campaign To Outlaw git-reset As It's Pointless".
+
+[12:56] *** legnaleurc_ left
+[12:56] <j416> FauxFaux: then clearly our workflows are very different. :)
+
+[12:56] <j416> I use git reset many times a day
+
+[12:57] <FauxFaux> For what?
+
+[12:57] *** herdingcat left
+[12:58] *** legnaleurc joined
+[12:58] *** thiago joined
+[12:58] <j416> FauxFaux: [make changes]; git commit -am 'WIP'; [make changes]; git reset HEAD^; git commit -am 'Add finished thing X'
+
+[12:58] *** Textmode left
+[12:59] <j416> and I either amend to that WIP or I create many WIP commits after one another, and then I just reset to before them and commit for real
+
+[12:59] <thiago> better: git commit -am WIP; make changes; git commit --amend -am "proper message"
+
+[12:59] *** resmo_ joined
+[12:59] <j416> (because rebase -i is more of a pain than just resetting and committing)
+
+[12:59] <j416> thiago: unless you have many WIP commits.
+
+[12:59] <thiago> yes, unless that
+
+[12:59] <j416> I prefer to have copies of my work at stages where I know it works
+
+[12:59] *** Textmode joined
+[12:59] *** resmo__ left
+[13:00] <j416> so I usually commit very often, just in case
+
+[13:00] <j416> committing is cheap, so why not
+
+[13:00] <j416> but I guess we all have our preferred ways of working :)
+
+[13:01] <FauxFaux> Mmm, I will admit that I have /no idea/ how to use merge --squash.
+
+[13:02] <j416> I never use that
+
+[13:02] * thiago often works on many parallel things at the same time
+
+[13:02] <thiago> as I'm working on one thing, I fix another
+
+[13:02] <cbreak> the use case is:
+
+[13:02] <j416> thiago: yeah, same.
+
+[13:02] <thiago> so often I end up with several unrelated files, which I must commit separately and then reorder all
+
+[13:03] <cbreak> "Oh, I have this nice merge here, but I wish I didn't have any but the first parents"
+
+[13:03] <j416> add -p to the rescue
+
+[13:03] <thiago> yup
+
+[13:03] <thiago> also the trick of editing in the editor, save, undo; commit, save
+
+[13:03] <FauxFaux> /o\
+
+[13:04] <j416> thiago: hmm
+
+[13:04] <thiago> it's easier to edit in the editor than the add -p's diff editor
+
+[13:04] <j416> oh.
+
+[13:05] <j416> I guess that depends on your editor. haha
+
+[13:05] <thiago> change, save, undo, commit, save, commit
+
+[13:05] <j416> I prefer add -p to anything
+
+[13:05] <FauxFaux> The diff editor gives me the willies.  "PATCH DOESN'T APPLY NOW YOU'RE FUCKED HAHAHA" makes me wet myself.
+
+[13:05] <thiago> editing diffs is... unintuitive
+
+[13:05] <thiago> worse than that are diff of diffs :-)
+
+[13:05] <j416> am I the only one who likes it
+
+[13:05] <j416> lol
+
+[13:06] <j416> diffs of diffs o_O
+
+[13:06] *** sattu94 left
+[13:06] <thiago> space-space, space-plus, space-minus, plus-space, plus-plus, plus-minus, minus-space, minus-plus, minus-minus
+
+[13:06] *** HG` joined
+[13:06] <cbreak> I've seen a guy who wanted to have a full diff of the changes in a commit in the commit meessage
+
+[13:06] <FauxFaux> There's a situation where you end up with something like "I want both proposals", but changing both sets of lines to plusses makes it claim to fail to apply to the diff.
+
+[13:06] <j416> the only time I have thought it was a bit unintuitive (to the point where I gave up) is editing with checkout -p
+
+[13:06] <j416> it's backwards
+
+[13:07] <cbreak> he complained about not being able to apply the commits when format-patch made patch files
+
+[13:07] <j416> cbreak: haha what
+
+[13:07] *** legnaleurc left
+[13:07] <j416> FauxFaux: quite possibly, yeah.
+
+[13:07] <j416> I guess.
+
+[13:07] *** legnaleurc_ joined
+[13:07] <thiago> reset -p is also backwards
+
+[13:08] <thiago> it's "do you want to remove these pluses", not "apply these minuses"
+
+[13:08] <FauxFaux> Reset?  BANNED.
+
+[13:08] <j416> yeah
+
+[13:08] <j416> tricky :)
+
+[13:08] *** nikuyoshi joined
+[13:08] <j416> never had the use for reset -p I don't think
+
+[13:08] <thiago> do you remember add -i ?
+
+[13:08] <j416> never understood the use of add -i
+
+[13:08] *** mloskot joined
+[13:09] <cbreak> it's like add -p, just less granularity
+
+[13:09] <thiago> it was "text adventure game" so hard it was to use
+
+[13:09] *** satyanash joined
+[13:09] <j416> thiago: yeah.. that was my impression. It was more complicated than it had to be.
+
+[13:09] *** macRover joined
+[13:10] <j416> maybe good for some.
+
+[13:10] * j416 shrugs
+
+[13:10] *** TomyLobo joined
+[13:11] *** unreal joined
+[13:12] *** nikuyoshi left
+[13:16] *** chrischambers_ joined
+[13:17] *** dr0id joined
+[13:18] *** DaveIngram joined
+[13:18] <LeMike> Did I get this right? If I have one git and clone with --depth, then I can't push  or pull it?
+
+[13:18] <thiago> correct
+
+[13:19] *** chrischambers left
+[13:19] *** chrischambers_ is now known as chrischambers
+
+[13:19] *** DaveIngram left
+[13:19] <LeMike> Damn this. Any possibility to clone only a subset / latest 10 revs with that ability?
+
+[13:20] *** ph^ joined
+[13:20] <LeMike> Can't believe that it's only up to branch and fork.
+
+[13:20] <thiago> no
+
+[13:20] *** Vampire0_ left
+[13:20] <thiago> branching has nothing to do with that. If you want a fully-working clone, don't use --depth.
+
+[13:21] <thiago> forking is not a Git operation
+
+[13:21] <cbreak> the closest equivalent to forking is cloning
+
+[13:21] <LeMike> Yee. Branch would only be a workaround for my aim to keep the used space of the clone low.
+
+[13:21] <cbreak> with telling the owner of the original "I hate you! I will do my own thing"
+
+[13:23] <thiago> LeMike: what is your aim then?
+
+[13:24] <LeMike> Having my repo always with me on a usb stick / shrink the size whereever it goes and having a bare usable repo.
+
+[13:24] *** maleknet left
+[13:25] <cbreak> just git clone
+
+[13:25] <LeMike> Just for pushing to it and pulling the latest
+
+[13:25] <cbreak> with --bare if you want it bare
+
+[13:25] <cbreak> without if you want a working dir
+
+[13:25] *** Vile left
+[13:25] <FauxFaux> LeMike: Have you actually checked there's a signfiicant saving between small --depth and not/
+
+[13:25] <cbreak> git's temporal compression is extremely good
+
+[13:26] <LeMike> if i depth 10 i have just around 0,2gig and if i don't we have around 3gig.
+
+[13:27] <FauxFaux> Oh my.
+
+[13:27] <LeMike> Yee.
+
+[13:27] *** bindaasomatic left
+[13:28] <cbreak> just look at git.git, all history is only twice as big as the newest checkout
+
+[13:28] <cbreak> --depth isn't going to save you much of significance unless you do something stupid
+
+[13:29] *** legnaleurc_ left
+[13:30] <FauxFaux> They've apparently done something "stupid". :)
+
+[13:30] *** BiggFREE left
+[13:30] *** legnaleurc joined
+[13:31] <LeMike> Damn long history I tell you. Was a SVN of plenty code in university and changed to git because someone said that git can do this kind of "HEAD-only-cloning". That's so wrong.
+
+[13:31] <cbreak> head only cloning?
+
+[13:32] <LeMike> neologism
+
+[13:32] <cbreak> I doubt your history is longer than git's and Linux' :)
+
+[13:32] *** AlbireoX left
+[13:33] <cbreak> the biggest repository I have is Qt
+
+[13:33] <cbreak> It's 5.2gb
+
+[13:33] <cbreak> the .git is 474 mb
+
+[13:33] <cbreak> and I could probably shrink it with repacking
+
+[13:34] <bremner> of course if you version .avi's, ....
+
+[13:34] <LeMike> :D i just see a 5 digit number. dunno why they are so masochistic. but if the phd sais then the student does :P
+
+[13:34] <FauxFaux> LeMike: Perhaps you should implement push from shallow clones! =p
+
+[13:35] *** Vampire0_ joined
+[13:35] <LeMike> i wonder what his face look like if I say: Check your feasibility.
+
+[13:35] <cbreak> do you happen to have multiple projects in one repository?
+
+[13:35] <LeMike> Yes, they do.
+
+[13:36] <cbreak> that's stupid
+
+[13:36] <cbreak> you shouldn't do that
+
+[13:36] <LeMike> 2nd best university for informatics in germany. just failed!
+
+[13:36] <cbreak> git repositories can not be split spatially
+
+[13:36] <cbreak> (not reasonably at least)
+
+[13:36] *** empity left
+[13:37] *** legnaleurc_ joined
+[13:37] <LeMike> could svn do this?
+
+[13:37] *** legnaleurc left
+[13:37] <cbreak> svn? It can only do this
+
+[13:37] <cbreak> well, not really
+
+[13:37] <cbreak> but in svn you don't get a repository
+
+[13:38] <cbreak> if you check out something from svn, you just get a snapshot of part of the repo
+
+[13:38] *** nikuyoshi joined
+[13:38] <cbreak> so by design it is very divisible
+
+[13:38] <cbreak> with git you get everything, because git ensures integrity
+
+[13:38] *** Behi joined
+[13:38] <cbreak> (on a repository basis)
+
+[13:39] <LeMike> I try to take a picture of my boss as I tell him tomorrow :D Feels like in a dilbert comic
+
+[13:39] *** Behi left
+[13:40] *** jordanm joined
+[13:40] *** canton7 joined
+[13:40] <LeMike> thanks very much! this made my day again :)
+
+[13:40] <cbreak> if you want to use git properly
+
+[13:40] <cbreak> then you have to use git semantics, not svn semantics
+
+[13:40] <cbreak> git and svn are very much not the same.
+
+[13:41] *** erichynds left
+[13:41] <jordanm> I have git core.filemod set to "true", but when I change permissions on files in git, the permission change is not detected after a git commit -a. How can I commit permission changes?
+
+[13:41] <cbreak> jordanm: git doesn't track file system permissions.
+
+[13:41] *** krz left
+[13:41] *** krz joined
+[13:41] *** krz left
+[13:41] *** krz joined
+[13:41] <cbreak> neither does it track file ownership
+
+[13:41] <thiago> fileMode to false will make Git *not* track the +x bit
+
+[13:42] <thiago> the default is already true, where Git tracks only the +x bit
+
+[13:42] <cbreak> everyone who clones your repository and checks out files have ownership of it
+
+[13:42] *** subbyyy joined
+[13:42] <FauxFaux> But that makes git /terrible/ as a deployment tool!  What /were/ they thinking!
+
+[13:42] <jordanm> cbreak: I am almost certain I have marked a file executable before and have been able to commit that change to git.. now I am just trying to do the opposite -x
+
+[13:42] *** eradicus joined
+[13:43] *** erichynds joined
+[13:43] *** toabctl joined
+[13:43] <cbreak> FauxFaux: giving people who have the repository access to the repository? How ... weird... indeed...
+
+[13:43] <cbreak> jordanm: executability is the only thing that's tracked
+
+[13:43] <eradicus> I'm getting fatal: Unable to find remote helper for 'https' in ubuntu 11.10 64-bit, I tried purging the installation and reinstalling a new one, however this error persists
+
+[13:44] <jordanm> cbreak: alright, thanks
+
+[13:44] <cbreak> eradicus: what are you trying to do?
+
+[13:44] *** legnaleurc_ left
+[13:45] <cbreak> eradicus: did you compile git with ssl support?
+
+[13:45] *** legnaleurc joined
+[13:45] <eradicus> cbreak, I'm trying to initialize a git repo
+
+[13:45] <cbreak> git init?
+
+[13:46] <cbreak> doesn't need https
+
+[13:46] <eradicus> cbreak, repo sync, sorry
+
+[13:46] <cbreak> git clone? https source?
+
+[13:46] <cbreak> sounds like your git doesn't get https
+
+[13:46] <cbreak> does your remote support ssl? if so, use it :)
+
+[13:47] <thiago> if you mean repo, it's technicall not git...
+
+[13:47] <cbreak> git has repositories?
+
+[13:47] <cbreak> what do you mean?
+
+[13:48] <thiago> the tool called "repo"
+
+[13:48] <cbreak> ... oh... how misleading
+
+[13:48] <thiago> Android uses it
+
+[13:48] *** DaveIngram joined
+[13:49] <cbreak> how does it relate to git?
+
+[13:49] <thiago> spearce wrote it, I think
+
+[13:49] <thiago> it is used to checkout a tree of repositories and keep them in sync
+
+[13:49] *** Vile joined
+[13:49] <cbreak> so like git submodule?
+
+[13:49] <thiago> repo sync rebases, instead of pulling
+
+[13:49] <eradicus> yes, what I'm trying to do is to sync an android repo
+
+[13:49] <cbreak> or gitslave
+
+[13:49] <thiago> and I think it's also integrated to gerrit
+
+[13:49] <cbreak> eradicus: well, try to use git directly
+
+[13:50] <eradicus> anyway, it happened when I tried recompiling git from source, I think I missed some lines to include ssl
+
+[13:50] <thiago> like them, but the links aren't stored as SHA-1 in a Git tree, but a simple XML file
+
+[13:50] <cbreak> if that fails, maybe your git doesn't have https support
+
+[13:50] <thiago> eradicus: you may want to ask for help in #android too
+
+[13:50] * thiago has never tried Android's sources and probably never will
+
+[13:50] <cbreak> android doesn't run on my nokia x6...
+
+[13:51] <cbreak> (that thing barely has the cpu power to run symbian :)
+
+[13:51] <eradicus> cbreak, haha
+
+[13:52] <cbreak> if you compiled git from source
+
+[13:52] <cbreak> did you have openssl installed? headers + libs?
+
+[13:52] <cbreak> maybe your system doesn't come with ssl support out of the box
+
+[13:53] *** nicoulaj left
+[13:53] *** tomislater left
+[13:55] <eradicus> cbreak, yes it has openssl
+
+[13:55] <cbreak> headers + libs?
+
+[13:55] <thiago> did you compile git from sources?
+
+[13:56] *** flaguy48 left
+[13:56] *** NiklasFiekas left
+[13:56] <thiago> "if you did X, then Y might be the reason". I hope you did X, otherwise considering Y makes no sense.
+
+[14:00] *** thevoice- joined
+[14:00] *** ziro` joined
+[14:00] *** HG` left
+[14:00] *** thevoice- left
+[14:01] *** mloskot is now known as mloskot_dogwalk
+
+[14:05] *** k299 joined
+[14:05] *** hasuTMK left
+[14:06] *** k299 left
+[14:06] *** k299 joined
+[14:06] *** nimrod10 left
+[14:07] *** alip left
+[14:07] *** flaguy48 joined
+[14:08] *** Ingmar left
+[14:08] *** gitnewbie joined
+[14:08] *** sepek left
+[14:08] *** gitinfo sets mode: +v gitnewbie
+
+[14:09] *** ciaranm left
+[14:09] *** boblet joined
+[14:10] <gitnewbie> Hello, I did a merged master into branch A and branch A shows A+48, but is telling me there is nothing to commit.  The new code is there, but I can't convince git to commit it.  Any ideas on how I can get this stuff committed?
+
+[14:10] <LeMike> files added to git? (git add)
+
+[14:11] <gitnewbie> there are a few new files, but the majority are changes to existing
+
+[14:12] <LeMike> $: git update-index --refresh
+
+[14:12] <thiago> gitnewbie: git merge completed the work
+
+[14:12] <thiago> there's nothing to commit
+
+[14:12] <gitnewbie> thiago: when I cloned the repository to a temp location, branch A doesn't have any of the changes
+
+[14:13] <thiago> you did something wrong in cloning then or in verifying that the changes are there
+
+[14:13] <thiago> start with the A+48 branch
+
+[14:13] <gitnewbie> thiago: do I need to push branch A to remote?
+
+[14:13] <thiago> no
+
+[14:13] <thiago> which branch does git branch tell you you're in?
+
+[14:14] <gitnewbie> branch A
+
+[14:14] <thiago> ok
+
+[14:14] <LeMike> cbreak: : what could go wrong if I force the shallow clone to be a "non-shallow" one?
+
+[14:14] <thiago> git log. Do you see any of the changes from master that you wanted to see?
+
+[14:14] <gitnewbie> thiago: yes
+
+[14:14] *** ziro` left
+[14:14] <thiago> git status tells you that "Your branch is ahead of 'origin/A' by 48 commits.", correct?
+
+[14:15] <cbreak> LeMike: just clone everything
+
+[14:15] <cbreak> no forcing required
+
+[14:15] <gitnewbie> thiago: yes
+
+[14:15] *** kloeri left
+[14:15] *** AnthonyCat left
+[14:15] <thiago> gitnewbie: ok, so far so good
+
+[14:15] <thiago> gitnewbie: when you cloned, what did you clone?
+
+[14:16] <thiago> gitnewbie: this repo or your origin (your upstream)?
+
+[14:17] <gitnewbie> thiago: git clone ssh://[host]/[path to project.git] ./project
+
+[14:17] *** hwit left
+[14:17] <thiago> gitnewbie: that repository, is it the one you made the merge in?
+
+[14:18] <gitnewbie> thiago: yes, I merged origin/master into branch A
+
+[14:19] <thiago> gitnewbie: that's not what I asked
+
+[14:20] <thiago> I asked if the repository you made that merge is reachable by ssh://[host]/[path to project.git]
+
+[14:20] <thiago> is that the proper URL to the repository?
+
+[14:20] *** dorisabayon joined
+[14:21] <thiago> remember that each repository is independent of one another. If you don't pull or push, changes do not propagate.
+
+[14:21] *** mandric joined
+[14:21] <thiago> the merge you made, it's in one repository only unless you push it elsewhere. So you cannot expect it to magically show up at another.
+
+[14:21] <cbreak> LeMike: you have to understand that a repository cloned with --depth is essentially corrupted
+
+[14:22] <gitnewbie> thiago: yes, we have only one repository, if that is what you're asking?
+
+[14:22] <LeMike> cbreak : damn this. k, was my last try.
+
+[14:22] <thiago> gitnewbie: no, it's not
+
+[14:22] <cbreak> hmm?
+
+[14:22] <thiago> gitnewbie: and it's telling that you said "we have" instead of "I have"
+
+[14:22] *** Chib left
+[14:23] <cbreak> LeMike: my tip: Use git properly instead of abusing it :)
+
+[14:23] <thiago> gitnewbie: does *everyone* ssh into the same machine and use the same path to make changes in?
+
+[14:23] *** legnaleurc left
+[14:23] *** Fandekasp left
+[14:24] <gitnewbie> thiago: we work locally, then use ssh to pull/push to the remote repository
+
+[14:24] *** secoif left
+[14:24] *** legnaleurc joined
+[14:25] <gitnewbie> thiago: so, if the code is local, I just need to push it....?
+
+[14:26] <thiago> gitnewbie: so each person has a repository, plus the central repository
+
+[14:26] <thiago> gitnewbie: you don't have 1 repository. You have N+1, where N is the number of people.
+
+[14:26] <gitnewbie> thiago: it is sounding like git committed the merge for me, it just needs to be pushed?
+
+[14:26] <thiago> gitnewbie: yes
+
+[14:27] <gitnewbie> thiago: right... I have a local repository as do others.... we share one remote repository
+
+[14:27] *** nimrod10 joined
+[14:27] *** nimrod10 left
+[14:28] <thiago> gitnewbie: and you cloned that remote repository right? And in that clone, you did not see your changes?
+
+[14:28] <gitnewbie> thiago: yep
+
+[14:28] <gitnewbie> thiago: just pushed, then did a pull in the temp repository I cloned and the changes came across
+
+[14:28] <thiago> gitnewbie: good
+
+[14:29] <gitnewbie> thiago: sorry for such  simple question. :)
+
+[14:29] *** btanaka joined
+[14:29] <gitnewbie> thiago: I'm a bit paranoid and want to make sure I don't hose things up. :)
+
+[14:29] <gitnewbie> thiago: switched from svn a week ago and still trying to get a handle on this local vs. remote stuff
+
+[14:30] <j416> gitnewbie: at least it seems you're actively learning the git way of doing things, instead of trying to apply svn logic to git. Good start. :)
+
+[14:30] <thiago> gitnewbie: np. I just hope you learned more how Git works now.
+
+[14:31] <j416> gitnewbie: many people seem to just assume git is another svn and try to use it as such. Then they fail.
+
+[14:31] <gitnewbie> j416: thanks.... we're still trying to get our branches straightened out.  need to get master to be a mirror of prod instead of a prod specific branch
+
+[14:31] *** Ingmar joined
+[14:31] <gitnewbie> thiago: learning something new every day.... just found gitk this morning. :)
+
+[14:31] <j416> gitnewbie: sounds like you might be interested in reading this: http://nvie.com/posts/a-successful-git-branching-model/
+
+[14:32] *** arvind_khadri left
+[14:32] *** ciaranm joined
+[14:32] <j416> gitnewbie: it's good start, modify it to your needs
+
+[14:32] <gitnewbie> j416: that is where we started. :)
+
+[14:32] *** kloeri joined
+[14:32] <j416> gitnewbie: cool. :)
+
+[14:32] <gitnewbie> great resource
+
+[14:32] <j416> indeed
+
+[14:33] <gitnewbie> we quickly learned git != svn
+
+[14:33] *** toabctl left
+[14:33] <j416> gitnewbie: I'm curious, what does your dev environment look like? languages? windows? linux?
+
+[14:34] <gitnewbie> j416: I'm on a mac, partner is on windows
+
+[14:34] <j416> ok!
+
+[14:34] *** arvind_khadri joined
+[14:34] <gitnewbie> j416: rails with linux servers
+
+[14:34] <TomyLobo> can one local branch (master) track multiple remote branches (origin/master and own/master)?
+
+[14:35] *** wbednarski joined
+[14:35] <FauxFaux> TomyLobo: What would that mean?  (no)
+
+[14:35] <j416> gitnewbie: then I assume you don't have any non-ascii filenames. They use non-ascii in filenames at my $dayjob, it's a mess. Can't cross filesystem boundaries easily.
+
+[14:35] <TomyLobo> FauxFaux that both "git pull origin" and "git pull own" merge in changes
+
+[14:36] <gitnewbie> thankfully, no.  we just got past our cross platform issues by switching to vagrant
+
+[14:36] *** mloskot_dogwalk left
+[14:36] <j416> gitnewbie: i.e. commit a file with non-ascii filename on windows, check it out on linux -> mess
+
+[14:36] <FauxFaux> TomyLobo: man git config push.default
+
+[14:36] <gitinfo> TomyLobo: the git-config manpage is available at http://jk.gs/git-config.html
+
+[14:36] <j416> vagrant, never heard of that
+
+[14:36] <j416> googling, thank you.
+
+[14:36] <gitnewbie> j416: vagrant is your friend
+
+[14:36] <cbreak> use 7bit ascii file names
+
+[14:36] <cbreak> preferably without spaces
+
+[14:37] <gitnewbie> command line virtual box so everyone is on the exact same platform regardless of their host platform
+
+[14:37] <j416> nice
+
+[14:37] <j416> except we do windows dev at work. :/
+
+[14:37] <EugeneKay> Oy, vbox.
+
+[14:37] <gitnewbie> that would work
+
+[14:38] <FauxFaux> cbreak: All lower-case, too.
+
+[14:38] <cbreak> that's more a naming convention. I've not seen it make trouble
+
+[14:38] <cbreak> as long as you don't have names that only differ in case :)
+
+[14:38] <j416> gitnewbie: does vagrant have a GUI?
+
+[14:38] <FauxFaux> We had build-failures last week due to OSX being case insensitive and HTTP not being so.
+
+[14:38] <FauxFaux> </gross oversimplification of http>
+
+[14:39] <Sir_Rai> Do you guys know any free name dns like dyndns earlier? ?
+
+[14:39] <gitnewbie> j416: I don't think so
+
+[14:39] <Mikachu> Sir_Rai: http://freedns.afraid.org/
+
+[14:39] <j416> gitnewbie: then we're screwed. People are scared of the commandline. :P
+
+[14:39] *** alip joined
+[14:39] <Sir_Rai> Oh love u Mika :!
+
+[14:39] <j416> gitnewbie: thanks though.
+
+[14:39] <gitnewbie> J416: yeah.... my partner is that way
+
+[14:40] <EugeneKay> HFS+ is case insensitive? o.O
+
+[14:40] <gitnewbie> j416: I had to twist hi arm to get vagrant running, but he came around now.  I'll get him into command line stuff one of these days.... :)
+
+[14:40] <j416> gitnewbie: heh. I wish you luck.
+
+[14:41] <Mikachu> hfs+ at least corrupts unicode filenames silently
+
+[14:41] <j416> EugeneKay: both variants exist, by default it is not case-sensitive.
+
+[14:41] <EugeneKay> gitnewbie - if you're just getting started at a business, you might wanna take a look at SmartGit. Best GUI I've found, and it's cross-platform.
+
+[14:41] <EugeneKay> (I mention "at a business" because that implies you'd be able to fork out for the licenses ;-) )
+
+[14:42] *** gitnewbie left
+[14:44] <cbreak> bash, best git ui there is. :)
+
+[14:44] *** cyfi left
+[14:44] <EugeneKay> Windows' TTY is somewhat lacking.
+
+[14:44] <cbreak> FauxFaux: OS X supports both :)
+
+[14:44] <j416> EugeneKay: msysgit works ok
+
+[14:44] <cbreak> Sir_Rai: Dyndns is still free
+
+[14:45] <EugeneKay> SmartGit is a wrapper around git(.exe). You still need msysgit.
+
+[14:45] <Sir_Rai> cbreak: There is only available a trial for a month
+
+[14:45] <j416> EugeneKay: and by that I was referring to msysgit's git bash, sorry to cause confusion. :)
+
+[14:46] <EugeneKay> Ah, right. bash.exe is fine, it's cmd.exe that bugs me
+
+[14:46] <cbreak> Sir_Rai: my name is still there
+
+[14:46] <FauxFaux> EugeneKay: Weak!
+
+[14:46] <j416> yeah using git from the regular plain cmd.exe thing is indeed a pain
+
+[14:46] <j416> need bash
+
+[14:46] <FauxFaux> cbreak: It's not free for new users anymore.
+
+[14:47] <cbreak> use bash + Console2 on windows
+
+[14:47] <Sir_Rai> cbreak: maybe for your old free service but this is not possible anymore
+
+[14:47] <Sir_Rai> and when i got registered i need to put a credit card even for test the trial
+
+[14:52] <cbreak> well. How expensive is it?
+
+[14:52] *** rurufufuss left
+[14:52] <Mikachu> cbreak: dyndns is only free for existing free accounts, if you don't refresh it you will not be able to reactivate it
+
+[14:53] <thiago> really?
+
+[14:53] * thiago has used it for 5 years without thinking
+
+[14:53] <zorzar> can anybody tell me how git handles comitting during GC?  is the repo locked during GC or is it possible that objects that are removed by GC won't be saved by commit?
+
+[14:53] <thiago> zorzar: it doesn't do anything special
+
+[14:53] <FauxFaux> zorzar: It works.  No idea how. ¬_¬
+
+[14:54] <thiago> zorzar: you should not GC while committing
+
+[14:54] *** eradicus left
+[14:54] <zorzar> thiago: ok thanks
+
+[14:54] <j416> zorzar: it will read the objects, store things temporarily, then when it is done it will replace/remove the old objects
+
+[14:54] <j416> thiago: really?
+
+[14:54] <thiago> the object pruning step of the GC deletes objects that haven't been used for 90 days
+
+[14:54] <j416> I would have assumed it would work just fine
+
+[14:54] <thiago> that operation is destructive
+
+[14:55] <FauxFaux> A significant amount of time during "make test" is doing race-condition tests.
+
+[14:55] *** stringoO left
+[14:55] *** lausi left
+[14:56] <zorzar> FauxFaux: can you point me to a test that covers this race condition?
+
+[14:56] *** lausi joined
+[14:56] *** Cromulent joined
+[14:56] <j416> considering that gc is run automatically from time to time, nothing should fail to run while it is running
+
+[14:56] <thiago> it's run automatically, but not asynchronously
+
+[14:56] *** DaveIngram left
+[14:56] <j416> thiago: ok.
+
+[14:57] <j416> thiago: so pushes for instance are put on hold until it's done?
+
+[14:57] <thiago> you mean running gc on a cron job? That's different
+
+[14:57] <thiago> I thought you meant the gc that is automatically run by git along other operations
+
+[14:58] <j416> I was under the impression that git's auto gc was triggered on bare repos upon different things, if needed
+
+[14:58] <j416> how that affects simultaneous pushes, I don't know.
+
+[14:58] <zorzar> i'm asking because i implemented my own repack command and wondered how git handles this race condition
+
+[14:58] <thiago> I have never seen it run on bare repos
+
+[14:58] <j416> hm
+
+[14:59] <j416> so on a central repo server you would have to cron gc?
+
+[14:59] <thiago> I think so
+
+[14:59] <j416> hm.
+
+[14:59] <j416> I see.
+
+[14:59] <thiago> gc is not an operation fitting the model of "write-once read-many"
+
+[14:59] <thiago> besides, on a bare repo serving as central server, there should be no objects becoming loose
+
+[15:00] <thiago> only force-pushes can do that
+
+[15:00] <j416> yes
+
+[15:00] <FauxFaux> But gc will still repack, which is /very/ necessary?
+
+[15:00] *** cyfi joined
+[15:00] <j416> you cannot simply assume that there are no force-pushes
+
+[15:00] <thiago> objects becoming loose in a bare repo are unreachable
+
+[15:00] <j416> so there will evidently be loose objects on a remote that need to be cleaned up
+
+[15:00] <thiago> so a push using the same object *contains* that object in the transmitted pack
+
+[15:00] *** tomislater joined
+[15:01] <FauxFaux> (Only gc after a force push!)
+
+[15:01] <thiago> a gc simultaneous to a push would be no problem
+
+[15:01] *** dangerousdave left
+[15:01] <thiago> I think we discussed this once. The only case we found with a problem was a push that lasted for as long as the gc expiry time.
+
+[15:02] <thiago> that is, one single push taking 90 days to complete.
+
+[15:02] <j416> makes me wonder how github handles it.
+
+[15:02] <FauxFaux> thiago: <3
+
+[15:02] *** wbednarski left
+[15:03] *** dangerousdave joined
+[15:03] *** aspotashev joined
+[15:03] <j416> reading about, it seems auto gc is triggered on bare repos as well.
+
+[15:03] <j416> upon push or so
+
+[15:03] <thiago> FauxFaux: summary: I think the only protection is the expiry time
+
+[15:03] <j416> haven't confirmed.
+
+[15:04] <thiago> an object becomes unreachable at time t and is collected at t+expiry time (90 days by default)
+
+[15:04] <FauxFaux> My belief would be that the order of reading and writing refs (which is done with a lock held) would prevent inconsistency, but I can't think how.
+
+[15:04] *** gavin_huang left
+[15:04] <Mikachu> thiago: what if a commit/push wants to write a blob, and the blob already existed as a loose object, but gc was about to prune it?
+
+[15:04] <FauxFaux> thiago: Really?  Where is the unreachability time of an object recorded?
+
+[15:04] <thiago> Mikachu: we're talking about pushes, not commits
+
+[15:04] *** arvind_khadri left
+[15:05] <Mikachu> s,commit/push,push,
+
+[15:05] * FauxFaux isn't sure he wants to look at the code. >.>
+
+[15:05] <thiago> on non-bare repos, where you commit, gc should be synchronous. Do not run anything else while it's gc'ing.
+
+[15:05] <thiago> on bare repos, the only reason for an object to become unreachable is a force-push or branch deletion.
+
+[15:06] <thiago> the objects that became unreachable are available for reuse for 90 days. Yet every single push that uses the same objects *contains* the objects in the pack
+
+[15:06] * j416 rests case until we know for sure
+
+[15:06] *** legnaleurc left
+[15:06] *** antihero joined
+[15:06] *** hwit joined
+[15:06] <thiago> so the only possible problem is that an object *was* reachable at the time of the object negotiation of a push, became unreachable and was expired before the completion of the same push (before the update).
+
+[15:07] *** legnaleurc joined
+[15:08] *** kinetic joined
+[15:08] *** NiklasFiekas joined
+[15:08] *** TheTFEF joined
+[15:09] <j416> thiago: yes, what you say makes much sense.
+
+[15:10] <j416> still not sure about gc not being able to run asynchronously in the background though. hm.
+
+[15:10] *** cobalt237 joined
+[15:11] <cobalt237> If I checkout a project into the wrong directory, can can I uncheckout out and move into that new directory to try again?
+
+[15:11] *** rhl joined
+[15:11] <j416> cobalt237: by checkout, do you mean 'git clone' ?
+
+[15:11] *** ecocode joined
+[15:12] <cobalt237> j416: "git checkout https://..."
+
+[15:12] <thiago> you can't do that
+
+[15:12] <j416> cobalt237: never heard of that.
+
+[15:12] <thiago> so, did you mean git clone?
+
+[15:12] *** jceb left
+[15:12] *** Cromulent left
+[15:13] *** solofight joined
+[15:13] <cobalt237> thiago: I probably meant git clone, but git checkout is what I did (http://pastebin.com/kMSZd2d6)
+
+[15:13] <solofight> clear
+
+[15:13] <cobalt237> At least on the fedora build, that's a valid command
+
+[15:14] <FauxFaux> cobalt237: Yes, but it doesn't do anything like what you think.
+
+[15:14] *** valtih_ joined
+[15:14] <cobalt237> FauxFaux: I figured.  Probably meant to do a clone
+
+[15:14] <j416> cobalt237: you don't use checkout with an url.
+
+[15:14] <Marquel> morning.
+
+[15:15] <FauxFaux> "fatal: git checkout: we do not like 'http://github.com/git/git' as a branch name." awww.
+
+[15:15] <Marquel> is it possible to get a single file from a different branch into the current branch?
+
+[15:15] <thiago> Marquel: git checkout otherbranch -- filename
+
+[15:15] <FauxFaux> Marquel: git show branch:path/to/file # or git checkout branch -- path/to/file # depending on whether you want it in it's real place or elsewhere.
+
+[15:15] <j416> cobalt237: if you clone a repository (git clone [address]) you will end up with a directory with the repo and work dir in it. You can move that directory to anywhere you like. It doesn't have to be where it ended up first. If that was your question..
+
+[15:15] <Marquel> thiago: you are faster than google.
+
+[15:15] <Marquel> thiago: is there a webinterface to your knowledge? ;)
+
+[15:15] <cobalt237> j416: That's what I expected to happen
+
+[15:16] <thiago> Marquel: command-line :-)
+
+[15:16] <j416> cobalt237: then you are right.
+
+[15:16] <cobalt237> j416: I did that and it worked, but do I need to do anything to clean up the checkout besides just deleting the files?
+
+[15:16] <Marquel> thiago: with or without official api documentation? ;)
+
+[15:16] <thiago> Marquel: it's all internal and undocumented
+
+[15:16] <FauxFaux> Perfect storm of :s.
+
+[15:17] *** mloskot_dogwalk joined
+[15:17] <j416> cobalt237: git clone only creates that one directory containing a .git directory with the repo, and checks out the latest set of files for you.
+
+[15:17] <j416> cobalt237: all you need to do is delete that directory if you don't want it. git clone does not create anything else.
+
+[15:17] *** mloskot_dogwalk is now known as mloskot
+
+[15:17] *** valtih left
+[15:17] <cobalt237> j416: right, and that worked, but do I need to clean up the checkout which didn't create a new directory?
+
+[15:18] <j416> cobalt237: I'm not sure what you mean by that.
+
+[15:18] *** jbrokc joined
+[15:18] <cobalt237> j416: I was in my base directory and it seemed to toss a bunch of files around in there
+
+[15:18] <thiago> cobalt237: please don't say "checkout" when you mean "clone"
+
+[15:18] *** arvind_khadri joined
+[15:18] <cobalt237> thiago: I don't mean "clone", I mean "checkout"
+
+[15:18] <Marquel> thiago: shouldn't it be open-sourced? ;)
+
+[15:18] <j416> cobalt237: pastebin what you did, it would be much easier for us to help.
+
+[15:19] *** AmirBehzad left
+[15:19] <cobalt237> j416: I did a "checkout" on the https url and a "clone" on the url
+
+[15:19] *** gavin_huang joined
+[15:19] <cbreak> you can't checkout an url
+
+[15:19] <cobalt237> j416: The latter created a bunch of directories in my home dir, while the latter created a new project directory
+
+[15:19] <cbreak> you should clone first
+
+[15:19] <cobalt237> cbreak: Right
+
+[15:19] <thiago> cobalt237: check out means "get the contents of a branch checked out in this repository"
+
+[15:19] <j416> cobalt237: pastebin what you did.
+
+[15:20] <thiago> cobalt237: there's no cleaning that up. Just check out another branch.
+
+[15:20] <cobalt237> thiago: Should I just delete the files created by the checkout then?
+
+[15:20] <cbreak> no
+
+[15:20] <cbreak> leave them
+
+[15:20] <thiago> cobalt237: why would you want to do that?
+
+[15:20] *** mishok13 joined
+[15:20] <thiago> cobalt237: just leave them. Check out the branch you wanted to have checked out.
+
+[15:21] <cobalt237> okay, going to pastebin as I'm not explaining myself well
+
+[15:21] <thiago> cobalt237: are you by any chance doing an out-of-tree check out? I.e., setting GIT_WORK_TREE.
+
+[15:21] <cbreak> I doubt he even knows what that is
+
+[15:21] *** kinetic left
+[15:22] <thiago> if he is doing that, he knows what it is. If he doesn't know what it is, the chances that he's doing it are very remote.
+
+[15:22] *** jonshea joined
+[15:23] *** secoif joined
+[15:23] *** secoif left
+[15:23] *** secoif joined
+[15:23] *** secoif left
+[15:24] <cobalt237> thiago: Here you go (http://pastebin.com/iiZYDxHf)
+
+[15:24] *** secoif joined
+[15:24] *** secoif left
+[15:24] *** legnaleurc left
+[15:25] *** secoif joined
+[15:25] *** secoif left
+[15:25] *** joshsmith joined
+[15:25] <j416> cobalt237: not just the commands you did, the output as well.
+
+[15:25] *** secoif joined
+[15:25] *** secoif left
+[15:26] <j416> cobalt237: just copy&paste what's in your terminal
+
+[15:26] *** secoif joined
+[15:26] <cbreak> cobalt237: checkout should not create any files
+
+[15:26] *** legnaleurc joined
+[15:26] *** thevoice- joined
+[15:27] <j416> a wild guess is that you have your home dir in a git repo and you checked out something weird by accident
+
+[15:28] <thiago> cobalt237: that git checkout should not have done anything
+
+[15:28] <cobalt237> j416: Oh, it wasn't a checkout, I did a pull after the checkout, which must have created the directories (http://pastebin.com/xXwTxjBB)
+
+[15:28] <thiago> cobalt237: so there's nothing to be cleaned up
+
+[15:28] <j416> cobalt237: right, so you are already in a repository
+
+[15:28] <j416> and you pulled from that url
+
+[15:28] *** macRover left
+[15:29] <j416> cobalt237: you have a repo right in your home directory, for some reason.
+
+[15:29] <thiago> to "undo" the pull, reset --hard back to the commit you want to be in
+
+[15:29] <thiago> be careful it might delete your $HOME
+
+[15:29] <j416> lol..
+
+[15:29] <cobalt237> thiago: Can I just delete the offending files including the .git directory in my home dir?
+
+[15:29] <thiago> yes
+
+[15:30] <j416> cobalt237: might want to run a 'git log' to find out what that repo came from before you delete it
+
+[15:30] <cobalt237> thiago: I wasn't sure if that .git dir/ contained anything special specific to my global git settings
+
+[15:30] <j416> maybe you can remember what you did wrong some time ago. :)
+
+[15:31] <j416> cobalt237: ".git" is always a git repository.
+
+[15:31] <thiago> he probably did a git checkout URL, which told him it wasn't a git repo, so he git init'ed
+
+[15:31] <cobalt237> j416: Okay.  I appreciate the help.  I'm very new to git obviously
+
+[15:31] <j416> thiago: good theory
+
+[15:33] <cbreak> there's no git init in the pastebin
+
+[15:33] <j416> cbreak: might be one before line 1
+
+[15:33] *** dfr|mac joined
+[15:34] <thiago> cobalt237: when asking for help, it's important to include everything you did
+
+[15:34] <j416> or rather, has to be one, if he didn't 'git clone blah .'
+
+[15:34] <thiago> we're right now guessing whether you meant to run git init or not
+
+[15:35] *** legnaleurc left
+[15:35] *** nimrod10 joined
+[15:35] *** nimrod10 left
+[15:35] *** legnaleurc joined
+[15:35] *** Targen joined
+[15:35] *** nimrod10 joined
+[15:35] *** nimrod10 left
+[15:36] *** giallu joined
+[15:36] *** nimrod10 joined
+[15:36] *** nimrod10 left
+[15:37] *** thevoice- left
+[15:37] *** Guest45503 left
+[15:39] *** storrgie joined
+[15:39] *** Cromulent joined
+[15:39] *** codebeaker_ joined
+[15:42] *** Cromulent left
+[15:44] *** Spockz left
+[15:45] *** legnaleurc left
+[15:46] *** codebeaker_ left
+[15:46] *** AmirBehzad joined
+[15:47] *** cobalt237 left
+[15:48] *** legnaleurc joined
+[15:49] *** dnjaramba left
+[15:49] *** nimrod10 joined
+[15:49] *** nimrod10 left
+[15:55] *** legnaleurc left
+[15:55] *** pidus joined
+[15:57] *** legnaleurc joined
+[15:57] *** nimrod10 joined
+[15:57] *** nimrod10 left
+[15:58] *** brian_g left
+[16:00] *** angelsl left
+[16:01] *** legnaleurc left
+[16:02] *** legnaleurc joined
+[16:03] *** hwit left
+[16:04] *** giallu left
+[16:04] *** jbrokc left
+[16:05] *** nimrod10 joined
+[16:05] *** nimrod10 left
+[16:07] *** shiba_yu36 joined
+[16:07] *** legnaleurc left
+[16:09] *** legnaleurc joined
+[16:12] *** nimrod10 joined
+[16:12] *** nimrod10 left
+[16:13] *** AmirBehzad left
+[16:13] *** nimrod10 joined
+[16:13] *** nimrod10 left
+[16:15] *** nimrod10 joined
+[16:15] *** nimrod10 left
+[16:15] *** Xizor joined
+[16:17] *** kukks joined
+[16:18] *** whyking_ left
+[16:18] *** Cromulent joined
+[16:19] *** wbednarski joined
+[16:19] *** gusnan left
+[16:19] *** LeMike left
+[16:19] *** mishok13 left
+[16:20] *** legnaleurc left
+[16:21] *** legnaleurc joined
+[16:23] *** madewokherd joined
+[16:24] *** fl0w joined
+[16:26] *** jameslordhz joined
+[16:27] *** hwit joined
+[16:27] <jameslordhz> i create  local repo using git svn clone http://..., how to update it?
+
+[16:27] <FauxFaux> git svn rebase
+
+[16:29] <jameslordhz> i have no priviledge to write svn, so i create git repo
+
+[16:29] <jameslordhz> if i changed local repo, can i still get update from svn?
+
+[16:31] <FauxFaux> Yes.
+
+[16:32] *** nimrod10 joined
+[16:32] *** nimrod10 left
+[16:32] *** solofight left
+[16:33] *** thevoice- joined
+[16:33] *** flavius joined
+[16:34] *** nimrod10 joined
+[16:34] *** nimrod10 left
+[16:34] *** dr0id left
+[16:34] *** someguyyes joined
+[16:35] *** dfr|mac left
+[16:35] *** rasmusth joined
+[16:36] <rasmusth> so a dude added something at the top of a php file that shouldnt be there, it acts as a merge conflict
+
+[16:36] <rasmusth> when I remove it, and commit it says ok
+
+[16:36] <rasmusth> then I try to push I cant
+
+[16:36] <rasmusth> then I try to pull and it adds the conflict again
+
+[16:36] <rasmusth> so even though I fix the conflict it just comes back
+
+[16:37] *** nimrod10 joined
+[16:37] *** nimrod10 left
+[16:37] *** nimrod10 joined
+[16:37] *** nimrod10 left
+[16:37] <jameslordhz> should i create a remote repo for my local repo? then it should have two upstreams, one svn, and the other is git repo
+
+[16:38] *** thevoice- left
+[16:38] *** someguyyes left
+[16:39] *** legnaleurc left
+[16:40] *** nimrod10 joined
+[16:40] *** nimrod10 left
+[16:40] *** HG` joined
+[16:40] *** legnaleurc joined
+[16:41] *** HG` left
+[16:41] *** dorisabayon left
+[16:42] *** ecocode left
+[16:43] *** koo4 left
+[16:43] *** fl0w left
+[16:44] *** SeySayux left
+[16:44] *** koo4 joined
+[16:45] *** mloskot left
+[16:45] *** ipalaus_ left
+[16:46] *** airborn left
+[16:47] *** wbednarski left
+[16:47] *** solofight joined
+[16:47] *** iocor joined
+[16:47] *** iocor left
+[16:47] *** iocor joined
+[16:47] *** solofight left
+[16:47] *** bobbuck joined
+[16:48] *** tshauck joined
+[16:49] *** innoying left
+[16:49] *** SeySayux joined
+[16:50] *** subbyyy left
+[16:50] *** innoying joined
+[16:51] *** variable is now known as consrt
+
+[16:51] *** consrt is now known as const
+
+[16:51] *** brian_g joined
+[16:52] *** gusnan joined
+[16:54] *** legnaleurc left
+[16:54] *** legnaleurc joined
+[16:55] *** steveoliver joined
+[16:56] *** ericmuyser left
+[16:56] *** fr0stbyte is now known as ericmuyser
+
+[16:56] *** Goplat joined
+[16:56] *** rasmusth left
+[16:56] *** ericm joined
+[16:57] <steveoliver> Is there a way to add a submodule that already exists in the working tree, using it's existing remote config and all?   rather than removing it and then submodule add ... ?
+
+[16:57] *** pidus left
+[16:57] *** bobbuck left
+[16:57] *** georgeps joined
+[17:00] *** shiba_yu36 left
+[17:01] *** thevoice- joined
+[17:01] *** Danib joined
+[17:01] <Danib> hello, my git fails weirdly, it writes objects, then it hangs up. When I look at the repo, it's not pushed.
+
+[17:02] <Danib> is this a server or client fail?
+
+[17:02] <jameslordhz> git log is boring, what i want is to show only date, commiter ,and comment, how to meet this requirement?
+
+[17:02] *** georgeps left
+[17:02] <FauxFaux> jameslordhz: git config --global alias.lg "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative" && git lg
+
+[17:03] *** hwit left
+[17:03] *** nikuyoshi left
+[17:03] *** hwit joined
+[17:04] *** hwit left
+[17:04] *** heiko joined
+[17:04] *** heiko left
+[17:04] *** EricInBNE_ left
+[17:05] <jameslordhz> FauxFaux this is a temporary operation, yes?
+
+[17:05] <jameslordhz> if i use git log, lots of output still exists, right?
+
+[17:05] *** FernandoBasso left
+[17:05] <FauxFaux> jameslordhz: Just use "git lg".
+
+[17:06] *** nimrod10 joined
+[17:06] *** nimrod10 left
+[17:06] <jameslordhz> nice:)
+
+[17:07] <cbreak> Danib: doesn't sound like a fail
+
+[17:07] *** delight joined
+[17:07] <Danib> cbreak, why isn't it pushed, then?
+
+[17:08] <cbreak> git isn't supposed to push anything on its own
+
+[17:08] *** mdel joined
+[17:08] <Danib> cbreak, so it's server related?
+
+[17:08] <cbreak> maybe you didn't push it
+
+[17:08] <Danib> cbreak, oh, I let it run some time now and got: Write failed: No route to host
+
+[17:08] <Danib> server problem?
+
+[17:09] <cbreak> sounds like a network problem.
+
+[17:09] *** steveoliver left
+[17:09] <cbreak> either you specified a wrong address
+
+[17:09] <cbreak> or the server/networkinbetween is dead
+
+[17:09] <jameslordhz> how to work with svn, since i have no priviledge to write to svn, but i have to gain update from it
+
+[17:09] <Danib> cbreak, but I can connect via ssh to the server perfectly
+
+[17:09] <jameslordhz> i'm affraid conflict will be often
+
+[17:10] <cbreak> jameslordhz: just resolve them
+
+[17:10] <jameslordhz> and svn update will pollute my modification
+
+[17:10] <cbreak> jameslordhz: use git svn rebase, and read man git-rerere
+
+[17:10] <gitinfo> jameslordhz: the git-rerere manpage is available at http://jk.gs/git-rerere.html
+
+[17:10] *** delight_ joined
+[17:10] <cbreak> Danib: no, you can't
+
+[17:10] <cbreak> Danib: git uses ssh
+
+[17:10] <Danib> cbreak, I can!
+
+[17:10] *** ecocode joined
+[17:10] <cbreak> if you get a no-route-to-host
+
+[17:10] <jameslordhz> yes, i can solve them, but any need to keep all version of running snapshot?
+
+[17:10] <cbreak> then that's an error from ssh
+
+[17:11] <jameslordhz> should i create branches for them respectivelly?
+
+[17:11] <Danib> hm
+
+[17:11] <cbreak> jameslordhz: what are you talking about?
+
+[17:11] <cbreak> you can make branches if you want
+
+[17:11] <cbreak> but you can't create svn branches
+
+[17:11] <cbreak> only in git
+
+[17:11] <cbreak> Danib: most likely you gave it a wrong url
+
+[17:12] <jameslordhz> i mean i should pay attention to error free editions of the code
+
+[17:12] <jameslordhz> since pollution to code is disgusting
+
+[17:12] <Danib> cbreak, could it be a hamachi related problem?
+
+[17:12] <cbreak> jameslordhz: so?
+
+[17:12] <cbreak> Danib: what's that?
+
+[17:12] <cbreak> Danib: just fix your URL
+
+[17:13] <Danib> cbreak, a VPN
+
+[17:13] <Danib> cbreak, how?
+
+[17:13] <cbreak> make it not be wrong of course
+
+[17:13] <cbreak> duh...
+
+[17:13] <Danib> it doesn't seem to be wrong to me
+
+[17:13] *** delight left
+[17:14] <cbreak> maybe you should show it to someone who knows what a push command is supposed to look like
+
+[17:14] <Danib> okay, sorry for asking
+
+[17:14] <cbreak> (-> pastebin)
+
+[17:14] *** legnaleurc left
+[17:14] *** legnaleurc joined
+[17:15] *** snearch joined
+[17:16] *** JEEB left
+[17:16] <cbreak> !work
+
+[17:16] <gitinfo> Sorry to hear it doesn't work. What did you want it to do? What happened instead? Did you get any error messages?
+
+[17:16] <jameslordhz> i use git svn, should i keep the svn branch clean
+
+[17:16] <cbreak> your decision.
+
+[17:17] <jameslordhz> that is i just modify on my own branch
+
+[17:17] <jameslordhz> and get svn update only to that svn branch
+
+[17:17] <cbreak> either works
+
+[17:17] <jameslordhz> then i can merge newest update of svn to my working branch
+
+[17:17] <jameslordhz> is that ok
+
+[17:17] <cbreak> you can not merge
+
+[17:17] <jameslordhz> i think this may be best practise
+
+[17:17] <cbreak> svn can't handle that
+
+[17:17] <jameslordhz> why i cannot merge
+
+[17:18] <cbreak> just use rebase
+
+[17:18] <jameslordhz> git svn clone http:// will create a branch named master, that is svn branch
+
+[17:18] <cbreak> among other things
+
+[17:19] <cbreak> it will create one branch per svn branch
+
+[17:19] <jameslordhz> then i get update from svn using git svn rebase, that is ok
+
+[17:19] <jameslordhz> but i not work on master branch
+
+[17:19] *** ecocode left
+[17:19] *** drev1 joined
+[17:19] <cbreak> doesn't matter. you can do either.
+
+[17:19] <jameslordhz> i create a branch named modify_branch,    and work on this branch
+
+[17:19] <jameslordhz> is that ok?
+
+[17:19] <cbreak> git svn rebase rebases local changes.
+
+[17:19] <jameslordhz> git svn rebase will just modify master branch
+
+[17:20] <cbreak> no, current branch
+
+[17:20] <jameslordhz> not modify_branch, am i right?
+
+[17:20] <jameslordhz> oh, just change current branch?
+
+[17:21] <jameslordhz> will git svn clone the commit history from svn?
+
+[17:21] <jameslordhz> i mean when i use git svn rebase
+
+[17:21] <cbreak> it will make a new repository
+
+[17:21] <jameslordhz> * master remotes/git-sv
+
+[17:21] <cbreak> that's the point of clone
+
+[17:21] *** FernandoBasso joined
+[17:22] <jameslordhz> git branch -a, shows *master  and remotes/git-svn
+
+[17:22] <cbreak> ignore the git-svn remote, it's fake
+
+[17:22] <jameslordhz> git svn rebase will make a new repository, what this means?
+
+[17:22] <cbreak> no... of course not
+
+[17:23] <cbreak> rebase will just rebase the current branch onto the new history fetched from svn
+
+[17:23] *** legnaleurc left
+[17:23] *** legnaleurc joined
+[17:23] <jameslordhz> cbreak i just get update from git-svn, do not commit to it
+
+[17:23] <cbreak> doesn't matter...
+
+[17:23] <cbreak> just don't run git svn dcommit
+
+[17:23] *** DofLeFou joined
+[17:24] <jameslordhz> git svn rebase will update the commit history, that is to change .git, and it will update current working dir, that is the code you are working on , right?
+
+[17:24] *** delight_ left
+[17:24] <cbreak> it will rebase the current branch
+
+[17:24] <cbreak> onto the new history fetched from svn
+
+[17:25] <cbreak> the working directory will be changed to fit as side effect of the rebasing
+
+[17:25] *** nimrod10 joined
+[17:25] *** nimrod10 left
+[17:26] <jameslordhz> yes
+
+[17:26] *** shruggar joined
+[17:27] <flyz> is `git push --all remote` equivalent of `git push remote :` ?
+
+[17:27] *** edude03 joined
+[17:27] <jameslordhz> the init branch is master which is init from svn, then i create a branch named modify_branch, and use git checkout modify_branch to switch to my working branch, after modification, i switch back to master , and run git svn rebase, will this chang modify_branch
+
+[17:27] <cbreak> flyz: no
+
+[17:27] <cbreak> jameslordhz: init?
+
+[17:28] <cbreak> no, it won't
+
+[17:28] <jameslordhz> initialization, not exactly, i should say clone
+
+[17:28] <cbreak> no
+
+[17:28] <cbreak> master is just the default branch
+
+[17:28] <cbreak> nothing special about it
+
+[17:28] *** mloskot joined
+[17:28] <jameslordhz> now master is updated, how to make this change to modify_branch?
+
+[17:28] *** nimrod10 joined
+[17:28] *** nimrod10 left
+[17:29] <cbreak> rebase or merge it.
+
+[17:29] <jameslordhz> should i switch back to modify_branch, and run git merge master?
+
+[17:29] *** nimrod10 joined
+[17:29] *** nimrod10 left
+[17:29] <cbreak> rebase the modified branch onto the new version
+
+[17:29] <cbreak> or merge the new version into the modified branch
+
+[17:29] <jameslordhz> rebase is to get update to master
+
+[17:29] <cbreak> no
+
+[17:29] <cbreak> rebase is a command with a lot of power
+
+[17:30] <cbreak> you can do what I wrote above.
+
+[17:30] <cbreak> both will give you the new history
+
+[17:30] <cbreak> but in different ways
+
+[17:30] <jameslordhz> no need to update master first?
+
+[17:30] <cbreak> jameslordhz: read http://eagain.net/articles/git-for-computer-scientists/ for details
+
+[17:30] <cbreak> of course you do
+
+[17:30] <cbreak> git svn rebase is needed to get the changes from subversion
+
+[17:31] <cbreak> git rebase or git merge can bring it into other branches
+
+[17:31] <jameslordhz> you get it:)
+
+[17:31] *** dreiss joined
+[17:31] <jameslordhz> git rebase on master branch, will not only affect master branch, but also other branches, right?
+
+[17:32] *** gusnan left
+[17:33] <cbreak> rebase only affects the current branch
+
+[17:33] <jameslordhz> confusing issues happened
+
+[17:33] <cbreak> do NOT rebase the master branch
+
+[17:33] <cbreak> you'll screw up all history
+
+[17:33] *** thevoice- left
+[17:33] <cmn> the confusion happened probably /because/ you didn't rebase the rest
+
+[17:33] *** giallu joined
+[17:33] <cbreak> just read what I wrote... :)
+
+[17:34] <jameslordhz> i switch to modify_branch, add a file , then git add it, git status shows it is in stage mode, then i swith to master branch, git status, this file is showed in stage mode:(
+
+[17:34] <cbreak> of course
+
+[17:34] <cbreak> you failed to commit
+
+[17:34] <jameslordhz> but this file is added on modify_branch, not on master branch:(
+
+[17:34] <cbreak> if you want to commit a file into a branch, commit it!
+
+[17:34] <jameslordhz> so it should not appears in master branch
+
+[17:34] <cbreak> you didn't add it to any branch
+
+[17:35] <jameslordhz> i add it when i am on that branch:(
+
+[17:35] *** dharrigan left
+[17:36] <cmn> no
+
+[17:36] <cmn> nothing exist on any branch until you commit
+
+[17:36] <cbreak> read what I wrote
+
+[17:36] <cbreak> instead of moaning
+
+[17:36] <cbreak> you did not commit
+
+[17:37] <cbreak> if you want to commit a file into a branch, commit it!
+
+[17:37] <jameslordhz> it seems file cannot be added to one branch, until you commit
+
+[17:37] <cbreak> if it's not committed, then it's not in a branch
+
+[17:37] <cbreak> as I said before...
+
+[17:37] <jameslordhz> you create a file on either branch, that doesnot matter, what matters is if you commit it
+
+[17:37] <cmn> no
+
+[17:37] <cmn> you create a file on the worktree
+
+[17:38] <jameslordhz> this file belongs to the branch where you commit it:)
+
+[17:38] *** Carmivore left
+[17:38] *** g3orge joined
+[17:38] *** g3orge left
+[17:38] <cmn> a file is on a branch if you commit it, until then it's nowhere
+
+[17:38] *** Carmivore joined
+[17:39] *** Werring joined
+[17:40] <Danib> cbreak, I re-cloned the repo, readded the files and re-commited --> works now, but thanks for suggesting me to check my network ;)
+
+[17:40] *** aidenhong joined
+[17:40] <cbreak> Danib: I suggested to check the URL
+
+[17:40] <Danib> cbreak, but it wasn't the URL
+
+[17:40] <cbreak> you probably had a wrong one set up as the remote
+
+[17:41] <cbreak> but you didn't want to show it to me :(
+
+[17:41] <Danib> cbreak, nope, I think it was just a broken commit
+
+[17:41] <cbreak> good joke
+
+[17:41] <Danib> no, really
+
+[17:41] <cbreak> a broken commit can not influence anything at that stage
+
+[17:41] *** macRover joined
+[17:41] *** Soliton joined
+[17:41] <cbreak> no route to host is an error from the network
+
+[17:41] <Danib> cbreak, the config is exactly the same ;)
+
+[17:41] <Danib> .git/config
+
+[17:42] <cbreak> commits have nothing to do with the network
+
+[17:42] *** matthiaskrgr joined
+[17:42] <Danib> cbreak, oh, they do
+
+[17:42] <cbreak> nope.
+
+[17:42] <Danib> cbreak, if they are broken, the server probably doesn't accept them
+
+[17:42] <Danib> or the server tries to parse them
+
+[17:42] <Danib> and fails
+
+[17:42] <Danib> so it doesn't response
+
+[17:42] <cbreak> it would require first getting a connection to find out what commits are needed
+
+[17:42] <Danib> and that was the error
+
+[17:42] <cbreak> but if you don't have a route to the host
+
+[17:42] <Danib> cbreak, that worked, I was able to pull, as I said
+
+[17:43] <cbreak> then that's not even an objective yet
+
+[17:43] <Danib> cbreak, it was
+
+[17:43] <cbreak> nope :)
+
+[17:43] <Danib> Write failed: Connection timed out
+
+[17:43] <cbreak> git is not magic
+
+[17:43] <cbreak> it can not communicate with hosts to which it has no route
+
+[17:44] <j416> wha
+
+[17:44] <j416> all this time
+
+[17:44] <Danib> cbreak, the error was Connection timed out
+
+[17:44] <cbreak> Danib: wrong
+
+[17:44] <j416> I have been thinking git _is_ magic
+
+[17:44] <cbreak> Danib: you said it was "No route to host"
+
+[17:44] <j416> now you're telling me it's not..
+
+[17:44] *** soulcake joined
+[17:44] <Danib> cbreak, first timed out, then no route to host
+
+[17:44] *** watsonian joined
+[17:44] *** dshap joined
+[17:45] <cbreak> j416: the magic is in the porcelain
+
+[17:45] *** robotmay left
+[17:45] <cbreak> j416: the plumbing is normal deterministic code
+
+[17:45] * j416 checks his tea cup
+
+[17:45] <Danib> cbreak, okay, let's just stop analyzing the non-existing problem, it works.
+
+[17:45] *** macRover left
+[17:46] <jameslordhz> what's wrong, i failed to push
+
+[17:46] *** cheater_ joined
+[17:46] <cheater_> hi
+
+[17:46] <cbreak> jameslordhz: push ... to what?
+
+[17:46] <jameslordhz> http://paste.ubuntu.com/797357/
+
+[17:46] <cbreak> you can't push to svn remotes
+
+[17:47] <cbreak> that's normal
+
+[17:47] <cheater_> i have a local git clone, and i have a remote server which i have ssh access to. can i somehow initialize a git clone on that remote server?
+
+[17:47] <jameslordhz> no, push to remote git repo, bare repo
+
+[17:47] <cbreak> just read the error message
+
+[17:47] <cbreak> and then tell it what to push
+
+[17:47] <cheater_> i later want to push to that server from this computer over and over
+
+[17:47] <jameslordhz> i have read it, but don't know how to specify
+
+[17:47] <jameslordhz> --all not works
+
+[17:47] <cbreak> cheater_: yes, ssh into it and git init
+
+[17:47] *** sreich joined
+[17:47] <cbreak> jameslordhz: read the error message...
+
+[17:48] <cbreak> git push remotename branchname
+
+[17:48] <jameslordhz> --all works now, it's odd issue:(
+
+[17:48] <cheater_> cbreak: then how do i get the stuff from my local pc to that place?
+
+[17:48] <cheater_> git push?
+
+[17:48] <cbreak> cheater_: yes
+
+[17:48] <cheater_> interesting.
+
+[17:48] <cheater_> thanks.
+
+[17:48] <cbreak> make sure to git init --bare if you want to push
+
+[17:48] <jameslordhz> git push remotename --all works now
+
+[17:48] *** tfnico joined
+[17:48] *** oriba joined
+[17:48] <jameslordhz> if i just push master branch
+
+[17:49] <jameslordhz> modify_branch will not be pushed , is it?
+
+[17:49] <cbreak> push which ever branch you want...
+
+[17:49] <Danib> cbreak, okay, now it's getting weird... it worked, but now I re-added the pdf files I wanted to push --> same error
+
+[17:49] <cbreak> adding?
+
+[17:50] <Danib> cbreak, I did: git add ./*.pdf
+
+[17:50] <Danib> then git commit -m "Added pdf files"
+
+[17:50] <Danib> and then git push
+
+[17:50] <Danib> same error
+
+[17:50] <Danib> hangs up, then time out, then no route to host
+
+[17:50] <cbreak> just git push?
+
+[17:50] <Danib> yeah
+
+[17:50] <cbreak> type git remote -v
+
+[17:50] <cheater_> cbreak: oh, why do i need to do --bare ?
+
+[17:50] <cbreak> and git branch -vv
+
+[17:50] <Danib> shows the correct urls
+
+[17:50] *** soulcake left
+[17:51] <Danib> fetch and push are the same
+
+[17:51] <cbreak> cheater_: because you want to push
+
+[17:51] *** tshauck left
+[17:51] <cbreak> Danib: the branch you are on
+
+[17:51] <cbreak> Danib: it is listed in git branch -vv
+
+[17:51] <Danib> cbreak, master
+
+[17:51] <cbreak> what is listed in []?
+
+[17:51] <cbreak> after that
+
+[17:51] *** dreiss left
+[17:51] <cheater_> cbreak: that is not an answer which helps me
+
+[17:51] <Danib> origin/master: ahead 2
+
+[17:51] <cbreak> so you made two new commits
+
+[17:51] *** johnkpaul joined
+[17:52] <cbreak> the remote for which you said the url is correct
+
+[17:52] <Danib> yes
+
+[17:52] <cbreak> it is origin?
+
+[17:52] <Danib> yes
+
+[17:52] <cbreak> so type git push origin master
+
+[17:52] <Danib> cbreak, same error
+
+[17:52] <cbreak> and pastebin the whole result
+
+[17:52] <Danib> okay
+
+[17:53] <cbreak> cheater_: if you want the details, google :) but it's because git can't merge non-interactively
+
+[17:53] <Danib> cbreak, http://pastebin.com/8s2wLHDc
+
+[17:53] <cheater_> cbreak: oh, and if i don't do --bare then i start a new branch, whereas --bare starts out with no branches?
+
+[17:53] <cbreak> pass phrase?
+
+[17:53] *** Goplat left
+[17:53] <cbreak> Danib: what kind of server is it? Gitolite?
+
+[17:54] <Danib> cbreak, the passphrase for the key is correct
+
+[17:54] <Danib> cbreak, yeah, it's gitolite
+
+[17:54] <cbreak> cheater_: it has nothing to do with branches
+
+[17:54] <jameslordhz> how to merge files, it's confusing
+
+[17:54] <cbreak> Danib: gitolite doesn't work with password access
+
+[17:54] <cheater_> cbreak: then what is the reason for mentioning the inability to merge non-interactively?
+
+[17:54] <Danib> cbreak, are the files too big?
+
+[17:54] <cbreak> it's a key, good
+
+[17:54] <Danib> cbreak, NO, that's the passphrase for the KEY :P
+
+[17:54] <jameslordhz> i do not modify master branch, i only get update from svn to master branch
+
+[17:54] <cbreak> Danib: I doubt it
+
+[17:54] <Danib> cbreak, believe me, I'm not an idiot.
+
+[17:55] <jameslordhz> there is a file in master, it will not be changed for ever
+
+[17:55] <Danib> cbreak, it worked with a test file
+
+[17:55] <cbreak> cheater_: git can not update working directories of repositories you push to
+
+[17:55] <Danib> I pushed a test file before
+
+[17:55] <jameslordhz> but i change it in modify_branch
+
+[17:55] <Danib> and it worked perfectly
+
+[17:55] <j416> cheater_: if you push to a repo that has a work tree, git would not know what to do with the work tree files. It cannot merge non-interactively.
+
+[17:55] <Danib> then I commited the pdf files
+
+[17:55] <Danib> --> error
+
+[17:55] <jameslordhz> every time i merge master to modify_branch, should i deal with conflict for this file?
+
+[17:55] <Danib> cbreak, ^
+
+[17:55] <cbreak> Danib: git push pushes history, not files
+
+[17:55] <cheater_> j416: but why does it then work if i do --bare ?
+
+[17:55] *** legnaleurc left
+[17:56] <j416> cheater_: a bare repo is a repo without a work dir
+
+[17:56] <cbreak> size is not a big issue
+
+[17:56] <Danib> cbreak, okay, I added a test file and pushed it
+
+[17:56] <cbreak> unless the server is really starved for RAM
+
+[17:56] *** gusnan joined
+[17:56] <cbreak> cheater_: bare repositories don't have a working dir
+
+[17:56] <cheater_> ohhh
+
+[17:57] <cheater_> ok i get it
+
+[17:57] <cheater_> but i do need a working dir
+
+[17:57] <cheater_> what do i do then?
+
+[17:57] <j416> cheater_: faq non-bare
+
+[17:57] <gitinfo> cheater_: Pushing to non-bare repositories is discouraged; more details available at http://jk.gs/gitfaq#non-bare
+
+[17:57] <cbreak> if you want to push to it, then you can't have
+
+[17:57] <cheater_> hmm.
+
+[17:57] <Danib> cbreak, it has enough ram, why doesn't it like the pdf files?
+
+[17:57] <j416> cheater_: you won't be working on the server, right.
+
+[17:57] <cbreak> there are ways to just nuke the working dir
+
+[17:57] <Danib> probably because they're in binary mode?
+
+[17:57] <j416> cheater_: you work locally.
+
+[17:57] *** callumacrae joined
+[17:57] <jameslordhz> why push to nonbare is not encouraged?
+
+[17:57] <j416> cheater_: then you push/pull from the server
+
+[17:57] *** legnaleurc joined
+[17:57] <jameslordhz> what is the philosophy of git
+
+[17:57] <j416> jameslordhz: read the link.
+
+[17:57] <cbreak> Danib: git doesn't even care about binary mode once stuff is committed
+
+[17:58] *** skylord5816 joined
+[17:58] <Danib> cbreak, what could be the problem, then?
+
+[17:58] *** skylord5816 left
+[17:58] *** skylord5816 joined
+[17:58] *** skylord5816 left
+[17:58] *** skylord5816 joined
+[17:58] <cbreak> Danib: not sure.
+
+[17:59] <Danib> cbreak, how could I traceback the problem?
+
+[17:59] <cbreak> Danib: you're pushing a normal repository?
+
+[17:59] *** nimrod10 joined
+[17:59] *** nimrod10 left
+[17:59] <cbreak> or the gitolite-admin?
+
+[17:59] <Danib> cbreak, I'm pushing to a normal repo, yeah
+
+[17:59] <cbreak> the whole repository, how big is it?
+
+[17:59] <Danib> and it works when I edit a text file and push it
+
+[17:59] <Danib> but when I push a pdf file
+
+[17:59] <Danib> --> fail
+
+[17:59] <jameslordhz> i run make on a git project, after that i want dir revert to the state before i run make, how to make this done?
+
+[18:00] <Danib> cbreak, how can I check? local clone of it (with pdf files) is 724K big
+
+[18:00] <jameslordhz> lots of files will be generated during make
+
+[18:00] <cbreak> jameslordhz: man git-clean
+
+[18:00] <gitinfo> jameslordhz: the git-clean manpage is available at http://jk.gs/git-clean.html
+
+[18:00] <FauxFaux> jameslordhz: git stash && git clean -ndx
+
+[18:00] *** lapistano left
+[18:00] <cbreak> Danib: that's not significantly big
+
+[18:00] <jameslordhz> man git-clone
+
+[18:00] <gitinfo> the git-clone manpage is available at http://jk.gs/git-clone.html
+
+[18:00] *** lapistano joined
+[18:00] <Danib> cbreak, yeah, they are small pdf files :P
+
+[18:00] <cbreak> if your server has more than a few megabytes of ram...
+
+[18:00] <cheater_> hmm ok
+
+[18:00] <cheater_> then maybe you guys can suggest something
+
+[18:00] <Danib> cbreak, I have 2 GB + 3 GB swap
+
+[18:01] <cbreak> Danib: try man git, look for GIT_TRACE
+
+[18:01] <gitinfo> Danib: the git manpage is available at http://jk.gs/git.html
+
+[18:01] <cbreak> I think that's local only
+
+[18:01] *** mloskot left
+[18:01] <cbreak> but maybe it helps remote too
+
+[18:01] *** mloskot joined
+[18:01] <cbreak> or throw in more -v
+
+[18:02] <jameslordhz> why i should type the whole command every time
+
+[18:02] <jameslordhz>  i hate this
+
+[18:02] *** nimrod10 joined
+[18:02] *** nimrod10 left
+[18:02] <jameslordhz> for example why i could not type git comm for short
+
+[18:02] <cbreak> Danib: oh, pastebin the output of git remote -v
+
+[18:02] <jameslordhz> but i must type git commit
+
+[18:02] <cbreak> jameslordhz: make an alias
+
+[18:03] *** nimrod10 joined
+[18:03] *** nimrod10 left
+[18:03] *** drev1 left
+[18:03] <cheater_> i have 1. a central repo server which i can checkout and branch from (i work using a branch/merge workflow) 2. my local pc which has extra branches on 3. a dev server which needs a checkout of that git repo to function (git repo contains the code). i want to be able to create a new branch or ref in (2) and push it to (3). I cannot pull from (2) to (3) because (2) is behind a firewall. I need to push from (2) to (3)
+
+[18:03] <jameslordhz> git co = git com  = git comm = git commi   , how many alias i should make
+
+[18:03] *** nimrod10 joined
+[18:03] *** nimrod10 left
+[18:03] <bremner> jameslordhz: or get a decent shell and learn to use it.
+
+[18:03] <cbreak> Danib: maye you're not authenticating with a user that's controled by gitolite
+
+[18:03] <cbreak> or a key that gitolite understands
+
+[18:03] <bremner> jameslordhz: you want some kind of git completion.
+
+[18:03] <jameslordhz> decent shell, what is that?
+
+[18:04] <bremner> bash or zsh
+
+[18:04] <cbreak> jameslordhz: as many aliases as you want
+
+[18:04] <jameslordhz> bremner yes, some completion
+
+[18:04] <cheater_> what do i best do in that situation?
+
+[18:04] <Danib> cbreak, I am, editing a file works!
+
+[18:04] <cheater_> i need to set up (3) which is the dev server somehow
+
+[18:04] <cheater_> not sure how...
+
+[18:04] <Danib> cbreak, only pushing the commited pdf files doesn't
+
+[18:04] <Danib> and trace doesn't seem to help :/
+
+[18:04] <cbreak> Danib: you have admin access to the server?
+
+[18:04] <Danib> cbreak, yes
+
+[18:05] <cbreak> your url is ssh://git@server/repository.git?
+
+[18:05] <jameslordhz> bremner which shell i should use?
+
+[18:05] *** meisth0th joined
+[18:05] <meisth0th> hello
+
+[18:05] <Danib> cbreak, gitolite@
+
+[18:05] <cbreak> Danib: gitolite is installed for the user gitolite?
+
+[18:05] <bremner> jameslordhz: either is fine.
+
+[18:05] *** nimrod10 joined
+[18:05] *** nimrod10 left
+[18:05] <Danib> cbreak, yes
+
+[18:05] <cbreak> read ~gitolite/.ssh/authorized_keys
+
+[18:05] *** nimrod10 joined
+[18:05] *** nimrod10 left
+[18:05] <meisth0th> i am using gnome, my ssh client asks for passphrase using seahorse gui, but git asks passphrase in terminal
+
+[18:06] <jameslordhz> bremner my shell support autocompletion, but why i cannot type for short?
+
+[18:06] <Danib> cbreak, okay
+
+[18:06] <cbreak> the key you use must be in there
+
+[18:06] *** nimrod10 joined
+[18:06] *** nimrod10 left
+[18:06] <Danib> cbreak, it is :P
+
+[18:06] <cbreak> does it have the gitolite command in there?
+
+[18:06] <bremner> jameslordhz: what shell?
+
+[18:06] *** nimrod10 joined
+[18:06] *** nimrod10 left
+[18:06] <cbreak> your key might be in that file several times
+
+[18:06] <cbreak> it should only be once though, managed by gitolite, and with the authorization command
+
+[18:07] <Danib> cbreak, no, it isn't
+
+[18:07] *** s0undt3ch joined
+[18:07] <cbreak> it's not in the file?
+
+[18:07] <Danib> cbreak, it has the /usr/share/gitolite/gl-auth-command
+
+[18:07] <Danib> cbreak, it's in it, but only once
+
+[18:07] <cbreak> good, looks ok
+
+[18:07] *** JEEB joined
+[18:08] <jameslordhz> i run git, but only part of the command is showed, no stash, why?
+
+[18:08] <Danib> cbreak, I wouldn't have asked here if it wasn't weird.. and the weird part is that I can edit text files, commit them and push them, but when I add pdf files, I can commit, but not push them
+
+[18:08] <cbreak> Danib: how did you create the repository on the server?
+
+[18:08] <cbreak> with gitolite?
+
+[18:09] <Danib> cbreak, yeah
+
+[18:09] *** steveoliver joined
+[18:09] <cbreak> (gitolite-admin)
+
+[18:09] <Danib> in the gitolite-admin repo
+
+[18:09] <Danib> yes
+
+[18:09] <cbreak> no customhooks?
+
+[18:09] <Danib> cbreak, I don't think so
+
+[18:09] <Danib> cbreak, I just gave myself RW+ permissions on the repo
+
+[18:09] <cbreak> you gave yourself rw permissions?
+
+[18:09] <Danib> and added an owner/description
+
+[18:09] <cbreak> hmm...
+
+[18:10] <Danib> cbreak, does gitolite save logs?
+
+[18:10] <cbreak> yeah
+
+[18:10] <cbreak> but not that detailed
+
+[18:10] <Danib> cbreak, where?
+
+[18:10] <jameslordhz> if i run git checkout on bare repo. what will happen?
+
+[18:10] <bremner> yes, under .gitolite/logs
+
+[18:10] <Danib> cbreak, can I increase the verbosity?
+
+[18:10] <cbreak> in its home directory, the gitolite folder
+
+[18:11] *** nimrod10 joined
+[18:11] *** nimrod10 left
+[18:11] <Danib> cbreak, it's full of git-receive-pack messages, but empty ones
+
+[18:11] *** nimrod10 joined
+[18:11] *** nimrod10 left
+[18:12] *** fermianyon joined
+[18:12] <Danib> cbreak, http://pastebin.com/6wyhQPYf
+
+[18:13] <Danib> the first one is when I edited the file, I suppose
+
+[18:13] <Danib> the other ones are the fails
+
+[18:13] *** glcrazy joined
+[18:13] <cheater_> cbreak: got any more clues for me? :)
+
+[18:13] <cbreak> the other ones are ok too, but they should be followed by one like the first
+
+[18:13] <Danib> cbreak, exactly.
+
+[18:14] <cbreak> you could go to the repository and check file permissions/ownership
+
+[18:14] <cbreak> but since you created it with gitolite, that should be correct
+
+[18:14] <cbreak> maybe the server's HD is full?
+
+[18:14] <cbreak> there are other situations that can make writing fail
+
+[18:15] *** arvind_khadri left
+[18:15] *** vak_ joined
+[18:15] <vak_> hi all
+
+[18:16] *** Octalot left
+[18:16] <Danib> cbreak, I don't think the HDD is full
+
+[18:16] <Danib> "df" shows usage below 10%
+
+[18:16] <vak_> how to check if a branch is a tracking-branch?
+
+[18:17] <cheater_> i think one idea is to have one of those bare repos on the remote server i'd be pushing to and then have a clone of it on that server in another dir, but that seems a bit cumbersome
+
+[18:17] <cheater_> isn't there any better way?
+
+[18:18] <cbreak> vak_: git branch -vv shows the brancy each branch tracks in []
+
+[18:18] <cbreak> cheater_: you can have a hook that does something
+
+[18:18] <cbreak> cheater_: like git archive | tar to get the files copied somewhere
+
+[18:18] <Danib> cbreak, okay, even if I only push ONE pdf file, it fails
+
+[18:19] <cbreak> as said, git doesn't push files
+
+[18:19] <cbreak> it pushes history
+
+[18:19] *** nimrod10 joined
+[18:19] *** nimrod10 left
+[18:19] <Danib> cbreak, I know, but you know what I mean ;)
+
+[18:19] <cbreak> it asks the remote which refs it has, and then it creates a delta pack
+
+[18:19] <vak_> cbreak: thanks!
+
+[18:19] <cbreak> and sends that
+
+[18:19] *** nimrod10 joined
+[18:19] *** nimrod10 left
+[18:20] <cheater_> cbreak: i think i don't want any hooks..
+
+[18:21] *** nimrod10 joined
+[18:21] <cheater_> cbreak: i'll do it manually, but i was wondering if i'm making things unnecessarily complicated, that's all
+
+[18:21] *** nimrod10 left
+[18:21] <jameslordhz> FauxFaux git clean -ndx do not delete files:(
+
+[18:21] <cbreak> jameslordhz: of course not
+
+[18:22] *** jargon- joined
+[18:22] <cbreak> it'd be a bug if it would delete files
+
+[18:22] <jameslordhz> -df works:)
+
+[18:22] <cbreak> of course it does
+
+[18:22] *** chisler joined
+[18:22] * vak_ has created somehow a remote branch with a name that begins with 'origin/' and this is a headacke now...
+
+[18:23] *** chisler left
+[18:23] *** glcrazy left
+[18:23] <cbreak> vak_: git branch -a, pastebin
+
+[18:23] *** ASIRINeiluj left
+[18:24] *** flash3d8 joined
+[18:24] *** gitinfo sets mode: +v flash3d8
+
+[18:25] <flash3d8> Hello guys, can you tell me how to revert a change from a previous commit to a single file in git?
+
+[18:25] *** harshpb joined
+[18:25] *** queequeg1 joined
+[18:25] <cbreak> git revert
+
+[18:25] *** steveoliver left
+[18:25] *** wbednarski joined
+[18:25] <flash3d8> I know, but specifically what flags. I am worried I might mess up the public repo.
+
+[18:25] *** swombat joined
+[18:25] <cbreak> until you push anything, you'll mess at most your own up
+
+[18:25] <flash3d8> http://book.git-scm.com/4_undoing_in_git_-_reset,_checkout_and_revert.html
+
+[18:26] <cheater_> hmm.. i'm almost there
+
+[18:26] <Danib> cbreak, okay, I got it to work
+
+[18:26] <flash3d8> Looking here it only tells me how to undo a whole commit.
+
+[18:26] <flash3d8> I only wnat to revert one file.
+
+[18:26] <flash3d8> Then commit the undo.
+
+[18:26] <cheater_> i configured the remote in .git/config, with url = [email@hidden.address]
+[18:26] <Danib> cbreak, workaround: Upload file via sftp to the server, commit from the server, push from server to localhost, works
+
+[18:26] <flash3d8> Any ideas?
+
+[18:26] <Danib> weird...
+
+[18:26] <cxreg> you know what i find myself wanting?  git stash --amend
+
+[18:26] <cheater_> however to ssh into that server i need to use the -i flag to ssh to use a key file
+
+[18:26] <cbreak> flash3d8: then just git checkout oldcommit -- file
+
+[18:26] <cbreak> and then commit
+
+[18:27] *** nimrod10 joined
+[18:27] *** nimrod10 left
+[18:27] <cheater_> can i configure git for that?
+
+[18:27] <cbreak> Danib: if you push locally, you should always use gl-admin-push
+
+[18:27] <EugeneKay> cheater_ - no, but ou can configure ssh for that. ~/.ssh/config
+
+[18:27] <cbreak> Danib: not git push
+
+[18:27] *** drizzd joined
+[18:27] <cheater_> EugeneKay: let me try thanks
+
+[18:27] <cbreak> (on a gitolite repository destination)
+
+[18:27] <flash3d8> Okay thanks. Oldcommit being the one where it was working right?
+
+[18:27] <Danib> cbreak, I pushed from another account
+
+[18:27] *** wbednarski left
+[18:27] <cbreak> via ssh?
+
+[18:27] <Danib> cbreak, from my user account
+
+[18:27] <Danib> yeah
+
+[18:27] <cbreak> weird.
+
+[18:27] <Danib> not root
+
+[18:28] <cbreak> so it is a network problem
+
+[18:28] <EugeneKay> You want to set a Host block, and then IdentitiesOnly
+
+[18:28] <cbreak> ... but a weird one
+
+[18:28] <cheater_> perfect, thank you
+
+[18:28] <jameslordhz> i modify something on modify branch, then run git diff
+
+[18:28] <Danib> cbreak, seems so, but why did an edit work? :P
+
+[18:28] <jameslordhz> nothing  shows, what's wrong?
+
+[18:28] <vak_> cbreak: http://pastebin.com/nJFKM7Sd
+
+[18:28] <cbreak> Danib: maybe your connection is... not stable enough for something less tiny?
+
+[18:28] <flash3d8> cbreak: Right?
+
+[18:28] <jameslordhz> but when i run git diff -b modify, the diff info appears:)
+
+[18:28] <EugeneKay> You can also abuse the Host block with a fake hostname(and a Hostname line) to get aliases such as 'gitolite'
+
+[18:28] <cheater_> nice, seems to be working
+
+[18:28] <Danib> cbreak, that's probably a hamachi problem ;)
+
+[18:28] <jameslordhz> gi tdiff  's default option is -b master?
+
+[18:28] <Danib> cbreak, VPN problem
+
+[18:29] <cheater_> is there a way to push everything i have locally to the remote?
+
+[18:29] <Danib> cbreak, but why did the sftp work, then? :P
+
+[18:29] <Danib> it's the same protocol
+
+[18:29] <cbreak> flash3d8: the one which's version you want to get
+
+[18:29] <cbreak> Danib: no, almost the same
+
+[18:29] <cheater_> oh --all
+
+[18:29] <Danib> well, git uses it differently
+
+[18:29] <cbreak> sftp uses ssh protocol tunneling
+
+[18:29] <cbreak> git uses remote command invocation
+
+[18:30] <cbreak> git requires an actual shell, not sure if sftp does too
+
+[18:30] *** NimeshNeema joined
+[18:30] <cbreak> jameslordhz: no.
+
+[18:30] *** wbednarski joined
+[18:31] <cheater_> thanks a lot for your help guys
+
+[18:31] <cheater_> you've been very helpful
+
+[18:31] <cbreak> git diff by default shows the difference between working dir and the index
+
+[18:31] *** lonewulf` left
+[18:32] <vak_> cbreak: weird, right?
+
+[18:33] *** nimrod10 joined
+[18:33] *** nimrod10 left
+[18:33] *** fl0w joined
+[18:33] <cbreak> vak_: looks normal
+
+[18:33] *** [1]sassyn joined
+[18:33] *** nimrod10 joined
+[18:33] *** nimrod10 left
+[18:33] <cbreak> you posted http://pastebin.com/nJFKM7Sd?
+
+[18:34] *** wbednarski left
+[18:34] <vak_> cbreak: yes, but look at 5th line
+
+[18:34] <flash3d8> Thank you, that did the trick!!!!!!!
+
+[18:34] <cbreak> if you type git branch -r, you get all but the top two?
+
+[18:34] <vak_> cbreak: 4th°
+
+[18:34] <cbreak> all but the top three I mean
+
+[18:34] *** flash3d8 left
+[18:34] *** sassyn left
+[18:34] <cbreak> vak_: yeah, both are legal branches
+
+[18:35] *** legnaleurc left
+[18:35] <cbreak> you have a bonyas_virt_serv/master branch and a bonyas_virt_serv_master branch
+
+[18:35] *** johchri joined
+[18:35] <cbreak> and a master branch
+
+[18:35] <cbreak> on the bonyas_virt_serv remote
+
+[18:35] <cbreak> you can delete them if you want
+
+[18:35] <cbreak> but be careful with checking wether you still need them
+
+[18:36] *** legnaleurc joined
+[18:36] <cbreak> (I am assuming you have ran git remote update or git fetch bonyas_virt_serv)
+
+[18:36] <vak_> cbreak: hm, ok, but / introduces ambiguities
+
+[18:37] <cbreak> well. You've created them :)
+
+[18:37] <cbreak> (or someone with repo access)
+
+[18:37] <vak_> cbreak: mistakenly :(
+
+[18:37] <cbreak> if it was my repo, I'd delete all the branches starting with bonyas_virt_serv
+
+[18:38] *** PovAddict joined
+[18:39] *** aidenhong left
+[18:39] <cbreak> vak_: man git-push --delete
+
+[18:39] <gitinfo> vak_: the git-push manpage is available at http://jk.gs/git-push.html
+
+[18:39] <cbreak> have to go
+
+[18:39] <cheater_> hey i did git push --all, and then on the server i did a git clone /opt/gitrepo, but if i do git branch in the clone, then i only see the branch master
+
+[18:39] <cheater_> whereas i have many more branches
+
+[18:40] <PovAddict> is it possible to customize diffstats? or, what hook could I use to show custom stats after a commit?
+
+[18:40] <vak_> cbreak: ok, thx
+
+[18:40] <cheater_> how do i get the other branches?
+
+[18:40] <PovAddict> cheater_: you already "got" all the changes the server has
+
+[18:40] *** barcoder joined
+[18:41] <cheater_> PovAddict: but why do i only see master in 'git branch'?
+
+[18:41] <PovAddict> cheater_: because "git branch" only shows local branches
+
+[18:41] *** nsussman joined
+[18:41] <PovAddict> try "git branch -r" to see the remote-tracking ones
+
+[18:41] <PovAddict> to 'work' on a branch different than master, you have to create a local branch that follows the corresponding remote branch
+
+[18:42] *** developernotes joined
+[18:42] *** disappe__ left
+[18:43] <cheater_> hmm
+
+[18:43] <jameslordhz> git push, pull , every time i should type password, boring
+
+[18:44] *** krz left
+[18:44] <cheater_> jameslordhz: configure your keys in ~/.ssh/config
+
+[18:44] <PovAddict> jameslordhz: that's a ssh problem, not a git problem :)
+
+[18:44] <PovAddict> use public keys instead of password login, then use ssh-agent so you only have to type the key passphrase once
+
+[18:45] <cheater_> so how do i automatically create local branches for each remote branch?
+
+[18:45] <jameslordhz> i run git server on DH, i don't know if i have priviledge to config on DH:(
+
+[18:45] <PovAddict> cheater_: sounds like a silly idea :P
+
+[18:45] <offby1> cheater_: git for-each-ref plus awk/sed/perl magic plus "git checkout"
+
+[18:45] <cheater_> jameslordhz: you do the config on the local computer, you only add your key to the remote server, you can always import stuff like a key
+
+[18:46] <PovAddict> jameslordhz: anyone worried about security would *disable* the ability to login with a password and only allow keys
+
+[18:46] *** mishok13 joined
+[18:46] <cheater_> PovAddict: not true :(
+
+[18:46] *** Cam joined
+[18:46] <jameslordhz> key is send through ssh tunnel, it is security
+
+[18:46] <cheater_> PovAddict: i have a lot of branches that i want to run metrics on, i need them all.
+
+[18:47] <cheater_> in fact i create like 10 new branches a day.. adding them all by hand on the remote server i push to could get very boring.
+
+[18:47] <PovAddict> cheater_: if you're not going to do commits in them, only "run metrics" (whatever that means), maybe you can just checkout the remote-tracking branch
+
+[18:47] *** dreiss joined
+[18:48] <cheater_> PovAddict: what i want is to have a single checkout, and be able to checkout into it any branch i have pushed onto the server.
+
+[18:48] *** fl0w left
+[18:49] <PovAddict> for completely read-only access, to have automated tools read the code and do something with it, I think it's common to have a single local branch that gets constantly "reset --hard" to the different remote branches
+
+[18:50] *** legnaleurc left
+[18:51] *** meisth0th is now known as zz_meisth0th
+
+[18:51] *** khmarbaise left
+[18:51] *** legnaleurc joined
+[18:51] <jameslordhz> i run mv t1 to t on working dir,
+
+[18:52] <jameslordhz> git status shows , t1 deleted , and t untracked:(
+
+[18:52] <PovAddict> use 'git mv' instead
+
+[18:53] *** mxweas joined
+[18:53] <jameslordhz> git is not that clever, haha
+
+[18:54] *** neurodrone joined
+[18:55] *** icwiener joined
+[18:55] *** umren left
+[18:55] *** umren joined
+[18:55] *** josefig joined
+[18:56] <cmn> how is git meant to know that you moved stuff from under it?
+
+[18:56] <jameslordhz> what is the good habit when using git
+
+[18:56] <cmn> to do what?
+
+[18:56] <SethRobertson> jameslordhz: see !best_practices
+
+[18:56] <gitinfo> jameslordhz: There is no one right answer for git best practices, but a consensus from #git is available at https://gist.github.com/1540906
+
+[18:58] <PovAddict> 'git mv' is really just a shorthand to git rm the old path and git add the new one; there is no magic
+
+[18:58] <PovAddict> { git mv a b; } is the same (or almost) as { mv a b; git rm --cached a; git add b; }
+
+[18:59] *** mishok13 left
+[18:59] <Mikachu> you could also mv a b; git add -u a b (i think)
+
+[19:00] <totte> Does any actively developed OS use git? FreeBSD uses CVS, SVN seems to be popular too...
+
+[19:00] <Mikachu> linux?
+
+[19:00] *** legnaleurc left
+[19:00] <cheater_> PovAddict: what if i wnted something more like normal usual use?
+
+[19:00] <jameslordhz> how to open hyperlinke which is showed in vim window
+
+[19:00] *** nimrod10 joined
+[19:01] *** nimrod10 left
+[19:01] <totte> Mikachu: What distribution?
+
+[19:01] *** umren left
+[19:01] <Mikachu> what do you mean what distribution?
+
+[19:01] *** umren joined
+[19:01] *** legnaleurc joined
+[19:02] <Mikachu> keeping built packages in git is probably not a good idea
+
+[19:02] *** _Cam_ joined
+[19:02] <totte> Fedora, RHEL, that one with the Chameleon...?
+
+[19:02] <Mikachu> distributions don't write any code, they package software
+
+[19:02] <PovAddict> totte: Debian uses tons of VCSs :P
+
+[19:02] *** damjan joined
+[19:03] *** mloskot_dogwalk joined
+[19:03] *** mloskot_dogwalk left
+[19:03] *** mloskot_dogwalk joined
+[19:03] <totte> Huh. Okay.
+
+[19:03] *** _Vi left
+[19:03] <totte> PovAddict: Cool, thanks.
+
+[19:03] <PovAddict> totte: they keep their packaging metadata in individual repos, each maintainer picks what he wants to use, git is increasingly popular
+
+[19:03] *** jameslordhz left
+[19:03] <damjan> can I reset a branch to a "nil" … to the starting position of a repo?
+
+[19:03] *** _Vi joined
+[19:03] *** Cam left
+[19:05] *** harshpb left
+[19:05] <PovAddict> totte: see http://upsilon.cc/~zack/stuff/vcs-usage/ (the monthly graph seems broken though)
+
+[19:05] <damjan> or can I create an fully empty branch?
+
+[19:05] <PovAddict> totte: also note it's in log scale
+
+[19:05] *** Rogi joined
+[19:05] *** harshpb joined
+[19:05] *** mloskot left
+[19:06] *** nimrod10 joined
+[19:06] *** nimrod10 left
+[19:06] *** Textmode left
+[19:06] <PovAddict> damjan: good question... I'm not sure if you can create an empty branch, usually I have seen that done by creating a new repository, putting stuff into it, then merging its master branch into the original repository
+
+[19:06] *** nimrod10 joined
+[19:06] *** nimrod10 left
+[19:06] <PovAddict> but dunno if you can use 'git branch' to create an empty one directly
+
+[19:07] *** nimrod10 joined
+[19:07] *** nimrod10 left
+[19:07] <totte> PovAddict: Cool. :)
+
+[19:08] *** jameslordhz joined
+[19:08] <jameslordhz> can i git from a hg repo?
+
+[19:08] <PovAddict> jameslordhz: there are bridges in both directions
+
+[19:08] <jameslordhz> hg is also a distributed vcs
+
+[19:08] <cmn> git isn't really a verb
+
+[19:09] <EugeneKay> git out.
+
+[19:09] <PovAddict> jameslordhz: this is to access a git server from a hg client: http://hg-git.github.com/
+
+[19:09] *** koo4 left
+[19:10] <PovAddict> but I'm sure there is some tool to work in the opposite direction too
+
+[19:10] *** aspotashev left
+[19:10] <EugeneKay> damjan - http://book.git-scm.com/5_creating_new_empty_branches.html
+
+[19:10] *** koo4 joined
+[19:10] <PovAddict> EugeneKay: nice, thanks
+
+[19:10] <EugeneKay> There's a shorter way to do it, but I forget the switch.
+
+[19:10] <damjan> EugeneKay: thanks  ++
+
+[19:10] <PovAddict> doesn't surprise me it needed some low-level commands
+
+[19:11] <cmn> git checkout --orphan ?
+
+[19:11] *** fl0w joined
+[19:11] <cmn> that will checkout a non-existing branch
+
+[19:11] <PovAddict> cmn: cool
+
+[19:11] <PovAddict> nice metaphors too :)
+
+[19:11] <EugeneKay> man git-checkout
+
+[19:11] <gitinfo> the git-checkout manpage is available at http://jk.gs/git-checkout.html
+
+[19:12] <cmn> metaphor?
+
+[19:12] *** nimrod10 joined
+[19:12] *** nimrod10 left
+[19:12] <EugeneKay> That'd be the one.
+
+[19:12] <PovAddict> orphan = parent-less
+
+[19:12] *** fl0w left
+[19:12] *** nimrod10 joined
+[19:12] *** nimrod10 left
+[19:12] <cmn> well, yes, but it's just graph theory
+
+[19:13] *** jameslordhz left
+[19:13] * PovAddict doesn't know about graph theory
+
+[19:13] *** mloskot_dogwalk is now known as mloskot
+
+[19:13] <cmn> it's what you do every time you tell git to do stuff
+
+[19:13] <PovAddict> my age has let me learn things in strange orders :)
+
+[19:13] <EugeneKay> !cs
+
+[19:13] <gitinfo> 'Git for Computer Scientists' explains the basic structures used by git, which is very helpful for understanding its concepts. http://sitaramc.github.com/gcs/
+
+[19:14] <cmn> well, almost every time
+
+[19:14] <EugeneKay> PovAddict ^
+
+[19:14] <PovAddict> took me a hwile but I managed to wrap my head around what git rev-list a...b did
+
+[19:14] *** ISF__ joined
+[19:15] <PovAddict> while*
+
+[19:15] <PovAddict> months later I learned set theory including the symmetric difference operation at university
+
+[19:15] <EugeneKay> sitaram - nitpick: you mention "DAG", but not "Directed Acyclic Graph", or an explanation thereof
+
+[19:16] <PovAddict> also, years ago I learned about processing threads long before learning the normal meaning of the English word 'thread' :P
+
+[19:16] *** queequeg1 left
+[19:16] *** ArcUser521 joined
+[19:17] *** drev1 joined
+[19:17] *** msponge left
+[19:17] *** nimrod10 joined
+[19:17] *** nimrod10 left
+[19:18] *** fayimora joined
+[19:18] *** dankest joined
+[19:19] *** dankest left
+[19:19] *** queequeg1 joined
+[19:19] *** joeytwiddle left
+[19:20] *** swombat left
+[19:21] *** nicoulaj joined
+[19:21] *** thevoice- joined
+[19:21] *** developernotes left
+[19:22] *** ipalaus_ joined
+[19:23] *** lonewulf` joined
+[19:24] *** koo4 left
+[19:25] *** koo4 joined
+[19:27] *** khmarbaise joined
+[19:27] *** joeytwiddle joined
+[19:29] *** stringoO joined
+[19:29] *** Cromulent left
+[19:30] *** NiklasFiekas left
+[19:32] *** fermianyon left
+[19:32] *** harshpb left
+[19:32] *** nimrod10 joined
+[19:32] *** nimrod10 left
+[19:33] *** swombat joined
+[19:35] *** OOPMan joined
+[19:35] *** nimrod10 joined
+[19:35] *** nimrod10 left
+[19:35] *** nimrod10 joined
+[19:35] *** nimrod10 left
+[19:36] *** nimrod10 joined
+[19:36] *** nimrod10 left
+[19:38] *** McManiaC joined
+[19:38] *** ArcUser521 left
+[19:38] <McManiaC> how do I set the default remote for "git push" for my current branch?
+
+[19:39] *** bindaasomatic joined
+[19:39] *** khmarbaise left
+[19:39] * djh just edits the .git/config, but there's probably a better way
+
+[19:40] <Mikachu> if you git push -u somewhere thebranch, it'll set the upstream for thebranch to somewhere
+
+[19:40] <Mikachu> or you can git branch --set-upstream
+
+[19:40] *** nimrod10 joined
+[19:40] *** nimrod10 left
+[19:41] *** kenperkins joined
+[19:42] *** nimrod10 joined
+[19:42] *** nimrod10 left
+[19:42] <McManiaC> Mikachu: thanks
+
+[19:42] *** nimrod10 joined
+[19:42] *** nimrod10 left
+[19:42] *** BonQuisha joined
+[19:44] *** nimrod10 joined
+[19:44] *** nimrod10 left
+[19:44] *** nimrod10 joined
+[19:44] *** nimrod10 left
+[19:45] *** macRover joined
+[19:45] *** damjan left
+[19:45] *** nimrod10 joined
+[19:45] *** nimrod10 left
+[19:45] *** Hapz joined
+[19:46] <Hapz> im trying to recover a deleted branch (previously merged into master)
+
+[19:46] <Hapz> git checkout -b my-branch refid
+
+[19:46] *** McManiaC left
+[19:46] <Hapz> works, but only with that refid. the branch was consisted of 6 commits
+
+[19:47] <Hapz> can i provede git checkout with a range of hashes?
+
+[19:47] <cmn> once you checkout that hash, you can access the rest of the history
+
+[19:47] *** _Cam_ left
+[19:47] *** nimrod10 joined
+[19:47] *** nimrod10 left
+[19:47] <SethRobertson> What might a range of hashes even mean to checkout?
+
+[19:47] <Hapz> i want the branch restoerd, so i can pull-request it on github
+
+[19:47] <cmn> just checkout that commit and give it a name
+
+[19:48] <Hapz> the _last_ commit?
+
+[19:48] *** subbyyy joined
+[19:48] <cmn> the last one you're interested in
+
+[19:48] <SethRobertson> Use `gitk --all --date-order` to visualize the tree.  Look for the commit before the merge.  The SHA is what you want, then .  `git branch newbranch SHA`
+
+[19:48] <cbreak> a branch only ever points to one single commit
+
+[19:48] <cbreak> always
+
+[19:48] <cbreak> ever
+
+[19:48] <cbreak> no exceptions
+
+[19:49] <SethRobertson> !branch
+
+[19:49] <gitinfo> A branch and a tag are just convenient ways of spelling the name of a particular commit.  A commit represents a specific set of files and the history of all commits which came before it, and the SHA-1 hash tag official name provides cryptographic assurance of the lineage of a particular commit (and thus branch or tag).  A branch's reference may change.  A tag usually doesn't.
+
+[19:49] <Hapz> lemme try to explain myself better
+
+[19:49] <cbreak> just create a branch from one of the parents of the merge commit
+
+[19:49] <SethRobertson> as I said
+
+[19:50] <Hapz> i had that branch ready. i merged it, and then deleted it. i then did some other changes on the master, and then decided to restore the lost branch.
+
+[19:50] <cmn> yes, so checkout that commit you merged and give it a name
+
+[19:50] <Hapz> so now what i "restored" also have the "other changes"
+
+[19:50] <SethRobertson> Yes.  That is what we thought.  So do what we said
+
+[19:50] <SethRobertson> !justdoit
+
+[19:50] <gitinfo> If you go to the trouble of asking questions, please go to the trouble of taking the advice offered, Take backups (type "!backup" as a reply to learn more) if necessary or do it anyway as an excellent idea. You can almost always censor log messages if you have to.  We are literally helpless unless you tell us what we need or do what we ask.  Please, Just Do It™.
+
+[19:50] <Hapz> i did that already..
+
+[19:50] <SethRobertson> No you didn
+
+[19:50] <SethRobertson> 't
+
+[19:51] <cbreak> Hapz: if you did it, then be happy :)
+
+[19:51] <SethRobertson> Do what we *said*, not what you assumed we said.
+
+[19:51] <cbreak> because you've restored the branch as it was before you deleted it
+
+[19:51] <cbreak> (minus the reflog which is of no concern of you anyway)
+
+[19:51] <Hapz> i did exatly waht you said..
+
+[19:51] <SethRobertson> If you have the "other changes" then you did not
+
+[19:51] <Hapz> sigh, lemme try again.
+
+[19:52] <SethRobertson> What is the first command you will run?
+
+[19:52] <Hapz> gitk --all --date-order
+
+[19:52] <SethRobertson> Right.  You can click on the commits to find the one which represents the state you desire
+
+[19:53] *** secoif left
+[19:53] *** nimrod10 joined
+[19:53] *** nimrod10 left
+[19:53] *** tshauck joined
+[19:54] *** Guest30693 joined
+[19:54] *** OOPMan left
+[19:54] <Hapz> SethRobertson that is what i did, but then i have 2 other commits that are stuck in the middle of my way
+
+[19:54] <cbreak> it's probably something like git checkout -b name mergecommit^2
+
+[19:54] <Hapz> that i need to get rid of, or move them up
+
+[19:54] <cbreak> you got exactly the commit you checked out
+
+[19:55] <cbreak> which has exactly the sha you checked out
+
+[19:55] <cbreak> that sha has exactly the same parent as it had before
+
+[19:55] <cbreak> and that is transitive
+
+[19:55] <cbreak> if there are two commits you didn't want, then you checked out the wrong thing
+
+[19:55] *** zendeavor left
+[19:55] <SethRobertson> Hapz: let us recap.  You had  a branch which you committed on.  Let us call the last commit on that branch before the merge Bn.  You then merged it.  Let us call the merge commit M.  You then did stuff you don't want. Let us call those B1 B2 B3
+
+[19:56] <Hapz> ok..
+
+[19:56] <SethRobertson> Hapz: True?  Can you identify Bn and M in the gitk output?
+
+[19:56] <SethRobertson> Would you prefer the pull request to represent Bn or M?
+
+[19:56] <Hapz> thats not correct. i had a branch, i commited on it. i merged it to master. i then deleted the branch
+
+[19:56] <SethRobertson> YES!
+
+[19:57] <Hapz> then i made commits to the master
+
+[19:57] <SethRobertson> That is exactly what I said
+
+[19:57] *** Guest30693 left
+[19:57] <cbreak> that's what he said.
+
+[19:57] <Hapz> sorry then, im just new, forgive me.
+
+[19:57] <cbreak> so, git log shows a commit
+
+[19:57] <SethRobertson> Can you screenshot the gitk output and make that available somewhere?
+
+[19:57] <cbreak> it is the commit you checked out
+
+[19:58] <cbreak> it is the commit you want
+
+[19:58] <Hapz> SethRobertson its a VM and it will be a mess now
+
+[19:58] *** martinjlowm joined
+[19:58] *** gavin_huang left
+[19:58] *** jmcantrell joined
+[19:58] <Hapz> lemme try anyways
+
+[20:00] *** nimrod10 joined
+[20:00] *** nimrod10 left
+[20:00] *** jab416171|Cloud joined
+[20:00] *** drev1_ joined
+[20:00] <Hapz> http://dl.dropbox.com/u/34697189/Capture.PNG
+
+[20:01] *** legnaleurc left
+[20:01] <SethRobertson> So is "allow semi-colon to be optional" the last commit on the branch you were talkinga bout?
+
+[20:02] *** iocor left
+[20:03] *** drev1 left
+[20:03] *** drev1_ is now known as drev1
+
+[20:03] <Hapz> the branch im talking about is added caps-flood up to changed stuff according
+
+[20:03] <Hapz> WITHOUT the remove_shit and remove_useless
+
+[20:04] *** zendeavor joined
+[20:04] <cbreak> that's part of the history
+
+[20:04] <Hapz> i know, thats my issue
+
+[20:04] <cbreak> it was in the branch to begin with
+
+[20:04] <cbreak> it was in there when you deleted it
+
+[20:04] <cbreak> so it will be in there for ever
+
+[20:04] <Hapz> it was not, it became part of it because of the mess of removign and re-adding the branch
+
+[20:04] *** legnaleurc joined
+[20:04] <Hapz> its part of it because it was MERGED when it was there..
+
+[20:05] *** wbednarski joined
+[20:05] <SethRobertson> Sounds like it was a fast-forward
+
+[20:05] <cbreak> -> it was there always.
+
+[20:05] <SethRobertson> No, sounds like it was a rebase
+
+[20:05] *** nimrod10 joined
+[20:05] *** nimrod10 left
+[20:05] <cbreak> merging does never change history
+
+[20:05] <cbreak> it NEVER adds anything to history that was not there in the first place
+
+[20:06] <Hapz> sigh
+
+[20:06] <SethRobertson> Why don't you try this:  gitk --all --date-order $(git fsck | grep "dangling commit" | awk '{print $3;}')
+
+[20:06] *** nimrod10 joined
+[20:06] *** nimrod10 left
+[20:06] <SethRobertson> Feel free to expand the size of the commit graph window
+
+[20:07] <SethRobertson> You can resize it between the "Find" line and the "Search" line.
+
+[20:07] <SethRobertson> Then screen-shot again
+
+[20:07] <Hapz> http://dl.dropbox.com/u/34697189/Capture%20%282%29.PNG
+
+[20:08] *** becomingGuru joined
+[20:08] <Hapz> the commits im talking about arent even there.
+
+[20:09] *** ecocode joined
+[20:09] *** thevoice- left
+[20:09] *** dankest joined
+[20:09] *** OOPMan joined
+[20:09] * djh likes git log --graph --abbrev-commit --pretty=oneline --all for gitk-like output that's easy to c&p...
+
+[20:10] *** rphillips left
+[20:10] <SethRobertson> Perhaps you need to scroll down.
+
+[20:10] <cbreak> I've had ambiguities in the output of git log --graph
+
+[20:10] <SethRobertson> Especially with orphan branches
+
+[20:10] <djh> Really? What kind?
+
+[20:11] <cbreak> it showed branches that had no history in common like branches that do
+
+[20:11] *** nimrod10 joined
+[20:11] *** nimrod10 left
+[20:11] <SethRobertson> If temporally commit N was last commit on a branch and commit N+1 was the first commit on an orphan branch. you cannot tell that N+1 was on a different branch
+
+[20:11] <djh> bizzare.. not seen that so far
+
+[20:11] <Hapz> SethRobertson cant find it
+
+[20:12] <SethRobertson> But you can with `gitk --all --date-order`?
+
+[20:12] *** dankest left
+[20:12] <SethRobertson> I find it difficult to believe that adding commits to visualize deletes commits
+
+[20:12] *** jackdempsey joined
+[20:12] <Hapz> sec.
+
+[20:12] *** mishok13 joined
+[20:13] <SethRobertson> Can you make a tarball of this repo available?
+
+[20:13] <Hapz> ok, i found it in the fsck list
+
+[20:13] *** nimrod10 joined
+[20:13] *** nimrod10 left
+[20:13] <Hapz> was in the wrong directory..
+
+[20:14] *** legnaleurc left
+[20:14] *** VladGh joined
+[20:14] *** legnaleurc joined
+[20:15] <Hapz> http://dl.dropbox.com/u/34697189/Capture3.PNG
+
+[20:15] <Hapz> this is with the fsck thing
+
+[20:16] *** nax__ joined
+[20:16] *** nimrod10 joined
+[20:16] *** nimrod10 left
+[20:16] *** Silowyi joined
+[20:18] *** gitinfo sets mode: +v valtih_
+
+[20:18] *** Cromulent joined
+[20:18] *** igotnolegs joined
+[20:20] *** Spockz joined
+[20:20] *** legnaleurc left
+[20:20] *** legnaleurc joined
+[20:21] *** nimrod10 joined
+[20:21] *** nimrod10 left
+[20:21] *** cjuner_ joined
+[20:21] *** nimrod10 joined
+[20:21] *** nimrod10 left
+[20:21] *** cjuner joined
+[20:21] <valtih_> why git 'checkout diverged_branch && git rebase master' checkouts the master? It says 'Current branch master is up to date', yet http://progit.org/book/ch3-6.html says that is must move the diverged branch on top of master.
+
+[20:21] <cmn> did the checkout succeed?
+
+[20:21] <valtih_> yes
+
+[20:22] <valtih_> but moving the branch did not
+
+[20:22] <cmn> you mean rebasing?
+
+[20:22] <valtih_> yes
+
+[20:22] <cmn> what does `cat .git/HEAD` say?
+
+[20:22] *** cjuner left
+[20:22] *** troubleman joined
+[20:22] *** cjuner_ is now known as cjuner
+
+[20:23] *** crisp joined
+[20:23] <valtih_> it is empty
+
+[20:23] <cmn> empty?
+
+[20:23] *** dreiss left
+[20:23] <cmn> it can't be empty
+
+[20:23] *** OOPMan left
+[20:24] <valtih_> ref: refs/heads/master
+
+[20:24] *** McManiaC joined
+[20:24] <cmn> you're in the master branch, the checkout to diverged_branch didn't succeed?
+
+[20:24] *** McManiaC left
+[20:25] *** iocor joined
+[20:25] <valtih_> rebase switched me
+
+[20:25] <cmn> no
+
+[20:25] * offby1 guesses valtih_ mistyped something
+
+[20:25] <offby1> without a transcript ... we'll never know
+
+[20:25] * offby1 whistles innocently
+
+[20:25] <cmn> not unless you used the three-argument form, which is not what you said you used
+
+[20:25] <valtih_> might be my command line is out of sync with GUI :)
+
+[20:25] <cmn> hm?
+
+[20:26] *** nimrod10 joined
+[20:26] *** nimrod10 left
+[20:26] *** mxweas left
+[20:26] <cmn> the GUI might not have refreshed, but that cat command says you're in master
+
+[20:26] *** s0ber left
+[20:26] *** mxweas joined
+[20:26] *** GreenJello joined
+[20:26] <cmn> can you post a transcript?
+
+[20:27] *** ecocode left
+[20:27] *** nimrod10 joined
+[20:27] *** nimrod10 left
+[20:27] *** nimrod10 joined
+[20:27] *** nimrod10 left
+[20:28] *** s0ber joined
+[20:28] *** glcrazy joined
+[20:29] *** mloskot_dogwalk joined
+[20:29] *** Cromulent left
+[20:29] *** ecocode joined
+[20:29] *** ecocode left
+[20:30] *** mloskot left
+[20:30] *** mloskot_dogwalk is now known as mloksot
+
+[20:30] *** mloksot is now known as mloskot
+
+[20:30] *** nicoulaj_ joined
+[20:30] *** nicoulaj_ left
+[20:31] *** drev1_ joined
+[20:31] * offby1 fidgets uncomfortably
+
+[20:32] *** troubleman left
+[20:32] *** becomingGuru left
+[20:32] *** ecocode joined
+[20:33] <GreenJello> I have a fork of a GitHub repo.  I've made some changes and pushed them, but they were not accepted.  Some more changes have been made on the orginal repo since.  I just want my repo to line up with the other, and not make a mess in the history.
+
+[20:33] <GreenJello> is there an easy way to do this?
+
+[20:34] *** fayimora left
+[20:34] *** fayimora joined
+[20:34] *** nimrod10 joined
+[20:34] *** nimrod10 left
+[20:34] *** nimrod10 joined
+[20:34] *** nimrod10 left
+[20:34] <EugeneKay> fetch the original, rebase onto it.
+
+[20:34] <GreenJello> git pull rem branch --rebase ?
+
+[20:34] *** drev1 left
+[20:34] *** drev1_ is now known as drev1
+
+[20:35] <GreenJello> Is that right EugeneKay?
+
+[20:35] *** nvictor joined
+[20:35] <nvictor> hey all
+
+[20:35] <EugeneKay> The book tells it better than I can. I don't use rebase myself. http://book.git-scm.com/4_rebasing.html
+
+[20:36] <nvictor> is it possible to tell git log to ignore path that do net exist yet?
+
+[20:36] <EugeneKay> If you just want to throw away your changes outright, you can reset --hard onto whatever state the Origin is at
+
+[20:36] *** nimrod10 joined
+[20:36] *** nimrod10 left
+[20:36] <EugeneKay> nvictor - man gitignore
+
+[20:36] <gitinfo> the gitignore manpage is available at http://jk.gs/gitignore.html
+
+[20:36] <cmn> how do you ignore something that doesn't exist?
+
+[20:36] <IcePic> I ignore invisible pink unicorns all the time.
+
+[20:36] <EugeneKay> I hope he means untracked.
+
+[20:36] *** pinky left
+[20:36] <nvictor> EugeneKay: i fail to see how git ignore will help
+
+[20:37] <EugeneKay> nvictor - I'm not sure what you mean by having "git log ignore path", then.
+
+[20:37] <cmn> nvictor: what do you actually want to do? if the path isn't there, there's nothing to ignore
+
+[20:38] <cbreak> cmn: people have fear of the unknown.
+
+[20:38] *** legnaleurc_ joined
+[20:38] <cbreak> the darkness. the emptyness
+
+[20:38] <EugeneKay> I fear the Dutch.
+
+[20:38] *** legnaleurc left
+[20:38] <cbreak> and the only way they can live is by ignoring that which lurks in the void
+
+[20:38] <GreenJello> Ok, 'git reset --hard' looks like what I want.  What is the "commit" parameter, and how do I link that to the remote?
+
+[20:39] *** Chillance left
+[20:39] *** dharrigan joined
+[20:39] <EugeneKay> GreenJello - any ref will do. git fetch <remote>; git reset --hard <remote>/<branch> will do the trick.
+
+[20:40] <EugeneKay> That'll put your current branch at exactly the spot as <remote>/<branch>
+
+[20:40] <cmn> and destroy any changes in the worktree
+
+[20:41] <GreenJello> I think it worked
+
+[20:41] <GreenJello> Thanks!  (I'm just going to check, to be sure)
+
+[20:41] <GreenJello> but how will this look on GitHub when I start pushing changes?
+
+[20:41] *** flip_digits joined
+[20:42] <EugeneKay> To your github fork? You'll need to push -f if you pushed any of your previous changes. I presume you were using a Pull Request, which was rejected?
+
+[20:42] *** _inc joined
+[20:42] <GreenJello> yeah
+
+[20:42] <GreenJello> ok, thanks.  I'll try that
+
+[20:42] <cmn> so how is a reset --hard what you need? why not a rebase?
+
+[20:43] *** xerora joined
+[20:43] <EugeneKay> cmn - changes were rejected, he's throwing them out ;-)
+
+[20:43] <GreenJello> cmn, I don't know this stuff that well... but it seemed to work.
+
+[20:43] *** dharrigan left
+[20:43] <nvictor> sorry all. phone call :)
+
+[20:43] *** infid left
+[20:43] *** faber left
+[20:43] <nvictor> cmn, why do i want to ignore some paths with the git log commands? well because it fails when i don't do that
+
+[20:44] <cmn> fail how?
+
+[20:44] <nvictor> cmn, i know these path will be created in later commit
+
+[20:44] <nvictor> commits*
+
+[20:44] <cmn> if the path doesn't exist, log won't show it
+
+[20:44] <nvictor> so i just want to tell git log, to ignore it when it fails now
+
+[20:44] <cmn> fail how?
+
+[20:44] <nvictor> one sec
+
+[20:44] <EugeneKay> log works on commits, not on paths.
+
+[20:44] <EugeneKay> Do you mean status?
+
+[20:44] <nvictor> fatal: ambiguous argument 'project/search_sites.txt': unknown revision or path not in the working tree.
+
+[20:45] <cmn> and what command is saying that?
+
+[20:45] *** nicoulaj left
+[20:45] *** nimrod10 joined
+[20:45] *** nimrod10 left
+[20:45] <cmn> is this from a script or somethign?
+
+[20:45] <nvictor> git log ... <many paths> including the one above
+
+[20:45] <nvictor> cmn, it is
+
+[20:45] *** pinky joined
+[20:45] <EugeneKay> Don't run log against paths that don't exist. It won't work.
+
+[20:46] <GreenJello> eh, I don't have the latest changes.  Do I do a merge too?
+
+[20:46] *** disappea_ joined
+[20:46] <cmn> EugeneKay: actually, it will
+
+[20:46] <cmn> I just tested
+
+[20:46] <nvictor> EugeneKay: ok, so there is no way to tell git log to ignore those?
+
+[20:46] <EugeneKay> o.O. Interesting.
+
+[20:46] <nvictor> i thought so
+
+[20:46] <cmn> nvictor: you just have to tell git that those are paths
+
+[20:46] <cmn> use --
+
+[20:46] <nvictor> i don't have revisions
+
+[20:46] <EugeneKay> GreenJello - if you just want to get your Github Fork to be the same state as the original, you don't want to merge. Do a push -f into your Fork.
+
+[20:46] <cmn> so?
+
+[20:47] <cmn> git log -- path
+
+[20:47] <nvictor> i thought it was path -- rev?
+
+[20:47] <nvictor> ohhh ok
+
+[20:47] <nvictor> thanks
+
+[20:47] <cmn> no
+
+[20:47] <cmn> -- is how you tell git to start looking for paths
+
+[20:47] <cbreak> git log does not need a path
+
+[20:47] <cbreak> it needs a revision
+
+[20:47] *** drev1 left
+[20:47] *** johchri left
+[20:47] <cmn> cbreak: it does if you want to filte by path
+
+[20:47] *** drev1 joined
+[20:47] <EugeneKay> cmn - oh, I see what you mean... it was trying to parse the nonexistant path as a ref.
+
+[20:47] <cbreak> that's why it considers the first argument as revision
+
+[20:47] <nvictor> cbreak: i see
+
+[20:47] <cbreak> and for all following ones, it tries to guess
+
+[20:48] *** NiklasFiekas joined
+[20:48] <nvictor> so the first arg is a revision
+
+[20:48] <EugeneKay> That makes.... some sort of sense.
+
+[20:48] <nvictor> cbreak: you helped last time :)
+
+[20:48] <GreenJello> EugeneKay, my local copy doesn't have the new changes.  There have been a bunch of commits made by others to the original, and mine is sitting behind.
+
+[20:48] <nvictor> cbreak: i'm trying another approach to the script i am writing
+
+[20:48] <nvictor> the first was to consider all the commits made by specific authors
+
+[20:48] <EugeneKay> GreenJello - did you fetch the Origin down to your Local before you reset --hard?
+
+[20:48] <GreenJello> yeah
+
+[20:48] *** nimrod10 joined
+[20:48] *** nimrod10 left
+[20:49] *** drev1_ joined
+[20:49] <nvictor> but i'm trying something else
+
+[20:49] *** nimrod10 joined
+[20:49] *** nimrod10 left
+[20:49] <EugeneKay> Silly question. Which Github repo is "origin" ? Your fork, or the original?
+
+[20:49] *** legnaleurc_ left
+[20:49] *** legnaleurc joined
+[20:49] <GreenJello> Mine is the fork.  Another user has the original
+
+[20:50] <EugeneKay> I mean, on your local rep
+
+[20:50] <GreenJello> oh wait
+
+[20:50] <GreenJello> I think my fork is the origin
+
+[20:50] *** imarcusthis left
+[20:50] <EugeneKay> That would cause it to have that issue, then.
+
+[20:50] <EugeneKay> Add/use the right remote pointing to the original on your fetch, run through it again.
+
+[20:50] <cbreak> tip: rename your remotes.
+
+[20:50] <EugeneKay> And your branches.
+
+[20:50] *** pinky left
+[20:51] *** nimrod10 joined
+[20:51] *** nimrod10 left
+[20:51] <GreenJello> Here's the commands I used.  'git fetch lex gh-pages'  and git reset --hard gh-pages'  where lex is the original remote and gh-pages is a branch
+
+[20:51] *** harshpb joined
+[20:51] *** rphillips joined
+[20:51] <GreenJello> We're both on the same branch
+
+[20:51] *** drev1 left
+[20:51] *** drev1_ is now known as drev1
+
+[20:51] <cbreak> GreenJello: git fetch A B fetches branch B from remote A into FETCH_HEAD
+
+[20:51] *** AlbireoX joined
+[20:51] <EugeneKay> You need to use lex/gh-pages on the reset.
+
+[20:52] *** imarcusthis joined
+[20:52] *** imarcusthis left
+[20:52] *** Anxi80 joined
+[20:52] <cbreak> git reset --hard gh-pages resets the current branch to the current commit gh-pages points at
+
+[20:52] <EugeneKay> If you're on gh-pages, reset --hard gh-pages won't do much
+
+[20:52] <cbreak> you need to use FETCH_HEAD
+
+[20:52] *** pinky joined
+[20:53] *** dvide joined
+[20:53] *** imarcusthis joined
+[20:53] *** jrm2k6 joined
+[20:53] <GreenJello> Ok I think it works now.  It was the lex/gh-pages I was missing
+
+[20:53] *** LongBeach left
+[20:53] <GreenJello> now just push -f?
+
+[20:53] *** nzee joined
+[20:53] *** diegoviola joined
+[20:53] <EugeneKay> If "upstream" of your local gh-pages is your Github fork, yes.
+
+[20:54] <EugeneKay> I would compare SHA ids all around to make sure you're in the right place
+
+[20:54] *** delight joined
+[20:54] <GreenJello> Thanks!!  It all looks right on GH now
+
+[20:55] *** tshauck left
+[20:55] <GreenJello> now for some patching...   :)
+
+[20:57] *** nimrod10 joined
+[20:57] *** nimrod10 left
+[21:01] *** mxweas left
+[21:02] *** delight_ joined
+[21:02] *** legnaleurc left
+[21:02] *** dorkmafia joined
+[21:02] <nvictor> when i get a fatal: ...
+
+[21:02] <nvictor> it means my command failed right?
+
+[21:02] <cbreak> yes
+
+[21:02] <nvictor> D: \
+
+[21:02] <nvictor> those are git add commands
+
+[21:02] *** legnaleurc joined
+[21:02] <nvictor> cbreak, so i put those references in a temp file
+
+[21:02] *** ecocode left
+[21:02] <nvictor> using a loop i do a cherry pick on each object
+
+[21:02] <cbreak> cherry-pick is on commits
+
+[21:02] <nvictor> i get a couple of merges too
+
+[21:04] *** ilogger2 joined
+[21:04] <nvictor> cmn, so i need to say ignore merge in my log command? before entering my loop?
+
+[21:05] <nvictor> the thing is that the commits on those branches that got merged in are required too :(
+
+[21:05] *** marcuy joined
+[21:06] <cmn> then you can cherry-pick those; why are you trying to cherry-pick in a loop?
+
+[21:06] *** legnaleurc joined
+[21:07] <nvictor> i'm writing a on a paste bin so there's a better idea of the whole mess i'm in right now :)
+
+[21:10] <cmn> the problem you're trying to solve or your idea of the code to create a solution?
+
+[21:11] *** Heisenmink_ joined
+[21:11] *** anjen joined
+[21:11] *** Carmivore joined
+[21:13] *** JackWinter joined
+[21:16] *** nimrod10 joined
+[21:16] *** nimrod10 left
+[21:16] <karstensrage> wow, once you understand --patch edits they are pretty powerful
+
+[21:16] *** vdv joined
+[21:16] <karstensrage> youre editing a hunk, not the diffs
+
+[21:17] *** notfunk joined
+[21:18] *** anjen left
+[21:20] *** cbreak joined
+[21:20] *** Carmivore left
+[21:21] *** Carmivore joined
+[21:24] <nvictor> cmn, cbreak: http://paste.pocoo.org/show/531938/
+
+[21:24] <nvictor> sorry took a while, had to gather my thoughts
+
+[21:24] <nvictor> hope it makes sense of what i'm doing
+
+[21:26] *** nimrod10 joined
+[21:26] *** nimrod10 left
+[21:26] <cbreak> you want to do history rewriting?
+
+[21:27] <nvictor> :0
+
+[21:27] <nvictor> :)
+
+[21:27] <cmn> so you've been developing different features on the same branch and now you want to split them up?
+
+[21:27] <nvictor> didn't want to say so
+
+[21:27] <nvictor> many people advised against
+
+[21:27] <cmn> yes, it can be a very bad idea
+
+[21:27] <nvictor> cmn, correct
+
+[21:27] <cbreak> you seem to do some conflicting things
+
+[21:27] <cbreak> you use cherry-pick -n
+
+[21:27] <cbreak> and after that git reset HEAD~1
+
+[21:28] <cbreak> do you know what this does?
+
+[21:28] <nvictor> well
+
+[21:28] <nvictor> i assume it will not commit until i manually do it?
+
+[21:28] <cmn> cherry-pick creates a new commit
+
+[21:28] <nvictor> really?
+
+[21:28] <cbreak> with -n it doesn't
+
+[21:28] <nvictor> the docs says with -n it doesnt
+
+[21:28] <nvictor> ah yes cbreak
+
+[21:29] <cbreak> so you reset a commit away
+
+[21:29] <cmn> damn, thought it was -m
+
+[21:29] <nvictor> that's why i added that one
+
+[21:29] <cbreak> the net commit output of that loop is 0
+
+[21:29] <nvictor> cbreak: yes
+
+[21:29] <nvictor> oh wait
+
+[21:29] <cbreak> net as in netto
+
+[21:29] <nvictor> so i don't need to reset?
+
+[21:29] <cbreak> don't know. I think it's a bad idea
+
+[21:29] <nvictor> because cherry-pick didn't create one
+
+[21:30] <cmn> the reset undoes the cherry-pick
+
+[21:30] <cbreak> no, it undoes the current commit
+
+[21:30] <NiklasFiekas> cmn: a reset --hard would
+
+[21:30] <NiklasFiekas> cmn: so we still have the cherry picked changes in the working copy. ready to be manually comitted
+
+[21:30] <cbreak> nvictor: my tip is: use rebase -i
+
+[21:30] <cbreak> and then filter-branch
+
+[21:30] <cbreak> or vice versa
+
+[21:31] <cbreak> a --tree-filter or --index-filter to reduce to the paths you care about
+
+[21:31] *** nimrod10 joined
+[21:31] *** nimrod10 left
+[21:31] <nvictor> cbreak: which i wanted to avoid
+
+[21:31] <cbreak> and then a rebase -i to prune the commits you don't want
+
+[21:31] *** CKr joined
+[21:31] <cbreak> that's much easier than the stuff you mess around with now
+
+[21:31] <cbreak> why do you want to avoid it?
+
+[21:31] <nvictor> the rebase
+
+[21:31] <cbreak> do you get paid by the hour? :)
+
+[21:31] <nvictor> no :)
+
+[21:31] <cbreak> it's faster and more comfortable.
+
+[21:32] <nvictor> cbreak: it's not really the commits but the paths affected
+
+[21:32] <cmn> if there are merges there, as he's hinted to, rebase -i might fuck them up
+
+[21:32] <cbreak> that's what you'd do with filter-branch
+
+[21:32] <cbreak> cherry-pick has the same problem :)
+
+[21:32] <nvictor> both have
+
+[21:32] <cbreak> rebase at least can pretend to preserve merges
+
+[21:32] <cbreak> (which I recommend against)
+
+[21:33] <nvictor> but going back the the -n
+
+[21:33] <nvictor> to*
+
+[21:33] <nvictor> i does change my working directory right?
+
+[21:33] <cbreak> yes
+
+[21:33] <cbreak> that's the point.
+
+[21:33] *** kmurph79 joined
+[21:33] <nvictor> ok
+
+[21:33] <nvictor> so git reset ^HEAD in a sense matters?
+
+[21:34] <cbreak> it matters... because it screws up your history
+
+[21:34] <cbreak> it's invalid syntax even
+
+[21:34] <kmurph79> if i wanted to merge one branch into the other, ignoring any conflicts, is there an option to do that?
+
+[21:34] <nvictor> sorry HEAD^
+
+[21:35] <cmn> I just tried running git rev-parse ^HEAD, and it gave me ^<sha>
+
+[21:35] <cbreak> kmurph79: why do you want to ignore conflicts and how?
+
+[21:35] *** Sir_Rai joined
+[21:35] <cbreak> do you want to keep the current history and only pretend to merge the other branch?
+
+[21:35] <cbreak> or just resolve conflicts in their or your favour?
+
+[21:36] *** vdv left
+[21:36] <kmurph79> i don't even care, i just want to move a branch entirely into master, it's not an important project
+
+[21:36] *** airborn joined
+[21:36] <nvictor> ok i am taking that i don't need the reset then :)
+
+[21:36] <nvictor> i have also added -m 1 just in case
+
+[21:37] *** legnaleurc left
+[21:37] <cmn> kmurph79: conflicts mean that there is something that has no clear resolution. If you want to merge that branch, you presumably care about the changes done to that branch, no?
+
+[21:38] *** legnaleurc joined
+[21:38] <kmurph79> cmn: yeah, i just want to have that branch smash over any conflicts in master, and retain its code
+
+[21:39] <cmn> so you want to resolve in favour of the branch you're merging
+
+[21:39] <cbreak> so you basically want to do a git merge -X theirs otherbranch?
+
+[21:39] <kmurph79> cmn: k, thanks
+
+[21:39] <cbreak> or a git checkout otherbranch && git merge -s ours master && git checkout master && git merge otherbranch
+
+[21:39] <cbreak> ?
+
+[21:40] <cbreak> one tries to get changes that happened in master, the other just ignores anything
+
+[21:40] <cbreak> (effectively a git reset --hard otherbranch, without the history rewriting)
+
+[21:41] <kmurph79> cbreak: thanks.  shall try that
+
+[21:42] *** klemenes joined
+[21:44] *** Dave^| joined
+[21:45] *** Samoi joined
+[21:45] *** cbreak left
+[21:46] *** chrisf joined
+[21:53] *** steffo joined
+[21:55] *** drev1 joined
+[21:55] *** legnaleurc left
+[21:55] *** legnaleurc joined
+[21:55] *** CKr left
+[21:56] <NiklasFiekas> does directly concatenating tar files give you the same thing as concatenating text files and tar'ing them later?
+
+[21:59] *** nimrod10 joined
+[21:59] *** nimrod10 left
+[22:00] *** klemenes left
+[22:01] *** legnaleurc left
+[22:01] *** sattu94 joined
+[22:02] *** ecocode joined
+[22:02] *** legnaleurc joined
+[22:05] <nvictor> NiklasFiekas: nope
+
+[22:06] <NiklasFiekas> nvictor: ok :/ thank you.
+
+[22:07] *** EricInBNE joined
+[22:07] *** legnaleurc_ joined
+[22:08] *** legnaleurc left
+[22:08] *** Sir_Rai left
+[22:08] *** nimrod10 joined
+[22:08] *** nimrod10 left
+[22:09] <cmn> the tar command can add to an archive, can't it?
+
+[22:10] *** kmurph79 left
+[22:11] *** psoo joined
+[22:12] *** pinky joined
+[22:12] *** mandric joined
+[22:13] *** mandric left
+[22:17] *** guampa joined
+[22:17] *** legnaleurc_ left
+[22:18] *** legnaleurc joined
+[22:19] *** twisted` joined
+[22:20] *** Agos joined
+[22:21] *** nimrod10 joined
+[22:21] *** nimrod10 left
+[22:21] <twisted`> yo, I'm a bit (well quite a bit) n00bish with git. I thought it'd be cool to try to use submodules. However I ran it in a dir too low and thought (in my innocence) just to rm -rf the offending dir. Now however I get the error: 'dir' already exists in the index
+
+[22:21] <twisted`> then I looked into the file .gitmodules and uhm, well deleted that but it still claims it's in the index. any ideas? it's a local git with no off-site git rpo
+
+[22:21] <twisted`> repo*
+
+[22:22] *** legnaleurc_ joined
+[22:23] *** Heisenmink_ left
+[22:23] *** legnaleurc left
+[22:23] <offby1> twisted`: I suspect that "git rm -r dir" will do it
+
+[22:23] <offby1> if not, do "git status" and paste a transcript
+
+[22:23] <twisted`> offby1: yes! thanks
+
+[22:24] *** fr0stbyte joined
+[22:24] <twisted`> oh, dang it still makes it one dir too low that's very odd
+
+[22:25] *** Cromulent joined
+[22:26] <offby1> ?
+
+[22:26] <twisted`> got it now
+
+[22:26] <offby1> !
+
+[22:26] <twisted`> no idea if my git repo is now broken
+
+[22:26] <offby1> \o/
+
+[22:26] <offby1> probably not
+
+[22:26] <offby1> repositories don't easily break
+
+[22:26] <twisted`> also don't know if Xcode will like my submodule stuff
+
+[22:26] <twisted`> but I guess it will :p
+
+[22:26] <FauxFaux> Apparently you haven't used submodules, offby1. *runs*
+
+[22:27] <twisted`> thanks :D
+
+[22:29] *** nimrod10 joined
+[22:29] *** nimrod10 left
+[22:29] *** legnaleurc_ left
+[22:31] *** nimrod10 joined
+[22:31] *** nimrod10 left
+[22:31] *** nimrod10 joined
+[22:31] *** nimrod10 left
+[22:32] *** angelsl joined
+[22:32] *** nimrod10 joined
+[22:32] *** nimrod10 left
+[22:33] *** Carmivore left
+[22:33] *** Destos joined
+[22:33] *** Carmivore joined
+[22:33] *** legnaleurc joined
+[22:34] *** t0rc1 joined
+[22:38] *** legnaleurc left
+[22:38] *** caseymcg joined
+[22:39] *** legnaleurc joined
+[22:40] *** robotmay joined
+[22:40] *** t0rc1 left
+[22:40] *** t0rc joined
+[22:43] *** Aktom joined
+[22:43] *** IanN joined
+[22:44] *** bauruine joined
+[22:45] *** txomon|home joined
+[22:46] *** Aktom left
+[22:46] *** otakutomo joined
+[22:47] *** unreal joined
+[22:48] *** ecocode left
+[22:48] *** legnaleurc left
+[22:49] *** Zyrkon joined
+[22:49] *** legnaleurc joined
+[22:50] *** cbreak joined
+[22:50] *** IanN left
+[22:54] *** mandric joined
+[22:58] *** txomon|home left
+[22:58] *** txomon|home joined
+[22:59] *** legnaleurc left
+[23:00] *** sreich_ joined
+[23:02] <const> other than 'edit' and 'pick' what else can I say in rebase -i?
+
+[23:05] *** legnaleurc_ joined
+[23:05] *** txomon|home left
+[23:05] *** Rogi joined
+[23:05] *** txomon|home joined
+[23:06] *** kmurph79 joined
+[23:07] *** Goplat joined
+[23:07] *** JEEB joined
+[23:07] *** savid joined
+[23:07] *** Trae32566 joined
+[23:08] <Trae32566> ok, I'm having an issue,  big PITA
+
+[23:08] <Trae32566> I have a repo synced here: https://github.com/Trae32566/android_kernel_samsung_aries
+
+[23:08] <Trae32566> what I'm trying to do is move it to google code as well
+
+[23:09] *** thebignoise joined
+[23:09] <Trae32566> I've already pulled, added gCode to git, etc
+
+[23:09] <savid> So, I'm trying to merge this fix some conflicts from an upstream merge,  and I want to view a log of all commits from upstream on just that one file. But, I'm currently on my own development branch.  Is there a way to say "show me the log for a different branch than the one I'm on"?
+
+[23:09] <Trae32566> when I go to push though, it waits 2 hours, uploads everything, then I see this
+
+[23:10] <Trae32566> http://pastebin.com/dsrpkbNR
+
+[23:11] *** Kiall joined
+[23:11] *** Kiall left
+[23:12] *** legnaleurc_ left
+[23:12] *** legnaleurc joined
+[23:13] <savid> oh, nm.  duh moment.  just need to specify the refs before the path
+
+[23:13] *** Bmac joined
+[23:14] *** zlin joined
+[23:16] *** Kiall joined
+[23:16] *** mxweas joined
+[23:17] *** legnaleurc left
+[23:17] *** legnaleurc joined
+[23:20] <bob2> savid, yeah, -- after ref to avoid ambiguity
+
+[23:22] *** legnaleurc left
+[23:23] *** TheTFEF joined
+[23:24] *** legnaleurc joined
+[23:27] <cmn> const: you have the possible intructions in the instruction sheet
+
+[23:28] *** legnaleurc left
+[23:29] *** otakutom_ joined
+[23:29] *** otakutomo left
+[23:29] <const> cmn: oh, I completely missed that
+
+[23:30] *** TheTFEF left
+[23:30] <const> cmn: there is no "omit" option :(
+
+[23:30] <const> oh, if I remove a line...
+
+[23:30] *** legnaleurc joined
+[23:30] <const> cool
+
+[23:30] *** steveoliver joined
+[23:31] <const> thanks !
+
+[23:32] *** mxweas left
+[23:32] *** BonQuisha joined
+[23:32] <EugeneKay> !--
+
+[23:32] <gitinfo> Use a double-dash(--) to separate refs from paths, especially when dealing with ambiguous file names. Ex: git checkout master -- origin (check out the file "origin" from branch "master")
+
+[23:32] <EugeneKay> Yay, works.
+
+[23:32] *** steffo left
+[23:32] *** soulcake joined
+[23:33] <thiago> double-dash is also necessary to refer to a file that doesn't exist
+
+[23:33] <EugeneKay> Do a gist writeup on it and add it as a "more" link :-p
+
+[23:40] *** johnkpaul joined
+[23:41] *** queequeg1 joined
+[23:42] *** tshauck joined
+[23:42] *** else joined
+[23:43] *** airborn left
+[23:44] <else> is it possible to export a directory of a bare git repo?
+
+[23:44] <thiago> git archive
+
+[23:44] <else> thank you
+
+[23:44] <else> i was looking into git checkout-index
+
+[23:44] *** fr0stbyte left
+[23:45] *** steveoliver left
+[23:45] <cbreak> else: you can use git checkout, but it's a bit more tricky
+
+[23:46] *** dfr|mac joined
+[23:46] *** cybersphinx joined
+[23:46] *** Dave^| left
+[23:46] <GreenJello> Is there a shortcut for "get the version of this file one commit ago?"  I tried git checkout -p HEAD-1 file.ext which I think I read somewhere.  It just says "No changes."
+
+[23:47] <frogonwheels> GreenJello: HEAD~1
+
+[23:47] <frogonwheels> not tilde not minus GreenJello
+
+[23:47] <GreenJello> ah thanks
+
+[23:48] *** cccaldas joined
+[23:48] <else> git-archive is awesome
+
+[23:48] *** subbyyy joined
+[23:48] *** linusoleander joined
+[23:48] *** Fandekasp joined
+[23:49] *** soulcake left
+[23:49] *** fisted joined
+[23:50] *** lonewulf` joined
+[23:51] *** legnaleurc left
+[23:52] *** legnaleurc joined
+[23:53] *** lonewulf` left
+[23:54] *** otakutom_ left
+[23:54] *** t0rc left
+[23:56] *** Destos left
+[23:58] *** otakutomo joined
+[23:58] *** legnaleurc left
+[23:59] *** legnaleurc joined
