@@ -10,7 +10,9 @@ statement4.time       #The time at which the statement was issued.
 statement4.text       #The text of the statement itself, which is
                       #returned as a LIST of words.
 statement4.users_online  #A list of users online at that time.
-statement4.alg_prob  #This is a dictionary of user names and their 
+statement4.total_time	 #A number that can be safely used to compare two 
+			 #statements chronologically.
+statement4.alg_lambda    #This is a dictionary of user names and their 
                      #corresponding lambdas. Populate this in your
                      #algorithm.
 
