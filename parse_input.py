@@ -38,13 +38,19 @@ def clean(text):
 def init(filename):
     t = open(filename)
     text = t.read()
-    matches = re.findall(r"(\[([0-9][0-9]\:[0-9][0-9])\] <(.*?)> (.*))\
+    matches = re.findall(r"(\[(\d\d:\d\d)\] <(.*?)> (.*))\
 |(\*\*\*) (.*?) (joined|left)", text)
     
         
         
     users_online = []; statements = []
-    
+
+    #for calculating total_time
+    intra_minute_count = 0
+    prev_minute = 0
+    prev_hour = 0
+    day_count = 0
+
     
     for match in matches:
         
@@ -56,8 +62,27 @@ def init(filename):
             statement.users.append(issued_by) #append user to universal list
             #in class statement
             
+            #calculate the total_time variable
+            match2 = re.search(r"(\d\d):(\d\d)", time)
+            hours = int(match2.group(1))
+            minutes = int(match2.group(2))
+            
+            #reset intra minute count if required
+            if prev_minute != minutes:
+                intra_minute_count = 0
+            #increment day count if the day has changed
+            if hours < prev_hour:
+                day_count += 1
+            #assign value to total_time
+            total_time = (day_count*24*3600)+(hours*3600)+(minutes*60)+(intra_minute_count)
+            #increment intra minute count
+            intra_minute_count+=1
+            #update prev variables
+            prev_minute = minutes
+            prev_hour = hours
+            
             #add stat to list of statements
-            stat = statement(time,issued_by,clean(statement_text), \
+            stat = statement(time, total_time, issued_by,clean(statement_text), \
 users_online) 
             statements.append(stat)    
         
@@ -78,13 +103,14 @@ users_online)
 class statement:
     
     users = []
-    def __init__(self, time, issuing_user_name, statement_text, \
+    def __init__(self, time, total_time, issuing_user_name, statement_text, \
 users_online):
         self.text = statement_text
         self.issued_by = issuing_user_name
         self.time = time
         self.users_online = users_online
-                
+        self.total_time = total_time
+        
         self.alg_lambda = {}
         #Probability dicitonary to be used by the algorithm
         #as convinient to it. Please ensure that the probabilities are centered
@@ -95,7 +121,7 @@ users_online):
         
         
     def print_details(self, full_text=False, online=True, current=True\
-,probabilities = True): 
+,total_time=True): 
         print self.issued_by + ' at ' + self.time
         if full_text == False:
             for word in self.text[:5]:
@@ -106,12 +132,17 @@ users_online):
         print
         if online==True:
             print "Users online:", self.users_online
-        print
+        if total_time==True:
+            print "Total time:", self.total_time
+            
 
 if __name__ == '__main__':
-    if len(sys.argv) != 1:
-        print "Usage: python parse_input.py"
+    if len(sys.argv) != 2:
+        print "Usage: python parse_input.py <filename>"
         sys.exit(1)
+    statements = init(sys.argv[1])
+    for stat in statements:
+        stat.print_details()
     
 
 
