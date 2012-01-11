@@ -18,7 +18,9 @@ if __name__ == '__main__':
             print '-------------------------'*3
             print
             for stat in statements[i-display_scope:i+1]:
+		print
                 stat.print_details(full_text=True)
+		print
             answer = ''
             for user in stat.alg_lambda:
                 if stat.alg_lambda[user] == max(stat.alg_lambda.values())\
