@@ -4,7 +4,8 @@ import settings
 import parse_input
 import re
 
-display_scope = 3
+prev_display_scope = 3
+next_display_scope = 1
 
 if __name__ == '__main__':
     
@@ -52,7 +53,7 @@ Usage: python test_algorithm.py [options] filename
             print test_alg 
             print '-------------------------'*3
             print
-            for stat in statements[i-display_scope:i+1]:
+            for stat in statements[i-prev_display_scope:i+1+next_display_scope]:
 		print
                 stat.print_details(full_text=True, online = show_online)
 		print
@@ -85,6 +86,6 @@ and stat.alg_lambda[user]!=0:
             print
     print '----------------------'*3
     print "Final success percentage :", correct_answers*100/deleted_nicks
-    print correct_answers,"correct,", unanswered, "unanswered, out of", deleted_nicks
+    print correct_answers,"correct,", unanswered, "unanswered," , deleted_nicks, "total."
     print '----------------------'*3
     print
