@@ -4,10 +4,10 @@ import re
 import parse_input
 
 
-current_scope = 4
-scope_weight = 3
-scope_weight_minus = 3
-addressed_weight = 5
+current_scope = 10
+scope_weight = 4
+scope_weight_minus = 5
+addressed_weight = 4
 inverse_recent_weight = 1
 
 class context_statement(parse_input.statement):

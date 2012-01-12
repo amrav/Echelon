@@ -125,17 +125,20 @@ users_online):
     def print_details(self, full_text=False, online=True, current=True\
 ,total_time=True): 
         print self.issued_by + ' at ' + self.time
+	print
         if full_text == False:
             for word in self.text[:5]:
                 print word,
         else:
             for word in self.text:
                 print word,
-        print
+        print; print
         if online==True:
             print "Users online:", self.users_online
+	print
         if total_time==True:
             print "Total time:", self.total_time
+	print
             
 
 if __name__ == '__main__':
