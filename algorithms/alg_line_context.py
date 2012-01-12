@@ -66,7 +66,7 @@ and (user+':') not in stat.text:
             for user in cumulative_scope:
                 statements[i].alg_lambda = cumulative_scope 
     for stat in statements:
-        if stat.issued_by == '$$$':
+        if stat.issued_by == '$$$' and stat.alg_lambda!=None and stat.alg_lambda!={}:
             avg = sum(stat.alg_lambda.values())/len(stat.alg_lambda.keys())
             #Divide by average to normalise values around 1 ?
             for user in stat.alg_lambda:
