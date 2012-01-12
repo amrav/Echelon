@@ -29,7 +29,7 @@ Usage: python test_algorithm.py [options] filename
         for option in sys.argv[1:-1]:
             if option == '--online':
                 show_online = True
-            if option == '--help':
+            elif option == '--help':
                 print help_text
                 sys.exit(0)
             else:
@@ -39,10 +39,11 @@ Usage: python test_algorithm.py [options] filename
     
     from settings import test_alg
     
-    statements = parse_input.init(sys.argv[1])
-    answers_file=open(sys.argv[1][:-8]+'answers.txt','r') #opening the corresponding _answers.txt file 
+    statements = parse_input.init(sys.argv[-1])
+    answers_file=open(sys.argv[-1][:-8]+'answers.txt','r') #opening the corresponding _answers.txt file 
     deleted_nicks=0 #counts how many $$$s were there
     correct_answers=0 #counts how many the algorithm got correct
+    unanswered=0 #counts how many are unanswered
     test_alg.run(statements)
     for i in range(len(statements)):
         if statements[i].issued_by == '$$$':
@@ -67,16 +68,23 @@ and stat.alg_lambda[user]!=0:
             if correct_answer==answer:
                 correct_answers+=1
                 print "Answer is correct."
+            elif answer=='':
+                unanswered+=1
+                print "Unanswered."
             else :
-                print "Answer is wrong. Correct answer was ", correct_answer
+                print "Answer is wrong."
+            print
+            print "Correct answer was ", correct_answer
             print
             print stat.alg_lambda
             print
-            print 'Success percentage so far:', correct_answers*100/deleted_nicks
-            print
+            print 'So far:'
+            print 'Success percentage    :', correct_answers*100/(deleted_nicks)
+            print 'Unanswered percentage :', unanswered*100/(deleted_nicks)
+            print 'Wrong percentage      :', (deleted_nicks-correct_answers-unanswered)*100/(deleted_nicks)
             print
     print '----------------------'*3
     print "Final success percentage :", correct_answers*100/deleted_nicks
-    print correct_answers,"out of", deleted_nicks
+    print correct_answers,"correct,", unanswered, "unanswered, out of", deleted_nicks
     print '----------------------'*3
     print
