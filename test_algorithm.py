@@ -1,6 +1,8 @@
+from __future__ import division
 import sys
 import settings
 import parse_input
+import re
 
 display_scope = 5
 
@@ -16,8 +18,8 @@ if __name__ == '__main__':
     test_alg.run(statements)
     for i in range(len(statements)):
         if statements[i].issued_by == '$$$':
-            print '-------------------------'*3
             deleted_nicks+=1
+            print '-------------------------'*3
             print test_alg 
             print '-------------------------'*3
             print
@@ -26,19 +28,21 @@ if __name__ == '__main__':
                 stat.print_details(full_text=True)
 		print
             answer = ''
+            stat = statements[i]
             for user in stat.alg_lambda:
                 if stat.alg_lambda[user] == max(stat.alg_lambda.values())\
-and user!='$$$':
+and stat.alg_lambda[user]!=0:
                     answer = user
                     break
             print "Replacing $$$ by", answer
-            correct_answer=answers_file.readline()[:-1]
+            correct_answer=answers_file.readline()[:-1] #to remove the \n
             if correct_answer==answer:
                 correct_answers+=1
                 print "Answer is correct."
             else :
-                print "Answer is wrong. Correct answer was "+correct_answer
+                print "Answer is wrong. Correct answer was ", correct_answer
             print stat.alg_lambda
             print
-    print "Success percentage :",float(correct_answers)*100/deleted_nicks
-    print correct_answers,"out of",deleted_nicks
+    print "Success percentage :", correct_answers*100/deleted_nicks
+    print correct_answers,"out of", deleted_nicks
+    print
