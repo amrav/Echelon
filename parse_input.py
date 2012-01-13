@@ -37,9 +37,11 @@ def clean(text):
                     cleantext_str+=' '
     return cleantext_str.split(' ')
 
-def init(filename):
-    t = open(filename)
-    text = t.read()
+def init(filename='', text=''):
+    if filehandle == '':
+        t = open(filename)
+        text = t.read()
+        t.close()
     matches = re.findall(r"(\[(\d\d:\d\d)\] <(.*?)> (.*))\
 |(\*\*\*) (.*?) (joined|left)", text)
     

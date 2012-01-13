@@ -8,7 +8,7 @@ import sys
 
 
   
-def createlog(filename, answerflag = False):
+def createlog(filename, filetext = '', answerflag = False):
   
   log = open(filename,"r")
   test_filename = re.search(r"(.*)\.", filename).group(1)
@@ -17,15 +17,18 @@ def createlog(filename, answerflag = False):
     answers = open(test_filename+'_answers.txt','w')
   
   line = log.readline()
-  
+  counter = 0
+  min_lines = 10
   while line:
     match=re.search(r"\[\d\d:\d\d\] <(.+?)>",line)
-    if match!=None and random.randint(1,20)==1:
+    if match!=None and random.randint(1,20)==1 and counter > min_lines:
+      counter = 0
       line=line.replace(match.group(1),'$$$')
       if answerflag == True:
         answers.write(match.group(1)+'\n')
     test_file.write(line)
     line=log.readline()
+    counter += 1
   lognames = []
   lognames.append(test_file.name)
   if answerflag == True:
