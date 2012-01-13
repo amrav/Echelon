@@ -3,6 +3,8 @@ import parse_input
 from create_test_log import createlog
 from settings import opt_alg
 
+runs = 30
+
 def check(testfile, answerfile, alg):
     stats = {} #stats[0] = answered, stats[1] = unanswered, stats[2] = total
     stats[0] = stats[1] = stats[2] = 0
@@ -25,9 +27,8 @@ if __name__ == '__main__':
     if len(sys.argv) != 2:
         print 'Usage: python optimise.py filename'
         sys.exit(1)
-    lognames = createlog(sys.argv[1], answerflag = True)
-    stats = check(lognames[0], lognames[1], opt_alg)
-    print stats
-    print type(stats)
-    print stats[0], 'correct,', stats[1], 'unanswered,', stats[2], 'total.'
-    
+    for i in range(runs):
+        lognames = createlog(sys.argv[1], answerflag = True)
+        stats = check(lognames[0], lognames[1], opt_alg)
+        print stats[0], 'correct,', stats[2]-stats[0]-stats[1], 'wrong,', stats[1], 'unanswered,', stats[2], 'total.'
+        i += 1

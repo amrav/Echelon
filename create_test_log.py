@@ -26,16 +26,10 @@ def createlog(filename, answerflag = False):
         answers.write(match.group(1)+'\n')
     test_file.write(line)
     line=log.readline()
-  print test_file.name
-  print type(test_file.name)
   lognames = []
   lognames.append(test_file.name)
-  print lognames
   if answerflag == True:
     lognames.append(answers.name)
-    print lognames
-    print type(lognames)
-  print type(lognames)
   return lognames  
 
 if __name__=='__main__':

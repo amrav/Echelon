@@ -59,9 +59,9 @@ def init(filename):
         time = match[1]
         issued_by = match[2]
         statement_text = match[3]
-
+        statement.users = []
         if match[0] != '':
-            statement.users.append(issued_by) #append user to universal list
+            statement.users += [issued_by] #append user to universal list
             #in class statement
             
             #calculate the total_time variable
