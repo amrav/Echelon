@@ -38,13 +38,14 @@ def clean(text):
     return cleantext_str.split(' ')
 
 def init(filename='', text=''):
-    if filehandle == '':
+    if text == '':
         t = open(filename)
         text = t.read()
         t.close()
+    ##print text
     matches = re.findall(r"(\[(\d\d:\d\d)\] <(.*?)> (.*))\
 |(\*\*\*) (.*?) (joined|left)", text)
-    
+    ##print 'matches list made'
         
         
     users_online = []; statements = []
@@ -55,9 +56,9 @@ def init(filename='', text=''):
     prev_hour = 0
     day_count = 0
 
-    
-    for match in matches:
         
+    for match in matches:
+    
         time = match[1]
         issued_by = match[2]
         statement_text = match[3]
