@@ -8,32 +8,55 @@ import sys
 
 
   
-def createlog(filename, filetext = '', answerflag = False):
+def createlog(filename='', filetext = '', create_file = False, answerflag = False):
   
-  log = open(filename,"r")
-  test_filename = re.search(r"(.*)\.", filename).group(1)
-  test_file = open(test_filename+'_test.txt',"w")
-  if answerflag == True:
-    answers = open(test_filename+'_answers.txt','w')
+  test_text = ''
+  answer_text = ''
   
-  line = log.readline()
+  if create_file == True:
+    log = open(filename,"r")
+    test_filename = re.search(r"(.*)\.", filename).group(1)
+    test_file = open(test_filename+'_test.txt',"w")
+    filetext = open(filename).read()
+    log.close()
+    if answerflag == True:
+      answers = open(test_filename+'_answers.txt','w')
+  
+  ##print filetext
+  lines = filetext.split('\n')
+  
+  
   counter = 0
   min_lines = 10
-  while line:
-    match=re.search(r"\[\d\d:\d\d\] <(.+?)>",line)
-    if match!=None and random.randint(1,20)==1 and counter > min_lines:
+  
+  for line in lines:
+    line+='\n'
+    match=re.search(r"^\[\d\d\:\d\d\] <(.+?)> .+",line)
+    if match != None and random.randint(1,20)==1 and counter > min_lines:
       counter = 0
-      line=line.replace(match.group(1),'$$$')
-      if answerflag == True:
+      ##print line
+      ##print match.group(0)
+      test_line = line.replace(match.group(1),'$$$')
+      ##print line
+      answer_text += match.group(1) + '\n'
+      if create_file == True and answerflag == True:
         answers.write(match.group(1)+'\n')
-    test_file.write(line)
-    line=log.readline()
+    else:
+      test_line = line
+    test_text += test_line
+    if create_file == True:
+      test_file.write(line)
     counter += 1
-  lognames = []
-  lognames.append(test_file.name)
-  if answerflag == True:
-    lognames.append(answers.name)
-  return lognames  
+  
+  if create_file == True:
+    lognames = [test_file.name]
+    if answerflag == True:
+      lognames.append(answers.name)
+      return lognames
+  else:
+    texts = [test_text]
+    texts.append(answer_text)
+    return texts
 
 if __name__=='__main__':
   
@@ -42,9 +65,9 @@ if __name__=='__main__':
     sys.exit(1)
   
   if len(sys.argv)==3 and sys.argv[1]=='--answers':
-    createlog(sys.argv[2],answerflag=True)
+    createlog(sys.argv[2],answerflag=True, file=True)
   else:
-    createlog(sys.argv[1])
+    createlog(sys.argv[1], create_file=True)
 
 
 
