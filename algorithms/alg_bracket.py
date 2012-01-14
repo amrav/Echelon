@@ -1,12 +1,34 @@
 from __future__ import division
 import re
 
-stat_scope = 1 #number of statements after the unknown statement which the algorithm will look at
-text_scope = 0 #maximum number of letters after which bracket can start
-user_lambda = 60 #lambda this algorithm will assign
-time_diff = 100 #roughly, the number of minutes after which the bracket can appear
+params = []
+ranges = []
+steps = []
+
+params +=  [1] #number of statements after the unknown statement which the algorithm will look at
+ranges += [(1, 2)]
+steps += [1]
+
+params += [0] #maximum number of letters after which bracket can start
+ranges += [(0,1)]
+steps += [1]
+
+params += [60] #lambda this algorithm will assign
+ranges += [(60,61)]
+steps += [1]
+
+params += [100] #roughly, the number of minutes after which the bracket can appear
+ranges += [(0,5)]
+steps += [1]
+
+
+
 
 def run(statements):
+    stat_scope = params[0]
+    text_scope = params[1]
+    user_lambda = params[2]
+    time_diff = params[3]
     for i in range(len(statements)):
         stat = statements[i]
         stat.alg_lambda = {}
