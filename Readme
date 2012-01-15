@@ -15,10 +15,9 @@ accessed, please refer to the parse_input.py module.
 
 2) How to write your algorithm:
 
-   i) Your first step will be to import parse_input.py and store a list of 
-statements returned by parse_input.init(filename) in some variable, say, stat_list. 
-Each statement has an attribute alg_prob. You are only concerned with those 
-statements, whose issued_by is unknown('$$$').
+   i) Your first step will be to store a list of statements in a list, say, 
+stat_list. Each statement has an attribute alg_lambda. You are only concerned with 
+populating those alg_lambdas, whose issued_by is unknown('$$$').
 
    ii) For each unknown statement in stat_list, your algorithm must 
 assign certain values, called lambdas, to each user. A lambda is an indicator 
@@ -62,11 +61,12 @@ the following specifications:
 	b) It need not return anything. However if it does, it will be 
 	ignored.
 	c) For each unknown statement, it must either populate a user-lambda
-	dictionary as specified above, or assign the value None. 
+	dictionary as specified above, or assign the value {}. 
 
 Failure to conform to these specifications may result in any number of errors.
 
-3) How to test algorithms:
+
+3) How to test your algorithm:
 
 In the module settings.py, import your algorithm module (alg_my_algorithm) and 
 set the value of test_alg to alg_my_algorithm. 
@@ -75,7 +75,19 @@ In bash, run:
 
 	python test_algorithm.py filename | less
 
-4) How to run algorithms:
+4) How to optimise your algorithm:
+   
+	i) Choose the parameters that you would like to vary, the range through which they must vary, and the
+steps. 
+       ii) Your algorithm must have the list 'params'. Make sure that the variables you have chosen as the 
+parameters of your algorithm are assigned to values in params before every run.
+      iii) Corresponding to each param in params, populate the variable 'ranges' with tuples of the range 
+for each parameter.
+       iv) Similarly, populate the variable 'steps' with how fast you'd like to step through the range.
+
+       HINT: Look at algorithms/alg_bracket.py or algorithms/alg_line_context.py for an example.
+
+5) How to run algorithms:
 
 Supposing that your algorithm module is named 'alg_my_algorithm.py'. 
 In the module 'settings.py', add the lines:
@@ -89,6 +101,6 @@ Now run your algorithm from bash using:
 
 	python run_algorithms.py filename | less
 
-Warning: This will use all algorithms specified in settings.py. For testing 
-your algorithm only, use test_algorithm.py(3) instead.
+Warning: This feature is still under development. This will use all algorithms specified in settings.py. 
+For testing your algorithm only, use test_algorithm.py(3). For optimising your algorithm, use optimise.py(4).
 
