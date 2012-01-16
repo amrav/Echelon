@@ -5,7 +5,7 @@ from create_test_log import createlog
 from settings import opt_alg
 from settings import opt_runs
 
-runs = 5
+runs = opt_runs
 
 def nonint_range(lower, upper, step):
     i = lower
