@@ -40,7 +40,7 @@ Usage: python test_algorithm.py [options] filename
     
     from settings import test_alg
     
-    statements = parse_input.init(sys.argv[-1])
+    statements = parse_input.init(filename = sys.argv[-1])
     answers_file=open(sys.argv[-1][:-8]+'answers.txt','r') #opening the corresponding _answers.txt file 
     deleted_nicks=0 #counts how many $$$s were there
     correct_answers=0 #counts how many the algorithm got correct
@@ -54,9 +54,11 @@ Usage: python test_algorithm.py [options] filename
             print '-------------------------'*3
             print
             for stat in statements[i-prev_display_scope:i+1+next_display_scope]:
+		##print stat.__class__
+                stat.__class__ = parse_input.statement
+                stat.print_details(full_text = True, online = show_online)
 		print
-                stat.print_details(full_text=True, online = show_online)
-		print
+                print
             answer = ''
             stat = statements[i]
             for user in stat.alg_lambda:
@@ -80,12 +82,12 @@ and stat.alg_lambda[user]!=0:
             print stat.alg_lambda
             print
             print 'So far:'
-            print 'Success percentage    :', correct_answers*100/(deleted_nicks)
+            print 'Correct percentage    :', correct_answers*100/(deleted_nicks)
             print 'Unanswered percentage :', unanswered*100/(deleted_nicks)
             print 'Wrong percentage      :', (deleted_nicks-correct_answers-unanswered)*100/(deleted_nicks)
             print
     print '----------------------'*3
-    print "Final success percentage :", correct_answers*100/deleted_nicks
+    print "Final success percentage :", correct_answers*100/(deleted_nicks-unanswered)
     print correct_answers,"correct,", deleted_nicks-unanswered-correct_answers, "wrong," , deleted_nicks, "total."
     print '----------------------'*3
     print

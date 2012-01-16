@@ -125,8 +125,7 @@ users_online):
 
         
         
-    def print_details(self, full_text=False, online=True, current=True\
-,total_time=True): 
+    def print_details(self, full_text=True, online=True, current=True, total_time=True): 
         print self.issued_by + ' at ' + self.time
 	print
         if full_text == False:

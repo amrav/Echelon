@@ -33,6 +33,7 @@ def createlog(filename='', filetext = '', create_file = False, answerflag = Fals
     line+='\n'
     match=re.search(r"^\[\d\d\:\d\d\] <(.+?)> .+",line)
     if match != None and random.randint(1,20)==1 and counter > min_lines:
+      ##print match.group(1)
       counter = 0
       ##print line
       ##print match.group(0)
@@ -45,7 +46,7 @@ def createlog(filename='', filetext = '', create_file = False, answerflag = Fals
       test_line = line
     test_text += test_line
     if create_file == True:
-      test_file.write(line)
+      test_file.write(test_line)
     counter += 1
   
   if create_file == True:
@@ -65,7 +66,7 @@ if __name__=='__main__':
     sys.exit(1)
   
   if len(sys.argv)==3 and sys.argv[1]=='--answers':
-    createlog(sys.argv[2],answerflag=True, file=True)
+    createlog(sys.argv[2],answerflag=True, create_file=True)
   else:
     createlog(sys.argv[1], create_file=True)
 

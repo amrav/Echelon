@@ -12,15 +12,15 @@ ranges = []
 steps = []
 
 
-params += [5]  #issue_scope
+params += [1]  #issue_scope
 ranges += [(1,10)]
 steps += [1]
 
-params += [5] #scope_weight
+params += [7] #scope_weight
 ranges +=  [(1,10)]
 steps += [1]
 
-params += [3] #scope_weight_minus
+params += [6] #scope_weight_minus
 ranges += [(0,10)]
 steps += [1]
 
