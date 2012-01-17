@@ -86,7 +86,10 @@ and stat.alg_lambda[user]!=0:
             print
     print '----------------------'*3
     print "Score :", 3*correct_answers - (deleted_nicks-unanswered-correct_answers)
-    print "Final success percentage :", correct_answers*100/(deleted_nicks-unanswered)
+    if deleted_nicks - unanswered == 0:
+        print "No nicks attempted."
+    else:
+        print "Final success percentage :", correct_answers*100/(deleted_nicks-unanswered)
     print correct_answers,"correct,", deleted_nicks-unanswered-correct_answers, "wrong," , deleted_nicks, "total."
     print '----------------------'*3
     print
