@@ -18,11 +18,10 @@ def createlog(filename='', filetext = '', create_file = False, answerflag = Fals
     test_filename = re.search(r"(.*)\.", filename).group(1)
     test_file = open(test_filename+'_test.txt',"w")
     filetext = open(filename).read()
+    answers = open(test_filename+'_answers.txt','w')
     log.close()
-    if answerflag == True:
-      answers = open(test_filename+'_answers.txt','w')
   
-  ##print filetext
+##print filetext
   lines = filetext.split('\n')
   
   
@@ -40,7 +39,7 @@ def createlog(filename='', filetext = '', create_file = False, answerflag = Fals
       test_line = line.replace(match.group(1),'$$$')
       ##print line
       answer_text += match.group(1) + '\n'
-      if create_file == True and answerflag == True:
+      if create_file == True:
         answers.write(match.group(1)+'\n')
     else:
       test_line = line
@@ -51,9 +50,8 @@ def createlog(filename='', filetext = '', create_file = False, answerflag = Fals
   
   if create_file == True:
     lognames = [test_file.name]
-    if answerflag == True:
-      lognames.append(answers.name)
-      return lognames
+    lognames.append(answers.name)
+    return lognames
   else:
     texts = [test_text]
     texts.append(answer_text)
@@ -61,14 +59,12 @@ def createlog(filename='', filetext = '', create_file = False, answerflag = Fals
 
 if __name__=='__main__':
   
-  if len(sys.argv)<2:
-    print "Usage: python create_test_log.py [--answers] <filename>"
+  if len(sys.argv)!=2:
+    print "Usage: python create_test_log.py <filename>"
     sys.exit(1)
   
-  if len(sys.argv)==3 and sys.argv[1]=='--answers':
-    createlog(sys.argv[2],answerflag=True, create_file=True)
-  else:
-    createlog(sys.argv[1], create_file=True)
+  createlog(sys.argv[1], create_file=True)
+  print 'Created test and answer logs.'
 
 
 
