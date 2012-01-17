@@ -27,23 +27,6 @@ def vary(ranges, param_steps):
                 perms.append(perm + [i])
         return perms
         
-<<<<<<< HEAD
-def findmax(testfile_text, answerfile_text, alg):
-    stats = {}
-    
-    param_perms = vary(alg.ranges, alg.steps)
-    for param_perm in param_perms:
-        stats['correct']=stats['unanswered']=stats['total']=0
-        print
-        print
-        print '----------'*3
-        print 'Testing with parameters,', param_perm
-        print '----------'*3
-        alg.params = param_perm
-        for i in range(runs):
-            texts = createlog(filetext = logtext) #returns a list of the test text and the answer text
-            ##print texts[0]
-=======
 def findmax(filename, alg, printmax = True, result_filename = ''):
     ##print 'FINDMAX!'
     stats = {}
@@ -77,27 +60,11 @@ def findmax(filename, alg, printmax = True, result_filename = ''):
             texts = createlog(filetext = logtext) #returns a list of the test text and the answer text
             ##print 'Created logfile'
             ##print texts[1]
->>>>>>> 3348849... Create module optimise:
             ##print 'End print'
             run_stats = check(texts[0], texts[1], alg)
             stats['correct'] += run_stats['correct']
             stats['unanswered'] += run_stats['unanswered']
             stats['total'] += run_stats['total']
-<<<<<<< HEAD
-            i += 1
-            
-        stats['correct'] *= 100 / stats['total']
-        stats['unanswered'] *= 100 / stats['total']
-        if stats['unanswered'] == 100:
-            print 'None attempted.'
-        else:
-            print stats['correct'], '% correct,', 100-stats['correct']-stats['unanswered'], '% wrong,', stats['unanswered'], '% unanswered,', stats['total'], 'total,', \
-stats['correct']*100/(100-stats['unanswered']), '% success.'
-        
-
-
-=======
-            
             if (i+1) % 13 == 0:
                 sys.stdout.write('\rRun {0} of {1}.........{2}%'.format((i+1), runs, int((i+1)*100/runs)))
                 sys.stdout.flush()
@@ -110,9 +77,8 @@ stats['correct']*100/(100-stats['unanswered']), '% success.'
             stats['unanswered'] *= 100 / stats['total']
         
             if stats['unanswered'] != 100 and stats['correct'] not in all_stats:
-                all_stats[str(param_perm)] = str(stats['correct']*100/(100-stats['unanswered'])) + ' % success, ' + str(stats['correct']) + ' % correct, ' + str(100-stats['correct']-stats['unanswered']) + \
-' % wrong, ' + str(stats['unanswered']) + ' % unanswered, ' + str( stats['total']) + ' total. ' + \
-'\nRun ' + str(count) + ': Testing with parameters, ' + str(param_perm) + '\n'
+                all_stats[str(param_perm)] = 'Run ' + str(count) + ': Testing with parameters, ' + str(param_perm) + '\n' + str(stats['correct']*100/(100-stats['unanswered'])) + ' % success, ' + str(stats['correct']) + ' % correct, ' + str(100-stats['correct']-stats['unanswered']) + ' % wrong, ' + str(stats['unanswered']) + ' % unanswered, ' + str( stats['total']) + ' total. ' + '\n' 
+
         
             ##print all_stats
         
@@ -126,6 +92,8 @@ stats['correct']*100/(100-stats['unanswered']), '% success.'
 stats['correct']*100/(100-stats['unanswered']), '% success.'
         count += 1
     
+    print 'Looping through parameter permutations... Done.'
+    print 'Writing to file... ',
     print
     if printmax == True and result_filename != '':
         result = open(result_filename, 'w')
@@ -140,12 +108,12 @@ RESULTS
         result.write("Algorithm: " + str(alg)+'\n')
         result.write("Ranges: " + str(alg.ranges) + '\n')
         result.write("Steps: " + str(alg.steps) + '\n\n')
-        
-        for stat in sorted(all_stats, key=lambda x: float(all_stats[x][:3]), reverse = True):
-            
+        result.write(">>>" + '\n\n')
+        for stat in sorted(all_stats):
             result.write(all_stats[stat]+'\n')
         result.close()
->>>>>>> 3348849... Create module optimise:
+    print 'Done.'
+
 
 def check(testfile_text, answerfile_text, alg):
     stats = {} #answered, unanswered, total
@@ -174,47 +142,16 @@ def check(testfile_text, answerfile_text, alg):
                 stats['correct'] += 1
             ##stat.print_details()
             ##statements[i+1].print_details()
-<<<<<<< HEAD
-=======
-
-    
->>>>>>> 3348849... Create module optimise:
     return stats
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         print 'Usage: python optimise.py filename [resultfilename]'
         sys.exit(1)
-<<<<<<< HEAD
-    stats = {} #for storing answered, unanaswered and total
-    stats['correct']=stats['unanswered']=stats['total']=0
-    logtextfile = open(sys.argv[1])
-    logtext = logtextfile.read()
-    ##print logtext
-    logtextfile.close()
-    for i in range(runs):
-        texts = createlog(filetext = logtext) #returns a list of the test text and the answer text
-        ##print texts[0]
-        ##print 'End print'
-        run_stats = check(texts[0], texts[1], opt_alg)
-        stats['correct'] += run_stats['correct']
-        stats['unanswered'] += run_stats['unanswered']
-        stats['total'] += run_stats['total']
-        i += 1
-        findmax(texts[0], texts[1], opt_alg)
-    stats['correct'] *= 100 / stats['total']
-    stats['unanswered'] *= 100 / stats['total']
-    if stats['unanswered'] == 100:
-        print 'None attempted.'
-    else:
-        print stats['correct'], '% correct,', 100-stats['correct']-stats['unanswered'], '% wrong,', stats['unanswered'], '% unanswered,', stats['total'], 'total,', \
-stats['correct']*100/(100-stats['unanswered']), '% success.'
-
-=======
     if len(sys.argv) == 3:
         findmax(sys.argv[1], opt_alg, printmax = True, result_filename = sys.argv[2])
     else:
-        findmax(sys.argv[1], opt_alg, printmax = True)
->>>>>>> 3348849... Create module optimise:
+        findmax(sys.argv[1], opt_alg, printmax = False)
+
 
         

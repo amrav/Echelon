@@ -6,29 +6,24 @@ ranges = []
 steps = []
 
 params +=  [1] #stat_scope: number of statements after the unknown statement which the algorithm will look at
-ranges += [(1, 3)]
+ranges += [(1, 5)]
 steps += [1]
 
 params += [0] #text_scope: maximum number of letters after which bracket can start
 ranges += [(0,10)]
 steps += [3]
 
-params += [60] #user_lambda: lambda this algorithm will assign
-ranges += [(60,60)]
-steps += [1]
-
 params += [1] #time_diff: roughly, the number of minutes after which the bracket can appear
-ranges += [(0,5)]
+ranges += [(0,2)]
 steps += [1]
 
-
+user_lambda = 60
 
 
 def run(statements):
     stat_scope = params[0]
     text_scope = params[1]
-    user_lambda = params[2]
-    time_diff = params[3]
+    time_diff = params[2]
     for i in range(len(statements)):
         stat = statements[i]
         stat.alg_lambda = {}
