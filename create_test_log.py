@@ -44,7 +44,7 @@ def createlog(filename='', filetext = '', create_file = False, answerflag = Fals
       test_line = line
     test_text += test_line
     if create_file == True:
-      test_file.write(line)
+      test_file.write(test_line)
     counter += 1
   
   if create_file == True:
