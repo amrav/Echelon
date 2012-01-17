@@ -77,9 +77,8 @@ def findmax(filename, alg, printmax = True, result_filename = ''):
             stats['unanswered'] *= 100 / stats['total']
         
             if stats['unanswered'] != 100 and stats['correct'] not in all_stats:
-                all_stats[str(param_perm)] = str(stats['correct']*100/(100-stats['unanswered'])) + ' % success, ' + str(stats['correct']) + ' % correct, ' + str(100-stats['correct']-stats['unanswered']) + \
-' % wrong, ' + str(stats['unanswered']) + ' % unanswered, ' + str( stats['total']) + ' total. ' + \
-'\nRun ' + str(count) + ': Testing with parameters, ' + str(param_perm) + '\n'
+                all_stats[str(param_perm)] = 'Run ' + str(count) + ': Testing with parameters, ' + str(param_perm) + '\n' + str(stats['correct']*100/(100-stats['unanswered'])) + ' % success, ' + str(stats['correct']) + ' % correct, ' + str(100-stats['correct']-stats['unanswered']) + ' % wrong, ' + str(stats['unanswered']) + ' % unanswered, ' + str( stats['total']) + ' total. ' + '\n' 
+
         
             ##print all_stats
         
@@ -93,6 +92,8 @@ def findmax(filename, alg, printmax = True, result_filename = ''):
 stats['correct']*100/(100-stats['unanswered']), '% success.'
         count += 1
     
+    print 'Looping through parameter permutations... Done.'
+    print 'Writing to file... ',
     print
     if printmax == True and result_filename != '':
         result = open(result_filename, 'w')
@@ -107,11 +108,11 @@ RESULTS
         result.write("Algorithm: " + str(alg)+'\n')
         result.write("Ranges: " + str(alg.ranges) + '\n')
         result.write("Steps: " + str(alg.steps) + '\n\n')
-        
-        for stat in sorted(all_stats, key=lambda x: float(all_stats[x][:3]), reverse = True):
-            
+        result.write(">>>" + '\n\n')
+        for stat in sorted(all_stats):
             result.write(all_stats[stat]+'\n')
         result.close()
+    print 'Done.'
 
 def check(testfile_text, answerfile_text, alg):
     stats = {} #answered, unanswered, total
@@ -149,7 +150,7 @@ if __name__ == '__main__':
     if len(sys.argv) == 3:
         findmax(sys.argv[1], opt_alg, printmax = True, result_filename = sys.argv[2])
     else:
-        findmax(sys.argv[1], opt_alg, printmax = True)
+        findmax(sys.argv[1], opt_alg, printmax = False)
 
 
         
