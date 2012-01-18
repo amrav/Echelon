@@ -32,6 +32,7 @@ def createlog(filename='', filetext = '', create_file = False, answerflag = Fals
     line+='\n'
     match=re.search(r"^\[\d\d\:\d\d\] <(.+?)> .+",line)
     if match != None and random.randint(1,20)==1 and counter > min_lines:
+      ##print match.group(1)
       counter = 0
       ##print line
       ##print match.group(0)

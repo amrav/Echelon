@@ -5,7 +5,7 @@ params = []
 ranges = []
 steps = []
 
-params +=  [3] #stat_scope: number of statements after the unknown statement which the algorithm will look at
+params +=  [1] #stat_scope: number of statements after the unknown statement which the algorithm will look at
 ranges += [(1, 5)]
 steps += [1]
 
@@ -13,7 +13,7 @@ params += [9] #text_scope: maximum number of letters after which bracket can sta
 ranges += [(0,10)]
 steps += [3]
 
-params += [2] #time_diff: roughly, the number of minutes after which the bracket can appear
+params += [1] #time_diff: roughly, the number of minutes after which the bracket can appear
 ranges += [(0,2)]
 steps += [1]
 
