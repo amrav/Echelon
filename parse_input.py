@@ -139,7 +139,7 @@ users_online):
                 print word,
         print; print
         if online==True:
-            print "Users online:", self.users_online
+            print "Users online:", sorted(self.users_online)
 	print
         if total_time==True:
             print "Total time:", self.total_time
