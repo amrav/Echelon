@@ -111,6 +111,7 @@ class statement:
     def __init__(self, time, total_time, issuing_user_name, statement_text, \
 users_online):
         self.text = statement_text
+        self.text_str = ' '.join(self.text)
         self.issued_by = issuing_user_name
         self.time = time
         self.users_online = users_online
@@ -122,7 +123,9 @@ users_online):
         #around one, unless you are unsure, in which case this object should 
         #be empty. The value of '1' is considered neutral. For more detailed
         #information, refer to the Readme.
-
+        self.alg_guess = ''
+        #The algorithm can store its guess here, to use for processing 
+        #subsequent statements
         
         
     def print_details(self, full_text=True, online=True, current=True, total_time=True): 
