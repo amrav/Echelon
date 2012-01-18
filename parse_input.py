@@ -122,7 +122,9 @@ users_online):
         #around one, unless you are unsure, in which case this object should 
         #be empty. The value of '1' is considered neutral. For more detailed
         #information, refer to the Readme.
-
+        self.alg_guess = ''
+        #The algorithm can store its guess here, to use for processing 
+        #subsequent statements
         
         
     def print_details(self, full_text=True, online=True, current=True, total_time=True): 
