@@ -48,7 +48,7 @@ def init(filename='', text=''):
     ##print 'matches list made'
         
         
-    users_online = []; statements = []
+    users_online = []; statements = []; statement.users = []
 
     #for calculating total_time
     intra_minute_count = 0
@@ -62,11 +62,11 @@ def init(filename='', text=''):
         time = match[1]
         issued_by = match[2]
         statement_text = match[3]
-        statement.users = []
+        
         if match[0] != '':
-            statement.users += [issued_by] #append user to universal list
+            statement.users.append(issued_by) #append user to universal list
             #in class statement
-            
+            ##print statement.users
             #calculate the total_time variable
             match2 = re.search(r"(\d\d):(\d\d)", time)
             hours = int(match2.group(1))
@@ -101,7 +101,7 @@ users_online)
     
     #remove duplicates
     statement.users = set(statement.users)
-    
+    ##print statement.users
     return statements
     
    
