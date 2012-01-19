@@ -13,15 +13,15 @@ class user:
         popped_users = []
         for luser in self.recent:
             self.recent[luser] -= scope_minus
-            if self.recent[luser] == 0:
+            if self.recent[luser] <= 0:
                 popped_users.append(luser)
         for luser in popped_users:
             self.recent.pop(luser)
 
-    def address(self, username, recent_scope):
+    def address(self, username, address_add_weight):
         if username not in self.recent:
             self.recent[username] = 0
-        self.recent[username] += recent_scope 
+        self.recent[username] += address_add_weight 
         
 
 def find_addressals(text):
@@ -34,20 +34,21 @@ def find_addressals(text):
     ##print users
     return users
 
-def search_forward(statements, userscore, pos, end, recent_scope):
+def search_forward(statements, userscore, pos, end, recent_scope, power_weight):
     
     #initialise unknown addressals, if any
     unknown_addressals = find_addressals(statements[pos].text_str)
-    ##print unknown_addressals
+    ##print 'Unknown addressals: ', unknown_addressals
     for i in range(pos+1,end):
         stat = statements[i]
         addressals = find_addressals(stat.text_str)
+        ##print 'Forward addressals: ', addressals
         for username in addressals:
             #inititalise each addressed username if required
             if username not in userscore:
                 userscore[username] = 0
             userscore[username] += recent_scope - (i-pos) #normalise each luser's score, depending on how far from 
-            ##print 'Forward addressal found! :', username, userscore[username]
+            ##print 'Forward addressal found! :', addressals
 #the unknown statement it is determined
             #if statement addresses the same username as the unknown statement, then award high bonus to the issuer
             if username in unknown_addressals:
@@ -60,20 +61,54 @@ def search_forward(statements, userscore, pos, end, recent_scope):
             ##print luser
             if stat.issued_by == luser:
                 for u in addressals:
-                    userscore[u] *= pow(recent_scope- (i-pos),3)
+                    userscore[u] *= pow(recent_scope- (i-pos), power_weight)
                     
                     ##print "Found Answer!!!!", stat.issued_by, u, userscore[u]
+
+params = []
+ranges = []
+steps = []
+
+params += [10] #recent_scope
+ranges += [(5,10)]   
+steps += [2]
+
+params += [10] #forward_scope
+ranges += [(5,10)]
+steps += [2]
+
+params += [1] #scope_minus
+ranges += [(1,2)]
+steps += [1]
+
+params += [4] #address_add_weight
+ranges += [(3,7)]
+steps += [2]
+
+params += [30] #lambda_threshold
+ranges += [(1,50)] 
+steps += [10]
+
+params += [12] #power_weight
+ranges += [(10,40)]
+steps += [10]
+
     
 def run(statements):
 
-    recent_scope = 5
-    forward_scope = 2
-    scope_minus = 1
+    recent_scope = params[0]
+    forward_scope = params[1]
+    scope_minus = params[2]
+    address_add_weight = params[3]
+    lambda_threshold = params[4]/100
+    power_weight = params[5]/10
 
     userlist = {}
     for i in range(len(statements)):
         stat = statements[i]
         ##stat.print_details(online=False)
+        ##for luser in userlist:
+            ##print 'Recent lists: ', luser, userlist[luser].recent
         #Just to be safe
         stat.alg_lambda = {}
         addressals = find_addressals(stat.text_str)
@@ -108,10 +143,14 @@ def run(statements):
                     for u in userlist[username].recent:
                         if u not in userscore:
                             userscore[u] = 1
-                        userscore[u] *= pow(userlist[username].recent[u],4)
+                        userscore[u] *= pow(userlist[username].recent[u], power_weight)
                         ##print "Addressee's recently addressed scores: ", u, userscore[u]
             #Do search for addressals forward of the unknown statement
-            search_forward(statements, userscore, i, i+forward_scope, recent_scope)
+            if (i+forward_scope) > len(statements):
+                end = i + (len(statements) - (i+1))
+            else:
+                end = i+forward_scope
+            search_forward(statements, userscore, i, end, recent_scope, power_weight)
             
             #if directly addressed, set userscore to zero.
             for luser in addressals:
@@ -140,11 +179,18 @@ def run(statements):
                 for username in addressals:
                     if username not in userlist:
                         userlist[username] = user()
-                    userlist[username].address(stat.issued_by, recent_scope)
-                    userlist[stat.issued_by].address(username, recent_scope)
+                    userlist[username].address(stat.issued_by, address_add_weight)
+                    userlist[stat.issued_by].address(username, address_add_weight)
         for u in userlist:
             userlist[u].update(scope_minus)
-                
+        
+        #finally if the algorithm assigns similar scores to the two top scores, then make no judgement.
+        if len(stat.alg_lambda) >= 2:
+            maxes = sorted(stat.alg_lambda, key=lambda x: stat.alg_lambda[x], reverse=True)[:2]
+            if stat.alg_lambda[maxes[0]] != 0:
+                if stat.alg_lambda[maxes[1]]/stat.alg_lambda[maxes[0]] > (lambda_threshold):
+                    stat.alg_guess = maxes[0]
+                    stat.alg_lambda = {}
             
         ##print
         ##stat.print_details(online=False)
