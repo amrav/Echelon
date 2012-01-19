@@ -4,8 +4,8 @@ import settings
 import parse_input
 import re
 
-prev_display_scope = 3
-next_display_scope = 1
+prev_display_scope = settings.prev_display_scope
+next_display_scope = settings.next_display_scope
 
 if __name__ == '__main__':
     
