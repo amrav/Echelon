@@ -11,5 +11,5 @@ next_display_scope = 4
 
 alg_list = [line_context, bracket]
 test_alg = addressal
-opt_alg = bracket
-opt_runs = 30
+opt_alg = addressal
+opt_runs = 10
