@@ -13,7 +13,7 @@ class user:
         popped_users = []
         for luser in self.recent:
             self.recent[luser] -= scope_minus
-            if self.recent[luser] == 0:
+            if self.recent[luser] <= 0:
                 popped_users.append(luser)
         for luser in popped_users:
             self.recent.pop(luser)
@@ -70,28 +70,28 @@ ranges = []
 steps = []
 
 params += [10] #recent_scope
-ranges += [(2,10)]   
+ranges += [(5,10)]   
 steps += [2]
 
 params += [10] #forward_scope
-ranges += [(2,10)]
+ranges += [(5,10)]
 steps += [2]
 
 params += [1] #scope_minus
-ranges += [(1,3)]
+ranges += [(1,2)]
 steps += [1]
 
 params += [4] #address_add_weight
-ranges += [(3,10)]
+ranges += [(3,7)]
 steps += [2]
 
 params += [30] #lambda_threshold
 ranges += [(1,50)] 
-steps += [5]
+steps += [10]
 
 params += [12] #power_weight
 ranges += [(10,40)]
-steps += [5]
+steps += [10]
 
     
 def run(statements):
@@ -187,9 +187,10 @@ def run(statements):
         #finally if the algorithm assigns similar scores to the two top scores, then make no judgement.
         if len(stat.alg_lambda) >= 2:
             maxes = sorted(stat.alg_lambda, key=lambda x: stat.alg_lambda[x], reverse=True)[:2]
-            if stat.alg_lambda[maxes[1]]/stat.alg_lambda[maxes[0]] > (lambda_threshold):
-                stat.alg_guess = maxes[0]
-                stat.alg_lambda = {}
+            if stat.alg_lambda[maxes[0]] != 0:
+                if stat.alg_lambda[maxes[1]]/stat.alg_lambda[maxes[0]] > (lambda_threshold):
+                    stat.alg_guess = maxes[0]
+                    stat.alg_lambda = {}
             
         ##print
         ##stat.print_details(online=False)
