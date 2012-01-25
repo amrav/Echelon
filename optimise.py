@@ -50,9 +50,9 @@ def findmax(filename, alg, printmax = True, result_filename = ''):
         if printmax != True:
             print
             print
-            print '----------'*4
+            print '----------'*5
             print 'Run', count, ': Testing with parameters,', param_perm
-            print '----------'*4
+            print '----------'*5
         
         alg.params = param_perm
         
@@ -145,8 +145,8 @@ def check(testfile_text, answerfile_text, alg):
     return stats
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        print 'Usage: python optimise.py filename [resultfilename]'
+    if len(sys.argv) != 3:
+        print 'Usage: python optimise.py filename resultfilename'
         sys.exit(1)
     if len(sys.argv) == 3:
         findmax(sys.argv[1], opt_alg, printmax = True, result_filename = sys.argv[2])
