@@ -144,6 +144,7 @@ def run(statements):
                         if u not in userscore:
                             userscore[u] = 1
                         userscore[u] *= pow(userlist[username].recent[u], power_weight)
+                        ##print u, ':', userscore[u]
                         ##print "Addressee's recently addressed scores: ", u, userscore[u]
             #Do search for addressals forward of the unknown statement
             if (i+forward_scope) > len(statements):
@@ -153,6 +154,7 @@ def run(statements):
             search_forward(statements, userscore, i, end, recent_scope, power_weight)
             
             #if directly addressed, set userscore to zero.
+            print addressals
             for luser in addressals:
                 userscore[luser] = 0
 
@@ -171,6 +173,9 @@ def run(statements):
     #finally assign these values as lambdas
             for luser in userscore:
                 stat.alg_lambda[luser] = userscore[luser]
+            
+            print stat.text_str
+            print stat.alg_lambda
 
         else:
             if len(addressals)!=0:
@@ -186,10 +191,7 @@ def run(statements):
         
         #finally if the algorithm assigns similar scores to the two top scores, then make no judgement.
         maxes = sorted(stat.alg_lambda, key=lambda x: stat.alg_lambda[x], reverse=True)
-        if len(maxes)>0 and stat.alg_lambda[maxes[0]] <= 1:
-            stat.alg_guess = maxes[0]
-            stat.alg_lambda = {}
-        elif len(stat.alg_lambda) >= 2:
+        if len(stat.alg_lambda) >= 2:
             if stat.alg_lambda[maxes[1]]/stat.alg_lambda[maxes[0]] > (lambda_threshold):
                     stat.alg_guess = maxes[0]
                     stat.alg_lambda = {}
