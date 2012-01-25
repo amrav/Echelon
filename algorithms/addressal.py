@@ -26,7 +26,7 @@ class user:
 
 def find_addressals(text):
     users = []
-    matches = re.findall(r"(.*?):", text)
+    matches = re.findall(r"\W?(.+?)\W+?", text)
     for match in matches:
         ##print match
         if match in statement.users:
@@ -69,11 +69,11 @@ params = []
 ranges = []
 steps = []
 
-params += [10] #recent_scope
+params += [5] #recent_scope
 ranges += [(5,10)]   
 steps += [2]
 
-params += [10] #forward_scope
+params += [5] #forward_scope
 ranges += [(5,10)]
 steps += [2]
 
@@ -85,11 +85,11 @@ params += [4] #address_add_weight
 ranges += [(3,7)]
 steps += [2]
 
-params += [30] #lambda_threshold
+params += [100] #lambda_threshold
 ranges += [(1,50)] 
 steps += [10]
 
-params += [12] #power_weight
+params += [30] #power_weight
 ranges += [(10,40)]
 steps += [10]
 
@@ -144,6 +144,7 @@ def run(statements):
                         if u not in userscore:
                             userscore[u] = 1
                         userscore[u] *= pow(userlist[username].recent[u], power_weight)
+                        ##print u, ':', userscore[u]
                         ##print "Addressee's recently addressed scores: ", u, userscore[u]
             #Do search for addressals forward of the unknown statement
             if (i+forward_scope) > len(statements):
@@ -153,6 +154,7 @@ def run(statements):
             search_forward(statements, userscore, i, end, recent_scope, power_weight)
             
             #if directly addressed, set userscore to zero.
+            print addressals
             for luser in addressals:
                 userscore[luser] = 0
 
@@ -171,6 +173,9 @@ def run(statements):
     #finally assign these values as lambdas
             for luser in userscore:
                 stat.alg_lambda[luser] = userscore[luser]
+            
+            print stat.text_str
+            print stat.alg_lambda
 
         else:
             if len(addressals)!=0:
@@ -184,9 +189,13 @@ def run(statements):
         for u in userlist:
             userlist[u].update(scope_minus)
         
-        #finally if the algorithm assigns similar scores to the two top scores, then make no judgement.
+        
+        
+    	##print stat.alg_lambda
+	
+	#finally if the algorithm assigns similar scores to the two top scores, then make no judgement.
         if len(stat.alg_lambda) >= 2:
-            maxes = sorted(stat.alg_lambda, key=lambda x: stat.alg_lambda[x], reverse=True)[:2]
+            maxes = sorted(stat.alg_lambda, key=lambda x: stat.alg_lambda[x], reverse=True)
             if stat.alg_lambda[maxes[0]] != 0:
                 if stat.alg_lambda[maxes[1]]/stat.alg_lambda[maxes[0]] > (lambda_threshold):
                     stat.alg_guess = maxes[0]
