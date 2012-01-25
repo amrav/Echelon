@@ -12,17 +12,21 @@ ranges = []
 steps = []
 
 
-params += [1]  #issue_scope
+params += [5]  #issue_scope
 ranges += [(1,10)]
 steps += [1]
 
-params += [9] #scope_weight
+params += [2] #scope_weight
 ranges +=  [(1,10)]
 steps += [1]
 
-params += [7] #scope_weight_minus
+params += [1] #scope_weight_minus
 ranges += [(0,10)]
 steps += [1]
+
+params += [50]
+ranges += [(50,50)]
+steps += [0]
 
 class context_statement(parse_input.statement):
     scope = {}
@@ -43,6 +47,7 @@ def run_alg(statements):
     issue_scope = params[0]
     scope_weight = params[1]
     scope_weight_minus = params[2]
+    lambda_threshold = params[3]/100
 #function that runs the line context algorithm      
     for stat in statements:
         #assign user_lambdas if required:
@@ -58,9 +63,17 @@ def run_alg(statements):
 
             for user in context_statement.scope: #Normalise the scope scores by dividing by the average
                 if avg != 0:
-                    stat.alg_lambda[user] = log(context_statement.scope[user])/avg
+                    context_statement.scope[user] = log(context_statement.scope[user])/avg
+                    stat.alg_lambda[user] = context_statement.scope[user]
                 ##print stat.alg_lambda[user],
             ##print
+            
+            #if scores don't cross threshold, don't assign any lambdas
+            maxes = sorted(context_statement.scope.values(), reverse = True)
+            if len(maxes)>1 and maxes[0] != 0:
+                if maxes[1]/maxes[0] > lambda_threshold:
+                    stat.alg_lambda = {}
+            
         #Otherwise update scope
         elif stat.issued_by not in context_statement.scope:
             context_statement.scope[stat.issued_by] = scope_weight*issue_scope

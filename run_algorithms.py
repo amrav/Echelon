@@ -1,13 +1,15 @@
+from __future__ import division
 import sys
 import parse_input
-import settings
-
+from settings import alg_list
+from settings import next_display_scope
+from settings import prev_display_scope
 
 class final_prob_statement(parse_input.statement):
     def init(self):
         self.final_lambda = {}
-        self.alg_probs = {}
-
+        self.alg_lambdas = {}
+    
 def run(logtext, answertext, alg_list):
     
     '''Takes a list of algorithms and assigns final probabilities to each 
@@ -27,36 +29,51 @@ For more information, refer to the Readme.'''
 
     print '-----------------'*4
     print
-    print 'Test', filename, 'using', alg_list
+    print 'Test using', alg_list
     print
     print '-----------------'*4
     print 
     print 
 
-    statements = parse_input.init(filetext=logtext)
-    
+    statements = parse_input.init(text=logtext)
+    final_statements = []
     for stat in statements:
-        stat.print_details(online = False)
+        stat.__class__ = final_prob_statement
+        stat.init()
+        final_statements.append(stat)
+        
+    
+    for alg in alg_list:
+        for stat in statements:
+            stat.alg_lambda = {}
+        alg.run(statements)
+        for i in range(len(statements)):
+            final_statements[i].alg_lambdas[str(alg)] = statements[i].alg_lambda
+            
+
+    for i in range(len(final_statements)):
+        stat = final_statements[i]
         if stat.issued_by == '$$$':
             deleted_nicks += 1
+            for st in final_statements[(i-prev_display_scope):i+next_display_scope+1]:
+                st.print_details()
+
             for alg in alg_list:
-                stat.alg_lambda = {}
-                alg.run(statements)
                 print
                 print alg
-                print stat.alg_lambda
+                print stat.alg_lambdas[str(alg)]
                 print
-                for user in stat.alg_lambda:
+                for user in stat.alg_lambdas[str(alg)]:
                     if user not in stat.final_lambda:
                         stat.final_lambda[user]=1
-                    stat.final_lambda[user] *= (stat.alg_lambda[user]) 
+                    stat.final_lambda[user] *= (stat.alg_lambdas[str(alg)][user])
             print 'Final Decision:'
             print stat.final_lambda
             if len(stat.final_lambda)>0:
-                answer = sorted(stat.final_lambda, key=lambda x: stat.alg_lambda[x], reverse=True)
+                answer = sorted(stat.final_lambda, key=lambda x: stat.final_lambda[x], reverse=True)[0]
             else:
                 answer = None
-            if answer != None and stat.alg_lambda:
+            if answer != None and stat.final_lambda[answer]!=0:
                 print 'Replacing $$$ by', answer
             else:
                 print 'Leaving unanswered.'
@@ -64,7 +81,7 @@ For more information, refer to the Readme.'''
             print 'Correct answer: ', answers[deleted_nicks-1]
             if answer == None:
                 unanswered += 1
-            elif answer = answers[deleted_nicks-1]:
+            elif answer == answers[deleted_nicks-1]:
                 correct += 1
             else:
                 wrong += 1
@@ -80,6 +97,20 @@ For more information, refer to the Readme.'''
                     #carefully.
                     ##print user,final_prob
     
+    success = correct*100/(correct+wrong)
+    score = 3*correct - wrong
+    correct *= 100/deleted_nicks
+    wrong *= 100/deleted_nicks
+    unanswered *= 100/deleted_nicks
+
+
+    print '----------------------'
+    print 'RESULT:'
+    print '----------------------'
+    print
+    print success, '% success,', correct, '% correct,', wrong, '% wrong,', unanswered, '% unanswered,', deleted_nicks, 'total.'
+    print 'Score:', score
+    print
             
 
 if __name__ == '__main__':
@@ -87,7 +118,9 @@ if __name__ == '__main__':
         print "Usage: python run_algorithms.py test_filename"
         sys.exit(1)
     #print type(sys.argv[1])
-    run(sys.argv[1], settings.alg_list)
+    test_text = open(sys.argv[1]).read()
+    answer_text = open(sys.argv[1][:-8]+'answers.txt').read()
+    run(test_text, answer_text, alg_list)
         
                 
                     

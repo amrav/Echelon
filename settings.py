@@ -9,7 +9,7 @@ import addressal
 prev_display_scope = 4
 next_display_scope = 4
 
-alg_list = [line_context, bracket]
+alg_list = [line_context, bracket, addressal]
 test_alg = addressal
 opt_alg = addressal
 opt_runs = 3
