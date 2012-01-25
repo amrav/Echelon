@@ -26,7 +26,7 @@ class user:
 
 def find_addressals(text):
     users = []
-    matches = re.findall(r"\W?(.+?)\W+?", text)
+    matches = re.findall(r"\W?(\w+)\W?", text)
     for match in matches:
         ##print match
         if match in statement.users:
@@ -69,11 +69,11 @@ params = []
 ranges = []
 steps = []
 
-params += [5] #recent_scope
+params += [7] #recent_scope
 ranges += [(5,10)]   
 steps += [2]
 
-params += [5] #forward_scope
+params += [7] #forward_scope
 ranges += [(5,10)]
 steps += [2]
 
@@ -85,11 +85,11 @@ params += [4] #address_add_weight
 ranges += [(3,7)]
 steps += [2]
 
-params += [100] #lambda_threshold
+params += [20] #lambda_threshold
 ranges += [(1,50)] 
 steps += [10]
 
-params += [30] #power_weight
+params += [20] #power_weight
 ranges += [(10,40)]
 steps += [10]
 
@@ -189,20 +189,16 @@ def run(statements):
         for u in userlist:
             userlist[u].update(scope_minus)
         
-        
-        
-    	##print stat.alg_lambda
-	
-	#finally if the algorithm assigns similar scores to the two top scores, then make no judgement.
+        #finally if the algorithm assigns similar scores to the two top scores, then make no judgement.
+        maxes = sorted(stat.alg_lambda, key=lambda x: stat.alg_lambda[x], reverse=True)
         if len(stat.alg_lambda) >= 2:
-            maxes = sorted(stat.alg_lambda, key=lambda x: stat.alg_lambda[x], reverse=True)
-            if stat.alg_lambda[maxes[0]] != 0:
-                if stat.alg_lambda[maxes[1]]/stat.alg_lambda[maxes[0]] > (lambda_threshold):
+            if stat.alg_lambda[maxes[1]]/stat.alg_lambda[maxes[0]] > (lambda_threshold):
                     stat.alg_guess = maxes[0]
                     stat.alg_lambda = {}
-            
+        
         ##print
         ##stat.print_details(online=False)
+        ##print userscore
         ##for u in userlist:
             ##print u, ':', userlist[u].recent
         ##print stat.alg_lambda
