@@ -1,13 +1,16 @@
+from __future__ import division
 import sys
 import parse_input
-import settings
-
+from settings import alg_list
+from settings import next_display_scope
+from settings import prev_display_scope
 
 class final_prob_statement(parse_input.statement):
     def init(self):
-        self.final_prob = {}
-
-def run(filename, alg_list):
+        self.final_lambda = {}
+        self.alg_lambdas = {}
+    
+def run(logtext, answertext, alg_list):
     
     '''Takes a list of algorithms and assigns final probabilities to each 
 statement in statements
@@ -18,51 +21,106 @@ populate a probability dictionary for users.
 
 For more information, refer to the Readme.''' 
     
-    statements = parse_input.init(filename)
+    answers = answertext.split('\n')
+    deleted_nicks = 0
+    correct = 0
+    wrong = 0
+    unanswered = 0
+
+    print '-----------------'*4
+    print
+    print 'Test using', alg_list
+    print
+    print '-----------------'*4
+    print 
+    print 
+
+    statements = parse_input.init(text=logtext)
+    final_statements = []
     for stat in statements:
         stat.__class__ = final_prob_statement
         stat.init()
+        final_statements.append(stat)
+        
+    
     for alg in alg_list:
-        alg.run(statements)
         for stat in statements:
-            if stat.issued_by == '$$$':
-                for user in stat.alg_lambda:
-                    if user not in stat.final_prob:
-                        stat.final_prob[user]=1
-                    stat.final_prob[user] *= (stat.alg_lambda[user]) 
-                    ##print stat.alg_prob
+            stat.alg_lambda = {}
+        alg.run(statements)
+        for i in range(len(statements)):
+            final_statements[i].alg_lambdas[str(alg)] = statements[i].alg_lambda
+            
+
+    for i in range(len(final_statements)):
+        stat = final_statements[i]
+        if stat.issued_by == '$$$':
+            deleted_nicks += 1
+            for st in final_statements[(i-prev_display_scope):i+next_display_scope+1]:
+                st.print_details()
+
+            for alg in alg_list:
+                print
+                print alg
+                print stat.alg_lambdas[str(alg)]
+                print
+                for user in stat.alg_lambdas[str(alg)]:
+                    if user not in stat.final_lambda:
+                        stat.final_lambda[user]=1
+                    stat.final_lambda[user] *= (stat.alg_lambdas[str(alg)][user])
+            print 'Final Decision:'
+            print stat.final_lambda
+            if len(stat.final_lambda)>0:
+                answer = sorted(stat.final_lambda, key=lambda x: stat.final_lambda[x], reverse=True)[0]
+            else:
+                answer = None
+            if answer != None and stat.final_lambda[answer]!=0:
+                print 'Replacing $$$ by', answer
+            else:
+                print 'Leaving unanswered.'
+            print
+            print 'Correct answer: ', answers[deleted_nicks-1]
+            if answer == None:
+                unanswered += 1
+            elif answer == answers[deleted_nicks-1]:
+                correct += 1
+            else:
+                wrong += 1
+            print
+            print 'So far:'
+            print 'Correct: ', correct
+            print 'Wrong:', wrong
+            print 'Unanswered:', unanswered
+            print
+
+##print stat.alg_prob
                     #NEED TO ADD WEIGHTS. This function has to be looked
                     #carefully.
                     ##print user,final_prob
-    return statements
-            
+    
+    success = correct*100/(correct+wrong)
+    score = 3*correct - wrong
+    correct *= 100/deleted_nicks
+    wrong *= 100/deleted_nicks
+    unanswered *= 100/deleted_nicks
 
-def print_decisions(statements):
-    for i in range(len(statements)):
-        
-        if statements[i].issued_by == '$$$':
-            print_range = 5
-            print "--------------------------------------------------"
-            print "Context:"
-            for stat in statements[i-print_range:i+1]: 
-                stat.print_details(full_text=True)
-            stat = statements[i]
-            for user in stat.final_prob:
-             if stat.final_prob[user] == max(stat.final_prob.values())\
-and user!='$$$':
-                 print "Replacing $$$ by", user
-            print stat.final_prob
-            print
-                
+
+    print '----------------------'
+    print 'RESULT:'
+    print '----------------------'
+    print
+    print success, '% success,', correct, '% correct,', wrong, '% wrong,', unanswered, '% unanswered,', deleted_nicks, 'total.'
+    print 'Score:', score
+    print
             
 
 if __name__ == '__main__':
     if len(sys.argv)!=2:
-        print "Usage: python run_algorithms.py logfile"
+        print "Usage: python run_algorithms.py test_filename"
         sys.exit(1)
     #print type(sys.argv[1])
-    statements = run(sys.argv[1], settings.alg_list)
-    print_decisions(statements)
+    test_text = open(sys.argv[1]).read()
+    answer_text = open(sys.argv[1][:-8]+'answers.txt').read()
+    run(test_text, answer_text, alg_list)
         
                 
                     

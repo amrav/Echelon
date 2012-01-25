@@ -128,7 +128,7 @@ users_online):
         #subsequent statements
         
         
-    def print_details(self, full_text=True, online=True, current=True, total_time=True): 
+    def print_details(self, full_text=True, online=False, current=True, total_time=True): 
         print self.issued_by + ' at ' + self.time
 	print
         if full_text == False:
@@ -140,7 +140,7 @@ users_online):
         print; print
         if online==True:
             print "Users online:", sorted(self.users_online)
-	print
+            print
         if total_time==True:
             print "Total time:", self.total_time
 	print
