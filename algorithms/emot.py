@@ -43,9 +43,9 @@ def emoticons_search (statements, downlimit, uplimit):
 
   for i in range(len(statements)):
     if statements[i].issued_by == '$$$':
-      curr_users.clear()
+      curr_users = {}
       if i> uplimit and i < len(statements)- downlimit :
-        for j in range(i-uplimit , i+downlimit ):       
+        for j in range(i-uplimit , i+downlimit+1 ):       
           stat = statements[j]
           if stat.issued_by != '$$$':
             if stat.issued_by not in curr_users:
