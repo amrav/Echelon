@@ -32,12 +32,12 @@ class emoticon_statement(parse_input.statement):
 
 class user:   
   def __init__(self,name):
-      self.name = name
-      self.emo = {}
-      self.statement_number = 0
+    self.name = name
+    self.emo = {}
+    self.statement_number = 0
       ##print 'initatiated', self.name
-      for emoticon in emoticons:
-          self.emo[emoticon]=0 
+    for emoticon in emoticons:
+      self.emo[emoticon]=0 
 
 def emoticons_search (statements, downlimit, uplimit):
 
