@@ -1,14 +1,47 @@
 from __future__ import division
 import sys
 import re
-import parse_input
+import os
 
+#so that parse_input can be imported
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import parse_input
 
 # Test algorithm for usage of emoticons
 
 userlist = {}
-emoticons = [':D',':P',':[)]',':[/]' , ':[|]' , ';[)]' , ':0' ,':O']  #add list of emoticons to track in regular expression form
-curr_users = {}
+
+def build_emoticons():
+#build emoticons list from the Emoticons.txt file 
+  emoticons = open("Emoticons.txt").read().split()
+  new_emots = []
+  for emot in emoticons:
+  #Also include :) for :-)
+    if len(emot) > 2 and emot[1] == '-':
+      new_emots.append([emot[:1]+emot[2:]])
+
+  for emo in new_emots:
+    emoticons += emo
+  ##print emoticons
+  new_emots = []
+
+  for emot in emoticons:
+  #make sure that parenthesis are preceded by '\'
+    new_emot = ''
+    for i in range(len(emot)):
+      letter = emot[i]
+      ##print letter
+      match = re.match(r"\W", letter)
+      if match:
+        new_emot += '\\' + letter
+        ##print new_emot
+      else:
+        new_emot += letter
+    ##print new_emot
+    new_emots.append(new_emot)
+  return set(new_emots)
+
+##print emoticons
 
 params = []
 ranges = []
@@ -35,10 +68,11 @@ class user:
     self.emo = {}
     self.statement_number = 0
       ##print 'initatiated', self.name
-    for emoticon in emoticons:
-      self.emo[emoticon]=0 
+    
 
 def emoticons_search (statements, downlimit, uplimit):
+
+  emoticons = build_emoticons()
 
   for i in range(len(statements)):
     if statements[i].issued_by == '$$$':
@@ -61,6 +95,8 @@ def emoticons_search (statements, downlimit, uplimit):
               ma = re.findall(emoticon,stat.text_str)
               #if any are found, increment emo for that user for that emoticon
               if ma:
+                if emoticon not in curr_users[stat.issued_by].emo:
+                  curr_users[stat.issued_by].emo[emoticon] = 0
                 curr_users[stat.issued_by].emo[emoticon] += len(ma)
       
       for users in curr_users:
@@ -76,7 +112,7 @@ def emoticons_search (statements, downlimit, uplimit):
           for usr in curr_users: #not users online it should be current users from line_context
               #print usr , curr_users[usr].emo[emoticon]
               #if curr_users[usr].emo[emoticon] > 0:
-            if curr_users[usr].emo[emoticon] != 0:
+            if emoticon in curr_users[usr].emo and curr_users[usr].emo[emoticon] != 0:
               statements[i].alg_lambda[usr] = 1 + curr_users[usr].emo[emoticon]/10   # use this 10 as parameter to va'''
 
             
@@ -99,8 +135,7 @@ def run(statements):
     
 
 if __name__ == '__main__':
-        
-    run(statements)
+  run(statements)
   
 
 
