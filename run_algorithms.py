@@ -27,11 +27,11 @@ For more information, refer to the Readme.'''
     wrong = 0
     unanswered = 0
 
-    print '-----------------'*4
+    print '-----------------'*12
     print
     print 'Test using', alg_list
     print
-    print '-----------------'*4
+    print '-----------------'*12
     print 
     print 
 
@@ -57,7 +57,7 @@ For more information, refer to the Readme.'''
             deleted_nicks += 1
             for st in final_statements[(i-prev_display_scope):i+next_display_scope+1]:
                 st.print_details()
-
+                print
             for alg in alg_list:
                 print
                 print alg
@@ -67,8 +67,9 @@ For more information, refer to the Readme.'''
                     if user not in stat.final_lambda:
                         stat.final_lambda[user]=1
                     stat.final_lambda[user] *= (stat.alg_lambdas[str(alg)][user])
-            print 'Final Decision:'
+            print 'Final Decision:',
             print stat.final_lambda
+            print
             if len(stat.final_lambda)>0:
                 answer = sorted(stat.final_lambda, key=lambda x: stat.final_lambda[x], reverse=True)[0]
             else:

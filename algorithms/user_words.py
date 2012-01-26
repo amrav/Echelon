@@ -14,7 +14,7 @@ params += [10] #match_threshold
 ranges += [(5,15)]
 steps += [2]
 
-params += [80] #lambda_threshold
+params += [70] #lambda_threshold
 ranges += [(20,99)]
 steps += [5]
 
@@ -74,7 +74,8 @@ def run(statements):
                 stat.alg_lambda = {}
 
             maxes = sorted(stat.alg_lambda.values(), reverse = True)
-            if len(maxes) > 2:
+            if len(maxes) >= 2:
+                ##print maxes[1]/maxes[0]
                 if maxes[1]/maxes[0] > lambda_threshold:
                     stat.alg_lambda = {}
 

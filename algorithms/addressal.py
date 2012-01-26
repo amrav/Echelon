@@ -89,7 +89,7 @@ params += [20] #lambda_threshold
 ranges += [(1,50)] 
 steps += [10]
 
-params += [20] #power_weight
+params += [30] #power_weight
 ranges += [(10,40)]
 steps += [10]
 
@@ -154,7 +154,7 @@ def run(statements):
             search_forward(statements, userscore, i, end, recent_scope, power_weight)
             
             #if directly addressed, set userscore to zero.
-            print addressals
+            ##print addressals
             for luser in addressals:
                 userscore[luser] = 0
 
@@ -174,8 +174,8 @@ def run(statements):
             for luser in userscore:
                 stat.alg_lambda[luser] = userscore[luser]
             
-            print stat.text_str
-            print stat.alg_lambda
+            ##print stat.text_str
+            ##print stat.alg_lambda
 
         else:
             if len(addressals)!=0:
