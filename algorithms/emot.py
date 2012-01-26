@@ -22,13 +22,6 @@ steps += [1]
 
 
 
-downlimit = params[0]
-uplimit = params[0]
-
-
-
-
-
 class emoticon_statement(parse_input.statement):
   scope = {}
   
@@ -46,7 +39,7 @@ class user:
       for emoticon in emoticons:
           self.emo[emoticon]=0 
 
-def emoticons_search (statements):
+def emoticons_search (statements, downlimit, uplimit):
 
   for i in range(len(statements)):
     if statements[i].issued_by == '$$$':
@@ -89,9 +82,12 @@ def emoticons_search (statements):
  
 def run(statements):
   
+  downlimit = params[0]
+  uplimit = params[0]
+
   for stat in statements:
     stat.__class__ = emoticon_statement
-  emoticons_search(statements)   
+  emoticons_search(statements, downlimit, uplimit)   
   ##print_details()
    
     
