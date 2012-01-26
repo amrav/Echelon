@@ -31,8 +31,7 @@ class emoticon_statement(parse_input.statement):
    
 
 class user:   
-  def __init__(self,name):
-    self.name = name
+  def __init__(self):
     self.emo = {}
     self.statement_number = 0
       ##print 'initatiated', self.name
@@ -72,7 +71,7 @@ def emoticons_search (statements, downlimit, uplimit):
 
     
       for emoticon in emoticons:
-        m = re.findall(emoticon,stat.text_str)
+        m = re.findall(emoticon,statements[i].text_str)
         if m:
           for usr in curr_users: #not users online it should be current users from line_context
               #print usr , curr_users[usr].emo[emoticon]
