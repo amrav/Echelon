@@ -1,15 +1,12 @@
 This file explains how to write an algorithm module, test it using 
-test_algorithm.py, and run it using run_algorithms.py. It is 
-intended as a specifications guide.
+test_algorithm.py, and run it using run_algorithms.py.  
+
 
 INSTALLATION:
 
 Dependencies:
 
 1) Tested on Python v2.7
-
-2) PyEnchant: available from packages.python.org/pyenchant
-
 
 USAGE:
 
