@@ -12,11 +12,11 @@ ranges = []
 steps = []
 
 
-params += [5]  #issue_scope
+params += [3]  #issue_scope
 ranges += [(1,10)]
 steps += [1]
 
-params += [2] #scope_weight
+params += [4] #scope_weight
 ranges +=  [(1,10)]
 steps += [1]
 
@@ -24,7 +24,7 @@ params += [1] #scope_weight_minus
 ranges += [(0,10)]
 steps += [1]
 
-params += [50]
+params += [90] #lambda_threshold
 ranges += [(50,50)]
 steps += [0]
 
@@ -33,14 +33,14 @@ class context_statement(parse_input.statement):
     #for debugging:
     def set_curr_users(self, curr_users):
         self.curr_users = curr_users
-    def print_details(self):
+    '''def print_details(self):
         parse_input.statement.print_details(self)
         print "Current Users: ", self.curr_users
         if self.alg_lambda != {}:
             print "Algorithm lambdas: ", self.alg_lambda
         print 
         print
-        print
+        print'''
 
 def run_alg(statements):
     #inititalise parameters
@@ -107,6 +107,6 @@ if __name__ == '__main__':
         sys.exit(1)
     statements = parse_input.init(sys.argv[1])
     run(statements)
-    for stat in statements:
+    ##for stat in statements:
         ##if stat.issued_by == '$$$':
-        stat.print_details()
+        ##stat.print_details()

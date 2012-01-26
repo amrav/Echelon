@@ -128,7 +128,7 @@ users_online):
         #subsequent statements
         
         
-    def print_details(self, full_text=True, online=False, current=True, total_time=True): 
+    def print_details(self, full_text=True, online=False, current=True, total_time=False): 
         print self.issued_by + ' at ' + self.time
 	print
         if full_text == False:
