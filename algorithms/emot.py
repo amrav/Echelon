@@ -48,7 +48,7 @@ ranges = []
 steps = []
 
 
-params +=  [6] #uplimit
+params +=  [12] #uplimit
 ranges += [(1, 15)]
 steps += [1]
 
