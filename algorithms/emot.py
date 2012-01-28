@@ -41,15 +41,15 @@ def build_emoticons():
     new_emots.append(new_emot)
   return set(new_emots)
 
-##print emoticons
+
 
 params = []
 ranges = []
 steps = []
 
 
-params +=  [12] #uplimit
-ranges += [(1, 15)]
+params +=  [5] #uplimit
+ranges += [(15, 15)]
 steps += [1]
 
 
@@ -73,48 +73,69 @@ class user:
 def emoticons_search (statements, downlimit, uplimit):
 
   emoticons = build_emoticons()
-
+  ##print emoticons
   for i in range(len(statements)):
+
     if statements[i].issued_by == '$$$':
       #initialise curr_users
-      curr_users = {}
+      
       #make sure that we are not very near the beginning or the end of the file
       if i> uplimit and i < len(statements)- downlimit :
+        curr_users = {}
+        ##print i
         #start checking for emoticons in the specified range
         for j in range(i-uplimit , i+downlimit+1 ):       
+          ##print j,
           stat = statements[j]
+          ##print '---'*10
+          ##stat.print_details()
+
           #don't using statements issued by unknown users
           if stat.issued_by != '$$$':
-            #initialise if necessary
-            if stat.issued_by not in curr_users:
-              curr_users[stat.issued_by] = user()
-            #increment the number of statements made by that user
-            curr_users[stat.issued_by].statement_number += 1
+            
+            '''#increment the number of statements made by that user
+            curr_users[stat.issued_by].statement_number += 1'''
             #search for any emoticons in the statement text
             for emoticon in emoticons:
               ma = re.findall(emoticon,stat.text_str)
+
               #if any are found, increment emo for that user for that emoticon
               if ma:
+                #initialise if necessary
+                if stat.issued_by not in curr_users:
+                  curr_users[stat.issued_by] = user()
+                ##print ma
                 if emoticon not in curr_users[stat.issued_by].emo:
                   curr_users[stat.issued_by].emo[emoticon] = 0
                 curr_users[stat.issued_by].emo[emoticon] += len(ma)
-      
-      for users in curr_users:
-        for emot in curr_users[users].emo:
+                ##print stat.issued_by, curr_users[stat.issued_by].emo
+                ##print 'Current Users:', curr_users
+            '''for users in curr_users:
+          for emot in curr_users[users].emo:
           #normalise emo for users by dividing by number of statements made by users 
-          curr_users[users].emo[emot]/= curr_users[users].statement_number
-        
+            curr_users[users].emo[emot]/= curr_users[users].statement_number'''
+          ##print '---'*10
 
-    
-      for emoticon in emoticons:
-        m = re.findall(emoticon,statements[i].text_str)
-        if m:
-          for usr in curr_users: #not users online it should be current users from line_context
+        score = {}
+        for emoticon in emoticons:
+          m = re.findall(emoticon,statements[i].text_str)
+          if m:
+            ##print 'Current Users!!!:', curr_users, ':',
+            for usr in curr_users: #not users online it should be current users from line_context
               #print usr , curr_users[usr].emo[emoticon]
               #if curr_users[usr].emo[emoticon] > 0:
-            if emoticon in curr_users[usr].emo and curr_users[usr].emo[emoticon] != 0:
-              statements[i].alg_lambda[usr] = 1 + curr_users[usr].emo[emoticon]/10   # use this 10 as parameter to va'''
-
+              #print usr,
+              if emoticon in curr_users[usr].emo and curr_users[usr].emo[emoticon] != 0:
+                if usr not in score:
+                  score[usr] = 0
+                score[usr] += curr_users[usr].emo[emoticon]
+        if score:
+          ##print 'Score:', score
+          avg = sum(score.values())
+          avg /= len(score)
+          for usr in score:
+            stat.alg_lambda[usr] = score[usr]/avg
+            #print
             
             
 
