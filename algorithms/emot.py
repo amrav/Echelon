@@ -134,7 +134,7 @@ def emoticons_search (statements, downlimit, uplimit):
           avg = sum(score.values())
           avg /= len(score)
           for usr in score:
-            statements[i].alg_lambda[usr] = score[usr]/avg
+            statements[i].alg_lambda[usr] = 1 + score[usr]/(avg*5)
         ##print statements[i-1].issued_by
         ##statements[i].alg_lambda[statements[i-1].issued_by] = 1.1
             #print
