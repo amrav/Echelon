@@ -11,11 +11,11 @@ import typo
 import emot
 
 #for test_algorithm.py
-prev_display_scope = 4
-next_display_scope = 4
+prev_display_scope = 10
+next_display_scope = 10
 
 alg_list = [line_context, bracket, addressal, user_words, typo, emot]
 test_alg = emot
 opt_alg = emot
-opt_runs = 100
+opt_runs = 1
 

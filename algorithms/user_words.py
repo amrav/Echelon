@@ -10,11 +10,11 @@ params = []
 ranges = []
 steps = []
 
-params += [10] #match_threshold
+params += [5] #match_threshold
 ranges += [(5,15)]
 steps += [2]
 
-params += [70] #lambda_threshold
+params += [80] #lambda_threshold
 ranges += [(20,99)]
 steps += [5]
 

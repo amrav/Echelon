@@ -48,7 +48,7 @@ ranges = []
 steps = []
 
 
-params +=  [5] #uplimit
+params +=  [15] #uplimit
 ranges += [(15, 15)]
 steps += [1]
 
@@ -80,7 +80,7 @@ def emoticons_search (statements, downlimit, uplimit):
       #initialise curr_users
       
       #make sure that we are not very near the beginning or the end of the file
-      if i> uplimit and i < len(statements)- downlimit :
+      if (i> uplimit and i < len(statements)- downlimit) :
         curr_users = {}
         ##print i
         #start checking for emoticons in the specified range
@@ -134,7 +134,9 @@ def emoticons_search (statements, downlimit, uplimit):
           avg = sum(score.values())
           avg /= len(score)
           for usr in score:
-            stat.alg_lambda[usr] = score[usr]/avg
+            statements[i].alg_lambda[usr] = score[usr]/avg
+        ##print statements[i-1].issued_by
+        ##statements[i].alg_lambda[statements[i-1].issued_by] = 1.1
             #print
             
             
