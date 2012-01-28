@@ -1,0 +1,1235 @@
+[00:01] <geever> good night
+
+[00:01] *** geever left
+[00:16] *** schumaml left
+[00:30] *** Winterslice left
+[00:49] *** TomeEclipse joined
+[00:52] *** Tamrabam joined
+[00:53] *** Tamrabam left
+[00:55] *** Garett joined
+[01:08] *** TeoR joined
+[01:11] *** dbelange left
+[01:11] *** TeoR left
+[01:13] *** Garett left
+[01:23] *** patter joined
+[01:23] *** Garett joined
+[01:38] *** patter left
+[01:39] *** Garett left
+[01:39] *** Garett joined
+[01:39] *** Garett left
+[01:40] *** Garett joined
+[01:44] *** Garett left
+[01:53] *** BTAxis left
+[02:00] *** BTAxis joined
+[02:00] *** ChanServ sets mode: +o BTAxis
+
+[02:02] *** Tron_ joined
+[02:18] *** Tron left
+[02:24] *** TomeEclipse left
+[02:32] *** TomeEclipse joined
+[02:43] *** TomeEclipse left
+[03:14] *** nairan_z joined
+[03:25] *** nairan_zz left
+[03:27] *** mattn2|home__ joined
+[03:27] *** mattn2|home_ left
+[04:07] *** Gnarge joined
+[04:09] *** Gnarge left
+[04:25] *** wwe joined
+[04:25] *** wwe left
+[05:22] *** Edheldil left
+[05:33] *** Tron_ is now known as Tron
+
+[06:15] <mattn2|home__> Richlv: compile with -quant 6
+
+[06:15] <mattn2|home__> the compilation for bunker lasts 30 seconds on my machine now
+
+[06:15] <mattn2|home__> both day and night lightmap
+
+[06:16] <mattn2|home__> i meant the complete compile - with pathfinding, too
+
+[06:28] <CIA-23> tlh2000 * r20555 /ufoai/trunk/base/ufos/aircraftmanagement.ufo: (log message trimmed)
+
+[06:28] <CIA-23> * reverted r20540 (this was intentional - even if the models are not
+
+[06:28] <CIA-23> shown on the geoscape now - this must be fixed in the code, not in the
+
+[06:28] <CIA-23> script files)
+
+[06:28] <CIA-23> * This change was made to unify the model paths in the script files -
+
+[06:28] <CIA-23> none menumodels (see models.ufo) should always have their 'full' path
+
+[06:28] <CIA-23> (relative to base/models of course) - only menumodels should use short
+
+[06:31] <CIA-23> tlh2000 * r20556 /ufoai/trunk/src/client/renderer/r_draw.c: * fixed R_Draw3DMapMarkers for new geoscape model paths
+
+[06:33] <CIA-23> tlh2000 * r20557 /ufoai/trunk/src/client/cl_map.c: * fixed geoscape base model paths
+
+[06:57] <CIA-23> tlh2000 * r20558 /ufoai/trunk/base/textures/tex_base/ (9 files): * merged helipad images into one image
+
+[07:01] <CIA-23> tlh2000 * r20559 /ufoai/trunk/base/maps/ (bunker.map dam.map):
+
+[07:01] <CIA-23> * merged helipad brushes
+
+[07:01] <CIA-23> * bunker:
+
+[07:01] <CIA-23> ** tweaked lighting a little bit
+
+[07:01] <CIA-23> ** fixed some corona positions
+
+[07:01] <CIA-23> ** NOTE: still wip
+
+[07:03] *** Brocotos joined
+[07:03] *** Brocotos left
+[07:04] *** viktor joined
+[07:09] *** acardenas joined
+[07:12] <CIA-23> tlh2000 * r20560 /ufoai/trunk/build/radiant.mk: * fixed radiant targets
+
+[07:21] <CIA-23> tlh2000 * r20561 /ufoai/trunk/base/maps/bunker.map:
+
+[07:21] <CIA-23> * func_door
+
+[07:21] <CIA-23> * fixed levelflag
+
+[07:21] <CIA-23> * moved coronas
+
+[07:21] <CIA-23> * tweaked lighting
+
+[07:25] *** viktor left
+[07:26] *** KillDoor joined
+[07:52] *** acardenas left
+[07:59] <CIA-23> tlh2000 * r20562 /ufoai/trunk/base/maps/bunker.map: * replaced some light ents with surface lights
+
+[08:11] <CIA-23> tlh2000 * r20563 /ufoai/trunk/base/maps/bunker.map: * more surface lights and tweaked them a little bit
+
+[08:14] *** tchristney left
+[08:23] <CIA-23> tlh2000 * r20564 /ufoai/trunk/src/tools/ufo2map/check.c: * SURF_LIGHT faces may point downwards (fixed -fix ndr function)
+
+[08:30] <CIA-23> tlh2000 * r20565 /ufoai/trunk/base/maps/bunker.map: * -fix ndr
+
+[08:33] *** Richlv left
+[08:34] *** Richlv joined
+[08:55] *** stevenjackson left
+[09:33] *** stevenjackson joined
+[09:33] *** ChanServ sets mode: +o stevenjackson
+
+[09:35] *** BTAxis sets mode: +o mattn2|home__
+
+[09:43] <BTAxis> mattn2|home__: ufo2map.exe -extra -quant 6 base/maps/dam.map takes 23 seconds here.
+
+[09:45] <BTAxis> mattn2|home__: Also, can you add the global lighting values as a parameter to ufo2map? I want to compile the maps so they look the same as before without having to hack my local code.
+
+[09:46] <BTAxis> mattn2|home__: The priority for the values should be: built in < worldspawn < parameters passed to ufo2map
+
+[09:46] <Richlv> erm, something's wrong with base name displaying in current trunk
+
+[09:46] <Richlv> i have PHALAN...
+
+[09:47] <Richlv> too short textarea ?
+
+[09:51] <KillDoor> where exactly?
+
+[09:52] <CIA-23> btaxis * r20566 /ufoai/trunk/base/maps/Makefile.win: * Added -quant 6 to FAST_UFO2MAPFLAGS
+
+[09:54] <Richlv> KillDoor, new game, create base - baseview top area
+
+[09:54] <CIA-23> btaxis * r20567 /ufoai/trunk/contrib/scripts/compile_maps.bat: * Added -quant 6 to fast map compilation
+
+[09:56] <Richlv> hmm, interesting. if i have a new base built w/o buildings, it can't even be selected in transfer menu
+
+[10:00] <Richlv> ah. that dialog probably is just extremely unintuitive
+
+[10:06] <KillDoor> transffer? yes, it is awfull
+
+[11:44] *** Senya_B] left
+[11:58] *** stevenjackson left
+[12:22] *** KrackenO joined
+[12:22] *** ChanServ sets mode: +o KrackenO
+
+[12:32] *** Xedge joined
+[13:18] *** Gregg joined
+[13:30] *** zhaoliang joined
+[13:34] *** Gregg left
+[13:36] *** jdolan_ left
+[13:50] *** zhaoliang left
+[14:02] *** KillDoor left
+[14:13] *** jdolan_ joined
+[14:25] *** TomeEclipse joined
+[14:29] *** TomeEclipse_ joined
+[14:32] *** TomeEclipse left
+[14:38] *** Kildor joined
+[14:46] *** urs joined
+[14:46] *** Xedge left
+[14:47] *** urs left
+[14:55] *** `alpha joined
+[14:55] <`alpha> hi. is anyone of devs here? I have a feature request/improvement proposal that you might find useful
+
+[14:56] <`alpha>  /msg NickServ identify amikae
+
+[14:58] <Kildor> `alpha: change a password first :-)
+
+[14:59] <Kildor> you can write it at forum, or wiki, or here. Developers read channel`s logs usually
+
+[15:01] <`alpha> I did
+
+[15:02] <`alpha> ok here it is
+
+[15:03] <`alpha> every base should have something like firing range where you can test weapons power or armor strength with one of your soldiers
+
+[15:04] <`alpha> or a computer simulator room
+
+[15:04] <`alpha> where you can do that and fight vs AI opponents
+
+[15:04] <`alpha> for practice
+
+[15:04] <`alpha> so you KNOW what you do when you go after actual aliens.
+
+[15:07] <`alpha> hope someone picks this up because I would really love it
+
+[15:10] *** ghosta joined
+[15:10] <ghosta> moin :)
+
+[15:31] *** TomeEclipse_ left
+[15:31] *** TomeEclipse_ joined
+[15:32] *** TomeEclipse_ left
+[15:41] *** Winterslice joined
+[15:57] *** nairan_z is now known as nairan
+
+[16:14] *** bobbens left
+[16:15] *** bobbens joined
+[16:41] *** acardenas joined
+[16:41] <acardenas> hi :)
+
+[17:06] <CIA-23> tlh2000 * r20568 /ufoai/trunk/build/maps.mk: * added quant 6 to makefile target to trigger a fast map compile
+
+[17:24] <mattn2|home__> BTAxis: no - and there will be no such option - we should tweak every single map via worldspawn
+
+[17:24] <mattn2|home__> see my monologue ealier the day
+
+[17:24] <mattn2|home__> no, yesterday evening ;)
+
+[17:25] <BTAxis> What.
+
+[17:25] <BTAxis> So you're saying I'm stuck with overlit night maps.
+
+[17:26] <BTAxis> Guess it's hacking the code for me then.
+
+[17:27] <BTAxis> Also, you're wrong about tweaking every map by worldspawn.
+
+[17:28] <BTAxis> That's a lot of work, even though most of it can be done with a global parameter.
+
+[17:28] <BTAxis> Honestly, maps were looking fine until you changed it.
+
+[17:28] <BTAxis> Now they look like SHIT.
+
+[17:29] <BTAxis> And I can't even do anythign about it.
+
+[17:29] <BTAxis> Pisses me off.
+
+[17:35] <mattn2|home__> BTAxis: ?
+
+[17:35] <mattn2|home__> they looked like shit before, too
+
+[17:35] <mattn2|home__> noone cared about lighting
+
+[17:36] <mattn2|home__> you can do something about it - provide normalmaps and tweak the lighting
+
+[17:36] <mattn2|home__> what is wrong about it to set a worldspawn flag - every map is different - so every map should become tweaked lighting
+
+[17:36] <mattn2|home__> s/should/must
+
+[17:37] <mattn2|home__> also surface lights are looking way better than the light ents
+
+[17:38] *** RudolfoWood joined
+[17:38] <RudolfoWood> hiho
+
+[17:38] <BTAxis> If I actually had a way of compiling the dam map with the old sttings, I'd make comparison screenshots.
+
+[17:38] <RudolfoWood> go back some revisions?
+
+[17:39] <BTAxis> Also, you seem to forget that we HAD worldspawn settings for each map before - and we removed that.
+
+[17:39] <BTAxis> Because it was a pain in the ass to manage.
+
+[17:39] <BTAxis> All I wanted was an option that allowed me to compile the maps with the same lighting settings they were using before, which REALLY isn't that much to ask.
+
+[17:39] <BTAxis> Because yeah, I also don't want to force the black night maps on people.
+
+[17:40] <BTAxis> (Which STILL is a bug in the renderer somehow. I don't see how it could be anything else.)
+
+[17:41] <BTAxis> Fact is that different folks need different lighting settings right now.
+
+[17:41] <BTAxis> You can't just say "tweak the worldspawn", because that doesn't work.
+
+[17:42] <BTAxis> At this rate we're going to return to the status quo, where I tweak all of the worldspawns with a script so the night maps look okay for me, and then people will start complaining about black night maps again.
+
+[17:45] <RudolfoWood> thx mattn2|home__ for fixing radiant targets, I inverted condition for testing and must have commited wrong version
+
+[17:48] *** tchristney joined
+[18:25] <ghosta> anyone ever thought about adding a lightsource inside the soldier modles?
+
+[18:26] <ghosta> The way it was done with the Rocket
+
+[18:26] <ghosta> This would look quite cool I think
+
+[18:30] *** bayo_O joined
+[18:30] <bayo_O> hello
+
+[18:32] <ghosta> hi bayo_O
+
+[18:37] <CIA-23> tlh2000 * r20569 /ufoai/trunk/src/tools/radiant/radiant/brushmanip.cpp: * added surface lights to light filter
+
+[18:38] <bayo_O> have we some screenshot of radian?
+
+[18:38] <bayo_O> can we map cell by cell with simple shapes?
+
+[18:38] <BTAxis> Technically yes, practically no.
+
+[18:39] <bayo_O> :D
+
+[18:42] <mattn2|home__> bayo_O: cool scrollbar
+
+[18:42] <RudolfoWood> hello bayo_O
+
+[18:42] <mattn2|home__> but shouldn't it be on the right side?
+
+[18:43] <bayo_O> i am moving it currently :D
+
+[18:45] <BTAxis> Also mattn, what is a normalmap?
+
+[18:47] <RudolfoWood> nice scrollbar should help to fix https://sourceforge.net/tracker2/?func=detail&aid=2071512&group_id=157793&atid=805245 thx bayo
+
+[18:51] <Kildor> bayo_O: why did you remove buttons from production menu?
+
+[18:51] <Kildor> And spinner is not usable there.
+
+[18:52] <mattn2|home__> BTAxis: for lighting and bump-mapping - see http://img154.imageshack.us/img154/1340/quake2world65hi5.jpg
+
+[18:52] <Kildor> Why we need to click to start production, but only scroll to drop it away?
+
+[18:53] <BTAxis> And how do you make one?
+
+[18:54] <CIA-23> bayo-fr * r20570 /ufoai/trunk/ (base/ufos/menu_hire.ufo src/client/cl_employee.c): * clean up
+
+[18:55] <RudolfoWood> bayo_O, are you planning to remove scrollbar from text list or replace it with your new one or leave these two as separated?
+
+[18:56] <bayo_O> RudolfoWood : maybe the better thing is to spit the node, a scrollbar is already very complex
+
+[18:56] <RudolfoWood> there is a bug in current text scrollbar that creates one entry more than needed for text list and so does not allow to scroll to the end
+
+[18:56] <mattn2|home__> BTAxis: http://ufoai.ninex.info/wiki/index.php/Artwork#Normalmaps
+
+[18:56] <mattn2|home__> http://www.katsbits.com/htm/tutorials/creating_bumpmaps_from_images.htm#template
+
+[18:57] <BTAxis> Okay, so short answer: way too much work.
+
+[18:57] <BTAxis> Never going to happen.
+
+[18:57] <bayo_O> Kildor: i see a topic on the forum about the missunderstand of the production, that why i change it like that
+
+[18:57] <RudolfoWood> so removing it from text? Could be used to place the scrollbar independant from text (e.g. for msgoptions dialog move it to the right)
+
+[18:57] <BTAxis> It doesn't look like we need it either.
+
+[18:58] <BTAxis> It's all details, and we don't really need them.
+
+[18:59] <bayo_O> Kildor : : but i dont spend too much time, it exists a lot of bug (bad item selection...) (and thats true, its not very nice to remove the item when we scroll down)
+
+[19:00] <Kildor> +/- 10 was nice and usefull.
+
+[19:00] <mattn2|home__> BTAxis: of course - we should also delete textures - they are only details
+
+[19:00] <RudolfoWood> but it could be nice to create some link between scrollbar and text, as update functions would look same for every scrollbar
+
+[19:00] <BTAxis> mattn2|home__: Apples, oranges.
+
+[19:00] <Kildor> And, there should be both, start production button and spinner.
+
+[19:00] <mattn2|home__> the lighting would look better and you can add a lot of details via texture + normalmap
+
+[19:00] <bayo_O> Kildor: , we can but but have you test a long time click on the spinner?
+
+[19:00] <BTAxis> The work involved isn't worth the gain.
+
+[19:01] <mattn2|home__> that's your opinion
+
+[19:01] <bayo_O> Kildor: , and we can add a textentry for number, its maybe more helpfull?
+
+[19:01] <BTAxis> Okay, so YOU make the normal maps.
+
+[19:01] <BTAxis> Because I'm not going to.
+
+[19:01] <BTAxis> I'M going to fix what you broke.
+
+[19:01] <BTAxis> By mass-replacing all the worldspawns.
+
+[19:02] <Kildor> bayo_O: I`ve tested, but anyway it is anoying for any clips and bullets.
+
+[19:02] <CIA-23> tlh2000 * r20571 /ufoai/trunk/base/materials/bunker.mat: * added bunker material file
+
+[19:03] <mattn2|home__> BTAxis: the stuff is still wip - so it's not really worth to mass fix something
+
+[19:03] <BTAxis> What's WIP about it?
+
+[19:03] <Kildor> and textentry would be nice. Textentry and button to start. And may be spinner
+
+[19:03] <bayo_O> Kildor : we easily add a x10 spinner
+
+[19:03] <BTAxis> As in, what else are you going to do?
+
+[19:03] <mattn2|home__> the code and the initial values
+
+[19:03] <bayo_O> (can add)
+
+[19:03] <mattn2|home__> break more to fill your day
+
+[19:03] <BTAxis> Why do I bother asking questions when you never answer them, anyway?
+
+[19:03] <BTAxis> Do whatever you want.
+
+[19:04] <Kildor> «this is opensource…» :-D
+
+[19:05] <mattn2|home__> BTAxis: i wonder which question i didn't answer? "What's WIP about it?" => "the code and the initial values"
+
+[19:05] <BTAxis> Yeah, which doesn't tell me anything.
+
+[19:06] <mattn2|home__> but anyway - the day was already too long to talk to you anymore
+
+[19:06] <BTAxis> I'm trying to understand what it is you're trying to do.
+
+[19:06] <mattn2|home__> ^^and that's my problem?
+
+[19:06] <BTAxis> YOUR problem is not answering the question!
+
+[19:06] <mattn2|home__> either be more gentle or read the code
+
+[19:06] <BTAxis> What the fuck, mattn!
+
+[19:06] <BTAxis> You're basically telling me to fuck off.
+
+[19:06] <BTAxis> And that's somehow my fault, too?
+
+[19:07] <BTAxis> You know full well I can't read the code, especially not the mapping/rendering stuff.
+
+[19:07] <mattn2|home__> you just told me, that the whole renderer update is not worth the effort - a lot of work is not worth to be included, just because you don't like it
+
+[19:07] <mattn2|home__> and in fact you told me to fuck up
+
+[19:07] <mattn2|home__> i just answered
+
+[19:07] <BTAxis> No, that's not what I said.
+
+[19:08] <BTAxis> And it's not what I think.
+
+[19:08] <mattn2|home__> but it's only about details and eye candy
+
+[19:08] <mattn2|home__> so it's not worth it, no?
+
+[19:08] <mattn2|home__> anyway - back to code and out of irc
+
+[19:08] <BTAxis> Yeah, don't give me a chance to explain myself.
+
+[19:08] <BTAxis> Because that would be bad, right?
+
+[19:08] <BTAxis> Oh well.
+
+[19:09] <Kildor> all just wants to be the only who direct the game.
+
+[19:09] <BTAxis> And that's not true, either.
+
+[19:09] <Kildor> and noone wants to listen other.
+
+[19:09] <BTAxis> And that's not true, either.
+
+[19:12] <Kildor> really? I remember one of last conversation about missions, I`ve looked to forum regularry, so I can see and make a conclusions… But I don`t want to argue anyway…
+
+[19:13] *** Xedge joined
+[19:13] <Kildor> CU
+
+[19:13] *** Kildor left
+[19:15] *** bayo__O joined
+[19:16] <CIA-23> tlh2000 * r20572 /ufoai/trunk/src/tools/ufo2map/ufo2map.c: * restored old lighting values to make BTAxis happy
+
+[19:16] *** acardenas left
+[19:16] <CIA-23> tlh2000 * r20573 /ufoai/trunk/base/maps/bunker.map: * surface lights, nodraws, ...
+
+[19:23] <BTAxis> mattn2|home__: Interestingly, the maps now look black for me too.
+
+[19:23] *** bayo__O left
+[19:23] *** bayo__O joined
+[19:23] <BTAxis> Or at least dam.
+
+[19:23] <BTAxis> Because that's the only one I tried so far.
+
+[19:24] <CIA-23> bayo-fr * r20574 /ufoai/trunk/base/ufos/menu_production.ufo: x10 for Kildor
+
+[19:24] <mattn2|home__> BTAxis: yes - because ambient is 0,0,0 now
+
+[19:24] <mattn2|home__> the old values
+
+[19:24] <mattn2|home__> of the old (and broken) code
+
+[19:24] <BTAxis> Hm.
+
+[19:24] <BTAxis> What about sunlight?
+
+[19:24] <BTAxis> Doesn't it exist anymore?
+
+[19:25] <mattn2|home__> Winterslice: can't answer, sorry - but no and thanks ;)
+
+[19:25] <Xedge> hi, is it possible to add to the function CL_Init in src/client/cl_main.c the global locale dir and not only the i18n dir in the basedir? e.g. /usr/share/games/locale/ ?
+
+[19:25] *** bayo_O left
+[19:25] <Winterslice> mattn2|home__: 'sokay.
+
+[19:26] <Xedge> it should search in the basedir and the globle dir for the locales, if possible
+
+[19:27] <Xedge> does anyone know how to add this?
+
+[19:28] <mattn2|home__> Xedge: would be possible yes - but the --prefix stuff that was given via configure should be used for this
+
+[19:28] <mattn2|home__> there is a gettext function to set the search dirs
+
+[19:28] <BTAxis> Also mattn2|home__, I'm sorry for yelling at you.
+
+[19:29] <mattn2|home__> Xedge: but i don't know how it should be done correctly - it should not be hardcoded to /usr/share/games/locale
+
+[19:29] <Richlv> mattn2|home__, BTAxis - do you both drink beer ?
+
+[19:30] <BTAxis> No, I'm a nonalcoholic.
+
+[19:30] <Xedge> mattn2|home__: ok, i try the --prefix stuff again ... but last time i test it, it does not work ...
+
+[19:31] <RudolfoWood> bayo__O, do parameters for variable confunc have to be included into <>? are they recognized via @param doc in front of it? (did not check the code for it)
+
+[19:32] <bayo__O> RudolfoWood: , maybe you can yet use the new scrollbar with the current text node ; not sure its bug safe, but it can help
+
+[19:32] <Richlv> BTAxis, darn. maybe that's the problem here :D
+
+[19:32] <bayo__O> oups
+
+[19:32] <Richlv> bayo__O, btw, base name is truncated in main base view
+
+[19:32] <Richlv> for default 'phalanx'
+
+[19:32] <Richlv> could you check that ?
+
+[19:33] <bayo__O> RudolfoWood : the client code call the confunc with param "theconfunc 10" here <1> = 10
+
+[19:33] <BTAxis> The problem is that I don't really understand what's happening with the lighting code right now, and asking doesn't seem to help.
+
+[19:34] <RudolfoWood> bayo__O do I have to use <1> <2> and so on or may I also use <buttoncount>?
+
+[19:34] <BTAxis> For one thing, the sunlight seems to have disappeared.
+
+[19:34] <CIA-23> bayo-fr * r20575 /ufoai/trunk/base/ufos/menu_bases.ufo: * bigger textentry
+
+[19:34] <bayo__O> Richlv: , it maybe fixed... or not :D
+
+[19:35] <bayo__O> RudolfoWood: , no you can't name the param yet :)
+
+[19:36] <BTAxis> config.sun_intensity[LIGHTMAP_NIGHT] = 35;
+
+[19:36] <BTAxis> It does still seem to exist in the code though.
+
+[19:37] <RudolfoWood> bayo__O, so it uses the numbers for ordering... does it allow <10> and more parameters (if ever needed)?
+
+[19:37] <bayo__O> yes, its just the num of param
+
+[19:38] <bayo__O> <0> is the command name :)
+
+[19:39] <bayo__O> RudolfoWood : i dont know about the upper limitation, i use the common to check command
+
+[19:44] <Richlv> mattn2|home__, is there somewhere a description of what -quant actually is ?
+
+[19:45] <mattn2|home__> Richlv: entities.def
+
+[19:46] <BTAxis> Richlv: It's in the ufo2map help as well.
+
+[19:47] <Richlv> BTAxis, that's what i just read
+
+[19:47] <Richlv> and i didn't understand anything ;)
+
+[19:47] <Richlv> "lightquant - lightmap resolution downscale (e.g. 4 = 1 << 4) (values between 1 and 6)"
+
+[19:47] <BTAxis> Yeah, so the lightmap is smaller.
+
+[19:48] <BTAxis> Meaning less work to calculate it.
+
+[19:48] <Richlv> ok, entities.def is way more descriptive
+
+[19:48] <BTAxis> mattn2|home__: Does bunker work for you? I compiled it and it crashes when I try to start it ingame.
+
+[19:48] <Richlv> reading that
+
+[19:49] <mattn2|home__> it crashes? backtrace available?
+
+[19:49] <BTAxis> Getting on that.
+
+[19:49] <BTAxis> It does segfault, yes.
+
+[19:49] <BTAxis> dam doesn't, compiled with the same ufo2map.
+
+[19:50] *** bayo_O joined
+[19:50] <Richlv> what does "(1 << 4)" mean ?
+
+[19:50] <CIA-23> tlh2000 * r20576 /ufoai/trunk/src/tools/radiant/ (include/ifilter.h radiant/brushmanip.cpp radiant/filters.cpp): * new filter to only show surface lights
+
+[19:50] <BTAxis> Ha, and then it did load up when I ran in gdb.
+
+[19:50] <BTAxis> Figures.
+
+[19:51] <Richlv> BTAxis, i always run ufoai and radiant in gdb
+
+[19:51] <Richlv> helpsalot ;)
+
+[19:51] <BTAxis> There we go.
+
+[19:51] *** bayo__O left
+[19:51] <BTAxis> Loading it again crashed the game.
+
+[19:52] <BTAxis> http://pastebin.com/m3db92588
+
+[19:53] <bayo_O> RudolfoWood : i write http://ufoai.ninex.info/wiki/index.php/UFO-Scripts/menu_*.ufo#Command_preprosessor , feel free to improve it, or to request something more helpful
+
+[19:54] <RudolfoWood> bayo_O, could you give me a hint were that replacement is done?
+
+[19:55] *** bayo_O left
+[19:55] <RudolfoWood> Richlv, 1<<4 means bit-shift a binary 1 4 times left, so it results to be 10000 (binary)  = 2^4
+
+[19:56] *** bayo_O joined
+[19:56] <RudolfoWood> bayo_O, did you catch my question?
+
+[19:56] <CIA-23> btaxis * r20577 /ufoai/trunk/src/tools/ufo2map/ufo2map.c: * Tweaked lighting values. Maps should be lit again now.
+
+[19:56] <bayo_O> RudolfoWood : for the scrollbar? you can see the lst change i done on menu_hire.ufo
+
+[19:57] <RudolfoWood> no, I meant replacement of <1> in confuncs
+
+[19:57] <bayo_O> RudolfoWood : yesterday and today
+
+[19:58] <bayo_O> RudolfoWood : hoo you also can take a look of the change of the r20570 :)
+
+[19:58] <RudolfoWood> that changes for scrollbar I saw, I'll try to adapt it for msgoptions - but I don't know whether I should try to fix the problem with old scrollbar
+
+[19:59] *** BTAxis sets mode: +o Winterslice
+
+[20:00] *** yann joined
+[20:00] <mattn2|home__> BTAxis: only bunker?
+
+[20:00] <BTAxis> I didn't try them all.
+
+[20:00] <BTAxis> But I repeatedly loaded dam, and that worked.
+
+[20:01] <BTAxis> I can see if any other maps do it.
+
+[20:02] <CIA-23> tlh2000 * r20578 /ufoai/trunk/src/tools/radiant/ (4 files in 3 dirs):
+
+[20:02] <CIA-23> * filters for phong and footsteps
+
+[20:02] <CIA-23> * also exclude entities in nosurflight filter
+
+[20:02] <Richlv> <RudolfoWood> Richlv, 1<<4 means bit-shift a binary 1 4
+
+[20:02] <Richlv> eww
+
+[20:02] <Richlv> while i barely understand that, i imagine average mapper to fold ;>
+
+[20:04] <BTAxis> I didn't get any other map to crash, though sometimes the game locks up for a long time before loading a map.
+
+[20:04] <BTAxis> Such as mine.
+
+[20:04] <Tron> shifting by 1 to the left is equivalent to multiplying by 2
+
+[20:05] <Tron> you can compare it with decimal notation: appending a 0 multiplies by 10 in decimal
+
+[20:05] <Tron> appending in 0 (i.e. shifting to the left by 1) in binary multiplies by 2
+
+[20:05] <Tron> s/in //
+
+[20:09] <CIA-23> tlh2000 * r20579 /ufoai/trunk/src/client/renderer/r_sphere.c: * use another mem pool for the sphere data (to not free it on map shutdown)
+
+[20:10] <mattn2|home__> BTAxis: night is still plain black outside
+
+[20:11] <mattn2|home__> it works for you?
+
+[20:11] <BTAxis> Hm, yeah. I'll take a screenshot.
+
+[20:12] <Xedge> mattn2|home__: i use "./configure --localedir=/usr/share/games/locale" and also the locales are placed there but when i start ufoai there is only "no language" ... :(
+
+[20:12] <mattn2|home__> i think localedir is not used by ufo
+
+[20:13] <Xedge> mattn2|home__: what other prefix did you mean?
+
+[20:13] <mattn2|home__> i meant that one - but someone has to include it ;)
+
+[20:13] *** BTAxis left
+[20:13] *** BTAxis joined
+[20:13] *** ChanServ sets mode: +o BTAxis
+
+[20:13] <mattn2|home__> that one or --prefix=/usr/share/games
+
+[20:14] <BTAxis> mattn2|home__: http://ufoai.streetofeyes.com/screenshots/dam.jpg
+
+[20:14] <mattn2|home__> not sure whether --prefix is handled (i don't think so ;) )
+
+[20:15] <Xedge> mattn2|home__: is there an easy way to include the the --localedir? or better how could i include it?
+
+[20:16] <mattn2|home__> Xedge: very good question ;) - see configure.ac and search for PKGDATADIR
+
+[20:16] <mattn2|home__> also see Makefile.in for PKGDATADIR
+
+[20:16] <mattn2|home__> something like that must be done for the prefix stuff, too
+
+[20:17] <mattn2|home__> Xedge: at the end of configure.ac
+
+[20:18] <`alpha> I wonder if anyone read my proposal
+
+[20:18] <mattn2|home__> BTAxis: absolutely black for me - let me upload my bsp file
+
+[20:18] <mattn2|home__> alpha, which one?
+
+[20:19] <Richlv> Tron, thanks. i'm trying to interpolate this with my knowledge about network masks :)
+
+[20:19] <BTAxis> mattn2|home__: Yeah. I predict it'll look fine for me - I did this before with someone else who had black map syndrome.
+
+[20:19] <Tron> CIDR/CIFS is different
+
+[20:19] <BTAxis> mattn2|home__: That's why I think it's not compiler related at all.
+
+[20:19] <Richlv> oh, subnets, yes
+
+[20:19] <mattn2|home__> BTAxis: http://mattn.ninex.info/files/dam.bsp
+
+[20:19] <Richlv> i referred to binary notation
+
+[20:19] <Tron> the 24 in 192.168.1.1/24 means something slightly different
+
+[20:20] <Richlv> if i am not mistaking all this massibvely
+
+[20:20] <`alpha> I pm'ed you mattn2|home__
+
+[20:20] <Tron> it means the number of 1 bits in the netmask
+
+[20:20] <mattn2|home__> alpha, you should try the skirmish in trunk ;)
+
+[20:21] <BTAxis> mattn2|home__: Yep. It shows up as in my screenshot here.
+
+[20:21] *** schumaml joined
+[20:21] <Richlv> bunker does not crash for me
+
+[20:21] <`alpha> mattn2|home__, svn up'ing
+
+[20:21] <`alpha> damn it takes so long..
+
+[20:22] <BTAxis> Richlv: Can you try mattn's bsp?
+
+[20:22] <`alpha> a question.. is trunk playable ?
+
+[20:23] <Richlv> ok, segfaulted when i tried it the 2nd time ;D
+
+[20:23] <Richlv> `alpha, no
+
+[20:23] <Richlv> we are talking about trunk problems right now ;)
+
+[20:23] <`alpha> doh
+
+[20:24] <`alpha> <mattn2|home__> alpha, you should try the skirmish in trunk ;)
+
+[20:24] <`alpha> I guess I'll just wait
+
+[20:24] <Richlv> backtrace does not end
+
+[20:24] <Richlv> loops on :
+
+[20:24] <Richlv>     fmt=0x817b7f8 "Mem_Free: bad memory footer sentinel [buffer overflow]\npool: %s\nalloc: %s:#%i\nfree: %s:#%i")
+
+[20:24] <Richlv>     at src/common/common.c:219
+
+[20:25] <mattn2|home__> can someone nail this down to a revision?
+
+[20:26] *** BTAllies joined
+[20:27] *** BTAxis left
+[20:27] *** BTAllies is now known as BTAxis
+
+[20:27] *** ChanServ sets mode: +o BTAxis
+
+[20:28] <mattn2|home__> Richlv: can you try to run it via valgrind?
+
+[20:29] <Richlv> mattn2|home__, um, i don't have valgrind here
+
+[20:29] <Richlv> downloading & compiling would probably take long time
+
+[20:29] <Richlv> any guess which rev would be suspect ?
+
+[20:29] <Richlv> i could try that
+
+[20:30] <Richlv> bisecting, using kernel-speak :)
+
+[20:30] <mattn2|home__> Richlv: sorry, no idea
+
+[20:32] <CIA-23> bayo-fr * r20580 /ufoai/trunk/base/ufos/menu_hire.ufo: * bigger textentry
+
+[20:47] <Richlv> btw, startup seems to be slower than before
+
+[20:47] <`alpha> svn: Write-lock stolen in 'base/pics/menu'
+
+[20:47] <`alpha> svn: Error processing command 'delete-entry' in 'base/pics/menu'
+
+[20:47] <`alpha> svn: In directory 'base/pics/menu'
+
+[20:47] *** Xedge left
+[20:47] <`alpha> looks like I accidentally the whole svn
+
+[20:51] <ghosta> Richlv do you remember the height of a fence a soldier can shoot over?
+
+[20:53] <Richlv> ghosta, hmm, i don't think i've ever known that
+
+[20:54] <Richlv> i'[m not even sure that is constant for all soldiers
+
+[20:54] <Richlv> `alpha, write lock ? do you have svn write access ?
+
+[20:54] <`alpha> no
+
+[20:55] <Richlv> in any case, try svn cleanmup while no other svn operation is running
+
+[20:55] <`alpha> I was syncing and got this error
+
+[20:55] <`alpha> alpha@alpha ~/games/ufo23 $ svn cleanup
+
+[20:55] <`alpha> svn: In directory 'base/pics/menu'
+
+[20:55] <`alpha> svn: Error processing command 'modify-wcprop' in 'base/pics/menu'
+
+[20:55] <`alpha> svn: 'base/pics/menu/notify_pause.tga' is not under version control
+
+[20:55] <`alpha> :/
+
+[20:56] * `alpha *confused*
+
+[20:56] <Richlv> bhah. got a broken checkout, i guess
+
+[20:56] <Richlv> mattn2|home__, hmm. when fish moves, it's bounding box in battlescape changes it's shape and size
+
+[20:56] <`alpha> i think I'll rm -r and resync
+
+[20:56] <Richlv> it seems to span to the starting position
+
+[20:57] <Richlv> is that expected or a bug ?
+
+[20:57] <Richlv> BTAxis, are only night maps having the problem ?
+
+[20:57] <ghosta> Richlv but I guess this is an important parameter. Look at the fence in the +farm assembly
+
+[20:57] <ghosta> You can hide behind it like behind a solid wall
+
+[20:58] <Richlv> ghosta, that's probably visibility/fire issue
+
+[20:58] <Richlv> somethin wilminator is touching
+
+[20:58] <Richlv> more ir les
+
+[20:58] <Richlv> less
+
+[20:58] <Richlv> for the record, both day and night maps look ok for me in revision 20571
+
+[20:58] <Richlv> (which is unusual)
+
+[20:59] <ghosta> hm ok, but when I am in the mood I gonna check it :)
+
+[21:00] <Richlv> sure
+
+[21:01] <Richlv> something's fishy with bunker doors as well
+
+[21:01] <Richlv> maybe generally pathfinding related
+
+[21:01] *** geever joined
+[21:01] <geever> hi @all
+
+[21:02] <RudolfoWood> hi geever
+
+[21:02] <ghosta> ah good point what is this issue with the doors now?
+
+[21:02] <ghosta> hi geever
+
+[21:02] <Richlv> battlescape seems to be faster on the other hand
+
+[21:02] <ghosta> are they implemented?
+
+[21:02] <Richlv> ghosta, sort of yes. but they seem to appear in weird places ;)
+
+[21:03] <ghosta> ok :)
+
+[21:04] <CIA-23> tlh2000 * r20581 /ufoai/trunk/src/common/tracing.c: * cleanup and new asserts
+
+[21:06] <`alpha> would some one please send me a full link/path to ufo:ai 2.3 trunk svn real quick?
+
+[21:07] <ghosta> http://ufoai.svn.sourceforge.net/viewvc/ufoai/
+
+[21:07] <ghosta> something like this?
+
+[21:07] <`alpha> not the web
+
+[21:08] <`alpha> the repo addr
+
+[21:08] <`alpha> for svn co
+
+[21:08] <geever> https://ufoai.svn.sourceforge.net/svnroot/ufoai/ufoai/trunk
+
+[21:08] <Richlv> https://ufoai.svn.sourceforge.net/svnroot/ufoai
+
+[21:08] <`alpha> thanks guys
+
+[21:08] <Richlv> ok then =)
+
+[21:08] <geever> now you got many ;)
+
+[21:09] <`alpha> it started..
+
+[21:09] <geever> and will never end =)
+
+[21:10] <`alpha> yea I know :>
+
+[21:10] <`alpha> last time it was 2 hours or something
+
+[21:11] <geever> Do you have a previous copy?
+
+[21:11] <Richlv> 2.1g for trunk
+
+[21:11] <Richlv> it's growing
+
+[21:11] <Richlv> first i checked was 1.5
+
+[21:12] <CIA-23> blondandy * r20582 /ufoai/trunk/src/tools/ufo2map/check.c: * add missing newline to composite sides message
+
+[21:13] *** blondandy joined
+[21:14] <RudolfoWood> bayo_O, found an issue with your new scrollbar:
+
+[21:15] <Richlv> blondandy, commit first, join irc later ? :)
+
+[21:15] <RudolfoWood> grab the slider, move it down up down up without up event of mouse, see that it is at upper bound at the end but you can still scroll up
+
+[21:15] <RudolfoWood> I think this is caused by some round or compute of actual visible index
+
+[21:15] <Richlv> rev 20568 still crashes on bunker
+
+[21:16] <blondandy> Richlv, yep.
+
+[21:16] <RudolfoWood> nobody found crash on msgoptions dialog :-) now I have fixed it
+
+[21:17] <Richlv> bhah
+
+[21:17] <Richlv> not fair.
+
+[21:17] <RudolfoWood> Richlv, you can actually cause it (as I did not commit yet): try to fold all categories...
+
+[21:18] <Richlv> hrm. for the screenshot on monthly news i folded all but the last one :D
+
+[21:18] <Richlv> #0  0x0814738d in Sys_Error (error=0x8179096 "recursive error after: %s") at src/ports/unix/unix_main.c:72
+
+[21:18] <Richlv>         argptr = 0x0
+
+[21:18] <Richlv>         string = Cannot access memory at address 0xbf236c24
+
+[21:19] <Richlv> backtrace differs alot in this revision, though
+
+[21:19] <Richlv> mattn2|home__, is this useful somewhat ?
+
+[21:19] <mattn2|home__> Richlv: retry (map compile) with current trunk please
+
+[21:20] <mattn2|home__> i have just fixed a invalid mem access in the tracing code
+
+[21:20] <mattn2|home__> maybe it was/is related
+
+[21:20] <Richlv> mattn2|home__, would it still crash with the old maps ?
+
+[21:20] <Richlv> (compiled bsp)
+
+[21:20] <mattn2|home__> yes
+
+[21:20] <Richlv> that's bad :)
+
+[21:20] <Richlv> it should not crash on bad input
+
+[21:20] <Richlv> i should be able to pass qwindows source code to it without crashing ;)
+
+[21:21] <CIA-23> RudolfoWood * r20583 /ufoai/trunk/src/client/menu/m_messages.c: * fix crash when visible index is greater than actual shown entry count
+
+[21:21] <mattn2|home__> maybe current trunk still crashes with recompiled map - it is just a guess
+
+[21:21] * Richlv svn ups
+
+[21:22] <mattn2|home__> but it's always bad to fix bugs that are not reproducibly for me ;)
+
+[21:22] <Richlv> well, i can get you backtraces and find the rev that broke it
+
+[21:23] <CIA-23> RudolfoWood * r20584 /ufoai/trunk/src/client/menu/m_node_text.c:
+
+[21:23] <CIA-23> * try to fix scrollbar showing one entry more than actually shown ('\n' at end of visible text causes an extra line to be drawn otherwise)
+
+[21:23] <CIA-23> * TODO could someone please verify this?
+
+[21:23] <Richlv> mattn2|home__, which rev shoulkd i check ?
+
+[21:24] <bayo_O> RudolfoWood : maybe more a problem of the text node
+
+[21:24] <mattn2|home__> latest trunk - but recompile the map with it, too
+
+[21:27] <Richlv> mattn2|home__, yeah, but game should not crash with bad basp as well ;)
+
+[21:28] <Richlv> basp !whatever that means
+
+[21:29] <CIA-23> bayo-fr * r20585 /ufoai/trunk/src/client/menu/m_node_text.c: * fix bug: we can scroll bigger than the visible size
+
+[21:30] <bayo_O> RudolfoWood: it mybe fixed
+
+[21:33] <RudolfoWood> bayo_O, for production screen: there was a spacer between queue and non-queued items, selection was based on it... with your changes it looks weird
+
+[21:33] <mattn2|home__> Richlv: are you compiling with -quant 6, too?
+
+[21:33] <mattn2|home__> maybe that's the problem
+
+[21:34] <bayo_O> RudolfoWood : i dont change anything of the production list
+
+[21:34] <RudolfoWood> spinner?
+
+[21:34] <Richlv> mattn2|home__, hrm, with latest trunk for bunker :
+
+[21:34] <Richlv> Could not find texture 'tex_lights/land_li_yellow2'
+
+[21:34] <RudolfoWood> I don't have your latest version bayo_O, I'll check whether it still exists
+
+[21:34] <Richlv> and ye, i'm using wuant 6
+
+[21:35] <Richlv> quant
+
+[21:35] <bayo_O> RudolfoWood : its more a problem of the gui, not realy about what i change
+
+[21:36] <CIA-23> tlh2000 * r20586 /ufoai/trunk/base/textures/tex_lights/ (land_li_orange.tga land_li_yellow2.tga): * new light textures
+
+[21:36] <Richlv> ok :)
+
+[21:37] <mattn2|home__> production screen is broken right now - yes - but i suppose bayo_O is redoing it anyway
+
+[21:37] <mattn2|home__> oh ... bayo_O said that already - sorry
+
+[21:38] <mattn2|home__> going to bed now - cu later guys
+
+[21:38] <Richlv> latest trunk seems to compile maps notably slower than few revisions before
+
+[21:38] <Richlv> mattn2|home__, hey !
+
+[21:38] <Richlv> what about the segfaults ? :)
+
+[21:38] <Richlv> i could test the for a few minutes more
+
+[21:38] <mattn2|home__> not using -quant 6 is slower of course
+
+[21:38] <Richlv> but i'd like to kjnow what should i test
+
+[21:38] <Richlv> no, using wuant 6 is slower than before
+
+[21:38] <mattn2|home__> i'll be back in 3 mins for some more mnutes
+
+[21:38] <Richlv> at least it seems so
+
+[21:38] <Richlv> a quickie ? :>
+
+[21:38] * Richlv ducks
+
+[21:39] <bayo_O> i dont understand very well where the production is broken
+
+[21:40] <mattn2|home__> bayo_O: the selection doesn't work - produce something and click the sniper rifle - you don't get the sniper - but any other weapon
+
+[21:40] <mattn2|home__> e.g.
+
+[21:40] <RudolfoWood> there is a SPACER that causes an offset
+
+[21:40] <bayo_O> ho my god, this gui is dead
+
+[21:40] <RudolfoWood> I'll recheck whether I added this with my try-to-fix scrollbar issue for text node
+
+[21:41] <Richlv> hmm, quant is way, way slower on trunk than before
+
+[21:41] <mattn2|home__> hm?
+
+[21:41] <mattn2|home__> maybe because i fixed the tracing.....
+
+[21:41] <mattn2|home__> we'll see
+
+[21:41] <Richlv> slowness is in lightmap phases
+
+[21:42] <Richlv> it seems to be the same as before qwuant flags
+
+[21:43] <RudolfoWood> It is my try-to-fix that breakes the production
+
+[21:44] <mattn2|home__> Richlv: tracing is used for light calculation ;)
+
+[21:45] <Richlv> mattn2|home__, ok then, it probably is connected :)
+
+[21:46] <bayo_O> RudolfoWood: , problem is R_FontDrawString also update the number of line draw
+
+[21:47] <RudolfoWood> that is the problem I tried to fix
+
+[21:47] <RudolfoWood> one empty line was drawn at the end of msgoptions
+
+[21:47] <bayo_O> else +1 ?
+
+[21:47] *** KrackenO left
+[21:48] <RudolfoWood> but that empty line should not be drawn
+
+[21:48] <RudolfoWood> my fix works for "normal" texts that use textarray, not list
+
+[21:48] <bayo_O> why do you want to add a line for nothing?
+
+[21:48] <RudolfoWood> production uses list instead
+
+[21:48] <RudolfoWood> that line for nothing is caused by pointers
+
+[21:48] <mattn2|home__> 11 minutes for -extra (day) on bunker
+
+[21:49] <mattn2|home__> can't wait another 11 mnutes - have to go to bed now
+
+[21:49] <mattn2|home__> cu later
+
+[21:49] <Richlv> sum:  1216 seconds elapsed
+
+[21:49] <RudolfoWood> after drawing last content line, \n is replaced by \0, end points to place right after this
+
+[21:49] <Richlv> bunker, -extra -quant 6
+
+[21:49] <RudolfoWood> cur is updated to end and so it still points somewhere
+
+[21:50] <RudolfoWood> after an extra round end is pointing to 0x0 and so cur does -> that way loop is left
+
+[21:50] <RudolfoWood> but there was an extra line drawn
+
+[21:51] <RudolfoWood> I tried to fix it by checking whether after cur there is still something left (which can't be applied to list)
+
+[21:52] <bayo_O> too hard to me to understand :)
+
+[21:52] <bayo_O> anyway a white line at end is not very problemtic
+
+[21:53] <RudolfoWood> it is - it updates line count
+
+[21:53] <RudolfoWood> line count is 30 for msgoptions, but there are only 29 entries shown
+
+[21:53] <RudolfoWood> so scrollbar leaves a gap at bottom
+
+[21:54] <bayo_O> who compute this 30 ?
+
+[21:54] <bayo_O> the text draw?
+
+[21:54] <bayo_O> node
+
+[21:54] <bayo_O> the function you update?
+
+[21:55] <geever> RudolfoWood, base summary is also f*cked up
+
+[21:56] <bayo_O> we realy need to change the way of computation of the line number (only when we update the text)
+
+[21:56] <RudolfoWood> MN:DrawTextNodeText adds a last '' -> ' ' as line, this is added as 30th entry
+
+[21:56] <Richlv> mattn2|home__, info : i can't reproduce crash with recompiled bunker map from current trunk, but it crashes with older bsp. on the other hand, compiling is notably slower now
+
+[21:56] <RudolfoWood> geever, I'm on it - it is the same problem for many views
+
+[21:56] <Richlv> mattn2|home__, should i report this on the tracker ?
+
+[21:57] <geever> (as he went sleeping I think so)
+
+[21:57] <Richlv> geever, i hope he gets this on the awaylog ;)
+
+[21:58] <bayo_O> o_O it replace \0 by \x20\0
+
+[21:58] <geever> And will you wait && remember till that?
+
+[22:00] <RudolfoWood> yes bayo_O, this is to draw empty lines (as for spacers)
+
+[22:01] <bayo_O> well but why \0 is not the end of the string
+
+[22:01] <bayo_O> is \0\0 the end ?
+
+[22:04] <RudolfoWood> \0 is end of current string, but perhaps we want to draw another one
+
+[22:04] <Richlv> geever, it's reproducible, so, if he responds, i can easily file it
+
+[22:04] <RudolfoWood> so after that \0 there would be a \n or other text
+
+[22:05] <RudolfoWood> it was my fault - *cur for \0 is 0, so empty lines would not be drawn
+
+[22:05] <RudolfoWood> I have to check whether cur points somewhere and cur[1] (the field after the one pointed to) contains something
+
+[22:06] <bayo_O> i am not sure, because the functino replace \n by \0 too
+
+[22:06] <RudolfoWood> but only in next round
+
+[22:07] <RudolfoWood> I'll have to do further investigations for this...
+
+[22:07] <RudolfoWood> I'll revert it for now
+
+[22:08] <bayo_O> you can test by adding a "else node->textLines++"
+
+[22:08] <bayo_O> hooo its what you dont what :D
+
+[22:09] <CIA-23> RudolfoWood * r20587 /ufoai/trunk/src/client/menu/m_node_text.c: * revert my try-to-fix for scrollbar issue - this needs more testing and coding. I'll fix it asap
+
+[22:10] *** blondandy left
+[22:10] <RudolfoWood> Improved the check -> works for production list partially (issue with amounts stays), does not fix baseoverview... I commented my check and will investigate this further tomorrow
+
+[22:11] <RudolfoWood> should work for now as previous
+
+[22:11] <RudolfoWood> good night
+
+[22:11] *** RudolfoWood left
+[22:11] <bayo_O> gn :)
+
+[22:19] *** yann left
+[22:24] <CIA-23> bayo-fr * r20588 /ufoai/trunk/ (3 files in 3 dirs): * cleaner and faster
+
+[22:25] <bayo_O> haaa shot :/
+
+[22:25] <bayo_O> shit
+
+[22:28] <geever> ?
+
+[22:29] <bayo_O> i commit more thing than i want :)
+
+[22:30] <bayo_O> well good night :)
+
+[22:31] *** bayo_O left
+[22:31] <Richlv> revert that, obviously
+
+[22:31] <Richlv> doh
+
+[22:31] <Richlv> pl. goodnight then as well :>
+
+[22:31] *** bayo_O joined
+[22:31] <Richlv> bayo_O, revert it !
+
+[22:31] *** bayo_O left
+[22:31] <Richlv> ;)
+
+[22:31] <Richlv> erm
+
+[22:31] *** TomeEclipse_ joined
+[22:31] <geever> funny :)
+
+[22:31] <Richlv> i was trumped
+
+[22:41] *** `alpha left
+[22:54] *** TomeEclipse_ left
+[23:07] <geever> good night
+
+[23:11] *** geever left
+[23:11] <ghosta> gn8
+
+[23:11] *** ghosta left
+[23:16] *** TomeEclipse_ joined
+[23:18] *** TomeEclipse_ left
+[23:19] *** Havok joined
+[23:19] *** Havok left
+[23:48] *** jdolan left
+[23:49] *** jdolan joined
+[23:49] *** Rasta joined
+[23:53] *** Rasta left

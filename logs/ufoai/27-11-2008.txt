@@ -1,0 +1,680 @@
+[00:02] *** Gnarge left
+[00:03] *** schumaml left
+[00:28] *** tchristney left
+[00:51] *** Winterslice joined
+[01:07] *** Tron_ joined
+[01:21] *** ptl joined
+[01:21] *** Rioting_pacifist joined
+[01:25] *** Tron left
+[01:41] <Rioting_pacifist> ufoai seams to stop loading after I: set swap control to 0
+
+[01:46] *** Gnarge joined
+[01:47] *** Gnarge left
+[01:48] *** Wawosz joined
+[02:11] *** Winterslice left
+[02:27] *** Gnarge joined
+[02:34] *** stevenjackson left
+[03:03] *** Gnarge left
+[03:19] *** nairan_Zz joined
+[03:30] *** Rioting_pacifist left
+[03:31] *** nairan left
+[04:17] *** Wawosz left
+[05:03] *** nairan_Zz is now known as nairan_wrk
+
+[05:09] *** KillDoor joined
+[05:30] *** LordHavoc left
+[06:12] *** fu joined
+[06:18] *** fu left
+[06:40] *** LordHavoc joined
+[06:48] *** Tron_ is now known as Tron
+
+[08:10] *** Xedge joined
+[08:12] *** wisp joined
+[08:12] *** wisp left
+[08:25] *** Zenerka joined
+[08:25] *** ChanServ sets mode: +o Zenerka
+
+[08:57] *** KrackenO joined
+[08:57] *** ChanServ sets mode: +o KrackenO
+
+[09:03] *** HHJ joined
+[09:06] *** HHJ left
+[09:06] *** Xedge left
+[09:06] *** HHJ joined
+[09:07] <CIA-23> dertron * r20423 /ufoai/trunk/src/client/cl_campaign.c: * Use local variables for clarity.
+
+[09:15] *** bayo_O left
+[09:21] *** HHJ left
+[09:49] *** Xedge joined
+[09:53] *** Xedge left
+[09:58] *** geever joined
+[09:58] <geever> hi
+
+[10:01] <KillDoor> hello
+
+[10:09] *** Xedge joined
+[10:11] <CIA-23> geever * r20424 /ufoai/trunk/base/ufos/menu_aircraft.ufo: * fix [2350990] mousewheel doesnt work on aircraft switcher, https://sourceforge.net/tracker/index.php?func=detail&aid=2350990&group_id=157793&atid=805242
+
+[10:23] <CIA-23> geever * r20425 /ufoai/trunk/base/ufos/menu_buy.ufo: * fix [2351006] aircraft screen accessible without aircraft, see: https://sourceforge.net/tracker/index.php?func=detail&aid=2351006&group_id=157793&atid=805242
+
+[10:46] <Zenerka> I just had a quick look over 2.3 changelog. Guys, I am really impressed.
+
+[10:48] <BTAxis> We really need to make a branch not too long from now.
+
+[10:48] <Zenerka> New RF, new HUD, cool.
+
+[10:49] <Zenerka> I should update pl translation. Lot of work done, but not added to wiki && not commited.
+
+[10:56] <Richlv> well, we also have a lot of large problems
+
+[10:56] <Richlv> 1. pathfinding + maps;
+
+[10:56] <Richlv> 2. geoscape hud
+
+[10:56] <geever> You should play again, find&fix bugs :)
+
+[10:57] <Richlv> it was all well until '&' character ;)
+
+[10:57] <geever> geohud?
+
+[10:57] <Zenerka> what problems with pathfinding and maps?
+
+[10:57] <Richlv> Zenerka, what, you missed ? :)
+
+[10:57] <Richlv> pathfinding was completely rewritten
+
+[10:57] <Zenerka> Yes, I am out of business for months.
+
+[10:57] <Richlv> we now don't have stepons anymore
+
+[10:57] <Zenerka> wilminator's work?
+
+[10:57] <Richlv> and we don't need as many actorclips as before
+
+[10:57] <Richlv> yep
+
+[10:58] <Richlv> but it's still problematic
+
+[10:58] <Richlv> a bunch of bugs remain, and stepup mechanism is considered for a rework
+
+[10:58] <geever> and we can go through walls, cannot climb stairs...
+
+[10:58] <Zenerka> ouch
+
+[11:00] <Richlv> stupid sf tracker
+
+[11:03] <KillDoor> may be start normal trak or mantis system?
+
+[11:04] <Richlv> somebody would have to migrate & maintain one
+
+[11:05] <Richlv> not mentioning setting it up
+
+[11:07] <KillDoor> well, I know something about mantis, and have installed and used it some works ago.
+
+[11:10] <Richlv> personally, i prefer bugzilla :)
+
+[11:10] <Richlv> but i don't think changing trackers now would be a good idea
+
+[11:10] <Richlv> getting 2.3 out...
+
+[11:10] <BTAxis> Also, isn't it almost time for a news update?
+
+[11:11] <KillDoor> we can install mantis (or other BT) at ufoai.ninex.info, and start to move bugs from current BT. We also can clean up this list of most outdated bugs, not-a-bugs, and so on.
+
+[11:13] <KillDoor> We need to make desicion about the problem, and if we say "yes" to changing, we will should tune new BT to date of release.
+
+[11:15] <KrackenO> when 2.3 will be out, we should also delete all out-to-date BT from 2.2
+
+[11:16] <KillDoor> Agree. And before release wee need to check not resolved bugs.
+
+[11:17] <KillDoor> Anyway, can anyone start discussion in maillist about this? to make our BT more user-friendly?
+
+[11:17] * KillDoor afraids current BT.
+
+[11:18] <CIA-23> geever * r20426 /ufoai/trunk/base/ (3 files in 2 dirs):
+
+[11:18] <CIA-23> * fix [2350986] switcher controls should be dimmed when there is one item, see: https://sourceforge.net/tracker/index.php?func=detail&aid=2350986&group_id=157793&atid=805242
+
+[11:18] <CIA-23> * fix [2351017] call back should be greyed out when aircraft is at base, see: https://sourceforge.net/tracker/index.php?func=detail&aid=2351017&group_id=157793&atid=805242
+
+[11:18] <KillDoor> I prefere to use forum or IRC but not current BT to bug-reporting :-)
+
+[11:19] <Richlv> BTAxis, 3 more days until i'll start parsing the log again :)
+
+[11:19] *** Xedge left
+[11:19] <Richlv> hmm, spinners are a bit buggy
+
+[11:20] *** Xedge joined
+[11:20] <KillDoor> Richlv: I can send to you my "essence of commits" to deal with. I make a snapahots to russian gamers, so I try to know about current progress :-)
+
+[11:21] <Richlv> what commits ?
+
+[11:21] <Richlv> ahh
+
+[11:21] <Richlv> you are talking about monthly news ?
+
+[11:23] <KillDoor> yes, "3 more days until i'll start parsing the log again" -- do you do it for making a report?
+
+[11:23] <Richlv> yes. i'll do it anyway so that i don't miss something Important, but it would be nice if you could take a look after that & note whether i missed something anyway :>
+
+[11:24] <Richlv> i read svn log anyway daily or more often
+
+[11:24] <KillDoor> Ok, not a problem
+
+[11:27] *** Xedge left
+[11:27] *** Xedge joined
+[11:32] <Richlv> bah. how do you edit those tgas ? i tried with gimp, it just broke the image :)
+
+[11:33] <KillDoor> tgas?
+
+[11:34] *** Xedge left
+[11:35] <Richlv> .tga files
+
+[11:35] <BTAxis> TGA tends to cause difficulties like that, if I recall correctly.
+
+[11:35] <BTAxis> I remember struggling with them too at one point.
+
+[11:35] <KillDoor> I edit they with gimp. 2.6.2, or latter
+
+[11:36] <Richlv> and how do you save them ? flatten/merge ?
+
+[11:36] <Richlv> i have 2.4.7, though
+
+[11:38] <KillDoor> Richlv: you really shoul update.
+
+[11:38] <geever> oh, I killed some bugs on tracker but new ones come. We should cut their reinforcement lines :)
+
+[11:38] <KillDoor> I save tga with defauld preferences :-)
+
+[11:38] <KillDoor> default*
+
+[11:40] *** Dunc joined
+[11:41] *** Dunc left
+[11:41] <Richlv> geever, you did a good job today ;)
+
+[11:42] <Richlv> remember, the less issues other users face, the more likely they will be to find other, less visible ones =)
+
+[11:43] <Richlv> KillDoor, well, i'm lazy & waiting for slackware package to come out :>
+
+[11:43] <Zenerka> So you update to 2.6 when 3.0 will be about to be released. ;-)
+
+[11:44] <Richlv> nah, i hope not :>
+
+[11:44] <Richlv> it's a bit weird, that 2.6 still isn't in -current, maybe there are some issues with it
+
+[11:52] *** KillDoor left
+[11:58] <peteran> just a note on tga and images in general...the default in gimp is (for me atleast) to save tgas with origin lower left, this makes it take slightly longer to read images, also tga is saved in BGRA whereas we need RGBA...also a lot of small images and such are scaled to closest 2^n i.e. 40x40 -> 64x64 and I'm not so sure this works really well for those small images
+
+[12:02] <Richlv> even with latest versions ?
+
+[12:06] <geever> I'll be of for some time
+
+[12:06] *** geever left
+[12:08] *** Xedge joined
+[12:19] *** peteran left
+[12:19] *** peteran joined
+[12:23] <peteran> on picture scaling, these http://drop.io/cyzqhr2 during startup...I messed around with converting a couple .jpg to .tga, so if there are files I missed on restoring, then disregard those
+
+[12:41] *** Kildor joined
+[12:46] *** geever joined
+[13:45] *** Dunc joined
+[13:49] *** geever left
+[13:55] *** Dunc left
+[14:47] *** DRDF joined
+[14:55] *** DRDF left
+[15:33] *** Senee joined
+[15:45] *** nairan_wrk is now known as nairan_sick
+
+[15:50] *** ghosta joined
+[15:50] *** Xedge left
+[15:57] <ghosta> moin
+
+[15:59] <Kildor> утро
+
+[15:59] <bobbens> moin
+
+[15:59] <Kildor> Morning, I mean :-)
+
+[16:23] *** geever joined
+[17:09] *** bbn joined
+[17:10] *** mattn2|home joined
+[17:10] *** ChanServ sets mode: +o mattn2|home
+
+[17:13] *** bbn left
+[17:22] *** geever left
+[17:24] *** peteran left
+[17:28] <CIA-23> kracken * r20427 /ufoai/trunk/src/client/ (10 files): (log message trimmed)
+
+[17:28] <CIA-23> * split aircraft_t::notOnGeoscape into aircraft_t::notOnGeoscape (used for UFO that will never be on geoscape, like carrier) and aircraft_t::landed (used for UFO that can't be seen because they landed)
+
+[17:28] <CIA-23> * aircraft_t::visible => aircraft_t::detected.
+
+[17:28] <CIA-23> * new function UFO_IsUFOSeenOnGeoscape() to know if a UFO should be seen on geoscape.
+
+[17:28] <CIA-23> * implement probability to detect mission (100% probability if the UFO spawning the mission was already detected)
+
+[17:28] <CIA-23> * make UFO detected when it takes off if mission was already detected.
+
+[17:28] <CIA-23> * fixed bugs with installation radar
+
+[17:32] <BTAxis> Nice.
+
+[17:33] <KrackenO> I made several test, but it may still be a bit buggy. I changed several things
+
+[17:34] <BTAxis> Also, did you say you were going to look at interceptor flight paths?
+
+[17:35] <Kildor> KrackenO, BTAxis, can spawned ground mission be undetected?
+
+[17:35] <KrackenO> yes
+
+[17:35] <KrackenO> terror mission is always detected, however
+
+[17:35] <Kildor> every type of missions, even terror?
+
+[17:36] <KrackenO> no. there are 2 different types: terror mission and ground recon mission
+
+[17:36] <Kildor> and what`s kind of ground missions are existed?
+
+[17:36] <BTAxis> Are we talking backwards now?
+
+[17:38] <KrackenO> Kildor? Bascially, terror mission and recon mission are almost the same mission type, except for the radar propoerties
+
+[17:39] <BTAxis> Well, terror missions *should* always happen in dense population centers, but that requirement can wait, I guess.
+
+[17:39] <Kildor> recon can be on ground?
+
+[17:39] <BTAxis> Since it's probably pretty hard to randomly select a location like that.
+
+[17:39] <Kildor> BTAxis: we haven`t enougth maps for this?
+
+[17:39] <Kildor> doesn`t have*
+
+[17:39] <BTAxis> Maps aren't the problem.
+
+[17:40] <BTAxis> In fact most of our maps are urban ones.
+
+[17:40] <Kildor> but without UFOs
+
+[17:40] *** bayo_O joined
+[17:40] <bayo_O> hi
+
+[17:41] <BTAxis> That needs not be a problem either.
+
+[17:41] <BTAxis> Terror missions are meant to force PHALANX' hand.
+
+[17:42] <BTAxis> There doesn't have to be a UFO present at the time of the mission, it could have left.
+
+[17:42] <Kildor> really? wnd what will be a solution for map-problem?
+
+[17:42] <BTAxis> I told you, we don't have a map problem.
+
+[17:45] <Kildor> I remember a point having written here about "mission can not be without UFO". So maps without UFO can`t be selected, and player always have 3 RMA or something like that. Was it changed?
+
+[17:45] *** bayo_O left
+[17:45] <KrackenO> BTAxis: mmm... that rises a lot of problem. This is not what we said previously
+
+[17:46] <BTAxis> What?
+
+[17:46] *** bayo_O joined
+[17:46] <BTAxis> I'm pretty sure I told you missions could spawn without UFOs.
+
+[17:46] <KrackenO> how aliens would leave after mission if UFO has already left?
+
+[17:46] <BTAxis> They wouldn't. They'd be left there to fend for themselves.
+
+[17:46] *** tchristney joined
+[17:47] <KrackenO> what I implemented is that mission can be spawned from ground: there is no UFO, neither before the mission, neither after
+
+[17:47] <BTAxis> Yeah.
+
+[17:47] <BTAxis> That's what I meant.
+
+[17:47] <BTAxis> What's the problem?
+
+[17:47] <KrackenO> no, no I missunderstood, sorry
+
+[17:48] <KrackenO> I thought you said a UFO should be able to come, spaw a mission, and leave but with the mission that stay on geoscape
+
+[17:48] <BTAxis> Oh, nah.
+
+[17:48] <BTAxis> I don't see the use of that.
+
+[17:48] <KrackenO> ok, everything's fine then
+
+[17:49] <BTAxis> It's just that terror missions might not have a UFO on the map (or recoverable after the mission).
+
+[17:49] <BTAxis> The purpose of terror missions is for PHALANX to have to act.
+
+[17:49] <KrackenO> yes, but that's not going to happen before at least 1 year of game
+
+[17:49] <BTAxis> They're not really supposed to get anything out of it.
+
+[17:49] <Richlv> experience, equipment
+
+[17:49] <Richlv> :)
+
+[17:49] <BTAxis> 1 year? That's quite long, considering the game is ~3 years long.
+
+[17:50] <KrackenO> as mission can be spawned from ground only if there are alien bases to spawn those kind of missions
+
+[17:50] <KrackenO> and alien bases appear only after alien interest reaches 400
+
+[17:50] <BTAxis> Wait, what? Oh, that's not what I had in mind...
+
+[17:50] <BTAxis> See, I think missions should be able to spawn without a UFO sometimes, regardless of bases.
+
+[17:50] <KrackenO> that's what we discussed with winter and you
+
+[17:51] <KrackenO> a few month ago
+
+[17:51] <BTAxis> The reason for that is so players can't prevent all missions from happening by intercepting all UFOs over water.
+
+[17:51] <BTAxis> I didn't really think they'd spawn from bases...
+
+[17:52] <Kildor> may there is som misunderstanding between alien terror and XVI-affected human terror?
+
+[17:52] <KrackenO> no, xvi is still another thing
+
+[17:52] *** bayo_O left
+[17:53] <KrackenO> but I didn't implement human attack yet
+
+[17:53] <BTAxis> Can terror missions not spawn normally with a UFO?
+
+[17:54] <KrackenO> BTAxis: I don't understand your question
+
+[17:54] <KrackenO> terror mission can be spawn without UFO, but only after alien bases appeared
+
+[17:54] <KrackenO> as well as base attack, for exemple
+
+[17:54] <BTAxis> I'm just a little confused.
+
+[17:55] <BTAxis> I thought you said terror missions wouldn't happen at all before 400 interest.
+
+[17:55] <KrackenO> no, terror mission can happen from the begining of the game
+
+[17:55] <BTAxis> Ah, good. Then I just misunderstood.
+
+[17:55] <BTAxis> No problem then.
+
+[17:55] <KrackenO> but they are always spawned by UFO if alien interest is smaller than 400
+
+[17:56] <BTAxis> Do base attacks also spawn without UFOs once the aliens get bases?
+
+[17:56] <KrackenO> yes
+
+[17:56] <BTAxis> Nasty.
+
+[17:56] <KrackenO> yes, you'll have to defend your base ;)
+
+[17:56] <BTAxis> I like it.
+
+[17:56] <KrackenO> me too :)
+
+[17:59] <BTAxis> So what about interceptor pathing, KrackenO?
+
+[18:00] <Kildor> so, terror missions can be spawned before alienbase only with UFO? And when will alienbases start appearing?
+
+[18:01] <KrackenO> BTAxis: i'll do it, but i didn't have time yet
+
+[18:01] <KrackenO> a lot of things to do
+
+[18:02] <BTAxis> Okay, just checking if you were going to look at it. If not I was going to take it up with stevenjackson.
+
+[18:03] <KrackenO> no, I hope to be able to do it during next week
+
+[18:04] <BTAxis> Also, did you catch the conversation about the aircraft speeds?
+
+[18:05] <KrackenO> maybe not. when was that?
+
+[18:06] <BTAxis> The other day. It resulted in me laying out the intended behavior for aircraft speeds and assigning it to stevenjackson as a bug report.
+
+[18:06] *** jdolan_ joined
+[18:06] <BTAxis> https://sourceforge.net/tracker/?func=detail&atid=805242&aid=2350462&group_id=157793
+
+[18:10] <KrackenO> BTAxis: what would be the order of x?
+
+[18:10] <KrackenO> I guess it should stay quite small, no? we don't want aircraft to spend half their time at max speed
+
+[18:10] <BTAxis> Yes, it should be small.
+
+[18:11] <BTAxis> I wrote 10 as the initial value, but that's just a guess.
+
+[18:11] <BTAxis> It might be too large still.
+
+[18:11] <KrackenO> oh, that's a lot bigger than I thought
+
+[18:11] <KrackenO> I guess it's quite hard to say until the new airfight is not fully implemented
+
+[18:12] <BTAxis> Quite so.
+
+[18:12] <KrackenO> it sounds good to me, it's simple
+
+[18:13] <BTAxis> But it's not useless. It allows UFOs to run away if they're fast enough.
+
+[18:13] <BTAxis> Of course they shouldn't always try to run.
+
+[18:13] <BTAxis> But that's a different story altogether.
+
+[18:13] <KrackenO> we should be carefull about fuel however... changing speed during fly may cause problem
+
+[18:14] <BTAxis> Why?
+
+[18:14] <KrackenO> because the calculation to know if an aircraft can reach a destination is done when the aircraft is send to this destination
+
+[18:14] *** schumaml joined
+[18:14] <BTAxis> But fuel consumption doesn't change with speed, does it? At least, it shouldn't.
+
+[18:15] <BTAxis> Otherwise we have a problem.
+
+[18:15] <KrackenO> yes it does
+
+[18:16] <KrackenO> basically, you could see fuel as "number of second to fly before there is no more fuel"
+
+[18:16] <BTAxis> Damn. We were discussing that, actually.
+
+[18:16] <BTAxis> [12:00:25] <@BTAxis> I was thinking about adding a mechanic to burn extra fuel during max speed, but let's not do that. It would serve no real purpose.
+
+[18:16] <BTAxis> [12:01:42] <Richlv> and it would complicate things a lot
+
+[18:16] <BTAxis> [12:01:57] <Richlv> like, aircraft returns to base because it's low on fuel
+
+[18:16] <BTAxis> [12:02:08] <@BTAxis> Yeah, it would only make things difficult.
+
+[18:16] <BTAxis> [12:02:09] <Richlv> should it be able to start speedburst ?
+
+[18:16] <BTAxis> [12:02:20] <Richlv> fuel consumption should be tied to distance travelled
+
+[18:16] <KrackenO> if you fly faster, then you can go farther
+
+[18:17] <BTAxis> Oh. That's the reverse of what I was thinking of, actually.
+
+[18:17] <KrackenO> yes, that would be good to burn extra fuel: just the same quantity that what you would have burned at low speed
+
+[18:17] <BTAxis> Yeah, because then fuel consumption becomes a function of distance traveled, as Richlv said.
+
+[18:17] <KrackenO> yes, that would be nice to avoid that
+
+[18:21] *** peteran joined
+[18:23] <Kildor> CU
+
+[18:27] *** ghosta left
+[18:29] *** RudolfoWood joined
+[18:29] <RudolfoWood> hiho
+
+[18:45] *** Flint joined
+[18:46] *** Flint left
+[18:53] *** Kildor left
+[18:55] *** bayo_O joined
+[18:57] <bayo_O> hi
+
+[18:57] <bayo_O> RudolfoWood : which image do you need to use as button?
+
+[19:01] <bayo_O> just need some, to test
+
+[19:02] *** Xedge joined
+[19:02] <RudolfoWood> geever did it already
+
+[19:03] <RudolfoWood> in aircraft menu little button to let aircraft return to base
+
+[19:04] <RudolfoWood> but geever did it with a second pic, perhaps merging these two would be a good idea (with the idea we had yesterday)
+
+[19:04] <RudolfoWood> look at /base/menu/buttons_small.tga third row
+
+[19:11] <CIA-23> tlh2000 * r20428 /ufoai/trunk/src/ (4 files in 2 dirs):
+
+[19:11] <CIA-23> * cls.multiplayerMapDefinitionIndex => cls.currentSelectedMap
+
+[19:11] <CIA-23> * sort the mapDefs for displaying the in the menu
+
+[19:12] *** bayo_O left
+[19:13] *** virnik joined
+[19:13] *** bayo_O joined
+[19:14] *** geever joined
+[19:19] *** ptl left
+[19:22] <RudolfoWood> geever, you are once again too fast with bugfixing for me :-)
+
+[19:22] <geever> :)
+
+[19:24] <geever> that bug with openable aircraft screen wo aircraft. I modified that part but someone (uhm) removed an inportant function from that...
+
+[19:28] <CIA-23> tlh2000 * r20429 /ufoai/trunk/src/common/ (files.c scripts.c): * FS_MapDefSort implemented
+
+[19:32] <RudolfoWood> should I add one msgcategory for transfer lost (no more space, no more quarters, no more hangars, no more alien cont) or should I add one for each?
+
+[19:34] *** mattn2|home left
+[19:37] *** bayo_O left
+[19:37] *** bayo__O joined
+[19:49] *** virnik left
+[19:49] *** Richlv left
+[19:50] <RudolfoWood> radiant builds quite long...
+
+[19:50] *** Richlv joined
+[19:50] *** virnik joined
+[19:51] <RudolfoWood> I finally got my problems with missing glib solved: it was not included in linking and could not be found...
+
+[19:56] <CIA-23> bayo-fr * r20430 /ufoai/data_source/images/menu/button_pack1.psd: * example of button pack for custombutton
+
+[19:59] *** bayo_O joined
+[19:59] *** bayo__O left
+[20:00] <RudolfoWood> hey... radiant is working for me *cheers*
+
+[20:02] *** bayo__O joined
+[20:02] *** bayo_O left
+[20:13] *** Senya_B] joined
+[20:20] *** ghosta joined
+[20:37] *** Senya_B] left
+[20:37] *** Senya_B] joined
+[20:38] *** bayo_O joined
+[20:39] *** bayo__O left
+[20:43] *** bayo_O left
+[20:45] <CIA-23> kracken * r20431 /ufoai/trunk/src/client/ (5 files):
+
+[20:45] <CIA-23> * cleaned up radar restoration code (used to know if radar should be switched off when UFO flies outside radar coverage)
+
+[20:45] <CIA-23> * hopefully fixed bug of mission appearing far from UFO that spawned it
+
+[20:45] <CIA-23> * added debug check to make sure mission is spawned at same location then UFO
+
+[20:47] *** bayo_O joined
+[20:48] *** KrackenO left
+[20:53] <CIA-23> bayo-fr * r20432 /ufoai/trunk/base/ (3 files in 2 dirs): * example to convert little pic in real button
+
+[20:54] <Richlv> <RudolfoWood> but geever did it with a second pic, perhaps merging these two would be a good idea (with the idea we had yesterday)
+
+[20:54] <Richlv> which idea ?
+
+[20:54] <Richlv> auto greyscaling or not ?
+
+[20:55] <Richlv> <RudolfoWood> hey... radiant is working for me *cheers*
+
+[20:55] <Richlv> haha. pity you ;>
+
+[20:56] <geever> I wanted to put the 3 picture sets to one image but didn't have time yet
+
+[20:56] <Richlv> well, if we could haver auto runtime greyscaling, that would be quite cool :)
+
+[20:58] <RudolfoWood> auto greyscaling, yes
+
+[20:58] <geever> and also flashing buttons...
+
+[21:00] <Richlv> i put auto greyscaling up on the feature tracker
+
+[21:00] <Richlv> so that it dioesn't get lost
+
+[21:05] *** bayo_O left
+[21:06] *** bayo_O joined
+[21:07] <bayo_O> auto grey is not a good idea. It break the work of graphists
+
+[21:07] <geever> ??
+
+[21:08] <RudolfoWood> auto grey would be good for non-graphists as me :-)
+
+[21:10] <Richlv> geever, that was a joke, hinting at broken window fallacy ;)
+
+[21:11] <CIA-23> RudolfoWood * r20433 /ufoai/trunk/ (6 files in 3 dirs): * new message categories for ufo spotting and transfer
+
+[21:13] <RudolfoWood> I'm off for today, good night
+
+[21:13] *** RudolfoWood left
+[21:15] *** bayo_O left
+[21:16] *** bayo_O joined
+[21:22] *** Xedge left
+[21:28] *** bayo_O left
+[21:29] *** bayo_O joined
+[21:32] *** yann_ joined
+[21:37] *** bayo_O left
+[21:37] *** bayo_O joined
+[21:46] *** bayo__O joined
+[21:46] *** bayo_O left
+[21:51] *** Senya_B] left
+[21:51] *** bayo__O left
+[21:51] *** bayo_O joined
+[22:01] <CIA-23> geever * r20434 /ufoai/trunk/base/ufos/menu_ufopedia.ufo: * fix [2350863] mailclient scrollbar located too low, see: https://sourceforge.net/tracker/index.php?func=detail&aid=2350863&group_id=157793&atid=805242
+
+[22:10] <Richlv> neat
+
+[22:11] <Richlv> geever, monthly news will feature something like "a lot of improvements for the gui" or something similar :)
+
+[22:12] <geever> BTAxis, Will we ever have more ammunition types for an aircraft weapon?
+
+[22:14] <Richlv> ok, i know why this is asked :)
+
+[22:15] <geever> :)
+
+[22:17] <Richlv> that screen is a mess anyway
+
+[22:17] <Richlv> i'd love to see a total redesign of it someday
+
+[22:17] <Richlv> using it consists of semi-random clicking around and scratching head
+
+[22:17] <Richlv> using the opposite side hand at that
+
+[22:20] <BTAxis> Yeah, no kidding.
+
+[22:21] <BTAxis> To answer the question, yes, there will be multiple ammo types for the missile launcher, for example.
+
+[22:21] <BTAxis> But that doesn't mean we need to equip them separately.
+
+[22:22] <BTAxis> I'm sure there's some elegant solution to equipping a weapon that can hold multiple ammo types. A popup maybe?
+
+[22:22] <Richlv> hmm. how would the player choose the ammo then ?
+
+[22:22] <Richlv> ok, i blame gprs :)
+
+[22:23] <Richlv> quite slow tonight
+
+[22:31] *** Senya_B] joined
+[22:35] <BTAxis> Merged Gameplay Proposals to Proposals... But it's still a mess.
+
+[22:35] <BTAxis> I need to reorder them sometime.
+
+[22:42] *** Darkchyld joined
+[22:47] <NineX> mysql upgrade on ninex.info - posibly wiki access issues. please be patioent :>
+
+[22:49] *** Darkchyld left
+[23:29] *** jdolan_ left
+[23:40] *** LordHavoc left
+[23:41] *** LordHavoc joined
+[23:49] <geever> good night
+
+[23:50] *** geever left

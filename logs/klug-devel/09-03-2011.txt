@@ -1,0 +1,1394 @@
+[00:12] *** hhfh joined
+[00:15] <yeban> Looks interesting: http://www.sproutcore.com/
+
+[00:18] *** hhfh left
+[00:29] <yeban> http://www.daniweb.com/hardware-and-software/linux-and-unix/linux-servers-and-apache/news/224861
+
+[00:29] <yeban> lol :D
+
+[02:41] *** lupo33_ joined
+[02:45] <lupo33_> So how was the second KLUG meeting?
+
+[02:45] *** lupo33_ left
+[02:46] *** lupo33 joined
+[03:49] <diffoperator> so what happened at the meeting with ISG?
+
+[03:50] <diffoperator> did he say, "oh, you are that loser who thinks a btree is superior to a linear search"?
+
+[04:02] *** lupo33 left
+[04:02] *** lupo33 joined
+[04:57] <sanket> diffoperator, Nice one. You remember that ;)
+
+[04:57] <sanket> artagnon, Why didn't you give me a call ?
+
+[05:14] *** DND joined
+[05:27] *** aftab joined
+[05:29] *** ps_jinx left
+[06:00] <sanjoyd> yeban: it is not pink!@
+
+[06:01] <diffoperator> hey its ok, i like pink shirts too
+
+[06:01] <sanjoyd> I do have a _real_ pink shirt.
+
+[06:01] <sanjoyd> Only real men can afford to wear such things.
+
+[06:01] <sanjoyd> :D
+
+[06:19] <diffoperator> :P
+
+[06:20] *** DND left
+[06:25] *** ps_jinx joined
+[06:26] <lupo33> 3
+
+[06:30] *** ps_jinx left
+[06:35] *** ps_jinx joined
+[06:36] *** ps_jinx left
+[06:40] *** ps_jinx joined
+[06:50] <artagnon> sanket: Becasue your phone is almos talways off :|
+
+[06:50] <artagnon> I can't get through most of the time.
+
+[06:57] <aftab> does anybody know who DND was?
+
+[06:57] *** ps_jinx left
+[07:03] *** ps_jinx joined
+[07:06] *** ps_jinx left
+[07:08] *** ps_jinx joined
+[07:14] <sanket> Ofcourse I have changed my number.
+
+[07:14] <sanket> artagnon, 7407139738 ( for others too )
+
+[07:15] <sanket> What did ISG say, or he was speaking hostile
+
+[07:39] *** navgeet joined
+[07:42] *** nulpoet joined
+[07:54] *** navgeet left
+[07:55] *** navgeet joined
+[08:18] *** navgeet left
+[08:24] <artagnon> sanket: Oh.
+
+[08:25] <artagnon> sanket: He didn't say so much -- he just wasn't receptive to what we were saying.
+
+[08:25] <artagnon> Oh, and ofcourse he did say a few really funny things along the way :)
+
+[08:26] <sanjoyd> artagnon: elucidate?
+
+[08:27] <artagnon> He started: We must get students to do projects that are "industrially relevant".  For this we must contact the industry for some projects and get them done by students.
+
+[08:28] <artagnon> Then he went on to say how proud he was of the various students and Nucleodyne had built.  When I told him that I didn't see any of those things on lkml,
+
+[08:28] <artagnon> he was of the opinion that "merging" a project back into upstream was a "secondary" task that required significant time investment.
+
+[08:29] <artagnon> In short: He doesn't understand open source, and it's very difficult to get him to listen to our ideas about it.
+
+[08:29] <sanjoyd> Then talking to him is a waste of time.
+
+[08:29] <sanjoyd> (If he thinks getting things merged is a secondary task.)
+
+[08:29] <artagnon> You might say that talking to to younger professors is much more productive, but they're all low-influence profs.
+
+[08:30] <artagnon> Low-investment low-return.
+
+[08:30] <artagnon> He's the high-investment high-return kind of cow.
+
+[08:30] <sanjoyd> Perhaps Abhijit Das?  How much influence does he have?
+
+[08:30] <artagnon> Zero.
+
+[08:30] <sanjoyd> :(
+
+[08:30] <sanjoyd> GB does not seem to have much influence either.
+
+[08:30] <artagnon> That's zero-point-zero.
+
+[08:30] <artagnon> Nope, and neither does PM.
+
+[08:30] <sanket> If I may.
+
+[08:31] <artagnon> Yes, please.
+
+[08:31] <sanjoyd> ?
+
+[08:31] <sanket> PM can be a good shot.
+
+[08:31] <sanket> He has influence, and gets along most faculty/administration well.
+
+[08:31] <sanjoyd> This is what OSS has boiled down to in KGP.  Politics.
+
+[08:31] <sanjoyd> :|
+
+[08:32] <sanket> sanjoyd, What politics ?
+
+[08:32] <artagnon> sanjoyd: Nope.  *Everything* is politics here.
+
+[08:32] <artagnon> Influencing people to do the Right Thing (TM).
+
+[08:32] <sanket> I think OSS has not been received properly.
+
+[08:32] <sanket> Forget politics.
+
+[08:32] <artagnon> The biggest downside with PM is that he does nothing (laziness).  Literally.
+
+[08:32] <sanket> artagnon, :).
+
+[08:33] <sanket> You need to run after him. Literally.
+
+[08:33] * artagnon nods
+
+[08:33] <artagnon> We don't want to put all our eggs in one basket -- I thought ISG would be another angle of attack.
+
+[08:33] <sanket> On a funny side, one of the department guys, Manaal, went for a talk regarding his MTP and he says - I will be back after chai.
+
+[08:33] <artagnon> :D
+
+[08:33] <sanket> PM returns, forgets Manaal is sitting, and goes for another with NG who sits on the other side.
+
+[08:34] * artagnon laughs
+
+[08:34] <artagnon> We have to attack from all sides and play a clever game of chess minimizing time investment and maximizing returns.
+
+[08:34] <sanket> What about the CIC proxy deal, he did not respond to that either ?
+
+[08:35] <artagnon> He didn't even listen.  "We will have a joint meeting sometime" was all he said.
+
+[08:35] <artagnon> He doesn't WANT to understand or learn.
+
+[08:35] <aftab> sanjoyd: Happy birthday.
+
+[08:35] <sanket> Oh - where's the treat :D ?
+
+[08:35] <sanjoyd> aftab: thanks!
+
+[08:36] <sanjoyd> sanket: you did not even know it was my birthday!
+
+[08:36] <sanket> Well I asked for the treat after I knew. So asking for treat was logical. ;)
+
+[08:36] <artagnon> sanjoyd: Happy Birthday! :D
+
+[08:36] <sanjoyd> artagnon: thanks!
+
+[08:37] <artagnon> Do something crazy today ;)
+
+[08:37] <sanjoyd> Nah.
+
+[08:37] *** maxking joined
+[08:37] <sanjoyd> I'll do something crazy when I feel like doing something crazy.
+
+[08:38] <sanket> One way to make him understand will be to elucidate OS model, the advantages, the business, the research - how open source really contributes back and how it takes from industry.
+
+[08:38] <artagnon> Oh, yes.  On that note:
+
+[08:38] <artagnon> One must understand operating system theory before contributing.  We must get industrially relevant projects from Nucleodyne, and make students work with the industry!
+
+[08:39] <artagnon> What irony.
+
+[08:39] <artagnon> Linus' philosophy and his.
+
+[08:40] <sanket> Op. Sys, is an eccentric area no ? We can not boil OSS as such to kernel IMO.
+
+[08:40] * artagnon nods
+
+[08:40] <artagnon> Ofcourse, both sides are quite extreme; I'm just pointing out.
+
+[08:40] <artagnon> And he thinks open source = Linux kernel.
+
+[08:41] <artagnon> "Are you teaching students OS concepts so that they can contribute to Linux?"
+
+[08:41] * artagnon sighs
+
+[08:41] <artagnon> And "contribute" = do "industrially relevant" project.
+
+[08:42] <artagnon> Thow the code inside a closet, and leave IIT do do a job.
+
+[08:43] <artagnon> It was literally depressing to talk to him -- I've lost a lot of faith and motivation in KLUG because of him.
+
+[08:43] <artagnon> First question: "Which departments are you from?" -- I knew we'd lost half the battle here.
+
+[08:45] <artagnon> We were just trying to fight for the other half for the rest of the hour.  Complete waste of our time.
+
+[08:45] <sa1> sanjoyd: Happy Birthday! :)
+
+[08:45] <sanjoyd> sa1: Thanks!
+
+[08:46] <artagnon> When you get code merged into the kernel, 4 billion people in industry use it.  What's more "industrially relevant" than that?
+
+[08:46] <artagnon> Er, s/people/installations/
+
+[08:51] <artagnon> From his shoes, we look like jobless wankers.
+
+[08:52] <artagnon> Remember: Mutual respect is one of the most important things that we should strive to maintain in KLUG.
+
+[08:53] <artagnon> We *have* to listen to each others' opinions, no matter how much they may conflict with ours, and debate it.
+
+[09:10] <sanjoyd> http://blog.fiplab.com/bootstrapping-a-company-straight-out-of-unive
+
+[09:25] *** maxking left
+[09:54] * aftab wrote his first makefile. 
+
+[09:57] <sanjoyd> Yay!
+
+[10:01] <aftab> I'm writing a small set of linear algebra routines. Very basic ones, just to get a little acquainted with the issues involved with C programming. It's here: http://github.com/stringtheorist/linalgsmall
+
+[10:01] <aftab> Feel free to mock it, because I know it's horrible. :P
+
+[10:02] <aftab> *involved in
+
+[10:02] <sanjoyd> aftab: you should have a #ifndef / #define / #endif in your headers to prevent multiple inclusion.
+
+[10:03] <sanjoyd> Like this: https://github.com/sanjoy/L/blob/master/src/l-context.h
+
+[10:03] <sanket> aftab, I am sure you did a good job. Most of the assignment submissions I get for my TA - do not have Makefiles. Consider the horror of doing gcc over each file :P
+
+[10:03] <aftab> Lol! yeah, that must really suck.
+
+[10:04] <sanjoyd> sanket: deduct marks? :D
+
+[10:04] <sanket> sanjoyd, No marks for that. ( the lab is Networks by ISG so we can all rant about it :P )
+
+[10:04] <aftab> sanjoyd: thanks, I was worried about exactly the same issue. I had no clue about how to avoid it.
+
+[10:05] <sanjoyd> Also, consider using calloc (instead of malloc) in create_zero_matrix.
+
+[10:05] <sanjoyd> It returns zeroed memory.
+
+[10:18] <artagnon> ISG *sigh*
+
+[10:27] * artagnon nods
+
+[10:27] <artagnon> They'll come up with new keywords.
+
+[10:28] <sanket> Not that filtering is an issue - there are always Regexes to make life hell.
+
+[10:28] <sanket> A guy even suggested writing a script to simply reverse the keywords.
+
+[10:28] <sanket> Anyhow, that's all pep talk.
+
+[10:29] <sanket> artagnon, Do you wish/plan to present something to ISG ?
+
+[10:29] <artagnon> No.
+
+[10:29] <artagnon> I wish, but I can't think of anything now.
+
+[10:29] <artagnon> I can't think of a strategy :|
+
+[10:30] <sanket> Understandable - The questions is, "Is ISG naive, or is he stubborn".
+
+[10:30] <sanket> If he is naive, then we may help - else it's a lost cause.
+
+[10:30] <artagnon> Stubborn.
+
+[10:31] <artagnon> It's not entirely lost -- we can try using his stubborness against him by changing the things he believes in and shaking his beliefs.
+
+[10:31] <artagnon> Correction: *rattling* his world view.
+
+[10:32] <sanket> I feel that he is not really stubborn as compared to being un-aware of the ramifications of OSS.
+
+[10:32] <artagnon> Ok.
+
+[10:33] <artagnon> I haven't given up completely yet either.
+
+[10:33] <artagnon> I'm just feeling especially low because I spoke to him yesterday.
+
+[10:33] <sanket> He really needs to be told what is going on inside - after his apparent lack of knowledge towards VCS's.
+
+[10:33] <sanket> I will assume he has no freaking clue of what goes inside the kernel, let's tell him that!
+
+[10:33] <artagnon> He respects glamorous jobs, high CGPA, and great resarch papers.
+
+[10:34] <artagnon> It's difficult to change that.
+
+[10:34] <sanket> Because he understands that side of the park, ignorance is bliss - perhaps not always.
+
+[10:34] <artagnon> You can't *tell* him anything until he respects you enough to listen.
+
+[10:34] <sanket> Agreed.
+
+[10:35] <sanket> And then you will simply be pushing through the motions. Though I like the point of using his close-by-colleagues.
+
+[10:35] <sanket> Again we just have PM.
+
+[11:02] *** sanket left
+[11:18] <diffoperator> wow, that was really entertaining
+
+[11:22] <artagnon> yeban is already at BCR.  I'm leaving too for chai.
+
+[11:25] <artagnon> A long email about reducing the gap b/w students and professors (from a conversation we'm having with the VP): http://pastie.org/2475581
+
+[11:25] <artagnon> Feel free to sprinkle in suggestions -- this is the first draft.
+
+[11:26] * artagnon leaves for chai
+
+[11:28] <diffoperator> the first point is so droll!
+
+[11:28] <diffoperator> but really accurate, I thought about it myself as well but never articulated it in writing
+
+[11:38] *** sanjoyd left
+[12:11] *** nulpoet left
+[12:22] *** zxcv joined
+[12:26] *** zxcv left
+[12:26] <aftab> artagnon: Personally I'm all for a complete detachment of students and faculty. The reason I've been able to survive so far at KGP is because of the rift that exists. While the intentions are all very merry, we must understand that most of these people are neanderthals, and I'm worried that calling for them to be involved in students lives will make them *too* involved.
+
+[12:27] <artagnon> aftab: The reason they're neanderthals is because they haven't interacted with this generation :)
+
+[12:27] <artagnon> The Architecture profs aren't neanderthals, for example.
+
+[12:28] <aftab> artagnon: You seem to have some rather wrong impression about the Architecture profs here.
+
+[12:28] <artagnon> A few of them are forward-thinking.
+
+[12:28] <aftab> have you been to their classes?
+
+[12:28] <aftab> *few*
+
+[12:28] <aftab> same is true of every department.
+
+[12:28] <artagnon> Still, an improvement over the other departments.
+
+[12:28] <artagnon> Hm.
+
+[12:29] <artagnon> The classes are brain-dead, as in any other department.
+
+[12:29] <artagnon> See: They will always be neanderthals (this generation will grow up to be profs as well), unless we do something about it.
+
+[12:30] <artagnon> Remember: We're not forcing student-professor interaction.  We're just creating the infrastructure to incentivsse it.
+
+[12:30] <aftab> Not really, I don't think that the new profs are neanderthals.
+
+[12:30] <artagnon> First, the forward thinking students will start interacting with the upper crest of the profs.
+
+[12:30] <aftab> and I certainly don't think that they're going to stay neanderthals forever.
+
+[12:30] <artagnon> True.  They will soon become neanderthals for their time in 20 years or so :)
+
+[12:31] <artagnon> The situation improves slowly with each generation, no bout.
+
+[12:31] <artagnon> doubt*
+
+[12:31] <artagnon> but it can really be sped up by incentivising interaction.
+
+[12:31] <aftab> yeah, with the natural change in culture towards a better model.
+
+[12:31] <artagnon> Also, as the new profs interact with the older guys, things will change.
+
+[12:32] <artagnon> One generation interacts with the next -- disconnecting them creates the sort of oppression and backward thinking that we see in India today.
+
+[12:32] <artagnon> They're not different from us -- don't alienate them.
+
+[12:32] <aftab> I don't know about that. Personally I'm really happy about some profs being as far away from me as possible. I wouldn't talk to them if I was paid 1000 dollars a minute.
+
+[12:32] <artagnon> They grew up in the same houses, had similar parents.
+
+[12:33] <artagnon> And similar culture.
+
+[12:33] * artagnon shrugs
+
+[12:33] <artagnon> Your choice.
+
+[12:33] <artagnon> I'd rather talk.
+
+[12:33] <artagnon> And I do. Occasionally.
+
+[12:33] <aftab> Really? I don't think the "neanderthals" grew up in a house like mine, or have my background.
+
+[12:33] <artagnon> Many of them recommmend good history books, and give me insights on people like Guha.
+
+[12:34] <artagnon> Many of them are IIT'ians.  It's just that the country (atmosphere in India) has changed over the years.
+
+[12:34] <artagnon> Otherwise, they're more-or-less the same people.
+
+[12:34] <artagnon> It's the same disconnect that exists between the various people in our batch.
+
+[12:34] <aftab> Are you trying to say that I'm the same as everyone in this institute?
+
+[12:34] <artagnon> The forward-thinking ones never become IIT profs.
+
+[12:34] <aftab> I beg to differ.
+
+[12:34] <artagnon> They didn't last generation, and they won't in this generation.
+
+[12:34] <artagnon> Yes, you are.
+
+[12:34] <aftab> Obviously they won't.
+
+[12:35] <artagnon> That's the difference between our parents and the IIT profs --
+
+[12:35] <aftab> Everyone who's forward looking leaves the country. And that is something that's driven by forces that are far to powerful to change.
+
+[12:35] <artagnon> the difference between the forward-thinkers and backward-thinkers of this generation.
+
+[12:36] <artagnon> Ofcourse -- we're only trying to improve the situation.
+
+[12:37] <artagnon> We're all the same -- we grew up in very similar environments, all had similar parents, and culture surrounding us.  Ofcourse, if you put it under a microscope, the differences seem very stark.
+
+[12:37] <aftab> Firstly, I am NOT the same as some chap who sits in his room and wanks off the whole day. And I don't feel that I need to prove that to you or anyone else. People are responsible for where they are, and how much they are worth to humanity.
+
+[12:37] <artagnon> :)
+
+[12:37] <artagnon> Free will.
+
+[12:39] <artagnon> One sec, brb.
+
+[12:40] <aftab> Secondly, personally, I'm quite thankful that this "scheme of interaction" is going to happen long after I'm out of here, because there are certain sections of the student and professor society that are beyond redemption, and I feel that instead of spending our time on them, we should be helping those people who show promise. Forget about the neanderthals and they'll become extinct like they should be.
+
+[12:41] *** sanjoyd joined
+[12:41] *** sanjoyd left
+[12:41] *** sanjoyd joined
+[12:44] * aftab is excercising.
+
+[12:44] <aftab> *exercising [I hate typos :(]
+
+[12:48] <sanjoyd> artagnon: nice writeup -- but what is the purpose?  Trying to implement even a small fraction of this is like banging your head against the wall, IMO.
+
+[12:48] <artagnon> sanjoyd: Not really.  They're very easy to implement quickly.
+
+[12:49] <sanjoyd> artagnon: okay.  Take [1].
+
+[12:49] <artagnon> This goes to the VP and DoSA who have the power to do it.
+
+[12:50] <sanjoyd> Okay, maybe the VP can do something.
+
+[12:51] <sanjoyd> One thing: we have our version of OCW: NPTL.
+
+[12:52] <artagnon> Oh, nice :)
+
+[12:52] <sanjoyd> Some of the content is actually good; but it is horribly designed.
+
+[12:56] * lupo33 woke up just now. Really long siesta. :|
+
+[12:56] <sanjoyd> Welcome to the show.
+
+[12:57] <aftab> "the show" lol!
+
+[12:58] * lupo33 is checking the logs.
+
+[13:05] *** vickyc1 left
+[13:06] *** lupo33 left
+[13:06] *** aftab left
+[13:06] *** aftab joined
+[13:07] *** vickyc joined
+[13:14] *** ps_jinx left
+[13:17] *** lupo33 joined
+[13:23] <diffoperator> sanjoyd: artagnon is looking to be the anna hazare of kgp
+
+[13:23] <artagnon> Bullshit.
+
+[13:23] <artagnon> I can't stand Hazare.
+
+[13:23] <diffoperator> go on a hunger strike to get the profs to smile on their profiles :D
+
+[13:23] <artagnon> His cause is completely useless, and he'll kill democracy.
+
+[13:23] <artagnon> Freeze the economy and pull all the money out.
+
+[13:24] <diffoperator> his cause is anti corruption
+
+[13:24] <diffoperator> i dont think his cause is BS, maybe his methods are too extreme
+
+[13:24] <diffoperator> they almost amount to blackmail
+
+[13:24] <artagnon> Nope, I think it's the wrong thing to be fighting.
+
+[13:24] <diffoperator> huh?
+
+[13:24] <artagnon> It's like saying: there's bad blood in this individual.
+
+[13:24] <artagnon> Let's pump the blood out!
+
+[13:25] <artagnon> It's a very superficial way to attack a problem.
+
+[13:25] <diffoperator> do you know what the kidneys do?
+
+[13:25] <artagnon> Corruption is the lubricant that keeps the entire machinery of the economy running.
+
+[13:25] <diffoperator> wtf!!!!
+
+[13:25] <diffoperator> WTF!!!!
+
+[13:26] <artagnon> Yes, that is my view.
+
+[13:26] <artagnon> It's a social problem, not an economic one.
+
+[13:26] <artagnon> Everyone's corrupt.
+
+[13:26] <artagnon> It's like banning religion.
+
+[13:26] <artagnon> Totally irrational.
+
+[13:26] <artagnon> Or banning culture.
+
+[13:26] <lupo33> Agree with artagnon. The black money saved our economy during the global downturn in '08.
+
+[13:26] <sanjoyd> artagnon: many countries have benefited from a dedicated anti-corruption wing.
+
+[13:27] <diffoperator> who is getting saved?
+
+[13:27] <artagnon> True, but the elections in this country are driven by black money.
+
+[13:27] <sanjoyd> The investors in limos.
+
+[13:27] <diffoperator> the 5% junta who hold equities and are related to the foreign markets?
+
+[13:27] <artagnon> Once that little money is pulled out, BJP won't have enough money to fight the elections.
+
+[13:27] <diffoperator> congress won't have either
+
+[13:27] <sanjoyd> But it is true that black money harms the economy more during re-entry than when it leaves the economy.
+
+[13:27] <artagnon> Oh, they have tons of money.
+
+[13:28] <artagnon> They've been in power for much longer.
+
+[13:28] * artagnon nods
+
+[13:28] <sanjoyd> I don't think having a anti-corruption wing is a bad idea.
+
+[13:28] <artagnon> How do you pump the money back into the economy?
+
+[13:28] <diffoperator> laundering
+
+[13:28] <diffoperator> buying real estate
+
+[13:28] <artagnon> I don't either -- atleast not in general.  But I think it's a very severe mistake at this point in India.
+
+[13:28] <sanjoyd> Why?
+
+[13:29] <sanjoyd> For instance, corruption is the main reason why Kolkata is where it is now.
+
+[13:29] <artagnon> Because of the way the governments work here -- and the fine balance that democracy has at this point.
+
+[13:29] <sanjoyd> I don't think it has hit any balance.
+
+[13:29] <artagnon> Congress has won too many elections and there's no strong opposition.
+
+[13:29] <diffoperator> then the way the govt works need to be changes
+
+[13:29] <diffoperator> *changed
+
+[13:29] <sanjoyd> Corruption harms economy more indirectly and directly.  It is not the fact that I have to pay 1k for a passport that is bad.
+
+[13:29] <artagnon> Yes, I know.  We all know that corruption will have to go away little by little.
+
+[13:30] <diffoperator> the fastest growing states in India have the least corruption at the microscopic level
+
+[13:30] <sanjoyd> It is the fact that, for instance, it is virtually impossible to have a startup in Kolkata.
+
+[13:30] <artagnon> But I don't agree that the problem should be attacked superficially.
+
+[13:30] <artagnon> Yes, I know.
+
+[13:30] <sanjoyd> It is not a superficial attack.
+
+[13:30] <artagnon> Taking money out of the economy is the most superficial thing you can possibly do.
+
+[13:30] <artagnon> Policing the economy.
+
+[13:30] <diffoperator> look, having a body to protect you if you decide to whistleblow is a very good idea
+
+[13:30] <sanjoyd> Who is taking money out of the economy?
+
+[13:30] <artagnon> Central planning, freezing free market.
+
+[13:30] <diffoperator> right now if you complain against the powers that be, god help you
+
+[13:31] <diffoperator> WTH?
+
+[13:31] <sanjoyd> Again, who's freezing the freemarket?
+
+[13:31] <artagnon> Jan Lokpal.
+
+[13:31] <artagnon> It doesn't matter.
+
+[13:31] <sanjoyd> No.
+
+[13:31] <sanjoyd> It isn't.
+
+[13:31] <diffoperator> the lokpal has no legislative authority
+
+[13:31] <diffoperator> it is an ombudsman
+
+[13:31] <sanjoyd> Right now, to investigate the PM, I need his signature.
+
+[13:31] <sanjoyd> JLB simply changes that.
+
+[13:31] * aftab will be back in 10 minutes.
+
+[13:31] * sanjoyd goes to the gym.
+
+[13:31] <artagnon> Yes, I know.  It's aggressive policing.
+
+[13:31] <sanjoyd> No, it is not.
+
+[13:31] <sanjoyd> It just policing.
+
+[13:31] <artagnon> What else is it?
+
+[13:32] <diffoperator> Effective policing
+
+[13:32] <diffoperator> Accountable policing
+
+[13:32] <sanjoyd> The point is that people will be corrupt if they have a chance of doing so.
+
+[13:32] <diffoperator> some people equate that with "aggressive"
+
+[13:32] <artagnon> Okay, don't think of the problem on such a macro level --
+
+[13:32] <sanjoyd> The idea is to make a little more risky.  To dissuade wrong behavior.
+
+[13:33] <artagnon> Think about an enterpreneur who needs to start a business.
+
+[13:33] <diffoperator> right, there is an incentive right now to be corrupt
+
+[13:33] <diffoperator> coz you can get away with it
+
+[13:33] <artagnon> There's corruption in every single step to reach the top.
+
+[13:33] <artagnon> Yes, those *incentives* have to change.
+
+[13:33] <artagnon> In the economy.
+
+[13:33] <artagnon> Not using policing.
+
+[13:33] <artagnon> People shouldn't refrain from committing crimes because of a severe death sentence.
+
+[13:33] <sanjoyd> What incentives?  People will make 2k extra if they can get away with it.
+
+[13:33] <artagnon> That's the wrong way to go.
+
+[13:34] <sanjoyd> Who's giving a death sentence?
+
+[13:34] <diffoperator> look, in a capitalistic economy, you will have people like madoff
+
+[13:34] <diffoperator> and you will have GS
+
+[13:34] <artagnon> I'm just saying it's too harsh.
+
+[13:34] <sanjoyd> JLB can investigate.
+
+[13:34] <artagnon> At this point.
+
+[13:34] <artagnon> It's very ideal and all that.
+
+[13:34] <sanjoyd> Then put up a case against you in the court.
+
+[13:34] <artagnon> Will it work in India here and now?
+
+[13:34] <artagnon> I don't think so.
+
+[13:34] <sanjoyd> I think so.
+
+[13:34] <diffoperator> but i have a problem with politicians who make off with taxpayers money and not provide solid infrstructure
+
+[13:34] <sanjoyd> Having a transparent system works will in countries with educated people.
+
+[13:34] <artagnon> sanjoyd: Yes, we know that.
+
+[13:34] <diffoperator> ombudsman laws are there all over the world
+
+[13:35] <diffoperator> even in the US at various federal levels, you can go and complain about corrupt officials
+
+[13:35] <diffoperator> they have a witness protection program
+
+[13:35] <artagnon> You want transparency? Legalize everything that a progressive country legalizes, liberate everything, remove all bans.
+
+[13:35] <diffoperator> remember the jessica lal case?
+
+[13:35] <artagnon> The entire country will sink into chaos.
+
+[13:35] <artagnon> It's much too fast.
+
+[13:35] <diffoperator> What are you talking about?
+
+[13:36] <diffoperator> Can you be more specific?
+
+[13:36] <sanjoyd> No, I meant having a transparent system will not work very well.
+
+[13:36] <artagnon> 19:02 <sanjoyd> Having a transparent system works will in countries with educated
+
+[13:36] <diffoperator> Legalize what?
+
+[13:36] <artagnon>                 people.
+
+[13:36] <sanjoyd> Since the people here are not very educated.
+
+[13:36] <sanjoyd> You need a dedicated body.
+
+[13:36] <artagnon> You're giving an example of a forward economy.
+
+[13:36] <artagnon> I'm saying that you can't apply those principles immediately.
+
+[13:36] <diffoperator> THen when>
+
+[13:36] <artagnon> People need to get there slowly.
+
+[13:36] <diffoperator> ?
+
+[13:36] *** ps_jinx joined
+[13:36] <diffoperator> do we need to wait another 60 years?
+
+[13:36] <artagnon> Get rid of their historical crufts.
+
+[13:37] <sanjoyd> JLB is not as drastic as you're thinking.
+
+[13:37] <artagnon> sanjoyd: I've read the draft.
+
+[13:37] <sanjoyd> artagnon: so?
+
+[13:37] <artagnon> I've pretty drastic.
+
+[13:37] <sanjoyd> artagnon: no.
+
+[13:37] <diffoperator> Its needed
+
+[13:37] <artagnon> What do you mean? I think it's drastic, you think it isn't.
+
+[13:37] <artagnon> Why can't you argue in a sane manner?
+
+[13:37] <sanjoyd> artagnon: I think the fact that to investigate you, I need *your* permission is pretty ridiculous.
+
+[13:37] <artagnon> Hold a different point of view and debate.
+
+[13:38] <artagnon> Ofcourse it is.
+
+[13:38] <artagnon> It's just that it's been running that way for far too long now.
+
+[13:38] <sanjoyd> So changing it, IMO, is not drastic.
+
+[13:38] <artagnon> And people need to understand that things are going to change.
+
+[13:38] <sanjoyd> That does not justify it.
+
+[13:38] <sanjoyd> Of course, but public memory is very short.
+
+[13:38] * artagnon shrugs
+
+[13:38] <sanjoyd> This thing should be sorted out as long as there is momentum.
+
+[13:39] <artagnon> There's very little money in the country -- it's just staying afloat and growing.
+
+[13:39] <artagnon> I feel that this is no time to start pulling money out and affecting cultural change.
+
+[13:39] <sanjoyd> WHO is pulling out money?
+
+[13:39] <artagnon> We can start pumping more money into the economy first, for instance.
+
+[13:39] <artagnon> sanjoyd: The police!
+
+[13:39] <artagnon> Out of people doing business!
+
+[13:40] <artagnon> Out of people bribing telecom networks
+
+[13:40] <sanjoyd> Not really.  Consider how much people would *save*.
+
+[13:40] <sanjoyd> The people paying bribes.
+
+[13:40] <sanjoyd> Consider the fact that it will actually be possible to have a startup in Kolkata.
+
+[13:40] <ashim> i think theres a lot of money in India, its ony poorly managed.
+
+[13:40] <artagnon> See: Money isn't about saving and keeping in the house.  Money is trust.
+
+[13:40] * ashim rudely enters the debate
+
+[13:40] <artagnon> It's not something physical.
+
+[13:40] <sanjoyd> artagnon: saving -> used in other causes.
+
+[13:40] <sanjoyd> Anyways, I'm off.
+
+[13:41] <sanjoyd> We'll continue this later.
+
+[13:41] <artagnon> Businesses won't start up.
+
+[13:41] <artagnon> Everyone'll be scared and shocked.
+
+[13:41] <artagnon> That they're suddenly having to earn only 60% of what they were.
+
+[13:41] <artagnon> The unaccounted 40% is suddenly gone.
+
+[13:41] <artagnon> And people's risk-taking ability comes down.
+
+[13:41] <artagnon> Trust in other people to grow the money starts collapsing.
+
+[13:41] <diffoperator> Hold on, are you saying that the JLB will be detrimental to corporates/startups?
+
+[13:42] <artagnon> Because entire companies like Reliance need to change the way they work.
+
+[13:42] <diffoperator> And they should!
+
+[13:42] <artagnon> That'll take time!
+
+[13:42] <artagnon> What'll they do until then?
+
+[13:42] <artagnon> Stop doing business?
+
+[13:42] <artagnon> And freeze the economy due to the shock?
+
+[13:42] <artagnon> The stock prices of everything will fall.
+
+[13:43] <diffoperator> Thats one of the issues of living in a capitalistic world.
+
+[13:43] <artagnon> Business won't flow as smoothly, because people suddenly have to change their habits.
+
+[13:43] <diffoperator> Who will be affected by the falling stock prices?
+
+[13:43] <diffoperator> certainly not the common man
+
+[13:43] <artagnon> Everyone!
+
+[13:43] <diffoperator> Thats a good thing.
+
+[13:43] <artagnon> Goods and services will become more expensive.
+
+[13:43] <artagnon> And people will die.
+
+[13:43] <diffoperator> :D
+
+[13:43] <artagnon> Yes, it's a great thing!
+
+[13:43] <artagnon> People will die!
+
+[13:43] <artagnon> Of hunger.
+
+[13:43] <diffoperator> Hey do you know how much grain is rotting in our granaries
+
+[13:43] <artagnon> They'll need to compensate for the 40% black money somehow using white money.
+
+[13:44] <diffoperator> because of corrupt officials wanting money to distribute it?
+
+[13:44] <artagnon> Everyone'll need to start paying higer taxes.
+
+[13:44] <artagnon> Yes, I know.
+
+[13:44] <artagnon> Wrong, it's a logistics problem.
+
+[13:44] <artagnon> Money is simply a lubricant.
+
+[13:44] <diffoperator> Its been portrayed as one. I really doubt if it is.
+
+[13:44] <artagnon> Money != Good or services.
+
+[13:44] <diffoperator> No one gives out goods or services for free
+
+[13:45] <artagnon> Money is a reflection of the culture and way of life of people.
+
+[13:45] * artagnon sighs
+
+[13:45] <artagnon> Things will become more expensive quite suddenly.
+
+[13:45] <diffoperator> How and why?
+
+[13:45] <artagnon> People will have to pay higher taxes suddenly.
+
+[13:45] <diffoperator> Why will they be paying higher taxes?
+
+[13:45] <artagnon> Because they have to account for all their income now.
+
+[13:46] <artagnon> They can't hide incomes as easily anymore.
+
+[13:46] <artagnon> And things will become expensive to compensate for the 40% black money.
+
+[13:46] <artagnon> IMHO, the correct way to solve corruption is to pump money into the economy.
+
+[13:47] <artagnon> So that everyone has more money.
+
+[13:47] <artagnon> And has less incentive to hide it.
+
+[13:47] <diffoperator> and you know what happens when you pump money into the system? the rich become richer while the poor remain as they are.
+
+[13:47] <artagnon> True, that's why public policy needs to be tweaked to bridge that gap.
+
+[13:48] <artagnon> Small changes in various laws will tweak incentives.
+
+[13:48] <diffoperator> And how exactly do you pump money? Printing more cash?
+
+[13:48] <artagnon> VAT is awesome IMHO.
+
+[13:48] * artagnon laughs
+
+[13:48] <artagnon> No, but creating I-Banks.
+
+[13:48] <artagnon> And lowering rates of interest.
+
+[13:48] * diffoperator laughs
+
+[13:48] <artagnon> To encourage people to borrow.
+
+[13:48] <artagnon> And make capital more available.
+
+[13:48] <artagnon> Encourage people to take risk and grow businesses.
+
+[13:49] <artagnon> Lower their incentive to be corrupt.
+
+[13:49] <artagnon> Grow the economy and lower taxation while gradually increasing policing.
+
+[13:49] <artagnon> Don't short-circuit all the steps and go to the policing extreme to push everyone into the brink of starvation.
+
+[13:50] <diffoperator> ok in the meanwhile what do we do with the folks getting away with stealing money laid out for critical infrastructure?
+
+[13:50] <artagnon> The poor are mostly illegal workers are earning black money.
+
+[13:50] <diffoperator> or money for social welfare?
+
+[13:50] <diffoperator> what?
+
+[13:50] <diffoperator> the poor people do not have to pay tax
+
+[13:50] <diffoperator> most of India doesnt pay tax because their income does not come in the taxable slab
+
+[13:50] <artagnon> True, but the rich don't account their salaries.
+
+[13:51] <artagnon> Yes, true.
+
+[13:51] <diffoperator> right, so the rich should be targeted
+
+[13:51] <diffoperator> the rich pay the most taxes in all major economies
+
+[13:51] <artagnon> See, there's a problem again:
+
+[13:51] <artagnon> The rich are the ones growing the economy.
+
+[13:51] <diffoperator> NO!
+
+[13:51] <artagnon> They're creating the businesses and employing people.
+
+[13:51] <diffoperator> The intellectually capable and active people grow the economy.
+
+[13:51] <artagnon> They start huge companies, buy cement, power, water.
+
+[13:52] <diffoperator> Hey, a guy like A Raja will not start a company
+
+[13:52] <artagnon> They buy more goods and services than anyone else.
+
+[13:52] <artagnon> He's a bureaucrat.
+
+[13:52] <artagnon> Professional Politician.
+
+[13:52] <artagnon> I'm mostly talking about entrepreneurs.
+
+[13:52] <diffoperator> so effectively what you are saying is that a priveleged group of people should have the leeway to be corrupt
+
+[13:52] <artagnon> The problem is that you can't discriminate.
+
+[13:53] <artagnon> ie. Who's actually growing it and who is expoliting the system.
+
+[13:53] *** ps_jinx left
+[13:53] <artagnon> Nope.
+
+[13:53] <diffoperator> Entrepreneurs are a victim of corruption.
+
+[13:53] <diffoperator> Everyone does not start out with a large capital to invest.
+
+[13:54] <artagnon> Victim or otehrwise: they have to be corrupt and operate the business to generate wealth.
+
+[13:54] <diffoperator> A wannabe entrepreneur is at a disadvantage when he is trying to negotiate his licenses with local MLA
+
+[13:54] <diffoperator> The entrpreneur is FORCED to pay bribes
+
+[13:54] <artagnon> You're painting a black-and-white "innocence" picture.
+
+[13:54] <diffoperator> his corruption is coerced
+
+[13:54] <artagnon> Black and white :)
+
+[13:54] <diffoperator> No, I come from a family of businessmen.
+
+[13:54] <artagnon> Everyone is, to some extent.
+
+[13:54] <diffoperator> I know for a fact that we would love to do business in a clean environment.
+
+[13:55] <artagnon> Force = The incentives for not being corrupt are far too low.
+
+[13:55] <artagnon> And the incentives for being corrupt is far too high.
+
+[13:55] <artagnon> Ofcourse they'd love it.
+
+[13:55] <diffoperator> With the JLB it will be the other way around.
+
+[13:56] <artagnon> The problem is that they can't stop operating their business tomorrow.
+
+[13:56] <artagnon> They can't change out their systems and ways.
+
+[13:56] <diffoperator> We will have the power to ensure that the local official does not sit on our file because we did not pay him.
+
+[13:56] <artagnon> It'll take time.
+
+[13:56] <diffoperator> Remember 1991?
+
+[13:56] <artagnon> So they'll be forced to slow down and correct everything.
+
+[13:56] <artagnon> Yes.
+
+[13:56] <diffoperator> We went from socialist to liberal overnight
+
+[13:56] <diffoperator> Because of a balance of payments crisis.
+
+[13:56] <diffoperator> That was the tipping point.
+
+[13:57] <diffoperator> Sure all PSUs were not privatised immediately.
+
+[13:57] <diffoperator> But 20 years later, the PSUs are definitely better performing than 20 years ago.
+
+[13:57] <diffoperator> (except for a few corner cases)
+
+[13:57] <artagnon> True, but liberating the economy didn't change that much overnight.
+
+[13:57] <artagnon> Policing can potentially change too many things overnight.
+
+[13:57] <diffoperator> No but it was a great first step.
+
+[13:58] * artagnon nods
+
+[13:58] <diffoperator> That we will have to see.
+
+[13:58] <diffoperator> If the JLB is too draconian, it can always be overturned later.
+
+[13:58] <diffoperator> We are after all, living in a democracy.
+
+[13:58] <artagnon> It'll be hard to tell how badly JLB will hit the economy.
+
+[13:58] * aftab thanks his stars that he doesn't care about any of the above issues.
+
+[13:58] <artagnon> Yeah, but the economy would've collapsed and people would've died by then :)
+
+[13:59] <diffoperator> HA
+
+[13:59] <diffoperator> Man, your thinking is too apocalyptic.
+
+[13:59] <artagnon> I just think we should be a little more cautious about it.
+
+[13:59] <diffoperator> Anyway we have a population problem + diabetes epidemic
+
+[13:59] <diffoperator> so...
+
+[13:59] * artagnon laughs
+
+[13:59] <diffoperator> it will be ok if people have less to eat
+
+[13:59] <aftab> No!
+
+[14:00] <artagnon> Killing off a few people is okay ;)
+
+[14:00] <artagnon> lol
+
+[14:00] <diffoperator> aftab: Why do you care?
+
+[14:00] <aftab> I want more to eat! that's why.
+
+[14:00] <diffoperator> you will be heading out to the land of promise anyway
+
+[14:00] <diffoperator> go to texas, eat all you want there
+
+[14:00] <aftab> that's a different matter. P
+
+[14:00] <aftab> *:P
+
+[14:00] <diffoperator> they supersize everything, including the already supersized burger
+
+[14:01] <artagnon> I just hope that India comes out in better shape than a centrally planned country like China.
+
+[14:01] <aftab> yeah, I know.
+
+[14:01] <diffoperator> I don't think economically, China is doing too bad
+
+[14:01] <aftab> artagnon: Nothing's going to happen to India.
+
+[14:01] <artagnon> Btw, do read the other criticisms of JLB -- they're not null and void.
+
+[14:01] <diffoperator> Yes I am aware of that.
+
+[14:01] <artagnon> And Congress has been around for far too long.
+
+[14:01] <artagnon> It's become far too wealthy.
+
+[14:02] <artagnon> Anyway, I'm off to get some dinner.
+
+[14:02] <diffoperator> But the most important thing is that the JLB introduces an ombudsman.
+
+[14:02] <diffoperator> + witness protection (which IMO is the most important thing)
+
+[14:02] <aftab> artagnon: Hey, give me about 5 minutes. I'll join you.
+
+[14:02] <artagnon> Ok.
+
+[14:04] <artagnon> Hazare doesn't understand economics, and that scares me.
+
+[14:04] <artagnon> They're nobody to decide public policy.
+
+[14:05] <artagnon> Anyway, there's very strong opposition still -- let's see if it gets passed.
+
+[14:05] <artagnon> And watch India for 2~3 years after, if it does get passed.
+
+[14:06] <artagnon> Had the Indian government proposed it in the first place, in a less extreme version along with a 5-year plan, I'd have been much more comforted.
+
+[14:07] <artagnon> And no, I hate Hazare's example -- I'm nobody to decide what's Right (TM), and I don't care about central planning.
+
+[14:07] <artagnon> I can merely ask people in power to consider a certain viewpoint if it makes sense.
+
+[14:08] * aftab heads off to dinner.
+
+[14:08] * artagnon leaves too
+
+[14:09] <artagnon> And I'm not stubborn (fast onto death) about my version of my plan either -- it's already changed many times after several inputs.
+
+[14:09] <artagnon> Hazare is stubborn as a mule.
+
+[14:20] <diffoperator> (just like Gandhi)
+
+[14:20] <diffoperator> i like stubborn people. They have more spine
+
+[14:34] * ashim rues that he missed such an awesome debate.
+
+[14:35] <ashim> How come a bunch of OSS guys want a single *centralised* law :D
+
+[14:36] <diffoperator> because anarchy is not the answer
+
+[14:36] <diffoperator> most successful OSS projects have a benevolent dictator
+
+[14:37] <diffoperator> and like with all things, we need a balance
+
+[14:38] <ashim> Not complete anarchy; rather a decentralised and mulit staged approach.
+
+[14:38] <diffoperator> right, but major decision that will affect the entire community are still taken by individuals
+
+[14:38] <diffoperator> the community sentiment is taken into account as well
+
+[14:38] <sanjoyd> artagnon: it is not Hazare's idea.  The whole plan was written by a team, and underwent many revisions.
+
+[14:39] <sanjoyd> artagnon: (With input from the public).
+
+[14:39] <sanjoyd> Hazare is mainly the face of it.
+
+[14:39] <ashim> Its taken and reviewed by the Paliament.
+
+[14:39] <diffoperator> and that team consisted of people like Kejriwal who gave us RTI
+
+[14:39] <sanjoyd> Many attempts have been made in passing it as a bill.  The legislature did not even ratify one clause.
+
+[14:39] <ashim> Its meaning the decisions taken by the gov.
+
+[14:39] <ashim> sanjoy: Many happy returns of the day :)
+
+[14:40] <sanjoyd> artagnon: the current situation is desperate, so desperate measures had to be taken.
+
+[14:40] <sanjoyd> ashim: thank you!
+
+[14:40] <diffoperator> Of course they won't. Any attempt to reduce their discretionary powers will make them squawk.
+
+[14:40] <diffoperator> oh yeah sanjoyd, happy b'day!
+
+[14:41] <sanjoyd> diffoperator: thank you.
+
+[14:41] <sanjoyd> diffoperator: you can mail my gift to C 305, LLR.
+
+[14:42] <diffoperator> :|
+
+[14:42] <lupo33> :D
+
+[14:42] <sanjoyd> lupo33: you too.  Or you can give it to me in person.
+
+[14:42] <sanjoyd> (The gift.)
+
+[14:43] <lupo33> Sure. :D
+
+[14:43] <lupo33> What would you like?
+
+[14:43] <diffoperator> i have a pair of really smelly shoes. Want me to mail them to you?
+
+[14:43] <diffoperator> They will impart this wonderful stench to your room.
+
+[14:43] <lupo33> sanjoyd: I heard you are on cloud 9 and won't care about gifts anymore. :D
+
+[14:44] <sanjoyd> lupo33: you heard right. :)
+
+[14:44] <sanjoyd> diffoperator: sure. :D
+
+[14:44] <sanjoyd> artagnon: ping!
+
+[14:44] <diffoperator> he has gone for dinner
+
+[14:44] <lupo33> sanjoyd: You got your gift on Pande's birthday. :D
+
+[14:44] <sanjoyd> lupo33: before that.
+
+[14:44] <sanjoyd> diffoperator: do you know where?
+
+[14:44] * sanjoyd wants dinner too.
+
+[14:45] * lupo33 saw himself as a fat and bald man in his siesta dream. Too shaken to think of food. :P
+
+[14:46] <sanjoyd> You can be a fat and bald man who marries supermodels.
+
+[14:46] <sanjoyd> These things have been known to happen. :)
+
+[14:46] * sanjoyd goes AFK.
+
+[15:33] <artagnon> sanjoyd: pong.
+
+[15:34] <aftab> artagnon thinks that I am an insect. And for some reason I like that particular description. :)
+
+[15:35] * artagnon laughs
+
+[15:43] *** aftab left
+[15:44] *** vickyc left
+[15:44] *** vickyc joined
+[15:45] *** aftab joined
+[15:45] *** lupo33 left
+[15:57] *** vickyc left
+[15:58] *** vickyc joined
+[16:01] <sanjoyd> artagnon: was calling for dinner.
+
+[16:04] *** lupo33 joined
+[16:07] *** nulpoet joined
+[16:14] *** sa1 left
+[16:43] *** sanket joined
+[16:43] <sanket> nulpoet, Do you still need the conf. ?
+
+[16:44] <nulpoet> yes
+
+[16:48] <nulpoet> sanket: mail me
+
+[16:48] *** nulpoet left
+[17:03] <artagnon> sanjoyd: :|
+
+[17:14] *** sa1 joined
+[17:18] <artagnon> Interesting perspectives on JLB.  Ofcourse, I would really love to see it work.
+
+[17:19] <artagnon> sanjoyd: ^^
+
+[17:20] <artagnon> Well, yeah.  I know it was a small team, and I know that they took inputs from the public.  I just wish more competent/ influencial people were on the team.  People like Amartya Sen and the like.
+
+[17:20] <artagnon> On top of that, I'm disappointed that they seem to have no political agenda.
+
+[17:21] <artagnon> They can't keep fasting onto death for every cause -- you can't die more than once :P
+
+[17:26] *** ps_jinx joined
+[17:30] <lupo33> artagnon: Not Amartya Sen. I sometimes find him in the same league as Arundhati Roy.
+
+[17:31] <artagnon> lupo33: Yeah, it's a little unfortunate, but I really can't think of anyone else :|
+
+[17:32] <artagnon> Which other Indian understands Economics, Law, and Public Policy like he does?
+
+[17:33] <lupo33> None that I can think of.
+
+[17:33] * artagnon sighs
+
+[17:34] <artagnon> I would've actually been *really* happy if they'd come out with a 5-year plan about how the economy would be affected by their policies, with proper justifications.
+
+[17:34] <lupo33> True.
+
+[17:35] <sanjoyd> I don't even think such a thing can be done.  It is probably more viable to implement something, see how it does and adapt continuously.
+
+[17:35] <lupo33> But even a temporary mauling of the economoy is alright if it serves a long-term purpose of removing most of the corruption from the system.
+
+[17:35] <artagnon> That's exactly the part I'm scared about -- the temporary mauling.
+
+[17:35] <lupo33> sanjoyd: Like a homing system. :)
+
+[17:36] <artagnon> sanjoyd: Yeah, I just hope they can evolve it fast enough.
+
+[17:36] <sanjoyd> lupo33: yes.
+
+[17:36] <lupo33> artagnon: Even the Great Depression lasted no more than two years.
+
+[17:36] <artagnon> Economics isn't an exact science, and iterating constantly is very important.
+
+[17:36] <artagnon> lupo33: True, but we have very different problems, no?  Not just economic-wise.
+
+[17:37] <artagnon> I'm especially scared because BJP is in SUCH a bad shape with LK Advani heading it :|
+
+[17:38] <lupo33> Yeah. But sometimes cell death is necessary to re-grow fresh tissue.
+
+[17:38] <artagnon> :D
+
+[17:38] <lupo33> Yeah. Its time for a third alternative.
+
+[17:38] <artagnon> I wonder if any party is competent enough to grab the power now -- it's the perfect opportunity.
+
+[17:38] <lupo33> BJP lacks a good leader (Modi has certain issues, post Godhra-riots).
+
+[17:38] <artagnon> Yes.
+
+[17:39] <artagnon> That plus their RSS - Hindu cow nonsense is the main problem.
+
+[17:39] <artagnon> Without a good opposition, there is no democracy.
+
+[17:40] <lupo33> Its of their own making. Most of them have no real understanding of Hinduism.
+
+[17:40] <artagnon> Only dictatorship/ central planning communism sort of thing.
+
+[17:40] * artagnon nods
+
+[17:40] <artagnon> True.
+
+[17:40] <lupo33> Benevolent dictatorship \m/
+
+[17:47] * sanjoyd is hungry.
+
+[18:33] * artagnon is downgrading to Debian testing
+
+[18:34] <sanjoyd> artagnon: want to get something to eat?
+
+[18:34] <artagnon> sanjoyd: Sure, chai.
+
+[18:34] <sanjoyd> artagnon: where?
+
+[18:34] <artagnon> Carlos/ BCR are fine.
+
+[18:34] <sanjoyd> artagnon: BCR.
+
+[18:35] * sanjoyd leaves.
+
+[18:35] <artagnon> Call Dipanjan too btw.  We have a few things to discuss.
+
+[18:35] <sanjoyd> I don't know his number.
+
+[18:35] <artagnon> Just pick him up from the ground floor!
+
+[18:35] <sanjoyd> Yes, but also give him a call if possible.
+
+[18:35] <artagnon> He lives in your block.
+
+[18:35] <sanjoyd> I know.
+
+[18:35] <sanjoyd> I don't know his room, but I'll find out.
+
+[18:35] <sanjoyd> But give him a call nevertheless.
+
+[18:35] <artagnon> I can't find his number either (new phone) :|
+
+[18:35] <sanjoyd> Okay, I'll bring him if possible.
+
+[18:35] <artagnon> Otherwise, I'd have called :|
+
+[18:36] <sanjoyd> Okay.
+
+[18:36] <artagnon> Ok.
+
+[18:55] <lupo33> Its crodjer 's birthday. Happy Birthday, crodjer!
+
+[19:02] <lupo33> Btw, did someone take the minutes of yesterday's meeting?
+
+[19:17] <sanket> ps_jinx, Happy birthday :)!
+
+[19:17] <sanket> Seems like it's raining birthdays ;-)
+
+[19:43] <lupo33> ps_jinx: Many happy returns. :)]
+
+[19:53] <crodjer> huh! lupo33: its not my b'day
+
+[19:56] <lupo33> :O
+
+[19:57] <lupo33> I saw a Rohan Jain's profile on facebook.
+
+[19:58] <crodjer> must be some other rohan
+
+[19:59] *** aftab left
+[21:01] *** lupo33 left
+[21:06] *** aftab joined
+[21:12] <ps_jinx> sanket, lupo33: thanks :)
+
+[21:20] *** ps_jinx left
+[21:23] * aftab calls it a day
+
+[21:23] *** aftab left
+[22:36] *** sa1 left

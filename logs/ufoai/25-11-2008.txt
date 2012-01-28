@@ -1,0 +1,747 @@
+[00:01] *** Chill-Out left
+[00:04] *** Tron_ joined
+[00:22] *** Tron left
+[00:31] *** Tron_ is now known as Tron
+
+[00:43] *** deathz0r joined
+[00:44] *** deathz0r` left
+[01:09] *** Tron_ joined
+[01:16] *** Pheredhel joined
+[01:23] *** Winterslice joined
+[01:23] *** ChanServ sets mode: +o Winterslice
+
+[01:27] *** Tron left
+[03:02] *** Kildor joined
+[03:14] *** Winterslice left
+[03:23] *** nairan joined
+[03:33] *** nairan_Zz left
+[03:44] *** stevenjackson joined
+[03:48] *** stevenjackson left
+[03:49] *** stevenjackson joined
+[03:51] *** stevenjackson left
+[03:51] *** stevenjackson joined
+[03:59] *** stevenjackson_ joined
+[03:59] *** stevenjackson left
+[03:59] *** stevenjackson_ left
+[04:00] *** stevenjackson joined
+[04:00] *** ChanServ sets mode: +o stevenjackson
+
+[04:08] *** Kildor_ joined
+[04:30] *** Kildor_ left
+[04:32] *** Stedevil joined
+[04:32] *** Kildor left
+[04:44] *** stevenjackson left
+[05:00] *** stevenjackson joined
+[05:00] *** ChanServ sets mode: +o stevenjackson
+
+[05:06] *** KillDoor joined
+[05:19] *** whx joined
+[05:19] *** whx left
+[05:37] *** tchristney joined
+[06:30] *** stevenjackson left
+[06:32] *** wobupa joined
+[06:32] *** wobupa left
+[06:41] <CIA-57> tlh2000 * r20389 /ufoai/trunk/src/common/cmd.c: * fixed segfault introduced in r20383
+
+[06:51] *** Tron_ is now known as Tron
+
+[06:55] *** KillDoor left
+[07:05] *** KillDoor joined
+[07:22] *** tchristney left
+[07:32] *** tchristney joined
+[07:58] *** KrackenO joined
+[07:58] *** ChanServ sets mode: +o KrackenO
+
+[08:55] *** KillDoor left
+[08:59] *** tchristney left
+[09:09] *** NineX joined
+[09:09] *** ChanServ sets mode: +v NineX
+
+[09:17] *** KillDoor joined
+[09:39] *** stevenjackson joined
+[09:39] *** ChanServ sets mode: +o stevenjackson
+
+[09:40] *** stevenjackson left
+[09:43] *** stevenjackson joined
+[09:43] *** ChanServ sets mode: +o stevenjackson
+
+[09:44] <stevenjackson> hi guys
+
+[09:51] <NineX> stevenjackson: ave
+
+[10:02] <KillDoor> hello :-)
+
+[10:15] *** AraW joined
+[10:18] *** AraW left
+[10:25] <KillDoor> stevenjackson: what is your plans about airbattle?
+
+[10:31] <stevenjackson> http://ufoai.ninex.info/wiki/index.php/Gameplay_Proposals/UFO_Interceptions
+
+[10:31] <stevenjackson> air combat will occur on a seperate screen.  this will allow for better control, and allow incorporation of UAV's and such
+
+[10:32] <stevenjackson> there will be maps for each terrain type.  so the background will vary depending on the terain when the battle begins
+
+[10:33] <stevenjackson> i have quite a lot of plans, but for the moment the essence of it is already there
+
+[10:33] <stevenjackson> with my new checkin
+
+[10:36] <stevenjackson> unfortunatly with such a close view of the battle that my new code brings it highlights the problems with the existing movement and such that already exist
+
+[10:37] <stevenjackson> there will be quite a bit of work to make the aircraft intelligent and the movement believable.
+
+[10:37] <stevenjackson> eventally the aircraft with bank when they turn, and actually seem like aircraft
+
+[10:39] <stevenjackson> back in a sec
+
+[10:39] *** stevenjackson left
+[10:44] *** stevenjackson joined
+[10:46] <KrackenO> hi stevenjackson
+
+[10:47] <KrackenO> I had some comment I wanted to make to you and BTAxis concerning airbattle
+
+[10:47] <stevenjackson> sure
+
+[10:47] <KrackenO> 1. I think the we should keep the airbattle as optionnal (in a menu for example)
+
+[10:48] <KrackenO> because I'm afraid that this will be boring after some time to intercpet every small UFO that you can encounter on geoscape
+
+[10:49] <KrackenO> that would be nice to be able to skip uninteresting fight, and play only airfight that requiere all your attention
+
+[10:49] <stevenjackson> yep, i agree
+
+[10:49] <KrackenO> (and that would also be easier for testing purpose to be able to skip a fight quite fast)
+
+[10:50] <KrackenO> 2. I think that in addition to what you do, we should add group of aircraft on geoscape
+
+[10:50] <KrackenO> you should be able to merge several aircraft on geoscape, to move all of them at the same time, and attack UFO together
+
+[10:51] <KrackenO> that would be a lot easier to handle attack
+
+[10:51] <KrackenO> and movement on geoscape
+
+[10:52] <stevenjackson> also agree with that.  its a good idea
+
+[10:52] <KrackenO> that's all for now :P
+
+[10:53] <KrackenO> oh yes, another thing
+
+[10:53] <stevenjackson> the air combat initiation really needs some though.  at the moment i want to get the screen working in a reasonable way
+
+[10:53] <KrackenO> I don't think you should change aircraft speed for aircraft interception
+
+[10:54] <KrackenO> this speed is used for geoscape
+
+[10:54] <KrackenO> imo, aircraft (and ufo) should use only their max. speed during interception
+
+[10:55] <stevenjackson> its used for both, cant really get around that, so we will have to find a happy medium
+
+[10:55] <KrackenO> why do you need it?
+
+[10:55] <stevenjackson> if the speed is too fast it doesn't work well on the air fights
+
+[10:56] <stevenjackson> the position in airfights is the same as the geoscape just really zoomed in
+
+[10:56] <stevenjackson> so the speed is really the same for both
+
+[10:56] <KrackenO> if you want to make aircraft move slower, you should change the time speed you use in aircraft interception, not the speed of aircraft
+
+[10:57] *** maxime02 joined
+[10:57] <KrackenO> imo, this is not good to have aircraft flying at speed smaller that speed of current commercial aircraft
+
+[10:57] <stevenjackson> true
+
+[10:57] <KrackenO> and the speed you enter in aircraftmanagement.ufo is linked to the speed in km/h
+
+[10:57] *** geever joined
+[10:58] <geever> hi
+
+[10:58] <maxime02> hello
+
+[10:58] <KrackenO> (you have to multiply the first by 111 to get speed in km/h)
+
+[10:58] <KrackenO> hi
+
+[10:59] <KrackenO> stevenjackson: on the other hand, there's no problem to change the speed of weapon (and range of weapon). I set those values to something proper for geoscape, but you'll probably have to change them for aircraft interception
+
+[11:00] <KrackenO> (btw, that would be nice to have some particle effect for the SHIVA rather than this ugly visual effect I made)
+
+[11:00] <stevenjackson> those wil now only be for the new system, not geoscape as no weapons fire wil apear on the geoscape
+
+[11:00] <KillDoor> well, I`ve read the proposal, but I`ve asked about code and some timepoints :-) Current draft is so draft and unusable. Missiles are slowely than aircrafts, focus can`t be moved manually, and in my opinion there should be event "crafts in linesign of each other", with pause
+
+[11:00] <stevenjackson> yep, we are planning that once i figure out how to do it :)
+
+[11:00] <KrackenO> stevenjackson: base and installation will still fire on geoscape, so please don't remove all the code I made ;)
+
+[11:01] <stevenjackson> yep bases and installs i'll leave but air to air is already removed
+
+[11:01] <stevenjackson> most of the existing code is fine as is.  i've already changed what needs changing
+
+[11:02] <stevenjackson> missiles arn't slower than aircraft
+
+[11:03] <stevenjackson> btaxis wanted them slow
+
+[11:03] <KillDoor> And, does current new system allow many Vs many fights?
+
+[11:03] <stevenjackson> you can speed up time if you want them faster
+
+[11:03] <stevenjackson> yep
+
+[11:03] <stevenjackson> you can have as many craft as you like in the fight
+
+[11:03] <stevenjackson> those in range will apear in combat
+
+[11:04] <KillDoor> stevenjackson: I can`t speedup time because it is freezed on 5sec value, and if I try to zoom out from airbattle, ithis makes light mess
+
+[11:05] <stevenjackson> yeah the time was working, but merging broke it.
+
+[11:05] <stevenjackson> light mess?
+
+[11:05] <stevenjackson> the time will be fixed pretty easily
+
+[11:06] <stevenjackson> also there will need to be a fair amount of balancing to get combat working at the correct basic speed
+
+[11:06] <KillDoor> When I try to use new system I`ve got saracien who outflies its missiles. It looked strange
+
+[11:06] <stevenjackson> in what way is it strange?
+
+[11:07] <stevenjackson> none of the speeds of aircraft shoulod be faster than ammo
+
+[11:07] <stevenjackson> i'll have a look
+
+[11:08] <KillDoor> how aircraft cans overfly its own missile? This is really strange and unbeliaveable
+
+[11:09] <KillDoor> yep, light mess. I don`t know where will be focus on geoscape, especially with its zooming in and out, And I don`t know where will be focus in airfight mode when I zoomin back.
+
+[11:10] <KillDoor> Can you make focus and zoom to show all units in the battle? not only one from 3, or 4
+
+[11:12] <KillDoor> "All" I mean aircrafts who has target on opposite, and they weapon-particles. As it was done for last iteration of the mode
+
+[11:14] <stevenjackson> only aircraft that are in weapons range or near it will apear on the air combat screen.  you have to exit that mode if you want to see other craft
+
+[11:15] <stevenjackson> at the moment the air combat screen's center is the middle of all aircraft in combat
+
+[11:15] <stevenjackson> you will be able to center on certain aircraft
+
+[11:16] <KillDoor> For me focus stuns on UFO only, and I can only zoom (and, btw, need to click to gui button to exit from menu)
+
+[11:17] <stevenjackson> gui button is the intention. you can also hit escape to exit
+
+[11:17] <stevenjackson> if you zoom in it shouldn't be right on the ufo
+
+[11:18] <stevenjackson> when i zoom right in i end up in empty space
+
+[11:20] <KillDoor> what`s wrong with old situation, where we shoulded to zoom out to exit mode?
+
+[11:21] <stevenjackson> it doesn't really work. zooming right out should just give you a overall view of battle, not exit
+
+[11:22] <stevenjackson> but the focus when you exit has gone funny, i need to fix that
+
+[11:22] <stevenjackson> back to the geoscape
+
+[11:22] <stevenjackson> it should be centered on the middle of the crafts
+
+[11:23] <geever> stevenjackson, I kindly ask first make it optional.
+
+[11:23] <stevenjackson> what optional?
+
+[11:24] <stevenjackson> zoom to exit?
+
+[11:25] <KillDoor> stevenjackson: and, can new aircrafts come into the battle, and move away from it?
+
+[11:25] <stevenjackson> yep
+
+[11:25] <KillDoor> And, one more. Is there any "healthbar" for our aircrafts?
+
+[11:26] <stevenjackson> yep, there is on the new screen design
+
+[11:26] <geever> stevenjackson, optional: the whole airfight thing
+
+[11:27] <geever> it will be buggy an unusable in develpment stage :)
+
+[11:27] <geever> and we should keep trunk playable whenever possible
+
+[11:28] <KillDoor> geever: you are wrong :-) It IS buggy and unusable at current stage.
+
+[11:28] <stevenjackson> yep, krackeno already suggested it and i agree
+
+[11:28] <geever> I would have said this development should happen in a branch
+
+[11:28] <geever> KillDoor, it's in dev. stage already so I was right.
+
+[11:28] <stevenjackson> no i disagree
+
+[11:29] <stevenjackson> its ready to use as is
+
+[11:29] <stevenjackson> it just needs tweaking
+
+[11:29] <geever> stevenjackson, I just wanted to push of it's priority :)
+
+[11:29] <geever> and stevenjackson don't forget about 2D geo as last time! :)
+
+[11:29] <KillDoor> no, it is not ready to use.
+
+[11:30] <stevenjackson> there is no such thing as 2d.3d in the new air combat.  its all the same
+
+[11:31] *** Xedge joined
+[11:31] *** Xedge left
+[11:31] <stevenjackson> KillDoor: what is wrong with it then?
+
+[11:32] <geever> well, just test what happens on exit, on both, you must remember the issues last time...
+
+[11:33] <stevenjackson> yeah, but most of those dont apply here as not much happens on the geoscape.  the problems before were because of interaction with geoscape
+
+[11:33] <KillDoor> I`ve already said it.
+
+[11:33] <stevenjackson> exit should be easy to handle
+
+[11:33] <stevenjackson> KillDoor: you didn't mention any major issues, just little bugs
+
+[11:34] <geever> stevenjackson, another thing must be handled (had issues before): dropship landing during airflight
+
+[11:35] <geever> AFAIR, there were problems with ccs.currentaircraft things and so
+
+[11:35] <stevenjackson> you cant land in combat mode
+
+[11:35] <stevenjackson> only on geoscape
+
+[11:36] <geever> well as the time flows, these can happen in the same time
+
+[11:36] <KillDoor> I can`t move, new mode doesn`t start automatically, aircrafts always dissapeared and appeared in random places, missiles are unusable, because they move very slowly, I can`t run time faster to skip some empty frames, and so on. quantity is became to quality
+
+[11:37] <stevenjackson> it doesn't start auto for development purposes, minor issue.
+
+[11:38] <stevenjackson> aircrafts dissapear sounds like a bug i'll have to look into
+
+[11:38] <stevenjackson> missiles speed is just balance, easy
+
+[11:38] <stevenjackson> time is easy to fix
+
+[11:38] <stevenjackson> i still dont see that major issues
+
+[11:39] <stevenjackson> and with it all being optional we can easily turn it on and off
+
+[11:40] <stevenjackson> so unless it breaks other things i see no reason for a branch
+
+[11:40] <stevenjackson> though it will need a lot if work before it is really "finished"
+
+[11:41] <stevenjackson> ai, realistic craft movenent, varying backgrounds, new screen menu implementation
+
+[11:41] <stevenjackson> UAV implementation
+
+[11:42] <geever> lua driven ai ;)
+
+[11:42] <stevenjackson> any ai would be good ;) all they do at the moment it head towards each other until one is dead
+
+[11:44] <stevenjackson> i spoke to bobbens about lua ai, i dont think we will see if for many versions in air combat.
+
+[11:44] <stevenjackson> ok guys talk to you later.  gotta head off to bed :)
+
+[11:44] <KillDoor> stevenjackson: I don`t argue opposite whole implementation, we need to do something new and complex, and complete too. But now it is very drafts. And all of this "easy to fix", someone must fix they. Can you fix some bugs before?
+
+[11:45] <stevenjackson> i'll try and fix the bugs in the next two days. i should have some time then
+
+[11:45] <KillDoor> And, whole battle miss one big pice of real world
+
+[11:46] <KillDoor> Currently it is 2d completely.
+
+[11:46] <stevenjackson> it will never be 3d
+
+[11:46] <stevenjackson> let me just say that
+
+[11:46] <stevenjackson> 3d isn't an option
+
+[11:47] <KillDoor> I know. unfortunately we are not in Megaprime (or megaprimus?)
+
+[11:47] <stevenjackson> whats megaprime?
+
+[11:47] <KillDoor> so, the planet is flat as LCD, and there is not any height
+
+[11:48] <KillDoor> city from X-Com 3
+
+[11:49] <stevenjackson> ahh, i only played the first one
+
+[11:50] <KillDoor> unfortunately XCom3 was never finished :-(
+
+[11:51] *** maxime02 left
+[11:52] *** stevenjackson left
+[12:19] *** Belgarion9 joined
+[12:19] *** Xedge joined
+[12:20] *** Belgarion9 left
+[12:21] <geever> Hi Xedge
+
+[12:21] <geever> how the packages are?
+
+[12:22] <geever> (you know we have 2 bugs on tracker about 2.2.1s :) )
+
+[12:24] <Xedge> geever: i did not create some new 2.2.1 yet sorry ...
+
+[12:26] *** Edheldil joined
+[12:26] *** Maucho joined
+[12:26] *** Maucho left
+[12:31] <Xedge> geever: but i working on it
+
+[12:31] <geever> thanx
+
+[12:31] <Xedge> geever: but also some other stuff is wasting my time ...
+
+[12:33] <Xedge> geever: but i hope i could provide the packages at the end of the week ...
+
+[14:09] *** KillDoor left
+[14:12] *** jdolan_ joined
+[14:15] <geever> cu later
+
+[14:15] *** geever left
+[14:30] *** Xedge left
+[14:44] *** ghosta joined
+[14:44] <ghosta> greetings
+
+[15:08] *** Aaron joined
+[15:08] *** Kildor joined
+[15:09] *** Aaron left
+[15:27] *** geever joined
+[15:27] <geever> hi, I'm back
+
+[15:28] <Kildor> hello again
+
+[15:28] <BTAxis> KrackenO: re: what you said about air battles, I definitely agree on both counts.
+
+[16:10] *** BTAllies joined
+[16:12] *** BTAxis left
+[16:12] *** BTAllies is now known as BTAxis
+
+[16:12] *** ChanServ sets mode: +o BTAxis
+
+[16:55] *** Xedge joined
+[16:55] <CIA-57> richlv * r20390 /ufoai/trunk/ (6 files in 4 dirs): * svn eol style & mimetype
+
+[16:56] *** Xedge left
+[17:18] *** mattn2|home joined
+[17:18] *** ChanServ sets mode: +o mattn2|home
+
+[17:33] *** CIA-57 left
+[17:53] <Richlv> darn. it's so annoying that radiant doesn't remember last used dir outside basedir & that i can' open multiple maps asim,ultanbeously :/
+
+[17:53] <Richlv> oops
+
+[17:53] <Richlv> simultaneously
+
+[17:53] <BTAxis> Just open multiple instances of radiant.
+
+[17:55] <Richlv> that's what i'm doung currently, of course
+
+[17:56] <Richlv> still very annoying to do, especially as i have to navigate yo the out-of-tree dir on each of those instances
+
+[17:56] <Richlv> instead of selecting the 3 or 4 maps i am interested in
+
+[17:56] <Richlv> (doung, to)
+
+[17:56] <Richlv> goddamn.
+
+[17:57] <Richlv> it's not enough being w/o electricity for 48 hours, i can't even type after that :>
+
+[17:57] <BTAxis> Wouldn't it be faster to launch the instances with the map you want as a command line parameter?
+
+[17:58] <Kildor> it is faster :-)
+
+[18:00] <Richlv> BTAxis, um, isn't that extrenely hackish & something a windows user would scream about ? :)
+
+[18:00] <Richlv> (extremely)
+
+[18:00] <BTAxis> No?
+
+[18:00] <BTAxis> What?
+
+[18:01] <Kildor> I`ve just make an fileassociation in FAR, and use it
+
+[18:02] <BTAxis> I don't use it (since I don't use uforadiant), but I use association and command line parameters for a lot of other stuff.
+
+[18:02] <Kildor> BTAxis: what do you use? GTKRadiant?
+
+[18:03] <BTAxis> Yeah.
+
+[18:04] <Kildor> dut isn`t it have the same problem? When I used it I need to make association too.
+
+[18:05] <BTAxis> As far as I know it doesn't support a map name as a startup parameter.
+
+[18:07] <Kildor> You are right. I`ve already forget, I wanted to do it, but can`t. And was very happy when Mattn learn UFORadiant to understand they
+
+[18:07] <BTAxis> Yeah, that's what I remember too.
+
+[18:10] <Richlv> i don't quite use file managers ;>
+
+[18:10] <Richlv> i'm somehwat half cli person
+
+[18:12] <BTAxis> I consider bash a file manager.
+
+[18:12] * DainDwarf is away: 7
+
+[18:12] <BTAxis> Oh what the hell. An away script?
+
+[18:13] <Richlv> mheh
+
+[18:14] <Richlv> DainDwarf, it might be a good idea to remove public away messages ;)
+
+[18:14] <Richlv> (bash can't be a file manager ;) )
+
+[18:16] * Kildor is totally CLI-user.
+
+[18:16] <Kildor> So I use FAR :-)
+
+[18:19] <BTAxis> I'm more of a keyboard person. Been using commanders since I was ten or something.
+
+[18:21] <Richlv> Kildor, far is no cli
+
+[18:21] <Richlv> you abuse the term ;>
+
+[18:21] <Richlv> that's something without even midnight commander
+
+[18:22] <Richlv> (which far has been inspired of, so i have heard)
+
+[18:22] <Richlv> too bad mc development has stopped
+
+[18:22] <BTAxis> mc has issues.
+
+[18:22] <BTAxis> But I still use it whenever I'm forced to use *nix.
+
+[18:23] *** Senee joined
+[18:26] <Richlv> i could write 2 a4 pages with issues it has :)
+
+[18:26] <Richlv> and stil there's not better alternative
+
+[18:27] <Senee> hi ppl ^_^
+
+[18:28] *** Xedge joined
+[18:30] <Kildor> Richlv: May be. I use command line when I use far very often. And some cli commands are from FAR.
+
+[18:30] <Kildor> Anyway, FAR is not gui programm :-)
+
+[18:35] *** ghosta left
+[18:41] *** Winterslice joined
+[18:41] <mattn2|home> Senee: there is Winterslice ^^ ;)
+
+[18:41] <Winterslice> Hullo hullo.
+
+[18:41] *** ChanServ sets mode: +o Winterslice
+
+[18:44] *** ghosta joined
+[18:44] <KrackenO> Beware: rev 20395 breaks savegame.
+
+[18:44] <Winterslice> I haven't got long, need to grab a shower, but if you ask any questions I'll be able to answer them as soon as I come out.
+
+[18:44] <KrackenO> 20395 is the saving part, and 20396 is the loading part
+
+[18:45] <Senee> ooo - i see
+
+[18:45] <Senee> now going home
+
+[18:46] <mattn2|home> Senee: this channel is also logged - so you can leave him a message, too
+
+[18:46] <mattn2|home> see http://colabti.org/irclogger/irclogger_logs/ufoai
+
+[18:46] <Senee> ok thnx
+
+[18:48] *** Senee left
+[18:50] *** koke joined
+[18:51] *** koke left
+[18:58] <mattn2|home> KrackenO: there's some debug output left in cl_campaign.c
+
+[18:58] <mattn2|home> Com_Printf("New interception stage: %i\n", mission->stage);
+
+[18:58] <mattn2|home> still needed?
+
+[18:59] <mattn2|home> or could you make it Com_DPrintf(DEBUG_CLIENT ?
+
+[18:59] <mattn2|home> KrackenO: also "Intercepting or attacking installation" is not translated, is that intended?
+
+[19:00] <mattn2|home> and did i understand this correctly? they are attacking installations, now?
+
+[19:00] <mattn2|home> great
+
+[19:02] *** CIA-23 joined
+[19:03] *** schumaml joined
+[19:04] *** bayo_O joined
+[19:04] <geever> hi bayo_O.
+
+[19:06] *** Kildor left
+[19:07] <CIA-23> tlh2000 * r20397 /ufoai/trunk/src/client/cl_campaign.c:
+
+[19:07] <CIA-23> * small cleanup
+
+[19:07] <CIA-23> * Com_Printf => Com_DPrintf
+
+[19:07] <mattn2|home> KrackenO: oh sorry - forget about the translated string - i haven't seen the doxygen comment - wasn't in the diff
+
+[19:12] <CIA-23> richlv * r20398 /ufoai/data_source/maps/unfinished/city/ (4 files): * improve pillar spacing; make tunnel fit the tile borders; add tunnel tile; make tunnel-facing tiles have reasonable borders
+
+[19:21] <KrackenO> mattn2|home: oops, sorry, I forgot the debug output
+
+[19:22] <KrackenO> and yes, you understood correctly: ufo attack installation now
+
+[19:23] <CIA-23> kracken * r20399 /ufoai/trunk/src/client/cl_campaign.c: * removed a debug output
+
+[19:30] <geever> bayo_O, could you check this: https://sourceforge.net/tracker/index.php?func=detail&aid=2343517&group_id=157793&atid=805242
+
+[19:34] * Winterslice returns.
+
+[19:36] *** Aslan82 joined
+[19:36] *** Tron_ joined
+[19:37] *** Aslan82 left
+[19:40] *** bayo_O left
+[19:43] *** Xedge left
+[19:50] *** Laino joined
+[19:52] *** Laino left
+[19:54] *** KrackenO left
+[20:14] *** Winterslice left
+[20:15] <CIA-23> bayo-fr * r20400 /ufoai/trunk/ (base/ufos/menu_research.ufo src/client/cl_research.c): * fast switch over base on the search GUI
+
+[20:16] *** bayo_O joined
+[20:16] <bayo_O> hello
+
+[20:17] <nairan> hi bayo
+
+[20:18] <geever> hi
+
+[20:22] <bayo_O> geever: i dont show spinner for research out of the base, but i put something to switch to the another base
+
+[20:22] <bayo_O> have you take a look?
+
+[20:24] <bayo_O> maybe i will work a little on the search do do something more like the layout of the preview i put on the wiki
+
+[20:28] *** bayo_O left
+[20:29] *** bayo_O joined
+[20:29] <bayo_O> re
+
+[20:35] *** bayo_O left
+[20:35] *** bayo_O joined
+[20:37] <bayo_O> not a good day :/
+
+[20:39] <geever> bad connection?
+
+[20:41] <geever> bayo_O, did you mean this proposal: http://ufoai.ninex.info/wiki/index.php/Image:Proposal_Base_Research.jpg
+
+[20:42] <bayo_O> yes
+
+[20:42] <geever> that's ok for me
+
+[20:42] <geever> and clicking on other base names changes base?
+
+[20:43] <geever> the current basename string is a bit hacky I hope will be fixed soon
+
+[20:44] <geever> on the other hand did you check the vug about firemode "popup"?
+
+[20:44] <geever> bayo_O, ^
+
+[20:44] <geever> s/vug/bug/ :)
+
+[20:47] <bayo_O> yes
+
+[20:47] <bayo_O> :D
+
+[20:48] <bayo_O> maybe i will have the header of the "base" gui
+
+[20:48] <bayo_O> vug?
+
+[20:48] <bayo_O> no i dont know what it is
+
+[20:48] <bayo_O> https://sourceforge.net/tracker/index.php?func=detail&aid=2343517&group_id=157793&atid=805242 ?
+
+[20:52] *** bayo__O joined
+[20:52] *** bayo_O left
+[20:52] <nairan> warnin in m_draw.c line 134 menu might be un initialized in this function
+
+[20:53] <nairan> last time it was 4 warnings now its only 2 =)
+
+[20:53] <geever> bayo__O, yes that bug.
+
+[21:05] *** Tron_ left
+[21:06] *** Winterslice joined
+[21:07] *** ChanServ sets mode: +o Winterslice
+
+[21:12] *** bayo__O left
+[21:20] *** mattn2|home left
+[21:41] *** tchristney joined
+[21:43] *** schumaml left
+[21:43] * DainDwarf is back (gone 03:31:12)
+
+[21:48] *** stevenjackson joined
+[21:48] *** ChanServ sets mode: +o stevenjackson
+
+[21:50] *** DainDwarf left
+[21:56] *** DarkFire joined
+[21:58] *** Vambi joined
+[21:58] *** Vambi left
+[21:59] *** DainDwarf joined
+[22:01] <DarkFire> Hi
+
+[22:01] <geever> hi
+
+[22:04] *** Darkchyld joined
+[22:09] <geever> Anyone knows employee code here?
+
+[22:13] *** Senee joined
+[22:18] *** ghosta left
+[22:21] *** DarkFire left
+[22:31] *** Darkchyld left
+[22:33] *** tchristney left
+[22:34] *** ghosta joined
+[22:35] <stevenjackson> some
+
+[22:35] <stevenjackson> i changed medics for pilots so had a look at some of it
+
+[22:36] <geever> ??
+
+[22:37] <stevenjackson> geever, what were you asking about?
+
+[22:37] <geever> wrong window, I guess. :)
+
+[22:37] <geever> [23:35] <stevenjackson> i changed medics for pilots so had a look at some of it
+
+[22:38] <geever> you have just continued a discussion which didn't ever start (here).
+
+[22:39] <stevenjackson> "Anyone knows employee code here?" i was replying to that statement
+
+[22:39] <stevenjackson> i though you were talking about the code that handles employees
+
+[22:39] <geever> ah, it wasn't obvious for me, sorry.
+
+[22:40] <geever> I wanted to ask about employee->hiredBase, but figured out later.
+
+[22:41] <geever> now the big question for me is why employee and aircraft stored differently
+
+[22:41] *** Trasher joined
+[22:41] <geever> employees have a global list but aircraft have lists on every base
+
+[22:41] *** Rolffer joined
+[22:43] <geever> it would be easier if we had a global list for aircraft either....
+
+[22:43] <Senee> like it was in x-com 8) ?
+
+[22:44] <geever> Senee, I don't know how it was handled in x-com. I've never seen it's code.
+
+[22:44] <geever> :)
+
+[22:44] <Senee> aaaa i see 8)
+
+[22:45] *** Rolffer left
+[23:04] <stevenjackson> not sure my its not global
+
+[23:04] *** Trasher left
+[23:10] *** tchristney joined
+[23:12] <geever> well, I try to move aircraft from bases to gd but it's a big job not sure if succeed :)
+
+[23:15] *** frggfrheh joined
+[23:15] *** frggfrheh left
+[23:18] *** ghosta left
+[23:21] <stevenjackson> what benefit is there for the work?
+
+[23:21] <geever> transfering
+
+[23:21] <geever> we should handle what happens when source base destroyed during transfer
+
+[23:22] <geever> and cleanup, imo
+
+[23:22] *** DarkRyder joined
+[23:28] *** DarkRyder left
+[23:46] *** jdolan_ left
+[23:46] *** nairan left

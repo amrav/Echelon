@@ -1,0 +1,610 @@
+[01:03] *** Lehi joined
+[01:03] *** Lehi is now known as LeVaJe
+
+[01:04] *** BTAllies joined
+[01:05] *** BTAxis left
+[01:08] *** BTAllies is now known as BTAxis
+
+[01:08] *** ChanServ sets mode: +o BTAxis
+
+[01:14] *** Xenobot joined
+[01:15] *** Xenobot left
+[01:45] *** BTAllies joined
+[01:49] *** Tron_ joined
+[01:49] *** BTAxis left
+[02:06] *** Tron left
+[02:23] <LeVaJe> Does anyone know how to build UFO:IA's GTKRadiant in Windows?
+
+[02:27] <BTAllies> Yeah, with Code::Blocks.
+
+[02:27] <BTAllies> Refer to the wiki for instructions.
+
+[02:28] <LeVaJe> To compile the included GTKRadiant, you have to pass --enable-gtkradiant flag to configure, then issue make.
+
+[02:29] <LeVaJe> How do I do that?
+
+[02:32] *** Kildor joined
+[02:52] <LeVaJe> I have compiled the game but I cannot find the GTKRadiant .EXEs. There is a line with --enable-gtkradiant in the configure file, do I need to something with that?
+
+[03:12] *** nairan_zz left
+[03:13] *** nairan_zz joined
+[03:23] *** mattn2|home_ joined
+[03:25] *** mattn2|home__ left
+[04:21] *** acardenas left
+[04:30] *** fgfsh joined
+[04:33] *** fgfsh left
+[04:35] *** Frostitute joined
+[05:07] *** Bootch joined
+[05:13] *** Bootch left
+[05:13] *** gunn3r joined
+[05:13] *** Bootch joined
+[05:13] *** gunn3r left
+[05:14] *** gunn3r joined
+[05:14] *** tchristney left
+[05:15] *** Frostitute left
+[05:16] *** acardenas joined
+[05:26] *** Bootch left
+[05:31] *** Kildor left
+[05:55] *** gunn3r left
+[06:13] *** Tron_ is now known as Tron
+
+[06:27] *** BTAllies left
+[06:45] *** LeVaJe left
+[06:49] <mattn2|home_> geever - which action brought you Error: No technology assigned to aircraft 'craft_drop_firebird'?
+
+[06:49] <mattn2|home_> there is a tech for the firebird....
+
+[06:58] *** KillDoor joined
+[07:16] *** acardenas left
+[08:25] *** novaalpha joined
+[08:26] *** novaalpha is now known as `alpha
+
+[09:02] *** Morak joined
+[09:02] *** Morak left
+[09:18] *** Rebane joined
+[09:19] *** Rebane left
+[09:45] *** Zenerka left
+[10:40] *** KillDoor8083 joined
+[10:42] *** KillDoor left
+[11:01] *** `alpha left
+[11:21] *** dong joined
+[11:25] *** dong left
+[11:49] *** nairan_zz is now known as nairan
+
+[12:09] *** stevenjackson left
+[12:11] *** Zenerka joined
+[12:11] *** ChanServ sets mode: +o Zenerka
+
+[12:27] *** noah joined
+[12:29] *** noah left
+[12:43] *** BTAxis joined
+[12:43] *** ChanServ sets mode: +o BTAxis
+
+[12:50] *** BTAllies joined
+[12:55] *** BTAxis left
+[12:55] *** BTAllies is now known as BTAxis
+
+[12:55] *** ChanServ sets mode: +o BTAxis
+
+[13:02] *** `alpha joined
+[13:17] *** Mike joined
+[13:18] *** Mike is now known as Guest89044
+
+[13:18] *** Guest89044 left
+[13:46] *** IY7T89UU89U8 joined
+[13:52] *** IY7T89UU89U8 left
+[14:21] *** jdolan_ joined
+[15:02] *** KrackenO joined
+[15:02] *** ChanServ sets mode: +o KrackenO
+
+[15:11] *** acardenas joined
+[15:34] *** KillDoor8083 left
+[15:36] *** Simone joined
+[15:37] *** dobrucki joined
+[15:37] *** ghosta joined
+[15:37] *** dobrucki is now known as wawosz
+
+[15:40] <ghosta> moin
+
+[15:42] <CIA-23> bayo-fr * r20617 /ufoai/trunk/src/client/menu/m_input.c: * update cache if hovered node is hidden
+
+[15:52] *** Simone left
+[16:02] *** acardenas left
+[16:16] *** Kildor joined
+[16:16] <nairan> mattn2|home i have same error with last rev built
+
+[16:19] <mattn2|home_> nairan: no time right now - but you should post the errors... otherwise i can't help you
+
+[16:25] *** BTAxis left
+[16:26] *** BTAxis joined
+[16:26] *** ChanServ sets mode: +o BTAxis
+
+[16:30] <nairan> same error as geevas
+
+[16:30] <ghosta> is there a way to make a rendered image with radiant?
+
+[16:30] <ghosta> or do I have to make it via screenshot?
+
+[16:33] *** peteran_ left
+[16:43] <ghosta> BTAxis?
+
+[16:44] * ghosta pokes BTAxis with a stick
+
+[16:46] * BTAxis explodes, killing thousands
+
+[16:47] <ghosta> uhm regarding the RMA stuff
+
+[16:47] <ghosta> do you want to make your desert map random map assemblied or not?
+
+[16:47] <BTAxis> Yes.
+
+[16:47] <ghosta> therefore I would suppose the ds_hill_a and b.map are a waaaay too big
+
+[16:48] <BTAxis> Why?
+
+[16:48] <ghosta> if you dont want to make a "RMA" map like Africa or Japan
+
+[16:48] *** BTAxis sets mode: +o mattn2|home_
+
+[16:48] <ghosta> having big tiles means less randomness
+
+[16:49] <BTAxis> No it doesn't.
+
+[16:49] <BTAxis> It just means the tiles are bigger.
+
+[16:49] <BTAxis> It can be as random as you want, as long as you have the tiles.
+
+[16:50] <ghosta> but the code prefers big tiles
+
+[16:50] <BTAxis> I know.
+
+[16:50] <ghosta> this would mean the tile would appear in every map
+
+[16:50] <BTAxis> But in the desert tileset there aren't too many restrictions.
+
+[16:51] <BTAxis> So even if you force the tile to show up only once (or not at all), it won't get stuck.
+
+[16:51] <BTAxis> It's easy enough to ensure the same tile won't be in every assembly by making multiple assemblies.
+
+[16:51] <ghosta> hm let me upload some pictures how I would like to assemble the desert map ok?
+
+[16:52] <BTAxis> Sure.
+
+[16:58] <ghosta> http://ufoai.ninex.info/forum/index.php?topic=3143.0
+
+[17:00] <ghosta> It took me around 1 hour to create 16 of the tiles and I just used heights ranging from 0 to 64. If you create more of them with the heights ranging from 64 to 128 you can see the "hills" better.
+
+[17:03] <BTAxis> Yeah, but then you can only get that random-looking bumpy terrain.
+
+[17:03] <BTAxis> That's not what I want.
+
+[17:03] <BTAxis> I want some serious hills and sand dunes as well.
+
+[17:04] <BTAxis> Also, if you don't make the edges uniform you're going to need to add a lot of restrictions to the ump file.
+
+[17:04] <BTAxis> That's not good.
+
+[17:04] <BTAxis> The fewer rules the better.
+
+[17:05] <ghosta> you just need 2 variables for a height from 0 - 64 and 3 variables for 0 - 128
+
+[17:06] *** tchristney joined
+[17:06] <ghosta> I tested it some time ago and it worked quite fast for a height ranging from 0 - 128
+
+[17:06] <ghosta> But I noticed some problems with the compiler
+
+[17:06] <ghosta> you can see gaps between the brushes
+
+[17:07] <BTAxis> I think gensurf does something wrong somehow.
+
+[17:07] <BTAxis> There were issues when I made my hills as well.
+
+[17:07] <ghosta> hm no its not gensurf
+
+[17:07] <ghosta> its the compiler
+
+[17:07] <ghosta> it doesent like to work with angular edges
+
+[17:08] <ghosta> thats why I am crying for a mass merge tool :)
+
+[17:09] <BTAxis> I thought blondandy did something like that for ufo2map.
+
+[17:10] <ghosta> he wanted to but he couldn't spare some time for this
+
+[17:12] <ghosta> I also tried making some tiles with sanddunes , but if you connect them they look ugly and weird :(
+
+[17:12] <BTAxis> I know.
+
+[17:12] <BTAxis> I tried that as well.
+
+[17:12] <BTAxis> That's why I went with big hill tiles instead.
+
+[17:14] <ghosta> However when the merge tool is available I am going to create a map with this terrain. With gensurf it will only take 2 or 3 days. It will work well as placeholder.
+
+[17:15] <BTAxis> Well, I think you shouldn't bother. It doesn't look very good.
+
+[17:15] <BTAxis> It's just bumpy and slightly flowing on the bigger scale.
+
+[17:17] <ghosta> Hm yes, but at least I want to try it
+
+[17:17] <BTAxis> Okay, no problem.
+
+[17:17] <BTAxis> It's not like I'm going to get around to my tiles anytime soon anyway.
+
+[17:17] *** MrHase joined
+[17:19] <BTAxis> Also, I don't know if you're up to it, but have you considered making a destroyed version of the bomber UFO?
+
+[17:20] <ghosta> u mean as prefab?
+
+[17:20] <BTAxis> Yes.
+
+[17:21] <BTAxis> We're going to need one for the crash missions.
+
+[17:21] <ghosta> Hm currently I am working on a city map
+
+[17:21] <ghosta> But after it I can try (and learn how to work with particles...)
+
+[17:22] <BTAxis> That would be great.
+
+[17:22] <BTAxis> Because I don't think I could pull it off.
+
+[17:27] *** geever joined
+[17:28] <geever> hi
+
+[17:30] <Kildor> BTAxis, ghosta do you use last ufo-radiant?
+
+[17:30] <BTAxis> I don't use it.
+
+[17:31] <BTAxis> It's very slow for me (probably a driver issue), but it's also got some things I don't like at all.
+
+[17:31] <BTAxis> Such as the orange wireframe stuff you get when selecting brushes.
+
+[17:31] <BTAxis> It gets in the way.
+
+[17:32] <Kildor> yep, this is annoyed. I`ve just noticed that I can`t use CtrlTab to switch between views
+
+[17:32] <geever> mattn2|home_, ping()
+
+[17:40] *** peteran joined
+[17:46] *** schumaml joined
+[18:01] *** MrHase left
+[18:03] <ghosta> BTAis I use the latest frehs compiled a few days ago
+
+[18:06] <CIA-23> geever * r20618 /ufoai/trunk/base/ufos/ (menu_geoscape.ufo menu_singleplayer.ufo):
+
+[18:06] <CIA-23> * fix wrong savename(6) in save menu
+
+[18:06] <CIA-23> * add hover effect on close-messageoptions button (behavior still needs fixin)
+
+[18:25] *** Kildor left
+[18:32] *** wawosz left
+[18:37] *** bayo_O joined
+[18:39] <bayo_O> hello
+
+[18:39] <geever> hi
+
+[18:39] <bayo_O> geever: , i do the patch, it change nothing
+
+[18:39] <geever> the messagesystem still bad
+
+[18:39] <geever> well, it's worse now :(
+
+[18:39] <geever> (in r20617)
+
+[18:40] <bayo_O> :D
+
+[18:40] <bayo_O> geever : can you take a look at the wiki
+
+[18:41] *** BTAllies joined
+[18:42] *** BTAllies left
+[18:42] *** bayo__O joined
+[18:42] *** bayo_O left
+[18:42] <bayo__O> maybe, with it you can see why it dont work like it need
+
+[18:45] <geever> bayo__O, before your patch on clicking the scrollbar appeared as should, but the messagesys closed on mouse move, now
+
+[18:45] <geever> it (the temporary opened) closes on click
+
+[18:46] <geever> and I never find your hidden wikipages :)
+
+[18:46] *** BTAxis left
+[18:48] *** bayo_O joined
+[18:48] <bayo_O> http://ufoai.ninex.info/wiki/index.php/Menu_implementation
+
+[18:48] <bayo_O> geever: http://ufoai.ninex.info/wiki/index.php/Menu_implementation
+
+[18:49] <geever> well, I never knew that :)
+
+[18:49] *** bayo__O left
+[18:49] <bayo_O> "mouse event" or something like that
+
+[18:50] <bayo_O> incomplet and bad english :) but it can help
+
+[18:50] <bayo_O> i create a category "GUIs"
+
+[18:56] <geever> bayo_O, I have a suspect reading this
+
+[18:56] <bayo_O> a suspect?
+
+[18:57] <geever> When we click on the button it disappears and another one appears so moving the mouse will call the first node's out and then the new node's in?
+
+[18:57] <bayo_O> yes
+
+[18:57] <geever> if so, then that's the problem here
+
+[18:58] <geever> but your last patch giex this, no?
+
+[18:58] <geever> s/giex/fixed/
+
+[18:58] <geever> (sorry, cannot type :) )
+
+[18:58] <bayo_O> no, my last patch do this behaviour
+
+[18:59] <bayo_O> i can check how do javascript for a case like that, but maybe the hidden not will receive a "mouse leave"
+
+[19:01] <geever> yes That would be the logical way
+
+[19:04] <bayo_O> you can rewrite the size on the "in" of the second button?
+
+[19:06] <geever> maybe
+
+[19:06] <geever> why?
+
+[19:07] <bayo_O> i dont know :) i dont check at all the code?
+
+[19:07] <bayo_O> geever : are you working on?
+
+[19:07] <geever> no I didn't touch this problem
+
+[19:08] <bayo_O> else i can do something (new i understabd better scripting....)
+
+[19:08] <geever> I was hunting a crash (SysError) somewhere else :)
+
+[19:08] <geever> but
+
+[19:08] <bayo_O> new->now
+
+[19:08] <bayo_O> not mine (buffer overflow) :D
+
+[19:08] <geever> changing messagesystems's size is not good in the second button's in
+
+[19:09] <geever> as we set different sizes w lclick and rclick
+
+[19:10] <bayo_O> leftclick-> change size ; rightclick -> fixe the current size
+
+[19:11] <geever> no, on the first button, lclick->open half-height, rclick->open full-height
+
+[19:24] *** ZiggiZ joined
+[19:25] *** bayo_O left
+[19:25] *** maximilian joined
+[19:25] *** ZiggiZ left
+[19:30] <`alpha> hello
+
+[19:31] <`alpha> why is it that alien craft, bases and heavly laser, and nv goggles do not have an image any more ?
+
+[19:31] <`alpha> cat got your images ? :)
+
+[19:38] *** maximilian left
+[19:46] *** bayo_O joined
+[19:51] *** wawosz joined
+[19:57] *** wawosz left
+[20:17] *** bayo_O left
+[20:20] *** BTAxis joined
+[20:20] *** ChanServ sets mode: +o BTAxis
+
+[20:27] <ghosta> While learning Java there is a Style check. Does anybody know what
+
+[20:28] <ghosta>  '100' is a magic number.
+
+[20:28] <ghosta> means?
+
+[20:30] <`alpha> huh
+
+[20:37] <Tron> Do you know the term "magic number"?
+
+[20:38] *** wawosz joined
+[20:39] *** BTAllies joined
+[20:42] <ghosta> no?
+
+[20:43] <ghosta> ok now I know
+
+[20:43] <ghosta> but why is 100 one?
+
+[20:44] <Tron> This question signifies, that you do not know, what "magic number" means.
+
+[20:44] *** KrackenO left
+[20:46] <ghosta> then tell me
+
+[20:47] <Tron> http://en.wikipedia.org/wiki/Magic_number_(programming)#Unnamed_numerical_constant
+
+[20:48] <Tron> Not the best possible explanation, but it will do
+
+[20:51] <ghosta> I hate coding...
+
+[20:51] *** BTAxis left
+[20:52] <ghosta> Why not telling me the colour of my pants to wear while typing the code?
+
+[20:52] <Tron> you make no sense
+
+[20:53] <`alpha> agree
+
+[21:01] *** tchristney left
+[21:01] *** tchristney joined
+[21:16] *** Krzysiek joined
+[21:18] *** Krzysiek left
+[21:20] *** BTAxis joined
+[21:20] *** ChanServ sets mode: +o BTAxis
+
+[21:31] *** BTAllies left
+[21:36] *** ghosta left
+[21:39] *** jdolan_ left
+[21:55] *** Jock joined
+[21:55] *** Jock left
+[22:02] <geever> ok, one more try. mattn2|home_ ping()
+
+[22:03] *** ghosta joined
+[22:04] <mattn2|home_> geever: pong()
+
+[22:04] <mattn2|home_> but only very little rtt ;)
+
+[22:04] <geever> I've found out the problem with aircraft techs
+
+[22:04] <geever> not so easy to fix
+
+[22:05] <geever> I think I'll disable your new check for now
+
+[22:05] <mattn2|home_> we need that check - otherwise it would segfault a line below ;)
+
+[22:05] <mattn2|home_> what is the problem?
+
+[22:06] <geever> on loading a game it syserrors on aircraft->tech
+
+[22:06] <geever> http://pastebin.ca/1277268
+
+[22:06] <geever> with a debug print I've found that aircrafts are loaded before techs
+
+[22:06] <geever> so they cannot be linked
+
+[22:07] <geever> if you start a new game, then load an old one it's not a problem
+
+[22:07] <geever> but if you load a game first... :(
+
+[22:07] <mattn2|home_> but they should not be shown in the menu without a tech assigned
+
+[22:08] <mattn2|home_> to disabling the check is not a fix - just a hack to forget the bug
+
+[22:08] <mattn2|home_> can you give me a savegame?
+
+[22:08] <geever> the trunk was broken on 20605 where only that check was included
+
+[22:08] <geever> it's easy to create either. start a game with base&equipment, save, exit, rerun, load..
+
+[22:09] <geever> so disabling it will not be worse
+
+[22:09] <geever> and ofc the bug should be fixed
+
+[22:09] <geever> the trunk should be playable till then
+
+[22:09] <geever> too
+
+[22:11] <mattn2|home_> i would always vote for exiting out on bugs - because otherwise it's not annoying and won't be fixed asap ;)
+
+[22:11] <mattn2|home_> let me first check it
+
+[22:11] <mattn2|home_> have some free minutes
+
+[22:11] <geever> should I send a savegame or you could manage it?
+
+[22:12] <mattn2|home_> have managed it - will have a look tomorrow
+
+[22:12] <mattn2|home_> cu later guys
+
+[22:12] <geever> so the game remains unusable :(
+
+[22:12] <geever> again
+
+[22:14] *** wawosz left
+[22:16] <Tron> Just use r20604
+
+[22:18] <geever> yes, or start a new game before loading and turn a somersault...
+
+[22:18] <geever> :)
+
+[22:20] <peteran> mattn2|home_: (and others who may be interested) some two weeks ago i mentioned that i would take a look at the startup time and i have done that now...running windows_debug I can squeeze 1s (11s->10s) with a nicer R_FilterTextures or same for windows (5s->4s)...there are some milliseconds details to be had that i log, but those are the times i see exactly in c::b...some of you may remember i mentioned a figure of 9s for windows target earlier...as
+
+[22:29] <peteran> Specifically related to R_FilterTextures: running (compiled with vc++ express) through a set of 4096x4096 images using old 6.4s, new 4.5s and 3.7s using intrinsics for sse...i spent (or wasted) a lot of evenings learning to use intrinsics and was almost ready to go full way with asm(), but in the end i at least learned something new...and the last time i did x86 assembly was before mmx was invented
+
+[22:41] <CIA-23> geever * r20619 /ufoai/trunk/src/po/hu.po: * some translated/updated strings
+
+[22:59] <geever> good night
+
+[22:59] *** geever left
+[22:59] <CIA-23> dertron * r20620 /ufoai/trunk/src/game/inv_shared.c: * Remove unnecessary line continuation.
+
+[23:01] <`alpha> umm
+
+[23:01] <`alpha> in trunk, ladders are not usable
+
+[23:01] <`alpha> why?
+
+[23:02] <peteran> mattn2|home_ (and others) patch for my long monologue above available at sf: https://sourceforge.net/tracker2/?func=detail&aid=2393701&group_id=157793&atid=805244...
+
+[23:03] <peteran> `alpha: I think that's the way it is right now in trunk...seen that question pop up a couple times
+
+[23:05] <`alpha> I see
+
+[23:05] <`alpha> thanks for the info peteran
+
+[23:10] <peteran> `alpha: see http://colabti.org/irclogger/irclogger_log/ufoai?date=2008-11-27,Thu and search to climb aroung 10:58 on that page
+
+[23:11] <`alpha> huh cool
+
+[23:11] <`alpha> walking through walls
+
+[23:11] <`alpha> gee.
+
+[23:12] <peteran> mmm...you feel like a ghost...sort of
+
+[23:12] <peteran> then again, i shouldn't say much as i only started twiddling with the source two weeks ago, have just sent my first patch and don't even have write access to svn :)
+
+[23:14] <peteran> and during those two weeks i have rarely even seen much more than the loading screen as i put a Sys_Quit call right at the end of Qcommon_Init...
+
+[23:19] <`alpha> I just wanted to play this game a bit but all I got was a crash and a bunch of unusable stairs :/
+
+[23:20] <`alpha> hope this does not become the next duke nukem
+
+[23:21] *** `alpha left
+[23:21] <peteran> well, you could run 2.2.1?
+
+[23:21] <peteran> or quit...anyone else here for me to talk to?
+
+[23:23] *** schumaml left
+[23:28] *** BTAllies joined
+[23:36] <peteran> BTAllies: =BTAxis?
+
+[23:37] *** ghosta left
+[23:38] *** BTAxis left
+[23:39] *** BTAllies is now known as BTAxis
+
+[23:39] *** ChanServ sets mode: +o BTAxis
+
+[23:42] <peteran> BTAxis: ahh...i see...you seem to be one of the more active members here...i've looked into some performance improvement to the startup side, but that soon becomes a dead-end as some things have to be done...aside from startup...what would you most consider valuable to get a speed improvement on?
+
+[23:44] <BTAxis> Possibly radar overlay rendering.
+
+[23:45] <peteran> i saw that code and didn't really like that...i suppose that is supposed to be some blurring, but the way it was implemented is...well...wrong in my opinion
+
+[23:45] <peteran> but more specifically, what did you have in mind?
+
+[23:46] <CIA-23> bayo-fr * r20621 /ufoai/trunk/src/common/cvar.c: * add functions to improve scripting
+
+[23:46] <BTAxis> I didn't have anything in mind. I think about game mechanics mostly, not performance issues.
+
+[23:47] <CIA-23> bayo-fr * r20622 /ufoai/trunk/src/client/menu/m_input.c: * allow injection on click
+
+[23:47] <peteran> please explain...i for one would love to see the radar overlay as i am placing something...if that is what you are thinking
+
+[23:48] <CIA-23> bayo-fr * r20623 /ufoai/trunk/src/client/menu/m_actions.c: * allow to inject cvar into command
+
+[23:49] <BTAxis> I know a lot of people think the same way.
+
+[23:49] <BTAxis> Kracken probably knows more about it than I do.
+
+[23:51] <peteran> i may take a look at radar, but first ufo2map as that is the one i feel is and area i should know how to do something nice
+
+[23:52] <BTAxis> Okay.
+
+[23:54] <peteran> i mean, i've been up and down a couple of times through a number of call graphs in vtune and ufo2map is easier than the game itself to get a grip on
+
+[23:54] <peteran> BTAxis: btw, if you feel adventurous https://sourceforge.net/tracker2/?func=detail&aid=2393701&group_id=157793&atid=805244
+
+[23:57] <CIA-23> bayo-fr * r20624 /ufoai/trunk/base/ufos/menu_geoscape.ufo: * proposal for messagesystem: only leftclick with 4 status
+
+[23:57] <BTAxis> Sorry, I don't really do any coding.
+
+[23:57] <peteran> ok...that was what i was afraid of...haven't really gotten to know people here...i saw that you're from sweden though?
+
+[23:59] <BTAxis> Not really, I'm from the Netherlands.
+
+[23:59] <BTAxis> I just live in Sweden.
+

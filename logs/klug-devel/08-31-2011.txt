@@ -1,0 +1,911 @@
+[04:52] <sanket> <sigh> Yeban's still not up :(
+
+[05:36] *** ksinkar joined
+[05:36] *** ksinkar left
+[05:36] *** ksinkar joined
+[05:37] *** ksinkar left
+[05:39] <sanket> artagnon, There's an article by George Orwell - "A Hanging" in Hindu. You might want to take a look at it :-)
+
+[06:02] *** sanket left
+[06:40] *** ps_jinx left
+[06:45] *** ps_jinx joined
+[06:50] *** ps_jinx left
+[06:56] *** ps_jinx joined
+[06:58] *** sa1 joined
+[07:39] *** yeban joined
+[07:42] * yeban just woke up
+
+[07:43] <yeban> Looks like I have been missing out on some serious action on the mailing list.
+
+[07:58] *** ksinkar joined
+[08:30] *** ksinkar left
+[08:32] *** varunsr joined
+[09:13] *** varunsr left
+[09:25] *** aftab joined
+[10:39] <aftab> "Flatland" is awesome. Should be made compulsary reading in schools.
+
+[11:08] * lupo33 googles.
+
+[11:16] *** hiwale joined
+[11:31] *** aftab left
+[12:46] *** hiwale left
+[12:47] *** yeban left
+[12:47] *** lupo33 left
+[12:49] *** lupo33 joined
+[13:03] *** ps_jinx left
+[13:34] *** aftab joined
+[13:35] * artagnon returns
+
+[13:35] <artagnon> Administration is cracking down on DC++ etc.  I was out talking to some people.
+
+[13:35] <artagnon> PM's response was really positive -- let me forward it to the list.
+
+[13:37] <aftab> Has started using git. Forked the narray project.
+
+[13:38] <artagnon> aftab: Use '/me' like: '/me has started using git.' and see what happens.
+
+[13:39] * aftab has started using git.
+
+[13:39] <aftab> Oh! Neat!
+
+[13:40] * artagnon nods
+
+[13:41] <artagnon> ashim: Great work on the rewrite!  Thanks :D
+
+[13:44] *** sanket joined
+[13:45] <sanket> Did I miss some action after the reply ?
+
+[13:45] <artagnon> sanket: Thanks for the "A Hanging" suggestion -- still haven't read the morning paper.
+
+[13:46] <sanket> What about the reply.
+
+[13:46] <sanket> He did miss the meeting part, what do you say.
+
+[13:46] <artagnon> PM, no?  Awesome response!
+
+[13:46] <artagnon> We should go meet him anyway.
+
+[13:46] <sanket> Yes.
+
+[13:46] <sanket> That's what I think.
+
+[13:47] <sanket> And we should also tell him how we wish to proceed. Though I did not understand the part of setting up mirrors in CSE.
+
+[13:47] <artagnon> Yes.
+
+[13:47] <artagnon> First few meetings should focus more on connecting with him imo.
+
+[13:48] <artagnon> I want to try to make it a "casual informal chat" kind of thing.
+
+[13:48] <sanket> He is a very simple guy, it'll be fun to talk to him :)
+
+[13:48] <artagnon> Then, we can slowly tell him about the agenda bit by bit as he absorbs more and more.
+
+[13:48] <artagnon> Good to hear :D
+
+[13:48] <sanket> Yes.
+
+[13:50] <sanket> I have my hands full for tomorrow's meet with NG. I will see you guys later.
+
+[13:50] *** sanket left
+[13:51] <lupo33> artagnon: http://www.thehindu.com/opinion/op-ed/article2412675.ece
+
+[13:51] <aftab> Nice and readable tutorial on extending Ruby with C: http://www.ruby-doc.org/docs/ProgrammingRuby/html/ext_ruby.html
+
+[13:51] <artagnon> lupo33: Thanks! :D
+
+[13:53] * aftab leaves. 
+
+[13:54] * artagnon leaves too
+
+[14:16] *** lupo33 left
+[14:19] *** yeban joined
+[14:23] *** sricharan joined
+[14:36] *** lupo33 joined
+[15:26] *** ps_jinx joined
+[15:33] <yeban> aftab: I had a brief discussion with mohawkjohn the other day.
+
+[15:34] <aftab> I think that the 0.7 branch is the one maintained by masa16 right?
+
+[15:34] <aftab> yeban: Okay, what did he say?
+
+[15:34] <yeban> aftab: Yup.
+
+[15:34] <yeban> Infact, only masa16 is the one working on the rewrite.
+
+[15:35] <yeban> mohawkjohn was saying that the current plan is to first get the specs for a generic numeric array library right.
+
+[15:35] <yeban> Maybe implement it in Ruby first to make sure.
+
+[15:35] <yeban> And then rewrite it in C.
+
+[15:36] <yeban> I know it sounds lame.
+
+[15:36] <aftab> yeban: specs as in, expected functionality right?
+
+[15:36] <yeban> aftab: Yup.
+
+[15:36] <yeban> mohawkjohn is not the best person to talk about it though.
+
+[15:36] <yeban> I will get in touch with jtprince today.
+
+[15:37] <yeban> If he wants the same. I am quitting.
+
+[15:37] <aftab> I thought Narray was supposed to emulate NumPy? Can't we just use the specs from there? Or just emulate the matrix structures in Matlab?
+
+[15:37] <yeban> aftab: I would prefer that the NArray rewrite take care of all of that.
+
+[15:38] <yeban> We should collaborate with masa16 and get into NArray the features we want.
+
+[15:38] <yeban> Rather than write a replacement.
+
+[15:38] <yeban> These guys have no fucking idea of what is involved in writing this.
+
+[15:38] <aftab> yeban: Yeah, I hold the same views. Redifining the spec from scratch seems to be a little much.
+
+[15:38] <aftab> *Redefining
+
+[15:39] <yeban> I told him, 'why not adapt narray to meet our specs as well'.
+
+[15:39] <yeban> They are calling their own re-write numarray.
+
+[15:40] <aftab> yeban: Yeah, considering that the major problem facing the SciRuby project is the slow progress towards deployment, I think that it's best to just stick with specs of existing libraries.
+
+[15:41] <aftab> This sort of splintering of the work force, and the resulting redundancy will not be good for progress.
+
+[15:41] <yeban> Besides, I can't afford to waste time on it, if they don't show some promise/action on their part.
+
+[15:41] <yeban> I am anyways dedicating too much time to hobby projects.
+
+[15:42] <yeban> I need to get back to more serious stuff.
+
+[15:42] <yeban> My involvement with SciRuby is only this:
+
+[15:42] <yeban> I want to explore the field of Scientific, and Numerical computing.
+
+[15:42] <aftab> yeban: Well, time really isn't much of an issue for me, but my main objective is the write C code. If it's going to become an all Ruby project, then I'll quit.
+
+[15:43] <artagnon> yeban: Hold the emails to PM for a while -- we first want to meet him and make him understands who we are and what we're doing.
+
+[15:43] <yeban> Since I am into AI, ML and stuff I want tools to be able to rapidly prototype things in the language of my choice.
+
+[15:43] <artagnon> Don't intimidate him with too much information so quickly.
+
+[15:44] <artagnon> He's probably busy reading the website, mailing list archives, and IRC channel logs already :)
+
+[15:44] <aftab> yeban: unfortunately unless you want to do your prototyping in C(which will kill you), there aren't too many reliable bug-free open source alternatives to Matlab for that.
+
+[15:44] <yeban> artagnon: Ok.
+
+[15:44] <yeban> aftab: I am willing to explore well established SciPy if need be.
+
+[15:45] <yeban> I am not an evangelist.
+
+[15:45] <yeban> They are tools, not an end in itself.
+
+[15:45] <aftab> yeban: yeah, SciPy is pretty nice, and the best thing out there in my opinion.
+
+[15:45] <yeban> artagnon: Good that you stopped me. I was just writing about ASF's mentorship program.
+
+[15:45] <artagnon> !
+
+[15:46] <artagnon> Do try to look at it from his perspective :P
+
+[15:46] <yeban> I got quite excited at the prospect of including these things as a part of curriculum.
+
+[15:46] <artagnon> Yes, we have to contain this excitement a bit.  Slow and steady wins the race :)
+
+[15:46] <yeban> Right.
+
+[15:46] <yeban> I am leaving for dinner now.
+
+[15:47] <yeban> Cya guys later.
+
+[15:47] <yeban> aftab: To conclude, my involvment with SciRuby is in a fix.
+
+[15:47] <yeban> artagnon: See the logs for context.
+
+[15:48] <yeban> And I guess I told you the conclusion already.
+
+[15:48] <yeban> So there goes the facts (in the logs).
+
+[15:48] <yeban> Bye.
+
+[15:48] * yeban leaves
+
+[15:48] * artagnon nods
+
+[16:01] * lupo33 off to grab some food.
+
+[16:01] *** lupo33 left
+[16:06] <artagnon> A tenth of a second! Hanging makes killing look coldly permissable.
+
+[16:07] <artagnon> Reading http://www.vijayvaani.com/FrmPublicDisplayArticle.aspx?id=365
+
+[17:01] <ashim> Artagnon: Lol, its funny how little has changed.
+
+[17:01] <ashim> The congress is still ruled by one dominant 'Gandhi' and the leaders in Pakistan are still hungry for power at the expense of the ppl.
+
+[17:02] * ashim doesn't claim to know much about history.
+
+[17:19] <artagnon> Hehe, yeah.
+
+[17:19] <artagnon> I'm ploughing through Guha's "India After Gandhi" now.
+
+[17:19] <artagnon> Very comprehensive -- I'm also a newbie.
+
+[17:29] <artagnon> [ANNOUNCE] How about meeting on Friday at 9 PM in front of the insti foyer?
+
+[17:29] <artagnon> Agenda: Everyone starts off with a sales pitch to start social interaction and "clan building".
+
+[17:33] <sa1> ok
+
+[17:36] * artagnon starts composing an email
+
+[17:48] *** aftab left
+[17:49] *** sricharan left
+[17:50] *** yeban left
+[18:13] *** yeban joined
+[18:15] <yeban> artagnon: I think I should send out my ASF mentor programme wala mail in response to PM.
+
+[18:16] <yeban> It will give him a subject of discussion with other Proffs.
+
+[18:16] <yeban> He can ask us questions when we meet him.
+
+[18:16] <yeban> Also, something for him to search about.
+
+[18:25] <artagnon> yeban: Just wait until we first meet him face-to-face?
+
+[18:34] *** aftab joined
+[18:38] *** lupo33 joined
+[18:38] * aftab calls it a day
+
+[18:38] *** aftab left
+[18:53] *** sanket joined
+[18:57] <sanket> A rather quite day at IRC.
+
+[18:57] <yeban> Actually.
+
+[18:58] <sanket> I have been having strong realization about Kgp culture. Biggest one is - you should read a lot of literature. It helps connect a lot of ideas.
+
+[18:58] * yeban agrees
+
+[18:58] <yeban> About the reading part.
+
+[18:58] * artagnon concurs
+
+[18:59] <yeban> Not sure how it relates with KGP culture though.
+
+[18:59] *** maxking joined
+[18:59] <yeban> hey maxking
+
+[18:59] <artagnon> maxking: Welcome! :)
+
+[18:59] <maxking> hello
+
+[18:59] <yeban> Has maxking introduced himself already?
+
+[19:00] <maxking> Yes on the group
+
+[19:00] <sanket> yeban, It might look awkward, but as you know I have been a part of the rather ugly Kgp politics. I served a complete year under Gymkhana.
+
+[19:00] <yeban> maxking: Are you Abhilash Raj?
+
+[19:00] <maxking> i cudn't turnup for the meeting
+
+[19:00] <maxking> yeban:yes
+
+[19:00] * yeban rocks
+
+[19:00] <yeban> :)
+
+[19:01] <artagnon> ! That was pretty awesome.
+
+[19:01] <artagnon> I couldn't remember.
+
+[19:01] <yeban> artagnon: I know maxking personally actually.
+
+[19:01] <artagnon> Oh.
+
+[19:01] <yeban> sanket: That is alright.
+
+[19:01] <yeban> artagnon: But it was a little difficult to remember him with the nick.
+
+[19:02] <artagnon> sanket: I actually think Gymkhana might have been a valuable experience.
+
+[19:02] <yeban> maxking: I hopw you will be able to join us this Friday.
+
+[19:02] <artagnon> Provided you were in the right mindset ie.
+
+[19:02] * yeban agrees with artagnon 
+
+[19:02] <maxking> yes hopefully
+
+[19:03] <sanket> Your above statement makes more context, because now I want to realize a lot more from my experience than an amateur 2nd year would have.
+
+[19:03] <yeban> sanket: Right.
+
+[19:03] <artagnon> :)
+
+[19:03] <yeban> You might not have learnt thing then, but you can build upon those experience now.
+
+[19:03] <maxking> i mean i am intrested  actually but last days of OP in hall
+
+[19:03] <sanket> Yes. You mostly go along the flow - and the current is strong.
+
+[19:04] <lupo33> Subconsciously, one always builds upon experiences. :)
+
+[19:04] <sanket> :D
+
+[19:04] <maxking> may have a SOP Box scheduled in hall
+
+[19:04] <maxking> i read the minutes of meet
+
+[19:04] <maxking> this week started using debian :D
+
+[19:04] <lupo33> SOP box amuses artagnon. :D
+
+[19:04] <artagnon> Yeah, that should summarize it -- you didn't miss that much.
+
+[19:04] <artagnon> Nice!
+
+[19:05] <artagnon> Yes, SOP is funny :P
+
+[19:05] <artagnon> I can't exactly understand the various cultural elements that are responsible for it -- how did it end up like this?
+
+[19:05] <maxking> artagnon: compulsary to apply so had to :(
+
+[19:06] * artagnon nods in understanding
+
+[19:06] <lupo33> maxking: Don't show up. Simple.
+
+[19:06] <sanket> artagnon, I would suggest you to understand what transpires. The fact that you realize something - link it - and get enlightened is much greater than the net worth of the fact/phenomenon :)
+
+[19:06] <maxking> lupo33:just want to have an experience
+
+[19:06] <yeban> lupo33: It is not that simple actually. Some people find doing it difficult.
+
+[19:06] <artagnon> 1. 20 years ago, the kids might have been nervous about turning up for company interviews.  So they made them dress in formal wear to get them comfortable with the idea.
+
+[19:07] * lupo33 agrees.
+
+[19:07] <artagnon> sanket: Indeed.
+
+[19:07] <maxking> small problem with using firefox 6
+
+[19:07] <artagnon> This is much like the way we have mailing list guidelines now -- in the hope that people will be more comfortable in larger open source communities :)
+
+[19:07] <artagnon> Quite well-meaning.
+
+[19:08] <maxking> i am not able to use flash player
+
+[19:08] <sanket> maxking, This is not a troubleshooting arena.
+
+[19:08] <yeban> maxking: Try flashplugin-nonfree.
+
+[19:08] <yeban> That is the exact name of the Debian package you want.
+
+[19:09] <artagnon> sanket: Small doubts are okay :)
+
+[19:09] <artagnon> maxking has started using Debian, so that's quite an achievement already.
+
+[19:09] <sanket> :-)
+
+[19:10] <artagnon> What we don't want is "shallow issues" -- when the person hasn't even tried.
+
+[19:10] * sanket nods
+
+[19:10] <artagnon> maxking: Also, consider using Google Chrome.  Nicer rendering.
+
+[19:10] <artagnon> Anyway, continuing along the SOP line:
+
+[19:11] <artagnon> 2. The panel is an emulation of the group-discussion that many companies used to have (some still have that)
+
+[19:11] <sanket> Ther
+
+[19:11] <maxking> artagnon: i tried googling for it installed even flashplugin-nonfree
+
+[19:12] <artagnon> 3. People are made to stand up and speak somewhat confidently, because lack of confidence is what plauged them most 20 years ago.
+
+[19:12] <maxking> but it dint work
+
+[19:12] <artagnon> Oh.
+
+[19:12] <artagnon> Hm.
+
+[19:12] <maxking> i even installed flashblock
+
+[19:12] <maxking> but it says incompatible with firefox6
+
+[19:12] <artagnon> maxking: Flash doesn't work at all?  Is this a 64-bit installation?
+
+[19:13] <artagnon> Flash is a silly proprietary plugin -- something everyone on Linux has been historically annoyed with.
+
+[19:13] <maxking> No, no vedios no audio
+
+[19:13] <artagnon> For many many years now.
+
+[19:14] <sanket> One thing I figure is missing, are the people who want to act a police. I never find a strong agenda or a motivation.
+
+[19:14] <artagnon> Right, policing seems to be quite a glamorous activity.
+
+[19:14] *** vickyc joined
+[19:15] <artagnon> Both moral policing and "forced funda impartation" :P
+
+[19:15] <sanket> They are not there swamping asses because it's needed( it's never needed AFAIK ), there's a disconnect.
+
+[19:15] <artagnon> I suppose it's meant to fill their egos.
+
+[19:15] <sanket> A disconnect - which says I do not know why I am doing this, but I am.
+
+[19:15] <lupo33> :D
+
+[19:15] <artagnon> True.  It's almost a ritual now.
+
+[19:15] <yeban> vickyc: Welcome :).
+
+[19:15] <artagnon> 4 times counter-clockwise, 5 times clockwise.
+
+[19:16] <sanket> :)
+
+[19:16] <artagnon> Sprinkle water on the fire.
+
+[19:16] <artagnon> and repeat what the man in the ponytail says.
+
+[19:16] * yeban is hearing that for the second time today
+
+[19:16] <artagnon> It's very deeply ingrained in Indian culture.
+
+[19:16] <sanket> Means are justified if it fulfils a purpose. I do not the see the purpose. Even if the purpose is fulfilled does not mean the "means" are justified.
+
+[19:16] * lupo33 has heard it once before at Shrivastav's. :)
+
+[19:16] <artagnon> yeban: Sorry, I wasn't feeling particularly creative.
+
+[19:16] <artagnon> I should've tried varying it a bit :P
+
+[19:17] <yeban> artagnon: Chill dude \m/
+
+[19:18] <sanket> It's simple A=>B logic.
+
+[19:18] <artagnon> Right, which is why I'm going for the "understand the motivation framework" "concrete actions-items are less important" approach.
+
+[19:18] <artagnon> At the risk of sounding like an abstruse philosophical nutjob :P
+
+[19:19] *** maxking left
+[19:20] *** maxking joined
+[19:20] <lupo33> Sooner or later people turn to philosophy. It belongs up there with self-actualisation on Maslow's heirarchy. :)
+
+[19:20] <artagnon> maxking: Again, are you using 64-bit?
+
+[19:20] *** vickyc left
+[19:21] *** vickyc1 joined
+[19:22] <artagnon> Yes :)
+
+[19:22] <maxking> artagnon: No, 32bit.
+
+[19:22] <artagnon> Hm, I thought 32-bit Flash was a little more forgiving.
+
+[19:23] <artagnon> Debian stable, testing, or unstable?
+
+[19:23] <artagnon> Do search on Debian BTS (Bug Tracking System) and file a report there.
+
+[19:23] <artagnon> ie. Try to file an intelligent bug report.
+
+[19:23] <yeban> It is.
+
+[19:23] <artagnon> It'll be a great open source exercise.
+
+[19:24] <yeban> I am quite sure maxking is getting something wrong on his side.
+
+[19:24] <maxking> artagnon: stable
+
+[19:24] <artagnon> !
+
+[19:24] <yeban> Ouch.
+
+[19:24] <yeban> Then I can't say.
+
+[19:24] <artagnon> Please move to testing asap.
+
+[19:24] <artagnon> stable is rotting old.
+
+[19:25] <artagnon> Start a dist-upgrade to 'testing'.
+
+[19:25] <artagnon> yeban, sanjoyd, and I use sid (unstable).
+
+[19:26] <maxking> what is actually the difference in three?
+
+[19:26] <artagnon> Don't get onto that until you're a little confident.
+
+[19:26] <yeban> maxking: Google :).
+
+[19:26] <artagnon> maxking: Three separate dependency trees.
+
+[19:26] <artagnon> Essentially three tiers -- packages start at unstable and graduate to testing/ stable as more bugs are fixed.
+
+[19:27] <yeban> artagnon: Let him find that for himself.
+
+[19:27] <yeban> You never told me that.
+
+[19:27] <artagnon> Yeah, do look it up :)
+
+[19:27] <artagnon> That's just a one-line summary.
+
+[19:29] <artagnon> Only really critical servers should run "stable".  It's not for normal desktop users.
+
+[19:29] <artagnon> Also, do try distro-hopping a bit if you like -- it'll help you appreciate Debian :)
+
+[19:30] <yeban> Right.
+
+[19:31] <maxking> artagnon: Sure i am upgrading now to testing
+
+[19:44] *** lupo33 left
+[19:49] <vickyc1> anyone know of any small, low-entry-barrier C/Ruby/Python projects for a beginner in open source?
+
+[19:49] <artagnon> vickyc1: Try Picard?
+
+[19:49] <yeban> Yeah. And you know some KDE too I guess.
+
+[19:49] <artagnon> A good receipe is to pick something that you actually use.
+
+[19:50] <artagnon> A piece of software that you use in your day-to-day work preferably.
+
+[19:50] <artagnon> And something you'd like to improve in it.
+
+[19:50] <artagnon> The motivation comes easily.
+
+[19:50] <artagnon> Also, picking a project is not marriage -- just contribute to anything!
+
+[19:50] <yeban> Finding what to improve in it part can be a little difficult at first. Depends on how much you use it.
+
+[19:50] <artagnon> And keep hopping around looking for more.
+
+[19:51] <vickyc1> but the problem with day-to-day software that I use is: the code base is likely _huge_
+
+[19:51] <artagnon> True, look for issue trackers/ documentation-translations tasks to start out with.
+
+[19:51] <artagnon> :)
+
+[19:51] <artagnon> Try to pick up and use cute nifty applications.
+
+[19:52] <yeban> vickyc1: I suggested you a lot of Ruby based ones. You know enough Ruby to contribute to them. Besides, if you don't start looking at the good ones you will be stuck with the same set of practices.
+
+[19:52] <yeban> You will also understand a lot of software design stuff I used to rant about at Intellecap.
+
+[19:53] <yeban> Yehuda Katz code is particularly good in terms of picking best practices.
+
+[19:53] <yeban> *Katz's
+
+[19:53] <yeban> Check out bundler.
+
+[19:54] <yeban> Reading code is very important too.
+
+[19:54] <yeban> Ruby's standard library is written in Ruby.
+
+[19:56] <ashim> How do you guys know about so many projects: do you find out from friends working with you on projects or is it just a lot of googling?
+
+[19:57] <artagnon> A combination of things -- you'll get into the right circles soon too.
+
+[19:57] <yeban> Depends
+
+[19:58] <artagnon> Friends + reading blogs/ articles + GitHub sharing + lists like SoC
+
+[19:58] <artagnon> Everyone: Please visit whatismyip.com and post a list of unique IPs here.
+
+[19:58] *** navgeet joined
+[19:58] <artagnon> 203.110.240.205, 203.110.246.230
+
+[19:58] <artagnon> navgeet: Welcome! :)
+
+[19:58] <yeban> 230 for me.
+
+[19:58] <yeban> artagnon: For freenode?
+
+[19:58] <navgeet> Hi all! :)
+
+[19:58] <ashim> artagnon: 203.110.243.21
+
+[19:59] <sa1> 205 for me
+
+[19:59] <artagnon> ashim: Thanks.
+
+[19:59] <artagnon> That's three.
+
+[19:59] <artagnon> navgeet: This channel is logged and all logs are public (see topic)
+
+[20:00] <navgeet> Yup, I know that.
+
+[20:00] <sa1> 203.110.243.23 . That's navgeet's.
+
+[20:00] <artagnon> navgeet: For a partial list of introductions, see http://colabti.org/irclogger/irclogger_log/klug-devel?date=2011-08-29#l178
+
+[20:00] <artagnon> sa1: Thanks, big help :)
+
+[20:01] <artagnon> yeban: Yes, for Freenode.
+
+[20:01] <yeban> artagnon: I prefer whatismyip.org
+
+[20:01] <artagnon> The admins want to know what's going on.
+
+[20:01] <yeban> Just states the IP.
+
+[20:01] <vickyc1> mine's 203.110.246.22
+
+[20:01] <artagnon> Ah.
+
+[20:01] <maxking> 203.110.246.230
+
+[20:01] <yeban> That is weird, no?
+
+[20:01] <yeban> I didn't expect so many different public IPs.
+
+[20:02] <artagnon> Thanks, I have 5 unique IPs so far.
+
+[20:02] <sa1> yeban:1 for every proxy, perhaps?
+
+[20:02] <artagnon> No, not really.
+
+[20:02] <yeban> I don't think so.
+
+[20:02] <sa1> Ok.
+
+[20:03] <sa1> Then what?
+
+[20:03] <sanket> yeban, NATting :)
+
+[20:03] <artagnon> Just the number of purchased public IPs :)
+
+[20:03] <yeban> I can confirm that 245, and 212 have different IPs though.
+
+[20:03] <sanket> artagnon, I think ISG told us in class what range we have purchased.
+
+[20:03] <artagnon> Some crazy network configuration.  Very few people understand it (I don't myself)
+
+[20:04] <artagnon> sanket: Oh.  It'll be nice if we can find out from him.
+
+[20:04] <artagnon> The Freenode admins are asking.
+
+[20:04] <sanket> Yes. He knows a lot about Kgp lan. He is a old lad :D.
+
+[20:04] <ashim> The IPs rarely change, so i am assuming they have an enough IP to issue them uniquely.
+
+[20:05] <yeban> vickyc1: If you have to watch a HP movie now, which one would it be?
+
+[20:05] <yeban> Quick.
+
+[20:05] *** lupo33 joined
+[20:05] <sanket> Just a short intro. IP's are purchased by class, so you can buy a "range" depending on your need. Hence IIT Kgp will have a range rather than discrete IP's.
+
+[20:05] <yeban> Don't think.
+
+[20:06] <yeban> sanket: I thought IPv4 addresses where exhausted.
+
+[20:06] <sanket> They are getting used quickly. Hence the next point.
+
+[20:06] <vickyc1> yeban: HP7 part 2, by far
+
+[20:06] <yeban> But is there a good print?
+
+[20:07] <yeban> For the curious ones: we buy IPs from APNIC.
+
+[20:07] <vickyc1> not sure.
+
+[20:07] <sanket> NATting is used - you are continuously mapped to one of the public IP's by the gatewatchers. You may consider the proxy as a NAT table too.
+
+[20:07] <yeban> vickyc1: Suggest another one.
+
+[20:07] <artagnon> sanket: I know that you can purchase a separate public IP though.
+
+[20:07] <artagnon> ie. one or two.
+
+[20:07] <sanket> But then you will be purchasing it from a reseller.
+
+[20:07] * yeban doesn't know abou NATing.
+
+[20:07] <vickyc1> yeban: 3 or 4... both are equally good :)
+
+[20:08] <yeban> I will watch 4 then.
+
+[20:08] <maxking> yeban: better 3 has a bad storyline
+
+[20:08] <sanket> Similar to Domain selling business, Directi follows the model of reselling. I might throw some light sometime - why does Directi makes such fuss about largest asian domain seller :)
+
+[20:08] <artagnon> Ah.
+
+[20:08] <vickyc1> yeban: you've read the books, I hope?
+
+[20:09] <artagnon> Long day; I'm already sleep deprived from overworking yesterday.
+
+[20:09] * artagnon dozes off
+
+[20:09] <sa1> I thought that 203.* to 10.* point something was the only place where NATing was used. I have a router so 10.* to 192.* would be one too.
+
+[20:09] <yeban> I have read all the books, and watched all the movies more than once :).
+
+[20:09] <sa1> Isn't it one ip range to another?
+
+[20:10] <yeban> sanket: Maybe this Friday :).
+
+[20:10] <sanket> sa1, Your statement is mostly broken. 10.0.0.0/24 and 192.168.0.0/16 are internal ranges.
+
+[20:10] <sanket> The slash says how many bits from last are masked, you might read 0's as *'s.
+
+[20:11] <sanket> You cannot use them for external purposes, that's why LAN uses 10.0.0.0/24 scheme. Apparently if we have more than 2^24 machines this scheme shall no longer work ;-)
+
+[20:11] <sa1> sanket: Sorry about that. Yeah I know that. Isn't NAT used to convert external ranges to internal one?
+
+[20:11] <yeban> sanket: Only 192, right? Not the 10 wala.
+
+[20:11] <sanket> Yes, basically it does a mapping.
+
+[20:11] <sanket> yeban, Both are internal.
+
+[20:12] <sanket> Or I did not get your question ?
+
+[20:12] <yeban> For every network?
+
+[20:12] <sanket> Yes. It's a universal system of assigning IP's defined by I don't remember which organization.
+
+[20:12] <yeban> IANA or something like that.
+
+[20:13] <sanket> No Public IP shall have 10. as it's system.
+
+[20:13] <yeban> sanket: Ok. I knew only about 192.
+
+[20:13] <sanket> Infact it's 192.168
+
+[20:13] <sa1> yeban: afaik, 192 is for smaller ip ranges, 10 for bigger ones, since it has more addresses.
+
+[20:13] *** navgeet left
+[20:13] <sanket> sa1, You don't need to know, it's 2^16 vs 2^24, you need to infer ;)
+
+[20:14] <sa1> There's 169 too.
+
+[20:14] <yeban> That is not the point. You can't buy an ip in the 192.168.0.0/16 range.
+
+[20:14] <sanket> http://en.wikipedia.org/wiki/IP_address.
+
+[20:14] <sanket> Look at the table which lists "IANA-reserved private IPv4 network ranges"
+
+[20:15] <sanket> And yes yeban, it's IANA.
+
+[20:15] <sa1> yeban: yeah. I was talking about NAT.
+
+[20:15] <yeban> Aah.
+
+[20:15] <sanket> Apparently you have another range for private network addresses. Anyhow.
+
+[20:15] <sa1> Are 203.*.*.* addresses assigned by NAT too?
+
+[20:16] <sa1> I mean the technology, not the organization of course.
+
+[20:17] <sanket> Yes, that's what NAT does. It maps your request from the private IP to one of the Public IP's IIT hosts.
+
+[20:17] <sanket> It's how the networks are constructed, and there's a lot of theory which I cannot deal into :-).
+
+[20:17] <sa1> All right. :)
+
+[20:18] <sanket> Anyhow, some spam fest here.
+
+[20:18] <sanket> A NAT device is similar to the receptionist at an office that has one public telephone number. Outbound phone calls made from the office all appear to come from the same telephone number. However, incoming calls have to be transferred to the correct private extension by an operator asking the caller who they'd like to speak with; private extensions cannot be dialed directly from outside.
+
+[20:19] <sanket> Does that makes thing clearer, for more information you might read the source: http://en.wikipedia.org/wiki/Network_address_translation.
+
+[20:20] <sanket> Though the description is cryptic for basic understanding.
+
+[20:21] <lupo33> sanket: Do you use Debian?
+
+[20:23] <sa1> Yes, I can understand that. I know that our proxy NAT devices convert 203 public addresses to 10 private ones. Which NAT device converts some ip into 203 ones? I meant which NAT device is one ahead of the IIT proxy in the NAT hierarchy?
+
+[20:24] <sanket> sa1, It's both way protocol. NAT is not a device. It's a simple computer program.
+
+[20:24] <yeban> :)
+
+[20:25] <yeban> sanket: I filtered it. You remember that, right?
+
+[20:25] <yeban> :D
+
+[20:26] <sa1> sanket: For proper terminology, I mean the device which runs embedded linux or bsd, which has the NAT program running on it. :P
+
+[20:26] <sa1> My question still stands, though.
+
+[20:26] <sanket> No it's a computer. Maybe my not-so-sturdy but sexy looking zero figure netbook.
+
+[20:27] <sanket> sa1, I will explain it in my next meet. It's fairly simple once you get the basics right :-).
+
+[20:29] <sa1> Ok. One last try before meeting you. My router(which assigns 192.168.*.*) is one step below the IIT proxy in the hierarchy, right? What is above the IIT proxy? The ISP servers?
+
+[20:29] <sanket> Does your router provide you with 192.168 IP ?
+
+[20:29] <sanket> Just curious,
+
+[20:29] <sa1> Yes, when I enable NAT on it.
+
+[20:30] <sanket> Oh. Your own router. Right.
+
+[20:30] <sa1> Yeah
+
+[20:31] <sanket> Umm. Mmm. Yes. If I had to answer you I would say, once you transfer your request to one of the Public IP's you can basically interact with the network which is accessible by it. Which is basically the "Internet"
+
+[20:32] <sanket> IIT LAN is a network disconnected from the rest of Internet by NAT of proxy servers, your router similarly disconnects you from IIT LAN when you enable NATting in it.
+
+[20:32] <sanket> So if you send a packet from your computer( with NATting on, on your router ) to say Linus.
+
+[20:33] <lupo33> Looks like some real good funda being discussed.
+
+[20:33] * lupo33 is looking at the logs.
+
+[20:33] <sa1> sanket, let me try to explain. Point out if there are any errors.
+
+[20:33] <sanket> Ok.
+
+[20:35] <sa1> My router 192.168.1.1 routes my request to the gateway. The gateway routes it to the IIT proxy server. Where does the IIT proxy server route it to?
+
+[20:35] <sanket> "gateway" is a term I won't use.
+
+[20:36] <sanket> You can say that your router sends it to the IIT's LAN, which it has access to.
+
+[20:36] *** lupo33 left
+[20:37] <sanket> After the proxy server - it is out in the open. It will bump and bounce through infrastructure of routers over the world.
+
+[20:37] <sanket> It's all about the scope. Conceptually there's no difference between IIT LAN and what you conceive as the "Internet".
+
+[20:38] <sanket> Rest later :-).
+
+[20:38] <sa1> Ok. Yeah that was kind of what I understood before I had this conversation. Your this statement confused me: "you are continuously mapped to one of the public IP's by the gatewatchers."
+
+[20:39] <sanket> Okay, so I was talking about the NAT's protocol in a bit more detail. For time being you might delimit that.
+
+[20:39] <sanket> sa1, You can consider doing a Network's course under ISG. It's pretty basic and decent.
+
+[20:39] <sanket> Besides networks is a commodity subject, helps in general understanding of terms.
+
+[20:40] <sanket> (commodity for computer science students)
+
+[20:40] <sanket> Or infact any one interested in such mechanisms ( else I might get some stares here :P )
+
+[20:41] <sa1> Well, in hindsight, that seems like a reasonable statement in hindsight. I thought that you were claiming that there is one more layer of networks before traffic reaches the open internet.
+
+[20:41] <sa1> sorry for the double hindsight.
+
+[20:41] <sanket> No there isin't.
+
+[20:41] * sanket dozes off.
+
+[20:41] <sa1> I am not a CS student. I am in the maths department.
+
+[20:42] <sanket> artagnon is from Physics. He should be buried then :P ?
+
+[20:42] <sanket> Infact I am the only one (besides vickyc1) in CS.
+
+[20:43] *** navgeet joined
+[20:43] <sa1> Anyway, thanks :). I just meant ISG's networks class is not something that I will normally take.
+
+[20:44] <sa1> as a commodity subject. :)
+
+[20:44] <vickyc1> sanket: how do you manage being in CS _and_ contributing to open source? Acads are draining the life out of me here.
+
+[20:45] <sanket> vickyc1, It's your drive which guides you. Consider what will make of you if you continually write absurdly abstruse code for next year as assignments.
+
+[21:05] *** navgeet left
+[21:28] *** navgeet joined
+[21:30] <navgeet> Hi, is ssh-ing to [email@hidden.address] blocked here ?
+
+[21:32] <sa1> navgeet: You can push/pull to github via http. If you need to ssh to github, you need to do it on port 443, since github accepts connections on 443. Use corkscrew for that.
+
+[21:36] <navgeet> sa1: Thanks.
+
+[21:38] <sa1> navgeet: Welcome :)
+
+[21:57] *** tuxwar joined
+[21:58] *** tuxwar left
+[21:58] *** tuxwar joined
+[21:59] <ashim> 3~/who
+
+[22:01] *** tuxwar left
+[22:14] *** navgeet left
+[22:47] *** maxking left
+[22:53] *** lupo33 joined
+[23:42] *** lupo33 left
+[23:44] *** sa1 left

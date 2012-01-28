@@ -1,0 +1,1162 @@
+[00:00] *** Senya_B] left
+[00:06] *** schumaml left
+[00:09] *** ghosta left
+[00:10] *** NineX left
+[00:12] *** NineX joined
+[00:12] *** ChanServ sets mode: +v NineX
+
+[00:52] *** stevenjackson joined
+[00:52] *** ChanServ sets mode: +o stevenjackson
+
+[01:06] *** Tron_ joined
+[01:23] *** Tron left
+[01:32] *** aziz joined
+[01:33] *** aziz left
+[01:43] *** aziz joined
+[01:45] *** aziz left
+[01:45] *** aziz joined
+[01:45] *** aziz left
+[01:51] *** federicooooor joined
+[02:09] *** federicooooor left
+[02:10] *** Abel joined
+[02:12] *** Abel left
+[02:29] *** Kildor joined
+[03:03] *** Stedevil left
+[03:20] *** nairan joined
+[03:31] *** nairan_sick left
+[03:42] *** Kildor left
+[03:57] *** eee joined
+[03:57] *** eee left
+[04:16] *** ptl joined
+[05:36] *** acardenas joined
+[05:54] *** jdolan joined
+[05:54] <jdolan> lolwut?
+
+[05:55] <jdolan> why was i kicked from ufo:ai?
+
+[05:58] <stevenjackson> sorry?
+
+[05:59] <stevenjackson> jdolan: what do you mean?
+
+[06:00] <jdolan> i returned home from thanksgiving and it said "invite only"
+
+[06:05] <stevenjackson> ufo:ai isn't used anymore.  ufoai is the new channel
+
+[06:09] <jdolan> werd
+
+[06:10] <CIA-23> stevenjackson77 * r20435 /ufoai/trunk/src/client/menu/m_node_airfightmap.c: * Fixed bug where in the airfight map, if you left a map image secton horizontally then zoom went funny.
+
+[06:10] *** acardenas left
+[06:11] <stevenjackson> i think some peoples irc clients didn't like the : character
+
+[06:11] *** Bootch joined
+[06:13] *** Bootch left
+[06:21] *** gue joined
+[06:23] *** gue left
+[06:35] *** Tripmine joined
+[06:35] *** Tripmine left
+[06:53] *** virnik left
+[07:09] *** Tron_ is now known as Tron
+
+[07:31] *** KrackenO joined
+[07:31] *** ChanServ sets mode: +o KrackenO
+
+[07:32] <KrackenO> hi
+
+[07:43] *** Stedevil joined
+[08:03] *** bayo_O left
+[08:08] <Richlv> jdolan, hmm, i had hoped we could get a redirect, but whatever
+
+[08:08] <Richlv> :, according to some irc rfcs or something should not be used in channel names
+
+[08:08] <Richlv> and we had problems with several irc clients because of that
+
+[08:27] <CIA-23> kracken * r20436 /ufoai/trunk/src/client/ (cl_campaign.c cl_radar.c):
+
+[08:27] <CIA-23> * should fix bug #2350821 (radar overlay not restored after loading)
+
+[08:27] <CIA-23> * BREAKS SAVEGAME. If you want to keep your savegames, follow instructions
+
+[08:27] <CIA-23> below* first part of the commit: saving part. If you want to keep your current
+
+[08:27] <CIA-23> savegame, update your checkout to this revision, load your game and save it.
+
+[08:27] <CIA-23> Then update your checkout to next revision.
+
+[08:27] <CIA-23> * Second part will follow soon
+
+[08:28] <CIA-23> kracken * r20437 /ufoai/trunk/src/client/cl_campaign.c:
+
+[08:28] <CIA-23> * should fix bug #2350821 (radar overlay not restored after loading)
+
+[08:28] <CIA-23> * second part: loading part. See previous commit log for details.
+
+[08:30] <Richlv> KrackenO, first commit probably missed a linebreak :)
+
+[08:30] <Richlv> thanks for the fix
+
+[08:30] <Richlv> darn. i could flame some more about a changed savegame format
+
+[08:30] <KrackenO> you're welcome
+
+[08:31] <Richlv> no matter all the problems with xml
+
+[08:31] <Richlv> problems it would solve would be huge
+
+[08:31] <KrackenO> why?
+
+[08:32] <KrackenO> this problem was not due to same/load
+
+[08:32] <KrackenO> it's only that I forgot to add a parameter to save/load code yesterday
+
+[08:33] <KrackenO> the bug was due to the fact that radar overlay was disabled on each loading game, after the value of your radar overlay setting has been set
+
+[08:33] <tchristney> binary file formats are generally inflexible, imo
+
+[08:34] <tchristney> change the width of an integer type and the file breaks
+
+[08:35] <tchristney> unless you have a detailed strategy to mediate this, of course (which is hard, so it is rarely done in practice)
+
+[08:36] <tchristney> using something like xml can allow you to more loosely couple values to types, and can allow relatively easy tranformations between file format versions
+
+[08:38] <tchristney> and there are loads of excellent xml parsers/serializers out there
+
+[08:39] *** bayo_O joined
+[08:39] <tchristney> binary file formats are easier to read into C data structures though
+
+[08:41] <tchristney> especially if the supported platforms share features like endianess and alignment
+
+[08:41] * tchristney returns to lurk mode
+
+[09:01] *** NineX left
+[09:06] *** tchristney left
+[09:09] *** NineX joined
+[09:09] *** ChanServ sets mode: +v NineX
+
+[09:25] *** Stedevil left
+[09:32] *** bayo_O left
+[09:42] *** Kildor joined
+[10:04] <Richlv> KrackenO, oh, i didn't mean this particular issue
+
+[10:04] <Richlv> i meant savegame breakage in general
+
+[10:04] *** Xedge joined
+[10:04] <Richlv> forward compatible savegames would be huge help for testing/fixing problems
+
+[10:05] <Richlv> and with xml it should be easy to add, change etc information contained in the save
+
+[10:12] <Tron> no, it does not help one bit. You just need different fixup code
+
+[10:12] <Tron> (hint: ufoai does not include any code to load older savegames)
+
+[10:14] <Kildor> I guess ufoai`s saves doesn`t include any version information
+
+[10:16] *** geever joined
+[10:16] <geever> hi
+
+[10:20] <Senee> hi
+
+[10:22] *** Stedevil joined
+[10:22] <Kildor> hello
+
+[10:24] <Richlv> Tron, wouldn't it help in cases when new information is added ? then a new tag could be added, but when loading, that tag missing would just use defaults
+
+[10:24] <Richlv> so no special case handling would be required
+
+[10:24] <Richlv> currently anything can break saves
+
+[10:24] <Tron> how is using a default value not a special case?
+
+[10:25] <Tron> For adding information you just need a version counter in the savegame
+
+[10:25] <Tron> If version >= $SOMETHING then load_data else use_default
+
+[10:25] <Tron> I do not see the benefit of if xml_stuff_there then load_xml else use_default
+
+[10:26] <Richlv> well, i might have misunderstood how this is implemented currently. i just noticed that, sometimes, loading old saves would try to use some data with incorrect offset
+
+[10:26] <Tron> currently there is /no/ code to compensate for older savegame versions
+
+[10:26] <Richlv> something like ircraft_thunderbird is not correct value nstuff
+
+[10:27] *** Stedevil left
+[10:27] <geever> Richlv, you've started a forbidden topic (xml saves). :)
+
+[10:28] <Kildor> current saves doesn`t contain any unformation about keys, only values, does it?
+
+[10:28] *** Stedevil joined
+[10:29] *** bayo_O joined
+[10:29] <bayo_O> hi
+
+[10:29] <Kildor> may be there should be something like "key-value" information, and load functions just use load_value("key", default value)?
+
+[10:31] *** stevenjackson77 joined
+[10:31] *** ChanServ sets mode: +o stevenjackson77
+
+[10:33] *** CIA-23 left
+[10:35] *** stevenjackson left
+[10:38] <Richlv> Kildor, that would help as well, yes
+
+[10:39] <Richlv> geever, to be fair, i don't care about format
+
+[10:39] <Richlv> what i want is a relatively easy way for forward compatibility and at least somewhat human readable format
+
+[10:42] <Kildor> and this is easyer than XML, don`t need to any new dependies, and providing compactibility
+
+[10:43] <bayo_O> what are you talking about?
+
+[10:43] *** CIA-21 joined
+[10:44] <Kildor> save compactibility
+
+[10:45] <Kildor> any save-related changes breaks saves as well. And sometimes it is quite annoying :-)
+
+[10:47] <bayo_O> anything allowing extendable slot can be used maybe
+
+[10:49] <Kildor> current problem is because saves doesn`t contain any value about keynames, and values are identified only in LOAD functions.
+
+[10:50] <Kildor> So if they order has been changed, save breaks.
+
+[11:01] <bayo_O> Kildor : you talk about keyboard bind?
+
+[11:03] <Kildor> no, I`m talking about i.e. revisions 20436+20437, and so on
+
+[11:04] <bayo_O> what is a keyname?
+
+[11:04] <bayo_O> hooo ok, its the main element of your save format?
+
+[11:05] <Kildor> yes. there all settings are saving as value velue1 value2, not key value key1 value1 …
+
+[11:17] <CIA-21> bayo-fr * r20438 /ufoai/trunk/src/client/menu/m_node_textentry.c: * implement textentry
+
+[11:20] <CIA-21> bayo-fr * r20439 /ufoai/trunk/src/client/menu/m_main.c: * implement textentry bis
+
+[11:35] <bayo_O> do you think something like va("%s|", va("aaaaa")) can work?
+
+[11:36] <bayo_O> i just want to know if i can reuse the va buffer to add something at the end?
+
+[11:38] <bayo_O> its maybe the same as sprintf(buf, "%s|", buf)
+
+[11:44] <Richlv> brr
+
+[11:45] <Richlv> upon startup, mem_stats reports total of 73 mb
+
+[11:45] <Richlv> pmap says 600 mb
+
+[11:45] <Richlv> of which :
+
+[11:45] <Richlv> 0818c000 231696K rw---    [ anon ]
+
+[11:45] <Richlv> using nvidia card with nvidia driver (though the box also has onboard intel adapter, that one is not used)
+
+[11:46] <Richlv> what the hell is 200 megs of anon ?
+
+[11:47] <geever> BTAxis, ping()
+
+[11:49] <Tron> [12:38:49] <bayo_O> its maybe the same as sprintf(buf, "%s|", buf) <--- this results in undefined behaviour
+
+[11:59] <bayo_O> :D yes, it can be little strange
+
+[12:00] <bayo_O> another little question internal UFOAI text are UTF8 ?
+
+[12:01] <bayo_O> is the game provide common function to edit UTF8 ?
+
+[12:01] <BTAxis> geever?
+
+[12:02] <geever> BTAxis, I wanted to ask about base defences:
+
+[12:02] <geever> Now building up takes 1 day and equiping 2 days which is bad imo.
+
+[12:03] <BTAxis> Yeah, that's a little strange.
+
+[12:03] <BTAxis> Building up should take several days, equipping only 1 day or so.
+
+[12:03] <geever> Could we change that so building takes 2 or 3 days and equiping 6-12 hours? would be more realistic.
+
+[12:05] <BTAxis> It should take a significant while to equip, though, enough time for any UFO in range to fly out of range. Otherwise equipping time is useless.
+
+[12:06] <geever> well, base defence range is quite small, don't know how much time a ufo flys over...
+
+[12:06] <BTAxis> All that is subject to tweaking anyway.
+
+[12:08] <nairan> theres a new warning with last rev. : cl_campaign line 668 : CP_MissionStageToName desclared static but never defined.
+
+[12:08] <nairan> *declared
+
+[12:09] <CIA-21> bayo-fr * r20440 /ufoai/trunk/src/client/menu/ (m_node_textentry.c m_node_textentry.h m_nodes.h): * some textentry custom
+
+[12:09] *** BTAxis sets mode: +v CIA-21
+
+[12:10] <bayo_O> a voice chat !
+
+[12:11] <nairan> ?
+
+[12:16] <geever> so BTAxis can we agree in new numbers for base defences/sam sites ?
+
+[12:16] <geever> (Players like these small tweakings :) )
+
+[12:17] <bayo_O> nairan : i have nothing, this function is used
+
+[12:19] <BTAxis> geever: Go with 3 days/12 hours for now.
+
+[12:19] <geever> ok.
+
+[12:20] <bayo_O> nairan you can see the prototype on the same file at line 668
+
+[12:26] <geever> KrackenO, ping()
+
+[12:26] <Richlv> not implemented
+
+[12:31] <CIA-21> richlv * r20441 /ufoai/trunk/src/client/cl_sound.c: * document snd_play a bit better
+
+[12:33] <geever> BTAxis, (KrackenO) Two harvesters were dancing around my (unequipped) sam site for 15 hours before it got destroyed - this should also be tweaked.
+
+[12:33] <geever> and it seems they always find the installations on their way
+
+[12:34] <geever> some probability should be introduced here too
+
+[12:40] <BTAxis> Do you know what their missions were?
+
+[12:40] <BTAxis> Is there even a way to check that?
+
+[12:42] <geever> debug_listmissions? But I missed.
+
+[12:42] *** bayo_O left
+[12:42] *** bayo_O joined
+[12:42] <geever> Even 1 ufo was attacking after the installation got destroyed for a while
+
+[12:42] *** stevenjackson77 left
+[12:43] <geever> Maybe I'm wrong... It's possible that a ufo didn't attack for 15 hours but new and new ones came (got detected), not sure...
+
+[12:51] *** Xedge left
+[12:52] *** Xedge joined
+[12:53] <geever> Xedge, did you see this? http://ufoai.ninex.info/forum/index.php?topic=3121.msg21360#msg21360
+
+[12:55] <Xedge> geever: no, but i know i removed all 2.2.1 packages because i want to create new ones ... but the time is not my friend :(
+
+[13:10] <Richlv> MN_ParseNodeBody: height value (15) of node 'mailclient' (menu: ufopedia_mail) differs from size (550) and format (38) values
+
+[13:10] <Richlv> geever, bayo_O ^
+
+[13:10] <Richlv> that's when opening mailclient in a new game
+
+[13:10] <Richlv> also, INV_ItemsSanityCheck: Item vhs has zero size set.
+
+[13:10] <Richlv> BTAxis, what's vhs here ?
+
+[13:11] <geever> Richlv, The first should be my fault, but didn't warn me...
+
+[13:11] <geever> vhs is an MP only assault gun
+
+[13:12] <Richlv> ah, yes, saw messages about that
+
+[13:13] *** bayo_O left
+[13:13] <Richlv> geever, should i report the node issue or are you looking at it already ?
+
+[13:13] <geever> I'm looking at it. btw I should figure out this format stuff
+
+[13:17] *** bayo_O joined
+[13:18] <bayo_O> re
+
+[13:18] <bayo_O> Richlv : i cant help a lot, i dont yet understand what is format
+
+[13:19] <Richlv> brr, ufopedia is quite a mess technically
+
+[13:20] <geever> Ok, I cannot fix it. :(
+
+[13:21] <geever> bayo_O, it's really for you.
+
+[13:21] <geever> The problem was scrollbar was longer than needed
+
+[13:21] <geever> i've reduced the size so it was ok
+
+[13:21] <bayo_O> hooo ok, its a code problem, not a script one?
+
+[13:21] <Richlv> ok, i'm not reporting ufopedia bugs anymore. there are too many
+
+[13:22] <geever> now height * format != size :(
+
+[13:22] <bayo_O> :D
+
+[13:22] <Richlv> geever, actually, it would be nice to move it a bit up and leave the same height
+
+[13:22] <bayo_O> anyway height is not a good number maybe, its better to provide lineheight
+
+[13:23] <geever> also there is an empty line in the end of mail list...
+
+[13:23] <bayo_O> num of element = nodeheight (size) / lineheight
+
+[13:23] <geever> format specifies it
+
+[13:25] <geever> but format is in reverse order y,x, which is bad imo
+
+[13:26] *** Vyraeth joined
+[13:26] <bayo_O> i add that here http://ufoai.ninex.info/wiki/index.php?title=TODO/Menu_branch&diff=19255&oldid=19246
+
+[13:27] <bayo_O> but iv got a lot of work before; and the text node fear me :)
+
+[13:29] *** ___al joined
+[13:31] *** ___al left
+[13:31] <bayo_O> more than 100 use of "format" on scripts
+
+[13:33] <bayo_O> well, so with format we can autocompute height no?
+
+[13:34] *** alangelov joined
+[13:34] *** alangelov left
+[13:34] *** ___al joined
+[13:50] <Richlv> hey, windows users - is a separate gtk installation required for build at http://gimp-win.sourceforge.net/stable.html or not ?
+
+[13:51] <BTAxis> I don't think so. I think it's included with the GIMP installer.
+
+[13:51] <BTAxis> It's been a long time since I installed it, though.
+
+[13:51] <BTAxis> Kildor will probably know.
+
+[13:51] <Xedge> Richlv: yes it should be included in the installer
+
+[13:52] *** bayo__O joined
+[13:55] *** Vyraeth left
+[13:56] *** bayo_O left
+[13:56] *** bayo__O left
+[13:56] *** bayo_O joined
+[13:57] <Richlv> ok, thanks
+
+[14:04] <geever> gotta go, bye
+
+[14:05] <bayo_O> by
+
+[14:06] *** geever left
+[14:12] <CIA-21> bayo-fr * r20442 /ufoai/trunk/src/client/menu/m_main.c: * to check memory menu structure
+
+[14:13] *** Xedge left
+[14:22] *** mattn2|home joined
+[14:22] *** ChanServ sets mode: +o mattn2|home
+
+[14:31] <mattn2|home> hi
+
+[14:31] <nairan> hi matt
+
+[14:31] <CIA-21> tlh2000 * r20443 /ufoai/trunk/src/client/menu/m_main.c:
+
+[14:31] <CIA-21> * fixed warnings for 64bit
+
+[14:31] <CIA-21> * static
+
+[14:33] *** Edheldil joined
+[14:33] <CIA-21> tlh2000 * r20444 /ufoai/trunk/src/client/menu/m_main.c:
+
+[14:33] <CIA-21> * renamed memory info command from mn_memory into debug_mnmemory to fit the naming schema
+
+[14:33] <CIA-21> * only activate this command in debug mode
+
+[14:42] * Kildor is here
+
+[14:43] <Richlv> mattn2|home, what about improving command description for the console - can/should we use multiline descriptions or should we stick to single line always ?
+
+[14:43] <Kildor> Richlv: gimp-stable includes GTK+
+
+[14:44] <mattn2|home> Richlv: try to stick to single line where possible - but if you really need it... use multilines
+
+[14:50] <mattn2|home> bayo_O: is there any example for the textentry node?
+
+[14:50] <mattn2|home> is it working already?
+
+[14:50] *** bayo_O left
+[14:50] <KrackenO> BTAxis: the 15 hour attack of geever is what I implemented
+
+[14:51] <KrackenO> (between 1 day and 2 days)
+
+[14:51] <BTAxis> Okay.
+
+[14:51] <KrackenO> would you prefer a smaller delay?
+
+[14:51] <BTAxis> I was more concerned that he had TWO harvesters attacking the same target.
+
+[14:52] <KrackenO> it shouldn't happen?
+
+[14:52] <BTAxis> It should be possible (if the same mission was spawned twice by sheer coincidence), but it's not very likely.
+
+[14:52] <___al> hey guys - just to make my manifesto public - UFO: AI rules!!! :)
+
+[14:53] <BTAxis> Hey, WE know.
+
+[14:53] <BTAxis> Go tell people who don't know yet.
+
+[14:53] <mattn2|home> hehe
+
+[14:53] <KrackenO> BTAxis: the fact that there are 2 harvester is due to 2 spawned missions
+
+[14:53] <BTAxis> Okay, then there's not much to worry about I suppose.
+
+[14:54] <BTAxis> I don't think there's a need to add code to prevent that unless it's a common occurrence.
+
+[14:54] <KrackenO> basically, if the alien interest category is important in intercepting, and you have only 1 installation, the probability to get 2 attacks on the same target is not that small currently
+
+[14:54] <BTAxis> Yeah.
+
+[14:54] <BTAxis> But players are going to want tp place a lot of them.
+
+[14:54] <___al> btw, (sorry to interrupt your chit-chat) i've started a bulgarian translation for your proj: 82% complete (most of the ufopedia and descs/mails)
+
+[14:55] <BTAxis> ___al, then you should upload it on the wiki.
+
+[14:55] <mattn2|home> ___al: and send the po file to us of course ;)
+
+[14:55] <KrackenO> BTAxis: ok, we'll wait some time then and see if this need to be changed later then
+
+[14:56] <BTAxis> Agreed.
+
+[14:56] <___al> sure thing as soon as I get it all spell checked and so on
+
+[14:56] <mattn2|home> but make sure to also put everything into the wiki (as BTAxis said) otherwise it will get lost on the next mass update (we are syncing translations from wiki into po from time to time)
+
+[14:56] <___al> ok
+
+[14:56] <BTAxis> You know the procedure, ___al?
+
+[14:56] <mattn2|home> ___al: if you have question how to deal with it, just ask
+
+[14:57] <BTAxis> Updating the list of msgids, etc.
+
+[14:57] <___al> mattn2: ok and i will read about exact procedure when done
+
+[15:05] <Kildor> ___al: FYI: http://ufoai.ninex.info/wiki/index.php/Translating
+
+[15:11] *** ___al left
+[15:17] <KrackenO> BTAxis: thinking back about the maximum speed code you mentionned
+
+[15:18] <KrackenO> what is the condition for a UFO to flee?
+
+[15:18] <BTAxis> Like I said, that's a whole different story, because it depends on a number of things.
+
+[15:18] <BTAxis> Like the type of the UFO, its mission and how badly damaged it is.
+
+[15:19] <KrackenO> what about UFO that don't fight?
+
+[15:19] <KrackenO> do they flee as soon as a Phalanx interceptor arrives?
+
+[15:20] <BTAxis> All UFOs fight back to some degree, just as all PHALANX craft can fight.
+
+[15:20] <BTAxis> But of course, supply UFOs will not be heavily armed.
+
+[15:20] <KrackenO> so in the end, every UFO is going to have weapon?
+
+[15:20] <BTAxis> They will have escorts, though.
+
+[15:20] <BTAxis> Yes.
+
+[15:20] <KrackenO> oh yes, right
+
+[15:21] <KrackenO> i'm still thinking of one single UFO, but there will be formations of UFO
+
+[15:21] <BTAxis> Speaking of UFO formations, the formation should always travel with the speed given for the main UFO.
+
+[15:22] <BTAxis> Escorts shouldn't slow it down.
+
+[15:22] <KrackenO> I guess in most cases, it will be the slower UFO anyway, no?
+
+[15:22] <BTAxis> Not really. UFOs tend to get faster as they get bigger.
+
+[15:22] <KrackenO> oh
+
+[15:22] <KrackenO> ok
+
+[15:23] <KrackenO> and how do you think we should see it on geoscape?
+
+[15:23] <KrackenO> only the main ufo, no?
+
+[15:23] <KrackenO> otherwise it's going to be very croweded
+
+[15:23] <BTAxis> Yes.
+
+[15:23] <BTAxis> Only the main UFO.
+
+[15:23] <BTAxis> But escorts should show up in combat zoom, of course.
+
+[15:23] <KrackenO> great :)
+
+[15:23] <KrackenO> sure
+
+[15:25] <KrackenO> basically, we will see one model for UFO formation, one for phalanx formation (or several if player uses several formation coming from different part of the globe), and when all those formation reachs at the same point on geoscape, you can enter combat zoom
+
+[15:25] <KrackenO> right?
+
+[15:25] <BTAxis> Yes, though combat should commence once the first PHALANX formation meets the UFO formation (assuming they don't reach the UFo simultaneously).
+
+[15:26] <BTAxis> Though the player can have the formation stand off to wait fot the other(s).
+
+[15:26] <BTAxis> for, even.
+
+[15:26] <KrackenO> ok. so basically, max speed is going to have really small impact on geoscape, right?
+
+[15:27] <KrackenO> only after a fight, UFO (or phalanx) that tries to flee will use it's max speed for some time (until it flied far enough)
+
+[15:27] <BTAxis> Exactly.
+
+[15:28] <KrackenO> but it shouldn't use it's max speed before the fight actually started
+
+[15:28] <BTAxis> Of course the pursuing interceptor would also be on max speed, but it should drop out sooner than the fleeing UFO.
+
+[15:28] <KrackenO> yes
+
+[15:29] <KrackenO> and during the airfight battle, you're going to see both ufo and phalanx formation flying at the same speed (if you're looking at geoscape and not airfight zoom) until one of the 2 formation breaks fight
+
+[15:29] <BTAxis> That's right.
+
+[15:30] <KrackenO> ok, good :)
+
+[15:30] <KrackenO> all the old zoom code should be remove from geoscape, then
+
+[15:31] <BTAxis> Well, the normal manual zoom should stay.
+
+[15:31] <KrackenO> sure
+
+[15:31] <BTAxis> But the combat zoom stuff, yeah.
+
+[16:47] *** Edheldil left
+[17:08] <CIA-21> kracken * r20445 /ufoai/trunk/src/client/ (8 files):
+
+[17:08] <CIA-21> * implemented alien interest for installation: they're going to be more interested in old installations and installations firing at UFOs.
+
+[17:08] <CIA-21> * detectioninterval => DETECTION_INTERVAL
+
+[17:08] <CIA-21> * check stealth of alien bases, phalanx bases and installation every 30 minutes, in order to make detection independant of time scale.
+
+[17:16] <Richlv> KrackenO, btw, have you seen my two reports about weird geoscape problems ?
+
+[17:18] <KrackenO> no
+
+[17:18] <KrackenO> on bug tracker?
+
+[17:18] <KrackenO> you add too many bug reports ;)
+
+[17:19] <KrackenO> invisible UFO after loading game?
+
+[17:20] <Richlv> incorrect pathline, invisible ufo and dropship starting not from the base
+
+[17:21] <KrackenO> mmm... I see you posted savegame, they're going to be broken :(
+
+[17:23] <KrackenO> how did you know there was an invisible UFO if it was invisible?
+
+[17:23] <Richlv> 1. it was there when i saved :)
+
+[17:24] <Richlv> 2. interceptor engages it and either runs out of ammo or shoots it down
+
+[17:29] <KrackenO> Richlv: concerning https://sourceforge.net/tracker2/?func=detail&aid=1999113&group_id=157793&atid=805242
+
+[17:29] <KrackenO> this was intended
+
+[17:30] <KrackenO> if mission spawned by ufo crash is within radar range, I made radar stay active
+
+[17:30] <KrackenO> you think it should be disable?
+
+[17:31] <Richlv> opening it
+
+[17:35] *** Kildor left
+[17:37] <Richlv> KrackenO, hmm. i feel that radar range should be shown for flying ufos
+
+[17:38] <Richlv> why would it stay enabled for the mission ? is there some reason for that ?
+
+[17:38] <Richlv> those missions are always visible, right ?
+
+[17:38] <KrackenO> not necessarily. Some mission are visible only if they are inside radar range
+
+[17:39] <BTAxis> He means visible regardless of the radar overlay.
+
+[17:39] <Richlv> i think radar range _could_ be enabled when a mission is discovered
+
+[17:39] <Richlv> but i'm, not sure about that
+
+[17:39] <KrackenO> yes, that's what I meant too
+
+[17:40] <KrackenO> for example, ground recon mission can be seen only if ufo lands inside radar coverage
+
+[17:40] <KrackenO> otherwise, you just don't know there is a mission, because you don't see it
+
+[17:40] <Richlv> yeah, well. i feel that radar range should be shown only for ufos,m though
+
+[17:41] <Richlv> the reasoning being it moves :)
+
+[17:41] <KrackenO> furthermore, most mission last a short time (expept alien crash)
+
+[17:42] <KrackenO> so I thought it would be better to have radar always turned on, rather than
+
+[17:42] <KrackenO> see UFO come, lands
+
+[17:42] <KrackenO> disable radar while mission is on earth
+
+[17:42] <KrackenO> then switch it on when UFO takes odd
+
+[17:42] <KrackenO> s/odd/off
+
+[17:44] <KrackenO> and it sounds more logical to me to let it turned on for mission that needs the radar to be seen
+
+[17:46] <KrackenO> your reasoning makes sense too
+
+[17:57] *** Kildor joined
+[17:59] <Kildor> KrackenO: what`s about harvesting mission? need they be into radar range to as seened?
+
+[18:00] <KrackenO> yes
+
+[18:01] <KrackenO> only terror mission are always detected
+
+[18:01] <KrackenO> and crash site mission
+
+[18:02] <Kildor> strange…Why UN doesn`t alert about that missions? they should not be quite hidden, especially if they become to urban regions
+
+[18:05] <KrackenO> well, I don't know what is exactly a harvesting mission. Is it really in a dense population zone? Do aliens let people live long enough to alert other people? ;)
+
+[18:05] <KrackenO> BTAxis, should harvesting mission be always visible?
+
+[18:06] <Kildor> at least they shoud become visible after some time.
+
+[18:08] *** RudolfoWood joined
+[18:08] <BTAxis> No.
+
+[18:09] <RudolfoWood> hiho
+
+[18:09] <BTAxis> We don't model disrtess calls from non-PHALANX operations.
+
+[18:09] <BTAxis> Distress, even.
+
+[18:12] <Kildor> so, terrorrs doesn`t alerted too?
+
+[18:12] <Kildor> isn`t*
+
+[18:13] <BTAxis> The only reason why terror missions show up immediately is because it's a game mechanic that's supposed to work that way.
+
+[18:13] <BTAxis> It has NOTHING to do with modeling reality.
+
+[18:15] <Kildor> sorry, I don`t understand this.
+
+[18:16] <Richlv> Kildor, it is that way because it makes sense from gameplay point of view :)
+
+[18:17] <Kildor> but what`s difference between STAGE_TERROR_MISSION and STAGE_HARVEST?
+
+[18:19] <BTAxis> A terror mission is an attack on a population center intended to cause panic. Show of force, lots of casualties, etc. Essentially the aliens are purposefully trying to draw PHALANX' attention. Harvest missions are meant to harvest human DNA.
+
+[18:19] <BTAxis> So basically, the objective is different, and so is the sort of weaponry taken to the missions.
+
+[18:19] <KrackenO> in current code, they differ in the UFO used, aliens encountered, and weapon used during mission
+
+[18:20] <BTAxis> What he said.
+
+[18:20] <BTAxis> We could also make terror missions impact nation happiness slightly more heavily, but I don't want to deal with that now.
+
+[18:20] <Kildor> and peoples doesn`t panic? Or it isn`t messaged about to PHALANX?
+
+[18:21] <BTAxis> See, now you're modeling reality again.
+
+[18:21] <BTAxis> I don't CARE what real people would do. I'm just designing a game system.
+
+[18:22] *** yann_ left
+[18:23] <Kildor> yes. But game system should have something common with reality. And it need to have those.
+
+[18:23] <BTAxis> The game models reality, but only up to a point.
+
+[18:23] <BTAxis> And what you're suggesting lies beyond that point.
+
+[18:25] <Kildor> why? how is your point described? What`s difference between harvest and terror, exept "We want"?
+
+[18:26] <BTAxis> I don't think I need any other reason than that I want it to behave that way.
+
+[18:29] <Kildor> In my opinion the appearancing crashing UFO outside radar range is more irrelevant than hiding harvest missions.
+
+[18:29] <BTAxis> Now I just don't know what you're talking about.
+
+[18:30] <Kildor> sometimes in the earth I get crashed UFOs, which I doesn`t intersept, and they placed outside radar. Am I right?
+
+[18:31] <KrackenO> oh, this is a bug then
+
+[18:31] <BTAxis> Seriously, crashed UFOs should only appear when you shoot them down.
+
+[18:31] <KrackenO> you should only have crashed UFO for UFO that you destroyed
+
+[18:31] <Kildor> KrackenO: thanks :-D This is answer too.
+
+[18:31] <Kildor> I`m agree that it is bug.
+
+[18:32] <KrackenO> are you sure they are crashed?
+
+[18:33] <Kildor> even landed, this should not be terror (because terror with scout is fullish and real bug in logic). So, what type of mission is it?
+
+[18:34] <BTAxis> Terror missions SHOULD be the only ones that appear outside radar range (excepting alien bases and the Carrier mission).
+
+[18:36] <Kildor> I`m not agree about harvest missions. And "it is not a real life" is not an argument.
+
+[18:36] <BTAxis> On the contrary, "it would be like this in real life" is not an argument.
+
+[18:37] <KrackenO> Kildor: you should use 'debug_listmission' to know what kind of mission this is
+
+[18:38] <Kildor> this is more logical. And why you use that argument? "miniguns will not be in game, they are not in reallife". But "harvest mission will not be appeared, this is not a real life"?
+
+[18:38] <BTAxis> I told you.
+
+[18:38] <BTAxis> Modeling of realism up to a point.
+
+[18:38] <BTAxis> We don't model birds taking a carp on your car.
+
+[18:39] <BTAxis> We do model gravity.
+
+[18:39] <BTAxis> We don't model citicens phoning in to report aliens.
+
+[18:39] <BTAxis> We do model terrorist tactics by the aliens.
+
+[18:40] <Kildor> KrackenO: Yes, now I know about it. But currently I haven`t any saves with this situations. I had one, but it was 2 or 4 savebreaks ago.
+
+[18:40] <Kildor> not citisens but UN|Nations forces.
+
+[18:41] <BTAxis> We don't model them either.
+
+[18:41] <Kildor> BTAxis: I understand your argument, but don`t understand they sence.
+
+[18:41] <BTAxis> Doing so would only make the game more tedious.
+
+[18:41] <BTAxis> No, it's just that we made some design decisions that you would not have made.
+
+[18:42] <BTAxis> And there's nothing wrong with that.
+
+[18:42] <Kildor> does falanx have telepats who alerts about terrors?
+
+[18:42] <BTAxis> I can only repeat myself.
+
+[18:42] <BTAxis> It's a gameplay mechanic.
+
+[18:43] <BTAxis> The reasoning isn't "this happens in real life so this is what happens in the game".
+
+[18:43] <Kildor> or there are some "phoning siticens"?
+
+[18:43] <BTAxis> You can think of an explanation if you like.
+
+[18:43] <BTAxis> ALl that matters to me is that it's a good gameplay element.
+
+[18:43] <Kildor> Ok. LEt`s name this as  "underground clatters".
+
+[18:45] <Kildor> it is not good element, it is unbalanced and unfinished thing.
+
+[18:46] <BTAxis> Well, there we disagree.
+
+[18:47] <Kildor> Yes. I prefer to be a logically correct as it possible. You are not. That`s all…
+
+[18:47] <BTAxis> *shrug*
+
+[18:49] <Kildor> but this is not advantage for game design.
+
+[18:50] <BTAxis> I say it is.
+
+[18:50] <Kildor> anyway, it`s your game… And I need to sleep some time…
+
+[18:51] <Kildor> CU
+
+[18:51] <BTAxis> Bye.
+
+[18:51] *** Kildor left
+[18:53] *** tchristney joined
+[19:02] *** dodo joined
+[19:12] <CIA-21> kracken * r20446 /ufoai/trunk/src/client/ (cl_aircraft.c cl_basemanagement.c):
+
+[19:12] <CIA-21> * fixed assert hit when using debug_listaircraft
+
+[19:12] <CIA-21> * added some test to check that UFO don't disappear while save/load
+
+[19:17] *** dodo left
+[19:20] *** schumaml joined
+[19:28] <KrackenO> Richlv: sorry, I didn't finf the problem with the invisible UFO. I commented out the bug report with what I found, but for some reason there is no more UFO in your savegame
+
+[19:28] <KrackenO> and I have no idea why
+
+[19:28] <KrackenO> :(
+
+[19:31] *** KrackenO left
+[19:31] <CIA-21> RudolfoWood * r20447 /ufoai/trunk/src/client/cl_produce.c:
+
+[19:31] <CIA-21> * update selected line if this item is displayed
+
+[19:31] <CIA-21> * should fix https://sourceforge.net/tracker/index.php?func=detail&aid=2351054&group_id=157793&atid=805242
+
+[19:31] <CIA-21> * see my comment there about long-term fix (TODO)
+
+[19:42] *** Senya_B] joined
+[20:16] *** Senya_B] left
+[20:16] *** Senya_B] joined
+[20:22] *** ghosta joined
+[20:22] <ghosta> mooooooooooooin
+
+[20:23] *** Grigio joined
+[20:24] *** Grigio left
+[20:28] *** Dunc joined
+[20:31] *** first joined
+[20:31] *** first left
+[20:35] *** Dunc left
+[21:05] *** keen101 joined
+[21:07] <RudolfoWood> I'm off for today, good night
+
+[21:07] *** RudolfoWood left
+[21:10] *** keen101 left
+[21:11] *** keen101 joined
+[21:12] *** stevenjackson joined
+[21:12] *** ChanServ sets mode: +o stevenjackson
+
+[21:13] *** keen101 left
+[21:13] *** keen101 joined
+[21:14] *** tobill joined
+[21:16] <tobill> hi
+
+[21:17] <Senya_B]> hi hi
+
+[21:17] <keen101> anyone wanna play a quick game?
+
+[21:17] <tobill> i get this error http://pastebin.com/d2e2ab95a when i try to start ufoaii i am on ubuntu interprid and using nvidia driver
+
+[21:18] <CIA-21> tlh2000 * r20448 /ufoai/trunk/src/client/ (cl_basemanagement.c menu/m_node_textentry.c):
+
+[21:18] <CIA-21> * fixed compilation
+
+[21:18] <CIA-21> * fixed doxygen
+
+[21:18] <CIA-21> * cleanup
+
+[21:19] <keen101> tobill,  i think those errors mean that there is something not configured right in your xorg.conf file.  But, i'm not sure.
+
+[21:20] <CIA-21> tlh2000 * r20449 /ufoai/trunk/src/client/cl_campaign.c: * fixed warning in release mode
+
+[21:20] <mattn2|home> keen101: looks like you don't have installed hardware acceleration
+
+[21:20] <mattn2|home> did you use the close-source drivers? or the open source ones?
+
+[21:20] <mattn2|home> glxinfo | grep direct
+
+[21:20] <mattn2|home> should print yes to the console
+
+[21:20] <keen101> i.m not the one who pasted errors.
+
+[21:21] <keen101> my ufoai works fine.
+
+[21:21] <mattn2|home> oh hehe - sorry i meant tobill
+
+[21:21] <tobill> close source
+
+[21:21] <mattn2|home> try that glx info stuff
+
+[21:22] <mattn2|home> what is your color depth? 32bit (24)?
+
+[21:22] <mattn2|home> oh i see - 16 bit- try to set it to 32bit
+
+[21:23] <mattn2|home> also something looks weird with your ~/.ufoai/<version>/config.cfg
+
+[21:23] <mattn2|home> try to remove it
+
+[21:23] <mattn2|home> going to bed now - cu later guys
+
+[21:28] <bobbens> night mattn2|home
+
+[21:32] <keen101> tobill, maybe you could try the open source graphics driver, and see if the game works then too. Im also on ubuntu ibex and ufoai works fine on my system with open source drivers. I have to use the closed source drivers if i want to play glest though.
+
+[21:34] <Richlv> keen101, erm, 3d acceleration with opensource drivers for nvidia cards ?
+
+[21:36] <tobill> cool setting color deep to 24 solved my problem
+
+[21:36] *** ggraz joined
+[21:38] *** tobill left
+[21:41] <keen101> Richlv, does ufoai use 3d acceleration?
+
+[21:42] <bobbens> keen101: yes
+
+[21:42] <bobbens> keen101: you can play ufo:ai with the radeon open source drivers
+
+[21:43] <keen101> hmm... well i have an ati card. and it works with the open source driver (at least on ubuntu 8.10)
+
+[21:43] <bobbens> nvidia open source drivers are much worse though
+
+[21:44] <bobbens> and it probably won't work
+
+[21:44] <keen101> ah. i see.
+
+[21:46] *** keen101 left
+[21:48] *** yann_ joined
+[21:50] <Richlv> kthxbye
+
+[21:50] <ghosta> bye
+
+[21:50] <Richlv> well, i was making a joke, at least trying :)
+
+[21:52] *** Zenerka left
+[21:53] *** Zenerka joined
+[21:53] *** ChanServ sets mode: +o Zenerka
+
+[21:53] *** yann_ left
+[21:53] *** yann_ joined
+[21:55] <ghosta> hm oh
+
+[21:55] <ghosta> I should read the stuff above before I respond :)
+
+[21:59] *** Senya_B] left
+[21:59] *** Senya_B] joined
+[22:03] *** ghosta left
+[22:07] *** ghosta joined
+[22:18] *** C14TGH joined
+[22:21] <C14TGH> question concerning the sourceforge project... will the project still continue? cause the UFO X-Com series can be bought via steam 'recently' (old news)
+
+[22:22] <Richlv> C14TGH, hmm, why wouldn't it ?
+
+[22:22] <C14TGH> you never know... copyright or something
+
+[22:22] <Richlv> heh. well, we haven't been harassed yet :)
+
+[22:23] <Richlv> in a way that would be good ;>
+
+[22:23] <Tron> copyright of what? The word "ufo"?
+
+[22:23] <C14TGH> the series are no longer abandonware anymore so... I hope so.. I like the project
+
+[22:23] <Richlv> massive publicity stunt
+
+[22:24] <C14TGH> well glad to hear that there are no rumours of stopping the project then ^^
+
+[22:25] <Richlv> we're glad to see new contributors, of course ;)
+
+[22:25] <Senya_B]> and it`ll be better ;)
+
+[22:26] <C14TGH> perhaps when I graduate ^^ hehe beerware
+
+[22:26] <tchristney> i've heard rumours that take-two may be working on another sequel
+
+[22:27] <Richlv> tchristney, joke or real ?
+
+[22:27] <tchristney> how much do you want to be bet it won't run on macs or linux?
+
+[22:28] <C14TGH> macs... bootcamp, linux... wel you'll figure out something for that
+
+[22:28] <Senya_B]> windows 7 ftw 8)
+
+[22:28] <C14TGH> -_-
+
+[22:28] <Senya_B]> or otherwise
+
+[22:29] <Senya_B]> windows 7 wtf =)
+
+[22:29] <C14TGH> aaaaah TYPOOOOOooooo ^^
+
+[22:29] <C14TGH> should check the updates in the 7
+
+[22:30] <tchristney> http://www.shacknews.com/onearticle.x/45797
+
+[22:30] <C14TGH> but as far as I understand it... it's just the XP version of Vista (analogy with XP and ME)
+
+[22:31] <Richlv> now how did you manage to start something that much of an offtopic
+
+[22:33] <C14TGH> i know, i'm wandering off again, my associations can be really strange to follow sometimes
+
+[22:35] <Richlv> we're posting monthly news, btw. so you can follow general trends of the development :)
+
+[22:35] <C14TGH> for some reason I think Irrational Games will screw up the old game play and make it a FPS of some sort
+
+[22:35] <C14TGH> I know :)
+
+[22:35] <bobbens> i don't think ufo type games would hit well with the mass market these days
+
+[22:35] <bobbens> on the other hand FPS with lots of eye cand...
+
+[22:35] <bobbens> *candy
+
+[22:35] <C14TGH> Oh yeah... btw... is there an rss of the updates?
+
+[22:36] * nairan points on CIA-21 for svn commits.
+
+[22:36] <Richlv> erm, given that monthly updates are hand crafted html, no
+
+[22:36] <Richlv> but we use svn
+
+[22:36] <Richlv> so you can follow svn log
+
+[22:36] <C14TGH> rgr
+
+[22:37] <C14TGH> it's no biggie
+
+[22:37] <C14TGH> i've tool to follow the website
+
+[22:37] <Richlv> not that easy to read, but more detailed :)
+
+[22:38] <nairan> rich compiled last rev 1:30 min
+
+[22:38] <nairan> =)
+
+[22:38] <C14TGH> FF > update scanner ; extremely handy for non rss sites
+
+[22:38] <C14TGH> :) well... I should start learning it someday anyways
+
+[22:39] <C14TGH> something they don't teach you at graduate it -_-
+
+[22:39] <C14TGH> using SVN
+
+[22:39] <nairan> im a non coder and i can handle that =P
+
+[22:40] <C14TGH> yeah but using it in team environment
+
+[22:40] <C14TGH> everything has a structure.. unless it's some mombo jombo from a monkey :P
+
+[22:41] <Richlv> nairan, i'm sorry, compiled what ?
+
+[22:41] *** yann_ is now known as yann
+
+[22:41] <C14TGH> very nice, it's even xhtml strict O_o
+
+[22:43] <nairan> the game from src.
+
+[22:44] <C14TGH> sow... when the uhm... 2.3 gets released... will there be a party with booth babes? and cake?
+
+[22:44] <bobbens> doubtful, but we might get a couple of guys in tamaan costumes
+
+[22:45] <C14TGH> meh... think i'll let my girl wear the improved suit with some major bulletholes in it then
+
+[22:46] <C14TGH> it's all about marketing you know :)
+
+[22:47] <bobbens> 2.3 is a bit away though
+
+[22:47] <C14TGH> but we can dream =) we can dream
+
+[22:47] <bobbens> if 2.3 gets everything that's advertised it'll be a pretty sweet release
+
+[22:47] *** yann left
+[22:48] <bobbens> plus that means I have to get my ass to work :P
+
+[22:48] *** yann joined
+[22:48] <bobbens> but first things first -> sleep
+
+[22:48] <C14TGH> oooh yeah... it's allready sweet in the stable release
+
+[22:48] <C14TGH> sleep is for weaklings!!!
+
+[22:48] <C14TGH> flesh is a design fault :P
+
+[22:49] <C14TGH> later... when I'm a manager... I will give all my employees... tazer badges.. when they slack off... i'll taze them
+
+[22:49] <bobbens> sleep increases my efficiency, more efficiency means less of me fixing my own crap I code, which means more featurse, which means release is sooner
+
+[22:49] <C14TGH> ohw yes... i forgot :) this is not a corporation :') this is stable software
+
+[22:49] <C14TGH> I <3 sourceforge
+
+[22:50] <Richlv> nairan, from make clean/fresh checkout ?
+
+[22:50] <bobbens> it's more like a beehive
+
+[22:50] <bobbens> or some sort of mutagenic hivemind
+
+[22:51] <Richlv> what configure flags, what hw ? which make steps ?
+
+[22:51] <Richlv> <C14TGH> sow... when the uhm... 2.3 gets released... will there be a party with booth babes? and cake?
+
+[22:51] <Richlv> which century are we wespeaking abouut here ? ;>
+
+[22:51] <C14TGH> 2010?
+
+[22:59] <C14TGH> Anyways I'll slip away and work on my CMS system... keep up the good work and perhaps when I know more about C, I'll join you guys
+
+[22:59] *** C14TGH left
+[22:59] *** gerxon joined
+[23:02] *** gerxon left
+[23:37] *** schumaml left
+[23:43] *** stevenjackson left
+[23:49] *** Senya_B] left
+[23:54] *** Karf joined
+[23:54] *** Karf left
