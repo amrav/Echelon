@@ -16,6 +16,6 @@ next_display_scope = 10
 
 alg_list = [line_context, bracket, addressal, user_words, typo, emot]
 test_alg = typo
-opt_alg = emot
+opt_alg = line_context
 opt_runs = 1
 

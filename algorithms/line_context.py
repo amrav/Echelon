@@ -12,21 +12,21 @@ ranges = []
 steps = []
 
 
-params += [3]  #issue_scope
+params += [2]  #issue_scope
 ranges += [(1,10)]
-steps += [1]
+steps += [2]
 
 params += [4] #scope_weight
 ranges +=  [(1,10)]
-steps += [1]
+steps += [2]
 
 params += [1] #scope_weight_minus
-ranges += [(0,10)]
+ranges += [(0,5)]
 steps += [1]
 
-params += [90] #lambda_threshold
-ranges += [(50,50)]
-steps += [0]
+params += [20] #lambda_threshold
+ranges += [(95,95)]
+steps += [1]
 
 class context_statement(parse_input.statement):
     scope = {}

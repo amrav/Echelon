@@ -10,11 +10,13 @@ params = []
 ranges = []
 steps = []
 
+word_length = 5
+
 params += [5] #match_threshold
 ranges += [(5,15)]
 steps += [2]
 
-params += [80] #lambda_threshold
+params += [50] #lambda_threshold
 ranges += [(20,99)]
 steps += [5]
 
@@ -55,7 +57,7 @@ def run(statements):
             userscore = {}
             for luser in users:
                 for match in matches:
-                    if len(match) > 3 and match in users[luser].words and users[luser].words[match] > match_threshold:
+                    if len(match) > word_length and match in users[luser].words and users[luser].words[match] > match_threshold:
                         if luser not in userscore:
                             userscore[luser] = 0
                         userscore[luser] += users[luser].words[match]

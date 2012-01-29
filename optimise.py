@@ -34,6 +34,7 @@ def findmax(filename, alg, printmax = True, result_filename = ''):
     all_stats = {}
     print 'Building parameter permutations...',
     param_perms = vary(alg.ranges, alg.steps)
+    print param_perms
     print 'Done.'
     print 'Loading chatlog...',
     logtextfile = open(filename)

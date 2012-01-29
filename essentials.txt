@@ -1,0 +1,12 @@
+Solution to the echelon problem statement. Made by Mihir Rege and Vikrant Varma. Tested on Mac OS X 10.7
+and Ubuntu 11.04 using Python 2.7 available at www.python.org.
+
+* Third Party Libraries
+  
+  - Python NLTK. Available at http://www.nltk.org/download.
+
+* Instructions
+  
+  - Run 'python run_algorithms.py testfilename > /dev/null' to get a file 'Output.txt' that 
+  has the answers separated by commas.
+  _ For information about the project, read the Readme.

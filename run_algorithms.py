@@ -21,11 +21,13 @@ populate a probability dictionary for users.
 
 For more information, refer to the Readme.''' 
     
-    answers = answertext.split('\n')
+    if answertext:
+        answers = answertext.split('\n')
     deleted_nicks = 0
     correct = 0
     wrong = 0
     unanswered = 0
+    answer_list = []
 
     print '-----------------'*12
     print
@@ -73,55 +75,69 @@ For more information, refer to the Readme.'''
             if len(stat.final_lambda)>0:
                 answer = sorted(stat.final_lambda, key=lambda x: stat.final_lambda[x], reverse=True)[0]
             else:
-                answer = None
-            if answer != None and stat.final_lambda[answer]!=0:
+                answer = ''
+            answer_list.append(answer)
+            if answer != '' and stat.final_lambda[answer]!=0:
                 print 'Replacing $$$ by', answer
             else:
                 print 'Leaving unanswered.'
             print
-            print 'Correct answer: ', answers[deleted_nicks-1]
-            if answer == None:
-                unanswered += 1
-            elif answer == answers[deleted_nicks-1]:
-                correct += 1
-            else:
-                wrong += 1
-            print
-            print 'So far:'
-            print 'Correct: ', correct
-            print 'Wrong:', wrong
-            print 'Unanswered:', unanswered
-            print
+            if answertext:
+                print 'Correct answer: ', answers[deleted_nicks-1]
+                if answer == '':
+                    unanswered += 1
+                elif answer == answers[deleted_nicks-1]:
+                    correct += 1
+                else:
+                    wrong += 1
+                print
+                print 'So far:'
+                print 'Correct: ', correct
+                print 'Wrong:', wrong
+                print 'Unanswered:', unanswered
+                print
 
 ##print stat.alg_prob
                     #NEED TO ADD WEIGHTS. This function has to be looked
                     #carefully.
                     ##print user,final_prob
+    if answertext:
+        success = correct*100/(correct+wrong)
+        score = 3*correct - wrong
+        correct *= 100/deleted_nicks
+        wrong *= 100/deleted_nicks
+        unanswered *= 100/deleted_nicks
+
+
+        print '----------------------'
+        print 'RESULT:'
+        print '----------------------'
+        print
+        print success, '% success,', correct, '% correct,', wrong, '% wrong,', unanswered, '% unanswered,', deleted_nicks, 'total.'
+        print 'Score:', score
+        print
     
-    success = correct*100/(correct+wrong)
-    score = 3*correct - wrong
-    correct *= 100/deleted_nicks
-    wrong *= 100/deleted_nicks
-    unanswered *= 100/deleted_nicks
-
-
-    print '----------------------'
-    print 'RESULT:'
-    print '----------------------'
-    print
-    print success, '% success,', correct, '% correct,', wrong, '% wrong,', unanswered, '% unanswered,', deleted_nicks, 'total.'
-    print 'Score:', score
-    print
+    else:
+        output = open("Output.txt", 'w')
+        for ans in answer_list:
+            print ans
+            output.write(ans+',')
+        output.close()
             
 
 if __name__ == '__main__':
-    if len(sys.argv)!=2:
-        print "Usage: python run_algorithms.py test_filename"
+    if len(sys.argv)<2:
+        print "Usage: python run_algorithms.py [--answers] test_filename"
         sys.exit(1)
     #print type(sys.argv[1])
-    test_text = open(sys.argv[1]).read()
-    answer_text = open(sys.argv[1][:-8]+'answers.txt').read()
-    run(test_text, answer_text, alg_list)
+    test_text = open(sys.argv[2]).read()
+    if len(sys.argv) == 3 and sys.argv[1] == '--answers':
+        answer_text = open(sys.argv[2][:-8]+'answers.txt').read()
+        run(test_text, answer_text, alg_list)
+    elif len(sys.argv) == 2:
+        run(test_text, '', alg_list)
+    else:
+        print "Usage: python run_algorithms.py [--answers] test_filename"
         
                 
                     
