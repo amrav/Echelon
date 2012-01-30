@@ -130,7 +130,11 @@ if __name__ == '__main__':
         print "Usage: python run_algorithms.py [--answers] test_filename"
         sys.exit(1)
     #print type(sys.argv[1])
-    test_text = open(sys.argv[2]).read()
+    if len(sys.argv) == 3:
+        test_text = open(sys.argv[2]).read()
+    else:
+        test_text = open(sys.argv[1]).read()
+
     if len(sys.argv) == 3 and sys.argv[1] == '--answers':
         answer_text = open(sys.argv[2][:-8]+'answers.txt').read()
         run(test_text, answer_text, alg_list)
