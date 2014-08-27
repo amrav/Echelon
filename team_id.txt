@@ -1,6 +1,6 @@
 Team ID: 141829
 
-Name		Phone Number		Email ID			College
+Name		      Phone Number			College
 
-Mihir Paresh	8001579427		mihirrege@gmail.com		IIT Kharagpur
-Vikrant Varma	8001578977		vikrant.varma94@gmail.com	IIT Kharagpur
+Mihir Paresh	8001579427	      IIT Kharagpur
+Vikrant Varma	8001578977	      IIT Kharagpur
